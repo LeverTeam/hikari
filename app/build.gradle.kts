@@ -1,3 +1,4 @@
+import java.util.Properties
 import hikari.gradle.Config
 import hikari.gradle.getBuildTime
 import hikari.gradle.getLatestCommitCount
@@ -23,11 +24,27 @@ if (Config.includeTelemetry) {
 android {
     namespace = "eu.kanade.tachiyomi"
 
+    signingConfigs {
+        create("release") {
+            val localProperties = Properties().apply {
+                val localPropertiesFile = rootProject.file("local.properties")
+                if (localPropertiesFile.exists()) {
+                    localPropertiesFile.inputStream().use { load(it) }
+                }
+            }
+
+            storeFile = localProperties.getProperty("RELEASE_STORE_FILE")?.let { file(it) }
+            storePassword = localProperties.getProperty("RELEASE_STORE_PASSWORD")
+            keyAlias = localProperties.getProperty("RELEASE_KEY_ALIAS")
+            keyPassword = localProperties.getProperty("RELEASE_KEY_PASSWORD")
+        }
+    }
+
     defaultConfig {
         applicationId = "app.hikari"
 
-        versionCode = 20
-        versionName = "0.19.7"
+        versionCode = 1
+        versionName = "0.0.1"
 
         buildConfigField("String", "COMMIT_COUNT", "\"${getLatestCommitCount()}\"")
         buildConfigField("String", "COMMIT_SHA", "\"${getLatestCommitSha()}\"")
@@ -45,6 +62,7 @@ android {
             isPseudoLocalesEnabled = true
         }
         val release by getting {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = Config.enableCodeShrink
             isShrinkResources = Config.enableCodeShrink
 
@@ -55,25 +73,6 @@ android {
 
         val commonMatchingFallbacks = listOf(release.name)
 
-        create("foss") {
-            initWith(release)
-
-            applicationIdSuffix = ".foss"
-
-            matchingFallbacks.addAll(commonMatchingFallbacks)
-        }
-        create("preview") {
-            initWith(release)
-
-            applicationIdSuffix = ".debug"
-
-            versionNameSuffix = debug.versionNameSuffix
-            signingConfig = debug.signingConfig
-
-            matchingFallbacks.addAll(commonMatchingFallbacks)
-
-            buildConfigField("String", "BUILD_TIME", "\"${getBuildTime(useLatestCommitTime = false)}\"")
-        }
         create("benchmark") {
             initWith(release)
 
@@ -89,7 +88,6 @@ android {
     }
 
     sourceSets {
-        getByName("preview").res.srcDirs("src/debug/res")
         getByName("benchmark").res.srcDirs("src/debug/res")
     }
 

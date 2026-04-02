@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt">
+
     <aapt:attr name="android:drawable">
         <vector
             android:name="history_enter"
@@ -22,15 +24,26 @@
             </group>
         </vector>
     </aapt:attr>
+
     <target android:name="arrow_head">
         <aapt:attr name="android:animation">
-            <objectAnimator
-                android:duration="500"
-                android:interpolator="@android:interpolator/fast_out_slow_in"
-                android:propertyName="rotation"
-                android:valueFrom="360"
-                android:valueTo="0"
-                android:valueType="floatType" />
+            <set android:ordering="sequentially">
+                <objectAnimator
+                    android:duration="450"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"
+                    android:propertyName="rotation"
+                    android:valueFrom="360"
+                    android:valueTo="-8"
+                    android:valueType="floatType" />
+                <objectAnimator
+                    android:duration="80"
+                    android:interpolator="@android:anim/decelerate_interpolator"
+                    android:propertyName="rotation"
+                    android:valueFrom="-8"
+                    android:valueTo="0"
+                    android:valueType="floatType" />
+            </set>
         </aapt:attr>
     </target>
+
 </animated-vector>

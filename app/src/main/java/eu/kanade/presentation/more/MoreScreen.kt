@@ -1,6 +1,7 @@
 package eu.kanade.presentation.more
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.automirrored.outlined.Label
@@ -23,7 +24,6 @@ import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.ui.more.DownloadQueueState
 import tachiyomi.core.common.Constants
 import tachiyomi.i18n.MR
-import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
@@ -45,7 +45,7 @@ fun MoreScreen(
     val uriHandler = LocalUriHandler.current
 
     Scaffold { contentPadding ->
-        ScrollbarLazyColumn(
+        LazyColumn(
             modifier = Modifier.padding(contentPadding),
         ) {
             item {
