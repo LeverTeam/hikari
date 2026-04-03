@@ -12,6 +12,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.presentation.more.settings.Preference
 import eu.kanade.presentation.more.settings.screen.browse.ExtensionReposScreen
+import eu.kanade.presentation.more.settings.screen.browse.HiddenMangaSourcesScreen
 import eu.kanade.tachiyomi.util.system.AuthenticatorUtil.authenticate
 import kotlinx.collections.immutable.persistentListOf
 import hikari.domain.extensionrepo.interactor.GetExtensionRepoCount
@@ -51,6 +52,12 @@ object SettingsBrowseScreen : SearchableSettings {
                         subtitle = pluralStringResource(MR.plurals.num_repos, reposCount, reposCount),
                         onClick = {
                             navigator.push(ExtensionReposScreen())
+                        },
+                    ),
+                    Preference.PreferenceItem.TextPreference(
+                        title = stringResource(MR.strings.label_hidden_manga),
+                        onClick = {
+                            navigator.push(HiddenMangaSourcesScreen())
                         },
                     ),
                 ),

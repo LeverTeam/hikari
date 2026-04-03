@@ -1,6 +1,7 @@
 package tachiyomi.data.manga
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.data.DatabaseHandler
@@ -64,6 +65,19 @@ class MangaRepositoryImpl(
 
     override fun getFavoritesBySourceId(sourceId: Long): Flow<List<Manga>> {
         return handler.subscribeToList { mangasQueries.getFavoriteBySourceId(sourceId, MangaMapper::mapManga) }
+    }
+
+    override suspend fun getHiddenMangaBySourceId(sourceId: Long): List<Manga> {
+        return handler.awaitList { mangasQueries.getHiddenMangaBySourceId(sourceId, MangaMapper::mapManga) }
+    }
+
+    override fun getHiddenMangaBySourceIdAsFlow(sourceId: Long): Flow<List<Manga>> {
+        return handler.subscribeToList { mangasQueries.getHiddenMangaBySourceId(sourceId, MangaMapper::mapManga) }
+    }
+
+    override fun getSourceIdsWithHiddenManga(): Flow<Map<Long, Long>> {
+        return handler.subscribeToList { mangasQueries.getSourceIdsWithHiddenManga() }
+            .map { it.associate { (source, count) -> source to count } }
     }
 
     override suspend fun getDuplicateLibraryManga(id: Long, title: String): List<MangaWithChapterCount> {

@@ -1,6 +1,7 @@
 # Hikari
 
 > Manga reader for Android, featuring offline downloads, security features, and a unified library.
+> Based on [Mihon](https://github.com/mihonapp/mihon).
 
 <p align="left">
   <img src="https://skillicons.dev/icons?i=kotlin,android,gradle,sqlite" alt="Tech Stack" />

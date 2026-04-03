@@ -105,6 +105,7 @@ class BrowseSourceScreenModel(
      * Flow of Pager flow tied to [State.listing]
      */
     private val hideInLibraryItems = sourcePreferences.hideInLibraryItems.get()
+    private val showHiddenManga = sourcePreferences.showHiddenManga.get()
     private val locallyHiddenMangaIds = MutableStateFlow(emptySet<Long>())
 
     val mangaPagerFlowFlow: kotlinx.coroutines.flow.StateFlow<kotlinx.coroutines.flow.Flow<androidx.paging.PagingData<kotlinx.coroutines.flow.StateFlow<Manga>>>> =
@@ -125,7 +126,9 @@ class BrowseSourceScreenModel(
                 combine(innerPager, locallyHiddenMangaIds) { pagingData, localHidden ->
                     pagingData.filter {
                         val m = it.value
-                        (!hideInLibraryItems || !m.favorite) && !m.hidden && !localHidden.contains(m.id)
+                        (!hideInLibraryItems || !m.favorite) && (showHiddenManga || !m.hidden) && !localHidden.contains(
+                            m.id,
+                        )
                     }
                 }
             }

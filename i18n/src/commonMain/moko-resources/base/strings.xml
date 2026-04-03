@@ -346,6 +346,7 @@
 
     <!-- Extension repos -->
     <string name="label_extension_repos">Extension repos</string>
+    <string name="label_hidden_manga">Hidden manga</string>
     <string name="information_empty_repos">You have no repos set.</string>
     <string name="action_add_repo">Add repo</string>
     <string name="label_add_repo_input">Repo URL</string>
@@ -704,6 +705,7 @@
     <string name="on_hiatus">On hiatus</string>
     <string name="add_to_library">Add to library</string>
     <string name="action_hide">Hide %1$s</string>
+    <string name="action_unhide">Unhide</string>
     <string name="in_library">In library</string>
     <!-- missing confirm menu after Compose rewrite #7901 -->
     <string name="remove_from_library">Remove from library</string>

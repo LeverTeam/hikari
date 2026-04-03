@@ -181,6 +181,18 @@ FROM mangas
 WHERE favorite = 0
 GROUP BY source;
 
+getSourceIdsWithHiddenManga:
+SELECT source, COUNT(*) AS manga_count
+FROM mangas
+WHERE hidden = 1
+GROUP BY source;
+
+getHiddenMangaBySourceId:
+SELECT *
+FROM mangas
+WHERE hidden = 1
+AND source = :sourceId;
+
 deleteNonLibraryManga:
 DELETE FROM mangas
 WHERE favorite = 0

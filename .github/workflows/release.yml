@@ -46,10 +46,19 @@ jobs:
       - name: Build Release APK
         run: ./gradlew assembleRelease --stacktrace --no-daemon
 
+      - name: Extract Release Notes
+        id: extract_notes
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          # Extract lines between the current version header and the next one (or EOF)
+          sed -n "/## \[$VERSION\]/,/## \[/p" CHANGELOG.md | sed '1d;$d' > release_notes.md
+          echo "notes_file=release_notes.md" >> $GITHUB_OUTPUT
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: app/build/outputs/apk/release/app-*-release*.apk
-          generate_release_notes: true
+          body_path: release_notes.md
+          generate_release_notes: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
