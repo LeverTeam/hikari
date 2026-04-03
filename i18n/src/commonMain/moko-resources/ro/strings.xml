@@ -71,13 +71,6 @@
     <string name="pref_category_about">Despre</string>
     <string name="pref_library_columns">Elemente pe rând</string>
     <string name="portrait">Portret</string>
-    <string name="pref_library_update_interval">Actualizări automate</string>
-    <string name="update_never">Oprit</string>
-    <string name="update_6hour">La fiecare 6 ore</string>
-    <string name="update_12hour">La fiecare 12 ore</string>
-    <string name="update_24hour">Zilnic</string>
-    <string name="update_48hour">La fiecare 2 zile</string>
-    <string name="update_weekly">Săptămânal</string>
     <string name="all">Toate</string>
     <string name="pref_library_update_restriction">Actualizează automat restricțiile dispozitivului</string>
     <string name="charging">La încărcare</string>
@@ -289,6 +282,8 @@
     <string name="obsolete_extension_message">Această extensie nu mai este disponibilă. Este posibil să nu funcționeze corect și poate cauza probleme cu aplicația. Se recomandă dezinstalarea acesteia.</string>
     <string name="pref_date_format">Formatul datei</string>
     <string name="pref_category_library_update">Actualizare globală</string>
+    <string name="pref_library_update_schedule">Program de actualizare</string>
+    <string name="update_schedule_none">Niciun interval orar selectat</string>
     <string name="logout_title">Deconectează-te de la %1$s?</string>
     <string name="logout">Deconectează-te</string>
     <string name="logout_success">Acum ești deconectat</string>
@@ -546,7 +541,6 @@
     <string name="unfinished_list">Lista neterminată</string>
     <string name="action_sort_unread_count">Număr de necitite</string>
     <string name="restore_miui_warning">Este posibil să nu funcționeze corect backup/restaurare dacă MIUI Optimization este dezactivată.</string>
-    <string name="update_72hour">La fiecare 3 zile</string>
     <string name="connected_to_wifi">Doar prin Wi Fi</string>
     <string name="off">Oprit</string>
     <string name="ext_app_info">Informații despre aplicație</string>

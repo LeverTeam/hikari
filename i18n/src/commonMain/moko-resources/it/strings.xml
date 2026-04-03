@@ -55,12 +55,6 @@
     <string name="pref_library_columns">Oggetti per riga</string>
     <string name="portrait">Verticale</string>
     <string name="landscape">Orizzontale</string>
-    <string name="pref_library_update_interval">Aggiornamenti automatici</string>
-    <string name="update_never">Disabilitati</string>
-    <string name="update_6hour">Ogni 6 ore</string>
-    <string name="update_12hour">Ogni 12 ore</string>
-    <string name="update_24hour">Ogni giorno</string>
-    <string name="update_48hour">Ogni 2 giorni</string>
     <string name="all">Tutte</string>
     <string name="pref_library_update_restriction">Restrizioni del dispositivo agli aggiornamenti automatici</string>
     <string name="charging">Quando si carica</string>
@@ -195,7 +189,6 @@
     <string name="action_open_log">Apri registro</string>
     <string name="action_restore">Ripristina</string>
     <string name="app_not_available">App non disponibile</string>
-    <string name="update_weekly">Ogni settimana</string>
     <string name="default_category">Categoria predefinita</string>
     <string name="track">Tracciamento</string>
     <string name="pref_category_tracking">Tracciamento</string>
@@ -289,6 +282,8 @@
     <string name="obsolete_extension_message">Questa estensione non è più disponibile. Potrebbe non funzionare correttamente e causare problemi con l\'app. Si consiglia di disinstallarla.</string>
     <string name="pref_date_format">Formato data</string>
     <string name="pref_category_library_update">Aggiornamenti globali</string>
+    <string name="pref_library_update_schedule">Programma di aggiornamento</string>
+    <string name="update_schedule_none">Nessun orario selezionato</string>
     <string name="logout_title">Disconnettersi da %1$s?</string>
     <string name="logout">Disconnetti</string>
     <string name="logout_success">Ora sei disconnesso</string>
@@ -541,7 +536,6 @@
     <string name="backup_info">Dovresti tenere delle copie dei backup anche in altri posti. I backup possono contenere dati sensibili comprese le password memorizzate; fate attenzione al condividerli.</string>
     <string name="notification_size_warning">Grossi aggiornamenti danneggiano le fonti, possono rallentare gli aggiornamenti e aumentare il consumo di batteria. Tocca per saperne di più.</string>
     <string name="connected_to_wifi">Solo su Wi-Fi</string>
-    <string name="update_72hour">Ogni 3 giorni</string>
     <string name="download_queue_size_warning">Attenzione: grossi download di massa possono rallentare le fonti e/o bloccare %s. Tocca per saperne di più.</string>
     <string name="ext_update_all">Aggiorna tutto</string>
     <string name="channel_app_updates">Aggiornamenti dell\'applicazione</string>

@@ -273,14 +273,8 @@
     <string name="portrait">உருவப்படம்</string>
     <string name="landscape">நிலப்பரப்பு</string>
     <string name="pref_category_library_update">உலகளாவிய புதுப்பிப்பு</string>
-    <string name="pref_library_update_interval">தானியங்கி புதுப்பிப்புகள்</string>
-    <string name="update_never">அணை</string>
-    <string name="update_6hour">ஒவ்வொரு 6 மணி நேரமும்</string>
-    <string name="update_12hour">ஒவ்வொரு 12 மணி நேரமும்</string>
-    <string name="update_24hour">நாள்தோறும்</string>
-    <string name="update_48hour">ஒவ்வொரு 2 நாட்களுக்கும்</string>
-    <string name="update_72hour">ஒவ்வொரு 3 நாட்களுக்கும்</string>
-    <string name="update_weekly">வாராந்திர</string>
+    <string name="pref_library_update_schedule">புதுப்பிப்பு அட்டவணை</string>
+    <string name="update_schedule_none">நேரம் தேர்ந்தெடுக்கப்படவில்லை</string>
     <string name="pref_security">பாதுகாப்பு</string>
     <string name="pref_firebase">பகுப்பாய்வு மற்றும் செயலிழப்பு பதிவுகள்</string>
     <string name="lock_with_biometrics">திறத்தல் தேவை</string>

@@ -66,13 +66,6 @@
     <string name="pref_library_columns">Elemente pro Zeile</string>
     <string name="portrait">Hochformat</string>
     <string name="landscape">Querformat</string>
-    <string name="pref_library_update_interval">Automatische Aktualisierungen</string>
-    <string name="update_never">Aus</string>
-    <string name="update_6hour">Alle 6 Stunden</string>
-    <string name="update_12hour">Alle 12 Stunden</string>
-    <string name="update_24hour">Täglich</string>
-    <string name="update_48hour">Alle 2 Tage</string>
-    <string name="update_weekly">Wöchentlich</string>
     <string name="all">Alle</string>
     <string name="pref_library_update_restriction">Geräteeinschränkungen für automatische Aktualisierungen</string>
     <string name="charging">Beim Laden</string>
@@ -289,6 +282,8 @@
     <string name="obsolete_extension_message">Diese Erweiterung ist nicht länger verfügbar. Sie funktioniert möglicherweise nicht mehr ordnungsgemäß und kann Probleme mit der App verursachen. Es wird empfohlen, sie zu deinstallieren.</string>
     <string name="pref_date_format">Datumsformat</string>
     <string name="pref_category_library_update">Globale Aktualisierung</string>
+    <string name="pref_library_update_schedule">Aktualisierungszeitplan</string>
+    <string name="update_schedule_none">Keine Zeit ausgewählt</string>
     <string name="logout_title">Aus %1$s abmelden?</string>
     <string name="logout">Abmelden</string>
     <string name="logout_success">Du bist jetzt abgemeldet</string>
@@ -541,7 +536,6 @@
     <string name="notification_size_warning">Große Aktualisierungen schaden Quellen und könnten zu langsameren Aktualisierungen sowie höherem Akkuverbrauch führen. Tippe, um mehr zu erfahren.</string>
     <string name="backup_info">Du solltest Kopien der Datensicherungen auch an anderen Orten aufbewahren. Datensicherungen beinhalten möglicherweise sensible Daten, einschließlich gespeicherter Passwörter. Sei vorsichtig beim Teilen.</string>
     <string name="connected_to_wifi">Nur über WLAN</string>
-    <string name="update_72hour">Alle 3 Tage</string>
     <string name="download_queue_size_warning">Achtung: Große Downloads könnten dazu führen, dass Quellen langsamer werden und/oder %s blockieren. Tippe um mehr zu erfahren.</string>
     <string name="ext_update_all">Alle aktualisieren</string>
     <string name="channel_app_updates">App-Updates</string>

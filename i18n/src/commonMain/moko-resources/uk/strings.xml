@@ -73,13 +73,6 @@
     <string name="pref_library_columns">Елементів у рядку</string>
     <string name="portrait">Портретна</string>
     <string name="landscape">Альбомна</string>
-    <string name="pref_library_update_interval">Автоматичне оновлення</string>
-    <string name="update_never">Вимкнути</string>
-    <string name="update_6hour">Кожні 6 годин</string>
-    <string name="update_12hour">Кожні 12 годин</string>
-    <string name="update_24hour">Щодня</string>
-    <string name="update_48hour">Що 2 дні</string>
-    <string name="update_weekly">Щонеділі</string>
     <string name="all">Всі</string>
     <string name="pref_library_update_restriction">Обмеження пристрою для автоматичних оновлень</string>
     <string name="charging">Коли заряджається</string>
@@ -289,6 +282,8 @@
     <string name="obsolete_extension_message">Це розширення більше не доступне. Воно може працювати невірно, а також викликати проблеми із застосунком. Рекомендується його видалити.</string>
     <string name="pref_date_format">Формат дати</string>
     <string name="pref_category_library_update">Глобальне оновлення</string>
+    <string name="pref_library_update_schedule">Розклад оновлень</string>
+    <string name="update_schedule_none">Не вибрано</string>
     <string name="logout_title">Вихід із %1$s?</string>
     <string name="logout">Вихід</string>
     <string name="logout_success">Ви вийшли з системи</string>
@@ -543,7 +538,6 @@
     <string name="backup_info">Ви повинні зберігати декілька резервних копій в інших місцях. Резервні копії можуть містити конфіденційні дані, включно зі збереженими паролями; будьте обережні, якщо ділитеся ними.</string>
     <string name="label_warning">Попередження</string>
     <string name="action_display_language_badge">Мова</string>
-    <string name="update_72hour">Що 3 дні</string>
     <string name="connected_to_wifi">Тільки через Wi-Fi</string>
     <string name="extension_api_error">Не вдалося отримати список розширень</string>
     <string name="pref_auto_clear_chapter_cache">Очищати кеш розділів під час запуску застосунку</string>

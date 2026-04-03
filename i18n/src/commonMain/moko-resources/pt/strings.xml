@@ -45,12 +45,6 @@
     <string name="pref_library_columns">Itens por linha</string>
     <string name="portrait">Vertical</string>
     <string name="landscape">Horizontal</string>
-    <string name="pref_library_update_interval">Atualizações automáticas</string>
-    <string name="update_never">Desligado</string>
-    <string name="update_6hour">A cada 6 horas</string>
-    <string name="update_12hour">A cada 12 horas</string>
-    <string name="update_24hour">Diariamente</string>
-    <string name="update_48hour">A cada 2 dias</string>
     <string name="all">Tudo</string>
     <string name="pref_library_update_restriction">Restrições do aparelho para atualizações automáticas</string>
     <string name="charging">Ao carregar</string>
@@ -181,7 +175,6 @@
     <string name="action_share">Partilhar</string>
     <string name="action_save">Guardar</string>
     <string name="action_undo">Anular</string>
-    <string name="update_weekly">Semanalmente</string>
     <string name="action_restore">Restaurar</string>
     <string name="app_not_available">App não disponível</string>
     <string name="default_category">Categoria padrão</string>
@@ -287,6 +280,8 @@
     <string name="obsolete_extension_message">Esta extensão não está mais disponível. Ela pode não funcionar corretamente e pode causar problemas na app. É recomendado desinstalá-la.</string>
     <string name="pref_date_format">Formato da data</string>
     <string name="pref_category_library_update">Atualização global</string>
+    <string name="pref_library_update_schedule">Cronograma de atualização</string>
+    <string name="update_schedule_none">Nenhum horário selecionado</string>
     <string name="logout_title">Terminar sessão em %1$s?</string>
     <string name="logout">Terminar sessão</string>
     <string name="logout_success">Sua sessão está agora encerrada</string>
@@ -518,7 +513,6 @@
     <string name="action_display_language_badge">Idioma</string>
     <string name="pref_category_appearance">Aparência</string>
     <string name="connected_to_wifi">Só com Wi-Fi</string>
-    <string name="update_72hour">A cada 3 dias</string>
     <string name="ext_update_all">Atualizar tudo</string>
     <string name="ext_app_info">Informações da app</string>
     <string name="ext_installer_shizuku_unavailable_dialog">Instale e inicie o Shizuku para utilizá-lo como o instalador de extensões.</string>

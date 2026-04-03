@@ -112,14 +112,9 @@
     <string name="restrictions">Абмежаванні: %s</string>
     <string name="charging">Падчас зарадкі</string>
     <string name="pref_library_update_restriction">Абмежаванні аўтаабнаўленняў</string>
-    <string name="update_weekly">Штотыдзень</string>
-    <string name="update_48hour">Кожныя 2 дні</string>
-    <string name="update_24hour">Штодня</string>
-    <string name="update_12hour">Кожныя 12 гадзін</string>
-    <string name="update_6hour">Кожныя 6 гадзін</string>
-    <string name="update_never">Выключаны</string>
-    <string name="pref_library_update_interval">Аўтаабнаўленні</string>
     <string name="pref_category_library_update">Глабальнае абнаўленне</string>
+    <string name="pref_library_update_schedule">План абнаўленняў</string>
+    <string name="update_schedule_none">Не выбраны гадзіны</string>
     <string name="landscape">Альбомная</string>
     <string name="portrait">Кніжная</string>
     <string name="pref_library_columns">Элементаў у радку</string>
@@ -331,7 +326,6 @@
     <string name="ext_installer_pref">Усталёўнік</string>
     <string name="ext_installer_legacy">Састарэлы</string>
     <string name="action_remove_everything">Прыбраць усё</string>
-    <string name="update_72hour">Кожныя 3 дні</string>
     <string name="connected_to_wifi">Толькі праз Wi-Fi</string>
     <string name="not_selected">Не выбрана</string>
     <string name="action_bar_up_description">Перайсці ўверх</string>

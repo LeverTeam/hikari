@@ -61,13 +61,6 @@
     <string name="pref_category_tracking">Tracking</string>
     <string name="pref_category_advanced">Geavanceerd</string>
     <string name="pref_library_columns">Elementen per rij</string>
-    <string name="pref_library_update_interval">Automatisch bijwerken</string>
-    <string name="update_never">Uit</string>
-    <string name="update_6hour">Iedere 6 uur</string>
-    <string name="update_12hour">Iedere 12 uur</string>
-    <string name="update_24hour">Dagelijks</string>
-    <string name="update_48hour">Iedere 2 dagen</string>
-    <string name="update_weekly">Wekelijks</string>
     <string name="all">Alles</string>
     <string name="default_category">Standaard categorie</string>
     <string name="default_category_summary">Altijd vragen</string>
@@ -287,6 +280,8 @@
     <string name="obsolete_extension_message">Deze extensie is niet meer beschikbaar. Mogelijk zal deze niet meer naar behoren functioneren en kan problemen binnen de app veroorzaken. Het wordt aangeraden de extensie te verwijderen.</string>
     <string name="pref_date_format">Datumformaat</string>
     <string name="pref_category_library_update">Globaal bijwerken</string>
+    <string name="pref_library_update_schedule">Update schema</string>
+    <string name="update_schedule_none">Geen tijd geselecteerd</string>
     <string name="logout_title">Uitloggen bij %1$s?</string>
     <string name="logout">Uitloggen</string>
     <string name="logout_success">U bent nu uitgelogd</string>
@@ -542,7 +537,6 @@
     <string name="channel_app_updates">App updates</string>
     <string name="download_queue_size_warning">Waarschuwing: grote bulk downloads kunnen leiden tot bronnen die trager werken en/of %s blokkeren. Tik om meer te leren.</string>
     <string name="ext_update_all">Alles updaten</string>
-    <string name="update_72hour">Iedere 3 dagen</string>
     <string name="library_errors_help">Voor hulp bij het oplossen van fouten bij het bijwerken van de bibliotheek, zie %1$s</string>
     <string name="database_clean">Niks om te wissen</string>
     <string name="privacy_policy">Privacybeleid</string>

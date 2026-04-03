@@ -30,11 +30,6 @@
     <string name="pref_fullscreen">Layar wutuh</string>
     <string name="all">Kabeh</string>
     <string name="charging">Pas ngisi daya</string>
-    <string name="update_weekly">Saben minggu</string>
-    <string name="update_48hour">Saben 2 dina</string>
-    <string name="update_24hour">Saben dina</string>
-    <string name="update_12hour">Saben 12 jam</string>
-    <string name="update_6hour">Saben 6 jam</string>
     <string name="landscape">Lansekap</string>
     <string name="portrait">Potret</string>
     <string name="pref_category_display">Tampilan</string>
@@ -176,7 +171,6 @@
     <string name="theme_greenapple">Ijo apel</string>
     <string name="parental_controls_info">Iki ora nyegah ekstensi kang ora resmi utawa salah dilabeli kanggo nampilake konten NSFW (18+) ing aplikasi.</string>
     <string name="relative_time_today">Dinten puniki</string>
-    <string name="update_never">Mati</string>
     <string name="pref_category_security">Kaamanan</string>
     <string name="lock_always">Tansah</string>
     <string name="pref_category_nsfw_content">Sumber NSFW (18+)</string>
@@ -194,7 +188,6 @@
     <string name="pref_dark_theme_pure_black">Mode ireng banget</string>
     <string name="hide_notification_content">Umpetake konten notifikasi</string>
     <string name="secure_screen">Amanaken layar</string>
-    <string name="update_72hour">Saben 3 dinten</string>
     <string name="connected_to_wifi">Namung ing Wi-Fi</string>
     <string name="ext_untrusted">Ora kapracaya</string>
     <string name="pref_update_only_started">Iku durung diwiwiti</string>
@@ -239,7 +232,8 @@
     <string name="action_sort_last_manga_update">Priksa nganyari pungkasan</string>
     <string name="action_sort_unread_count">Total gak diwoco</string>
     <string name="pref_category_library_update">Updatean umum</string>
-    <string name="pref_library_update_interval">Updatean otomatis</string>
+    <string name="pref_library_update_schedule">Jadwal updatean</string>
+    <string name="update_schedule_none">Ora ana wektu sing dipilih</string>
     <string name="lock_with_biometrics">Mbutuhake mbukak kunci</string>
     <string name="pref_library_update_refresh_metadata">Nganyari metadata otomatis</string>
     <string name="network_not_metered">Jaringan gak kebates tok</string>

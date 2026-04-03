@@ -74,13 +74,6 @@
     <string name="pref_library_columns">Величина мреже</string>
     <string name="portrait">Усправно</string>
     <string name="landscape">Хоризонтално</string>
-    <string name="pref_library_update_interval">Аутоматска ажурирања</string>
-    <string name="update_never">Искључено</string>
-    <string name="update_6hour">Шесточасовно</string>
-    <string name="update_12hour">Дванаесточасовно</string>
-    <string name="update_24hour">Дневно</string>
-    <string name="update_48hour">Свака 2 дана</string>
-    <string name="update_weekly">Недељно</string>
     <string name="all">Све</string>
     <string name="pref_library_update_restriction">Ограничења уређаја за аутоматска ажурирања</string>
     <string name="charging">Пуњење</string>
@@ -226,6 +219,8 @@
     <string name="obsolete_extension_message">Овај додатак није више доступан. Можда неће исправно функционисати и може изазвати проблеме са апликацијом. Препоручује се деинсталирање.</string>
     <string name="pref_date_format">Формат датума</string>
     <string name="pref_category_library_update">Глобално ажурирање</string>
+    <string name="pref_library_update_schedule">Распоред ажурирања</string>
+    <string name="update_schedule_none">Није изабран временски интервал</string>
     <string name="logout_title">Излогуј се из %1$s?</string>
     <string name="logout">Излогуј се</string>
     <string name="logout_success">Сада сте излоговани</string>
@@ -495,7 +490,6 @@
     <string name="nav_zone_left">Лево</string>
     <string name="information_empty_category_dialog">Још немате категорија.</string>
     <string name="ext_app_info">Информације о апликацији</string>
-    <string name="update_72hour">Свака 3 дана</string>
     <string name="connected_to_wifi">Само преко Wi-Fi-а</string>
     <string name="restrictions">Ограничења: %s</string>
     <string name="categorized_display_settings">Поставке за сортирање одвојено за сваку категорију</string>

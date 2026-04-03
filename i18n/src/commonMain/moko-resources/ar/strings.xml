@@ -68,13 +68,6 @@
     <string name="pref_library_columns">العناصر لكل صف</string>
     <string name="portrait">طوليٌّ</string>
     <string name="landscape">عرضيٌّ</string>
-    <string name="pref_library_update_interval">التحديثات التلقائية</string>
-    <string name="update_never">إيقاف</string>
-    <string name="update_6hour">كل ٦ ساعات</string>
-    <string name="update_12hour">كل ١٢ ساعة</string>
-    <string name="update_24hour">يومياً</string>
-    <string name="update_48hour">كل يومان</string>
-    <string name="update_weekly">أسبوعياً</string>
     <string name="all">الكل</string>
     <string name="pref_library_update_restriction">تقييد التحديث التلقائي للجهاز</string>
     <string name="charging">عند الشحن</string>
@@ -539,7 +532,6 @@
     <string name="pref_verbose_logging_summary">طباعة السجلات المطولة في سجل النظام (يقلل من أداء التطبيق)</string>
     <string name="channel_app_updates">تحديثات التطبيق</string>
     <string name="ext_update_all">تحديث الكل</string>
-    <string name="update_72hour">كل ثلاثة ايام</string>
     <string name="connected_to_wifi">فقط على شبكة WI-FI</string>
     <string name="ext_installer_shizuku_stopped">«Shizuku» لا يعمل</string>
     <string name="publishing_finished">انتهى النشر</string>

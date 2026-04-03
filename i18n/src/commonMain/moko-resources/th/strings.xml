@@ -48,11 +48,6 @@
     <string name="pref_category_reader">ตัวอ่าน</string>
     <string name="pref_category_advanced">ขั้นสูง</string>
     <string name="pref_category_about">เกี่ยวกับ</string>
-    <string name="update_6hour">ทุก 6 ชั่วโมง</string>
-    <string name="update_12hour">ทุก 12 ชั่วโมง</string>
-    <string name="update_24hour">ทุกวัน</string>
-    <string name="update_48hour">ทุก 2 วัน</string>
-    <string name="update_weekly">ทุกสัปดาห์</string>
     <string name="all">ทั้งหมด</string>
     <string name="charging">ขณะกำลังชาร์จ</string>
     <string name="default_category_summary">ถามทุกครั้ง</string>
@@ -92,8 +87,6 @@
     <string name="pref_library_columns">รายการต่อแถว</string>
     <string name="portrait">แนวตั้ง</string>
     <string name="landscape">แนวนอน</string>
-    <string name="pref_library_update_interval">การอัปเดตอัตโนมัติ</string>
-    <string name="update_never">ปิด</string>
     <string name="pref_library_update_restriction">อัปเดตข้อจำกัดของอุปกรณ์โดยอัตโนมัติ</string>
     <string name="pref_update_only_non_completed">ข้ามรายการที่มีสถานะ \"จบแล้ว\"</string>
     <string name="pref_auto_update_manga_sync">อัปเดตความคืบหน้าหลังอ่าน</string>
@@ -323,6 +316,8 @@
     <string name="pref_library_update_refresh_metadata_summary">ตรวจสอบหน้าปกและรายละเอียดใหม่เมื่ออัปเดตคลัง</string>
     <string name="pref_library_update_refresh_metadata">โหลดข้อมูลเมตาใหม่โดยอัตโนมัติ</string>
     <string name="pref_category_library_update">อัปเดตทั้งหมด</string>
+    <string name="pref_library_update_schedule">กำหนดการอัปเดต</string>
+    <string name="update_schedule_none">ไม่ได้เลือกเวลา</string>
     <string name="pref_category_display">การแสดงผล</string>
     <string name="parental_controls_info">นี่ไม่ได้เป็นการป้องกันไม่ให้ส่วนขยายที่ไม่เป็นทางการ หรือที่อาจถูกตั้งค่าสถานะไม่ถูกต้อง ให้แสดงเนื้อหา NSFW (18+) ภายในแอป</string>
     <string name="pref_show_nsfw_source">แสดงในรายการแหล่งข้อมูลและส่วนขยาย</string>
@@ -548,7 +543,6 @@
     <string name="theme_yinyang">หยินหยาง</string>
     <string name="theme_yotsuba">โยทซึบะ</string>
     <string name="pref_dark_theme_pure_black">โหมดมืดดำสนิท</string>
-    <string name="update_72hour">ทุก 3 วัน</string>
     <string name="restrictions">ข้อจำกัด: %s</string>
     <string name="connected_to_wifi">เฉพาะขณะเชื่อมต่อ Wi-Fi</string>
     <string name="download_queue_size_warning">คำเตือน: การดาวน์โหลดจำนวนมากอาจทำให้แหล่งที่มาทำงานช้าลงและ/หรือปิดกั้น %s แตะเพื่อเรียนรู้เพิ่มเติม</string>

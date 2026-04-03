@@ -131,7 +131,6 @@
     <string name="pref_image_scale_type">Масштабирование</string>
     <string name="pref_keep_screen_on">Не выключать экран</string>
     <string name="pref_library_columns">Размер сетки</string>
-    <string name="pref_library_update_interval">Автоматические обновления</string>
     <string name="pref_library_update_restriction">Ограничения обновлений для устройства</string>
     <string name="pref_read_with_volume_keys">Клавиши громкости</string>
     <string name="pref_reader_navigation">Навигация</string>
@@ -169,17 +168,12 @@
     <string name="title">Название</string>
     <string name="unknown">Неизвестно</string>
     <string name="unknown_error">Неизвестная ошибка</string>
-    <string name="update_12hour">Каждые 12 часов</string>
-    <string name="update_24hour">Ежедневно</string>
-    <string name="update_48hour">Каждые 2 дня</string>
-    <string name="update_6hour">Каждые 6 часов</string>
     <string name="update_check_confirm">Загрузить</string>
     <string name="update_check_no_new_updates">Нет обновлений</string>
     <string name="update_check_notification_download_complete">Нажмите для установки обновления</string>
     <string name="update_check_notification_download_error">Ошибка загрузки</string>
     <string name="update_check_notification_download_in_progress">Загрузка…</string>
     <string name="update_check_notification_update_available">Доступно обновление!</string>
-    <string name="update_never">Выключено</string>
     <string name="updating_category">Обновление категории</string>
     <string name="used_cache">Использовано: %1$s</string>
     <string name="username">Имя пользователя</string>
@@ -216,7 +210,6 @@
     <string name="restoring_backup">Восстановление из резервной копии</string>
     <string name="snack_categories_deleted">Категории удалены</string>
     <string name="track">Отслеживание</string>
-    <string name="update_weekly">Еженедельно</string>
     <string name="action_sort_total">Количество глав</string>
     <string name="action_open_log">Открыть журнал</string>
     <string name="app_not_available">Приложение недоступно</string>
@@ -289,6 +282,8 @@
     <string name="obsolete_extension_message">Это расширение больше недоступно. Оно может работать неправильно, а также вызвать проблемы с приложением. Рекомендуется его удалить.</string>
     <string name="pref_date_format">Формат даты</string>
     <string name="pref_category_library_update">Глобальное обновление</string>
+    <string name="pref_library_update_schedule">План обновлений</string>
+    <string name="update_schedule_none">Не выбраны часы</string>
     <string name="logout_title">Выйти из %1$s?</string>
     <string name="logout">Выйти</string>
     <string name="logout_success">Вы успешно вышли</string>
@@ -541,7 +536,6 @@
     <string name="notification_size_warning">Большое количество обновлений может привести к замедлению работы источников и увеличению расхода батареи. Нажмите для подробностей.</string>
     <string name="backup_info">Настоятельно рекомендуется хранить резервные копии в других местах или сервисах. Резервные копии могут содержать конфиденциальную информацию, как, например, пароли. Будьте осторожны при их отправке.</string>
     <string name="connected_to_wifi">Только по Wi-Fi</string>
-    <string name="update_72hour">Каждые 3 дня</string>
     <string name="download_queue_size_warning">Предупреждение: Большое количество загрузок может привести к замедлению работы источников и/или блокировке %s. Нажмите для подробностей.</string>
     <string name="ext_update_all">Обновить все</string>
     <string name="channel_app_updates">Обновления приложения</string>

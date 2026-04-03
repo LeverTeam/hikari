@@ -70,13 +70,6 @@
     <string name="pref_category_about">關於</string>
     <string name="portrait">直向</string>
     <string name="landscape">橫向</string>
-    <string name="pref_library_update_interval">自動更新</string>
-    <string name="update_never">關閉</string>
-    <string name="update_6hour">每 6 小時</string>
-    <string name="update_12hour">每 12 小時</string>
-    <string name="update_24hour">每天</string>
-    <string name="update_48hour">每 2 天</string>
-    <string name="update_weekly">每週</string>
     <string name="all">全部</string>
     <string name="pref_library_update_restriction">自動更新的裝置限制</string>
     <string name="charging">僅充電時</string>
@@ -313,6 +306,8 @@
     <string name="pref_category_for_this_series">套用於這部作品</string>
     <string name="pref_category_reading">翻閱</string>
     <string name="pref_category_library_update">全域更新</string>
+    <string name="pref_library_update_schedule">更新計劃</string>
+    <string name="update_schedule_none">未選擇時間</string>
     <string name="battery_optimization_disabled">已停用電池效能最佳化</string>
     <string name="battery_optimization_setting_activity_not_found">無法前往裝置設定</string>
     <string name="pref_disable_battery_optimization">停用電池效能最佳化</string>
@@ -538,7 +533,6 @@
     <string name="backup_info">你應該在多處儲存備份副本，備份檔可能含有敏感資料 (包括任何已儲存的密碼)，分享時請留意</string>
     <string name="pref_verbose_logging_summary">傾印詳細記錄至系統日誌 (將降低應用程式效能)</string>
     <string name="connected_to_wifi">僅透過 Wi-Fi</string>
-    <string name="update_72hour">每 3 天</string>
     <string name="download_queue_size_warning">警告：大量批次下載可能壅塞來源，甚至使其封鎖 %s，輕觸以瞭解詳情</string>
     <string name="ext_update_all">全部更新</string>
     <string name="channel_app_updates">應用程式更新</string>

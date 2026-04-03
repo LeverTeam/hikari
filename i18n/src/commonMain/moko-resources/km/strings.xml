@@ -144,12 +144,6 @@
     <string name="pref_library_columns">ធាតុក្នុងមួយជួ</string>
     <string name="portrait">បញ្ឈរ</string>
     <string name="landscape">ផ្ដេក</string>
-    <string name="pref_library_update_interval">ការធ្វើប្ចុប្បន្នភាពដោយស្វ័យប្រវត្ត</string>
-    <string name="update_never">បិទ</string>
-    <string name="update_6hour">រាល់៦ម៉ោងម្ដង</string>
-    <string name="update_48hour">រាល់២ថ្ងៃម្ដង</string>
-    <string name="update_72hour">រាល់៣ថ្ងៃម្ដង</string>
-    <string name="update_weekly">រាល់សប្ដាហ៍</string>
     <string name="pref_library_update_restriction">ធ្វើប្ចុប្បន្នភាពdevice restrictionsដោយស្វ័យប្រវត្ត</string>
     <string name="connected_to_wifi">នៅពេលបើកWi-Fiប៉ុណ្ណោះ</string>
     <string name="action_webview_forward">ទៅមុខ</string>
@@ -158,12 +152,12 @@
     <string name="pref_app_theme">ពណ៌កម្មវិធី</string>
     <string name="theme_yotsuba">យ៉ុតស្ស៊ូបា</string>
     <string name="hide_notification_content">លាក់ការជូនដំណឹង</string>
-    <string name="update_12hour">រាល់១២ម៉ោងម្ដង</string>
     <string name="secure_screen_summary">ការពារអេក្រង់លាក់contentរបស់កម្មវិធីនៅពេលswitchingកម្មីធីនិងប្លុកscreenshots</string>
     <string name="lock_never">មិនដែល</string>
     <string name="parental_controls_info">ការសម្រេចចិត្តនេះមិនបិទការflagនៃប្រភពទៅលើរឿង(១៨+)នៅក្នុងកម្មវិធីឡើយ។</string>
-    <string name="update_24hour">រាល់ថ្ងៃ</string>
     <string name="pref_category_library_update">ការធ្វើបច្ចុប្បន្នភាពសកល</string>
+    <string name="pref_library_update_schedule">កាលវិភាគធ្វើបច្ចុប្បន្នភាព</string>
+    <string name="update_schedule_none">មិនមានពេលវេលាដែលបានជ្រើសរើស</string>
     <string name="title">ចំណងជើង</string>
     <string name="completed">បានបញ្ចប់ការចេញផ្សាយ</string>
     <string name="ongoing">កំពុងតែចេញផ្សាយ</string>

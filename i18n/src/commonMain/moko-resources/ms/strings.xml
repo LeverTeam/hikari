@@ -69,13 +69,6 @@
     <string name="pref_library_columns">Item setiap baris</string>
     <string name="portrait">Potret</string>
     <string name="landscape">Landskap</string>
-    <string name="pref_library_update_interval">Kemas kini automatik</string>
-    <string name="update_never">Mati</string>
-    <string name="update_6hour">Setiap 6 jam</string>
-    <string name="update_12hour">Setiap 12 jam</string>
-    <string name="update_24hour">Setiap hari</string>
-    <string name="update_48hour">Setiap 2 hari</string>
-    <string name="update_weekly">Setiap minggu</string>
     <string name="all">Semua</string>
     <string name="pref_library_update_restriction">Sekatan kemas kini automatik peranti</string>
     <string name="charging">Ketika mengecas</string>
@@ -289,6 +282,8 @@
     <string name="obsolete_extension_message">Sambungan ini tidak lagi ada. Ia mungkin tidak berfungsi dengan betul dan boleh menyebabkan masalah dengan aplikasi. Mengenyahpasang adalah disarankan.</string>
     <string name="pref_date_format">Format tarikh</string>
     <string name="pref_category_library_update">Kemas kini keseluruhan</string>
+    <string name="pref_library_update_schedule">Jadual kemas kini</string>
+    <string name="update_schedule_none">Tiada masa dipilih</string>
     <string name="logout_title">Log keluar daripada %1$s?</string>
     <string name="logout">Log keluar</string>
     <string name="logout_success">Anda telah log keluar</string>
@@ -541,7 +536,6 @@
     <string name="backup_info">Anda patut simpan salinan sandaran di tempat lain juga.</string>
     <string name="notification_size_warning">Kemas kini yang besar membahayakan sumber dan mengakibatkan sumber menjadi perlahan dan juga peningkatan penggunaan bateri. Ketik untuk ketahui selebihnya.</string>
     <string name="connected_to_wifi">Hanya menggunakan Wi-Fi</string>
-    <string name="update_72hour">Setiap 3 hari</string>
     <string name="download_queue_size_warning">Amaran: muat turun secara pukal besar boleh menyebabkan sumber menjadi lebih perlahan dan/atau menyekat %s. Ketik untuk ketahui selebihnya.</string>
     <string name="ext_update_all">Kemas kini semua</string>
     <string name="channel_app_updates">Kemas kini aplikasi</string>

@@ -46,12 +46,6 @@
     <string name="pref_library_columns">Títulos por fila</string>
     <string name="portrait">En vertical</string>
     <string name="landscape">En horizontal</string>
-    <string name="pref_library_update_interval">Actualizaciones automáticas</string>
-    <string name="update_never">No</string>
-    <string name="update_6hour">Cada 6 horas</string>
-    <string name="update_12hour">Cada 12 horas</string>
-    <string name="update_24hour">Diarias</string>
-    <string name="update_48hour">Cada 2 días</string>
     <string name="pref_library_update_restriction">Restringir las actualizaciones automáticas dependiendo del estado del dispositivo</string>
     <string name="charging">Mientras se carga la batería</string>
     <string name="pref_update_only_non_completed">Saltarse títulos cuyo estado de publicación sea «completado»</string>
@@ -180,7 +174,6 @@
     <string name="action_open_log">Abrir registro</string>
     <string name="action_restore">Restaurar</string>
     <string name="app_not_available">La aplicación no está disponible</string>
-    <string name="update_weekly">Semanales</string>
     <string name="all">Todos</string>
     <string name="default_category">Categoría predeterminada</string>
     <string name="default_category_summary">Preguntar siempre</string>
@@ -288,6 +281,8 @@
     <string name="obsolete_extension_message">Esta extensión ya no está disponible. Puede que no funcione bien y te cause problemas con el resto de la aplicación, te recomendamos desinstalarla.</string>
     <string name="pref_date_format">Formato de fecha</string>
     <string name="pref_category_library_update">Actualización global</string>
+    <string name="pref_library_update_schedule">Horario de actualización</string>
+    <string name="update_schedule_none">No se han seleccionado horas</string>
     <string name="logout">Cerrar sesión</string>
     <string name="logout_success">Has cerrado sesión</string>
     <string name="paused">Pausado</string>
@@ -539,7 +534,6 @@
     <string name="action_display_language_badge">Idioma</string>
     <string name="backup_info">Es una buena idea tener copias de respaldo fuera de tu dispositivo. Ten en cuenta que incluyen contraseñas y otros datos privados que seguramente no quieras compartir.</string>
     <string name="connected_to_wifi">Solo con Wi-Fi</string>
-    <string name="update_72hour">Cada 3 días</string>
     <string name="download_queue_size_warning">Advertencia: Las descargas grandes pueden llevar a que las fuentes se vuelvan cada vez más lentas y en casos extremos que los servidores limiten o impidan el acceso a %s. Toca aquí para más información.</string>
     <string name="ext_update_all">Actualizar todas</string>
     <string name="channel_app_updates">Actualizaciones de la aplicación</string>

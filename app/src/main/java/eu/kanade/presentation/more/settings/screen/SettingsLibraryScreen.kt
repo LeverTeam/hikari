@@ -43,6 +43,8 @@ import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
+import java.text.DateFormat
+import java.util.Calendar
 
 object SettingsLibraryScreen : SearchableSettings {
 
@@ -72,7 +74,6 @@ object SettingsLibraryScreen : SearchableSettings {
         val scope = rememberCoroutineScope()
         val userCategoriesCount = allCategories.filterNot(Category::isSystemCategory).size
 
-        // For default category
         val ids = listOf(libraryPreferences.defaultCategory.defaultValue()) +
             allCategories.fastMap { it.id.toInt() }
         val labels = listOf(stringResource(MR.strings.default_category_summary)) +
@@ -118,11 +119,11 @@ object SettingsLibraryScreen : SearchableSettings {
     ): Preference.PreferenceGroup {
         val context = LocalContext.current
 
-        val autoUpdateIntervalPref = libraryPreferences.autoUpdateInterval
+        val autoUpdateSchedulePref = libraryPreferences.autoUpdateSchedule
+        val autoUpdateSchedule by autoUpdateSchedulePref.collectAsState()
+
         val autoUpdateCategoriesPref = libraryPreferences.updateCategories
         val autoUpdateCategoriesExcludePref = libraryPreferences.updateCategoriesExclude
-
-        val autoUpdateInterval by autoUpdateIntervalPref.collectAsState()
 
         val included by autoUpdateCategoriesPref.collectAsState()
         val excluded by autoUpdateCategoriesExcludePref.collectAsState()
@@ -144,22 +145,34 @@ object SettingsLibraryScreen : SearchableSettings {
             )
         }
 
+        val hoursMap = remember {
+            val timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT)
+            (0..23).associate { h ->
+                val cal = Calendar.getInstance().apply {
+                    set(Calendar.HOUR_OF_DAY, h)
+                    set(Calendar.MINUTE, 0)
+                }
+                h.toString() to timeFormatter.format(cal.time)
+            }
+        }
+
         return Preference.PreferenceGroup(
             title = stringResource(MR.strings.pref_category_library_update),
             preferenceItems = persistentListOf(
-                Preference.PreferenceItem.ListPreference(
-                    preference = autoUpdateIntervalPref,
-                    entries = persistentMapOf(
-                        0 to stringResource(MR.strings.update_never),
-                        12 to stringResource(MR.strings.update_12hour),
-                        24 to stringResource(MR.strings.update_24hour),
-                        48 to stringResource(MR.strings.update_48hour),
-                        72 to stringResource(MR.strings.update_72hour),
-                        168 to stringResource(MR.strings.update_weekly),
-                    ),
-                    title = stringResource(MR.strings.pref_library_update_interval),
+                Preference.PreferenceItem.MultiSelectListPreference(
+                    preference = autoUpdateSchedulePref,
+                    entries = hoursMap.toImmutableMap(),
+                    title = stringResource(MR.strings.pref_library_update_schedule),
+                    subtitle = if (autoUpdateSchedule.isEmpty()) {
+                        stringResource(MR.strings.update_schedule_none)
+                    } else {
+                        autoUpdateSchedule
+                            .map { it.toInt() }
+                            .sorted()
+                            .joinToString(", ") { hoursMap[it.toString()]!! }
+                    },
                     onValueChanged = {
-                        LibraryUpdateJob.setupTask(context, it)
+                        ContextCompat.getMainExecutor(context).execute { LibraryUpdateJob.setupTask(context) }
                         true
                     },
                 ),
@@ -172,9 +185,8 @@ object SettingsLibraryScreen : SearchableSettings {
                     ),
                     title = stringResource(MR.strings.pref_library_update_restriction),
                     subtitle = stringResource(MR.strings.restrictions),
-                    enabled = autoUpdateInterval > 0,
+                    enabled = autoUpdateSchedule.isNotEmpty(),
                     onValueChanged = {
-                        // Post to event looper to allow the preference to be updated.
                         ContextCompat.getMainExecutor(context).execute { LibraryUpdateJob.setupTask(context) }
                         true
                     },

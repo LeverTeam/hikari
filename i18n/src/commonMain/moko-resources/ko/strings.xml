@@ -72,13 +72,6 @@
     <string name="action_pause">일시중지</string>
     <string name="portrait">세로</string>
     <string name="landscape">가로</string>
-    <string name="pref_library_update_interval">자동 업데이트</string>
-    <string name="update_never">끄기</string>
-    <string name="update_6hour">6시간</string>
-    <string name="update_12hour">12시간</string>
-    <string name="update_24hour">1일</string>
-    <string name="update_48hour">2일</string>
-    <string name="update_weekly">1주</string>
     <string name="all">전부</string>
     <string name="pref_library_update_restriction">자동 업데이트 조건</string>
     <string name="charging">충전 중일 때만</string>
@@ -389,6 +382,8 @@
     <string name="pref_category_appearance">모양</string>
     <string name="relative_time_today">오늘</string>
     <string name="pref_category_library_update">전역 업데이트</string>
+    <string name="pref_library_update_schedule">업데이트 스케줄</string>
+    <string name="update_schedule_none">선택된 시간 없음</string>
     <string name="pref_category_security">보안 및 개인정보 보호</string>
     <string name="lock_always">항상</string>
     <string name="lock_never">끄기</string>
@@ -561,7 +556,6 @@
     <string name="pref_show_nsfw_source">소스 및 확장 기능 목록에 보이기</string>
     <string name="parental_controls_info">이 옵션을 끄더라도 비공식 또는 분류가 잘못된 확장 기능으로 인하여 성인 컨텐츠가 표시될 수 있습니다.</string>
     <string name="action_show_errors">터치하여 자세히 보기</string>
-    <string name="update_72hour">3일</string>
     <string name="restrictions">제한: %s</string>
     <string name="pref_library_update_categories_details">카테고리가 업데이트에서 제외된 경우 다른 카테고리에 포함되어 있어도 업데이트 되지 않습니다.</string>
     <string name="ext_updates_pending">업데이트 대기 중</string>

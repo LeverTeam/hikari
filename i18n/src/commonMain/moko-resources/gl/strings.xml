@@ -101,14 +101,9 @@
     <string name="pref_update_only_non_completed">Co estado de \"Rematados\"</string>
     <string name="charging">Durante a carga</string>
     <string name="pref_library_update_restriction">Restricións do dispositivo para as actualizacións automáticas</string>
-    <string name="update_weekly">Semanalmente</string>
-    <string name="update_48hour">Cada 2 días</string>
-    <string name="update_24hour">Diariamente</string>
-    <string name="update_12hour">Cada 12 horas</string>
-    <string name="update_6hour">Cada 6 horas</string>
-    <string name="update_never">Desactivadas</string>
-    <string name="pref_library_update_interval">Actualizacións automáticas</string>
     <string name="pref_category_library_update">Actualización global</string>
+    <string name="pref_library_update_schedule">Horario de actualización</string>
+    <string name="update_schedule_none">Non se seleccionaron horas</string>
     <string name="landscape">Horizontal</string>
     <string name="portrait">Vertical</string>
     <string name="pref_library_columns">Tamaño da reixa</string>
@@ -385,7 +380,6 @@
     <string name="invalid_backup_file">O arquivo da copia de seguridade non é válido:</string>
     <string name="invalid_backup_file_missing_manga">A copia de seguriade non contén ningún elemento da biblioteca.</string>
     <string name="pref_dns_over_https">DNS por HTTPS (DoH)</string>
-    <string name="update_72hour">Cada 3 días</string>
     <string name="downloaded_only_summary">Filtra tódolos elementos da túa biblioteca</string>
     <string name="snack_add_to_library">Engadir á biblioteca?</string>
     <string name="description_placeholder">Sen descripción</string>

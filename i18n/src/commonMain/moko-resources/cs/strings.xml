@@ -44,11 +44,6 @@
     <string name="loading">Načítání…</string>
     <string name="app_not_available">Aplikace není k dispozici</string>
     <string name="pref_category_downloads">Stahování</string>
-    <string name="update_6hour">Každých 6 hodiny</string>
-    <string name="update_12hour">Každých 12 hodiny</string>
-    <string name="update_24hour">Denně</string>
-    <string name="update_48hour">Každé 2 dny</string>
-    <string name="update_weekly">Týdně</string>
     <string name="pref_update_only_non_completed">Přeskočit položky ve stavu \"Dokončeno\"</string>
     <string name="pref_auto_update_manga_sync">Aktualizovat počet kapitol po přečtení</string>
     <string name="ext_update">Aktualizovat</string>
@@ -172,8 +167,6 @@
     <string name="pref_library_columns">Položek na řádek</string>
     <string name="portrait">Na výšku</string>
     <string name="landscape">Na šířku</string>
-    <string name="pref_library_update_interval">Automatické aktualizace</string>
-    <string name="update_never">Nikdy</string>
     <string name="all">Vše</string>
     <string name="charging">Při nabíjení</string>
     <string name="default_category">Výchozí kategorie</string>
@@ -290,6 +283,8 @@
     <string name="logout">Odhlásit se</string>
     <string name="pref_date_format">Formát data</string>
     <string name="pref_category_library_update">Globální aktualizace</string>
+    <string name="pref_library_update_schedule">Plán aktualizací</string>
+    <string name="update_schedule_none">Nevybrány žádné hodiny</string>
     <string name="logout_title">Odhlásit z %1$s?</string>
     <string name="logout_success">Nyní jste odhlášený</string>
     <string name="paused">Pozastaveno</string>
@@ -537,7 +532,6 @@
     <string name="action_sort_count">Celkem položek</string>
     <string name="action_select_inverse">Vybrat obráceně</string>
     <string name="action_display_language_badge">Jazyk</string>
-    <string name="update_72hour">Každé 3 dny</string>
     <string name="connected_to_wifi">Jen na Wi-Fi</string>
     <string name="pref_verbose_logging">Podrobné protokolování</string>
     <string name="download_queue_size_warning">Varování: hromadné stahování může vést k tomu, že zdroje zpomalí a/nebo zablokují %s. Klepnutím se dozvíte více.</string>

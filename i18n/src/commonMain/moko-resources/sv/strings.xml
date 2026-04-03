@@ -73,13 +73,6 @@
     <string name="pref_library_columns">Objekt per rad</string>
     <string name="portrait">Porträtt</string>
     <string name="landscape">Landskap</string>
-    <string name="pref_library_update_interval">Automatiska uppdateringar</string>
-    <string name="update_never">Av</string>
-    <string name="update_6hour">Var 6:e timme</string>
-    <string name="update_12hour">Var 12:e timme</string>
-    <string name="update_24hour">Dagligen</string>
-    <string name="update_48hour">Varannan dag</string>
-    <string name="update_weekly">Varje vecka</string>
     <string name="all">Alla</string>
     <string name="pref_library_update_restriction">Automatiska uppdateringar av enhetsbegränsningar</string>
     <string name="charging">Vid laddning</string>
@@ -289,6 +282,8 @@
     <string name="obsolete_extension_message">Detta tillägg är inte längre tillgängligt. Det kanske inte fungerar korrekt och kan orsaka problem med appen. Vi rekommenderar att du avinstallerar det.</string>
     <string name="pref_date_format">Datumformat</string>
     <string name="pref_category_library_update">Global uppdatering</string>
+    <string name="pref_library_update_schedule">Uppdateringsplan</string>
+    <string name="update_schedule_none">Ingen tid vald</string>
     <string name="logout_title">Logga ut från %1$s?</string>
     <string name="logout">Logga ut</string>
     <string name="logout_success">Du är nu utloggad</string>
@@ -542,7 +537,6 @@
     <string name="connected_to_wifi">Bara över Wi-Fi</string>
     <string name="notification_size_warning">Stora uppdateringar skadar källor och kan leda till långsammare uppdateringar samt en ökad batterianvändning. Tryck för att få veta mer.</string>
     <string name="download_queue_size_warning">Varning: stora massnerladdningar kan leda till att källor blir långsamma och/eller blockerar %s. Tryck för att få veta mer.</string>
-    <string name="update_72hour">Var 3:e dag</string>
     <string name="ext_update_all">Uppdatera alla</string>
     <string name="channel_app_updates">Appuppdateringar</string>
     <string name="pref_auto_clear_chapter_cache">Rensa kapitelcache när appen startas</string>

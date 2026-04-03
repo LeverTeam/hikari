@@ -30,13 +30,6 @@
     <string name="pref_library_columns">Elemek soronként</string>
     <string name="portrait">Álló</string>
     <string name="landscape">Fekvő</string>
-    <string name="pref_library_update_interval">Frissítések gyakorisága</string>
-    <string name="update_never">Ki</string>
-    <string name="update_6hour">6 óránként</string>
-    <string name="update_12hour">12 óránként</string>
-    <string name="update_24hour">Naponta</string>
-    <string name="update_48hour">2 naponta</string>
-    <string name="update_weekly">Hetente</string>
     <string name="all">Összes</string>
     <string name="pref_library_update_restriction">Frissítések korlátozása</string>
     <string name="charging">Töltés közben</string>
@@ -187,6 +180,8 @@
     <string name="pref_library_update_refresh_metadata_summary">Új borító és részletek keresése a könyvtár frissítésekor</string>
     <string name="pref_library_update_refresh_metadata">Metaadatokat frissítse automatikusan</string>
     <string name="pref_category_library_update">Minden frissítése</string>
+    <string name="pref_library_update_schedule">Frissítési ütemezés</string>
+    <string name="update_schedule_none">Nincs kiválasztott idő</string>
     <string name="pref_category_display">Megjelenés</string>
     <string name="parental_controls_info">Ez nem akadályozza meg a nem hivatalos vagy az esetlegesen helytelenül megjelölt bővítményeket a 18+-os tartalmak megjelenítésétől az alkalmazáson belül.</string>
     <string name="pref_show_nsfw_source">Megjelenítés a forrás- és kiterjesztéseklistában</string>
@@ -404,7 +399,6 @@
     <string name="ext_installer_shizuku_stopped">A Shizuku nem fut</string>
     <string name="ext_installer_legacy">Régi</string>
     <string name="tracking_info">Egyirányú szinkronizálás, hogy a fejezetben való előrehaladás frissítve legyen a követési szolgáltatásokban. Állíts be követést egyéni elemekre, a követés gomb lenyomásával.</string>
-    <string name="update_72hour">3 naponta</string>
     <string name="connected_to_wifi">Csak Wi-Fi-n keresztül</string>
     <string name="backup_info">A biztonsági mentésekről más helyeken is érdemes másolatokat tartani. A biztonsági mentések érzékeny adatokat tartalmazhatnak, beleértve a tárolt jelszavakat is; legyen óvatos a megosztáskor.</string>
     <string name="empty_backup_error">Nincs könyvtári elem, amit menteni lehetne</string>

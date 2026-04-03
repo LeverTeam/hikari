@@ -68,13 +68,6 @@
     <string name="pref_library_columns">Itens por linha</string>
     <string name="portrait">Retrato</string>
     <string name="landscape">Paisagem</string>
-    <string name="pref_library_update_interval">Atualizações automáticas</string>
-    <string name="update_never">Desligado</string>
-    <string name="update_6hour">A cada 6 horas</string>
-    <string name="update_12hour">A cada 12 horas</string>
-    <string name="update_24hour">Diariamente</string>
-    <string name="update_48hour">A cada 2 dias</string>
-    <string name="update_weekly">Semanalmente</string>
     <string name="all">Todas</string>
     <string name="pref_library_update_restriction">Restrições do dispositivo para atualizações automáticas</string>
     <string name="charging">Quando carregando</string>
@@ -289,6 +282,8 @@
     <string name="migration_selection_prompt">Selecione uma fonte da qual migrar</string>
     <string name="pref_date_format">Formato de data</string>
     <string name="pref_category_library_update">Atualização global</string>
+    <string name="pref_library_update_schedule">Cronograma de atualização</string>
+    <string name="update_schedule_none">Nenhum horário selecionado</string>
     <string name="logout_title">Desconectar de %1$s?</string>
     <string name="logout">Desconectar</string>
     <string name="logout_success">Você foi desconectado</string>
@@ -541,7 +536,6 @@
     <string name="label_warning">Aviso</string>
     <string name="backup_info">Você deve manter cópias em outros locais também. Backups podem ter informações sensíveis incluindo senhas salvas; tenha cuidado se compartilhar.</string>
     <string name="connected_to_wifi">Somente no Wi-Fi</string>
-    <string name="update_72hour">A cada 3 dias</string>
     <string name="download_queue_size_warning">Aviso: grandes downloads em massa podem levar as fontes a ficarem lentas e/ou começarem a bloquear o %s. Toque para saber mais.</string>
     <string name="ext_update_all">Atualizar tudo</string>
     <string name="channel_app_updates">Atualizações do aplicativo</string>

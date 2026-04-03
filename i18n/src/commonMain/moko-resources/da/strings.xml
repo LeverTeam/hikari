@@ -159,14 +159,8 @@
     <string name="landscape">Liggende</string>
     <string name="portrait">Stående</string>
     <string name="pref_category_library_update">Global opdatering</string>
-    <string name="pref_library_update_interval">Automatiske opdateringer</string>
-    <string name="update_never">Fra</string>
-    <string name="update_6hour">Hver 6. time</string>
-    <string name="update_12hour">Hver 12. time</string>
-    <string name="update_24hour">Dagligt</string>
-    <string name="update_48hour">Hver anden dag</string>
-    <string name="update_72hour">Hver tredje dag</string>
-    <string name="update_weekly">Ugentligt</string>
+    <string name="pref_library_update_schedule">Opdateringsplan</string>
+    <string name="update_schedule_none">Ingen timer valgt</string>
     <string name="charging">Kun under opladning</string>
     <string name="restrictions">Begrænsninger: %s</string>
     <string name="pref_update_only_completely_read">Med ulæst kapitler</string>

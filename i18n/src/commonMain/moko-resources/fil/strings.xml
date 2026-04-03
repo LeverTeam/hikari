@@ -200,14 +200,9 @@
     <string name="pref_update_only_non_completed">Laktawan ang mga entry na may katayuang \"Nakumpleto\"</string>
     <string name="charging">Kapag naka-charge</string>
     <string name="pref_library_update_restriction">Awtomatikong ina-update ang mga paghihigpit sa device</string>
-    <string name="update_weekly">Linggo-linggo</string>
-    <string name="update_48hour">Kada 2 araw</string>
-    <string name="update_24hour">Araw-araw</string>
-    <string name="update_12hour">Kada 12 oras</string>
-    <string name="update_6hour">Kada 6 na oras</string>
-    <string name="update_never">Nakapatay</string>
-    <string name="pref_library_update_interval">Awtomatikong pag-update</string>
     <string name="pref_category_library_update">Panlahatang update</string>
+    <string name="pref_library_update_schedule">Iskedyul ng pag-update</string>
+    <string name="update_schedule_none">Walang oras na napili</string>
     <string name="landscape">Pahiga</string>
     <string name="portrait">Patayo</string>
     <string name="pref_library_columns">Mga item kada row</string>
@@ -541,7 +536,6 @@
     <string name="label_warning">Babala</string>
     <string name="backup_info">Dapat nagtatabi rin kayo ng mga kopya ng backup sa ibang mga lugar. Ang mga backup ay naglalaman ng sensitibong data tulad ng nakaimbak na password; mag-ingat kung ibahagi ito.</string>
     <string name="connected_to_wifi">Sa Wi-Fi lang</string>
-    <string name="update_72hour">Kada 3 araw</string>
     <string name="download_queue_size_warning">Babala: maaaring humantong sa pagbagal at/o pagharang ng mga source sa %s ang maramihang pag-download. I-tap para matuto pa.</string>
     <string name="channel_app_updates">Mga update sa app</string>
     <string name="ext_update_all">I-update lahat</string>

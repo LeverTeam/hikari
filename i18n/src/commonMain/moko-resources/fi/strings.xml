@@ -117,13 +117,6 @@
     <string name="pref_library_columns">Kohteita per rivi</string>
     <string name="portrait">Pystysuunta</string>
     <string name="landscape">Vaakataso</string>
-    <string name="pref_library_update_interval">Automaattinen päivitys</string>
-    <string name="update_never">Pois</string>
-    <string name="update_6hour">Kuuden tunnin välein</string>
-    <string name="update_12hour">12 tunnin välein</string>
-    <string name="update_24hour">Päivittäin</string>
-    <string name="update_48hour">Kahden päivän välein</string>
-    <string name="update_weekly">Viikoittain</string>
     <string name="all">Kaikki</string>
     <string name="pref_library_update_restriction">Automaattisen päivityksen laitteistorajoitukset</string>
     <string name="charging">Latauksessa</string>
@@ -289,6 +282,8 @@
     <string name="obsolete_extension_message">Tämä laajennos ei ole enää saatavilla. Se ei välttämättä toimi oikein ja voi aiheuttaa ongelmia Mihonin kanssa. Laajennoksen poistoa suositellaan.</string>
     <string name="pref_date_format">Päivämäärän muoto</string>
     <string name="pref_category_library_update">Globaali päivitys</string>
+    <string name="pref_library_update_schedule">Päivitysaikataulu</string>
+    <string name="update_schedule_none">Ei valittuja aikoja</string>
     <string name="logout_title">Kirjaa ulos kohteesta %1$s?</string>
     <string name="logout">Kirjaudu ulos</string>
     <string name="logout_success">Kirjauduttu ulos</string>
@@ -515,7 +510,6 @@
     <string name="action_display_language_badge">Kieli</string>
     <string name="action_move_to_top_all_for_series">Siirrä sarja päällimmäiseksi</string>
     <string name="theme_tako">Tako</string>
-    <string name="update_72hour">Joka 3. Päivä</string>
     <string name="connected_to_wifi">Ainoastaan WiFillä</string>
     <string name="pref_inverted_colors">Käänteisväri</string>
     <string name="ext_app_info">Sovelluksen tiedot</string>

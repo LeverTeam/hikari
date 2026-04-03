@@ -57,7 +57,7 @@ import eu.kanade.tachiyomi.data.export.LibraryExporter.ExportOptions
 import eu.kanade.tachiyomi.util.system.DeviceUtil
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.persistentMapOf
+import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import logcat.LogPriority
@@ -66,6 +66,8 @@ import tachiyomi.core.common.storage.displayablePath
 import tachiyomi.core.common.util.lang.launchNonCancellable
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
+import java.text.DateFormat
+import java.util.Calendar
 import tachiyomi.domain.backup.service.BackupPreferences
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.manga.interactor.GetFavorites
@@ -205,6 +207,19 @@ object SettingsDataScreen : SearchableSettings {
             navigator.push(RestoreBackupScreen(it.toString()))
         }
 
+        val backupSchedulePref = backupPreferences.backupSchedule
+        val backupSchedule by backupSchedulePref.collectAsState()
+        val hoursMap = remember {
+            val timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT)
+            (0..23).associate { h ->
+                val cal = Calendar.getInstance().apply {
+                    set(Calendar.HOUR_OF_DAY, h)
+                    set(Calendar.MINUTE, 0)
+                }
+                h.toString() to timeFormatter.format(cal.time)
+            }
+        }
+
         return Preference.PreferenceGroup(
             title = stringResource(MR.strings.label_backup),
             preferenceItems = persistentListOf(
@@ -253,19 +268,20 @@ object SettingsDataScreen : SearchableSettings {
                 },
 
                 // Automatic backups
-                Preference.PreferenceItem.ListPreference(
-                    preference = backupPreferences.backupInterval,
-                    entries = persistentMapOf(
-                        0 to stringResource(MR.strings.off),
-                        6 to stringResource(MR.strings.update_6hour),
-                        12 to stringResource(MR.strings.update_12hour),
-                        24 to stringResource(MR.strings.update_24hour),
-                        48 to stringResource(MR.strings.update_48hour),
-                        168 to stringResource(MR.strings.update_weekly),
-                    ),
+                Preference.PreferenceItem.MultiSelectListPreference(
+                    preference = backupSchedulePref,
+                    entries = hoursMap.toImmutableMap(),
                     title = stringResource(MR.strings.pref_backup_interval),
+                    subtitle = if (backupSchedule.isEmpty()) {
+                        stringResource(MR.strings.update_schedule_none)
+                    } else {
+                        backupSchedule
+                            .map { it.toInt() }
+                            .sorted()
+                            .joinToString(", ") { hoursMap[it.toString()]!! }
+                    },
                     onValueChanged = {
-                        BackupCreateJob.setupTask(context, it)
+                        BackupCreateJob.setupTask(context)
                         true
                     },
                 ),

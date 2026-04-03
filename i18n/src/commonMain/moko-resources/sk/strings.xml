@@ -75,13 +75,6 @@
     <string name="pref_library_columns">Položky na riadok</string>
     <string name="portrait">Na výšku</string>
     <string name="landscape">Na šírku</string>
-    <string name="pref_library_update_interval">Automatické aktualizácie</string>
-    <string name="update_never">Vyp.</string>
-    <string name="update_6hour">Každých 6 hodín</string>
-    <string name="update_12hour">Každých 12 hodín</string>
-    <string name="update_24hour">Raz za deň</string>
-    <string name="update_48hour">Každé 2 dni</string>
-    <string name="update_weekly">Každý týždeň</string>
     <string name="all">Všetko</string>
     <string name="pref_library_update_restriction">Automatické aktualizácie obmedzení zariadenia</string>
     <string name="charging">Pri nabíjaní</string>
@@ -369,10 +362,11 @@
     <string name="pref_update_only_started">Ktoré sa ešte nezačali</string>
     <string name="parental_controls_info">Toto nastavenie avšak nebráni tomu, aby sa v aplikácii objavil neoficiálny alebo potenciálne nesprávne označený obsah NSFW (18+).</string>
     <string name="pref_category_library_update">Globálna aktualizácia</string>
+    <string name="pref_library_update_schedule">Aktualizačný plán</string>
+    <string name="update_schedule_none">Nevybraný čas</string>
     <string name="pref_library_update_refresh_metadata">Automatický obnoviť metadata</string>
     <string name="pref_library_update_refresh_metadata_summary">Pri aktualizácii knižnice skontrolujte nový obal a podrobnosti</string>
     <string name="pref_category_display">Zobraziť</string>
-    <string name="update_72hour">Každé 3 dni</string>
     <string name="update_already_running">Aktualizácia už prebieha</string>
     <string name="empty_backup_error">Žiadne záznami v knižnici k zálohovaniu</string>
     <string name="requires_app_restart">Vyžaduje reštart aplikácie, aby sa zmeny prejavili</string>

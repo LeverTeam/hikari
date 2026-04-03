@@ -118,14 +118,9 @@
     <string name="restrictions">प्रतिबन्धहरू: %s</string>
     <string name="charging">चार्ज हुँदा</string>
     <string name="pref_library_update_restriction">स्वचालित अपडेट्स यन्त्र प्रतिबन्धहरू</string>
-    <string name="update_weekly">साप्ताहिक</string>
-    <string name="update_48hour">प्रत्येक २ दिन</string>
-    <string name="update_24hour">दैनिक</string>
-    <string name="update_12hour">प्रत्येक १२ घण्टा</string>
-    <string name="update_6hour">प्रत्येक ६ घण्टा</string>
-    <string name="update_never">अफ</string>
-    <string name="pref_library_update_interval">स्वचालित अपडेट्स</string>
     <string name="pref_category_library_update">ग्लोबल अपडेट</string>
+    <string name="pref_library_update_schedule">अपडेट अनुसूची</string>
+    <string name="update_schedule_none">कुनै समय चयन गरिएको छैन</string>
     <string name="landscape">ल्याण्डस्केप</string>
     <string name="pref_library_columns">प्रति रो वस्तुहरू</string>
     <string name="pref_category_display">प्रदर्शन</string>
@@ -258,7 +253,6 @@
     <string name="white_background">सेतो</string>
     <string name="pref_viewer_type">पूर्वनिर्धारित पढ्ने मोड</string>
     <string name="connected_to_wifi">Wi-Fi मा मात्र</string>
-    <string name="update_72hour">प्रत्येक ३ दिन</string>
     <string name="edge_nav">कुना</string>
     <string name="vertical_viewer">ठाडो</string>
     <string name="webtoon_viewer">लामो स्ट्रिप</string>

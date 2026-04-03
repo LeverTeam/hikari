@@ -38,13 +38,9 @@
     <string name="default_category_summary">Кашнинчех ыйтмалла</string>
     <string name="charging">Петтерей тулнӑ чух</string>
     <string name="pref_library_update_restriction">Хатӗр валли хӑй-хальлӗн ҫӗнетӳ чарӑвӗсем</string>
-    <string name="update_weekly">Кашни ерне</string>
-    <string name="update_48hour">Кашни 2 кун</string>
-    <string name="update_24hour">Кашни кун</string>
-    <string name="update_12hour">Кашни 12 сехет</string>
-    <string name="update_6hour">Кашни 6 сехет</string>
-    <string name="pref_library_update_interval">Ҫӗнетни тӑтӑшлӑхӗ</string>
     <string name="pref_category_library_update">Пӗтӗмӗшле ҫӗнетӳ</string>
+    <string name="pref_library_update_schedule">Ҫӗнетӳ графикӗ</string>
+    <string name="update_schedule_none">Суйланӑ сехетсем ҫук</string>
     <string name="pref_category_display">Кӑтарт</string>
     <string name="secure_screen">Ыкран сыхлавӗ</string>
     <string name="pref_category_security">Сыхлав тата вӑрттӑнлӑх</string>
@@ -144,7 +140,6 @@
     <string name="action_display_comfortable_grid">Меллӗ сетке</string>
     <string name="action_display_grid">Ҫӑтӑ сетке</string>
     <string name="action_select_inverse">Хирӗҫле суйла</string>
-    <string name="update_never">Сӳнтернӗ</string>
     <string name="pref_library_columns">Йӗркере миҫе йапала</string>
     <string name="portrait">Урлӑ</string>
     <string name="landscape">Тӑрӑх</string>
@@ -520,7 +515,6 @@
     <string name="pref_dark_theme_pure_black">Хуп-хура темӗ</string>
     <string name="pref_app_language">Ап чӗлхи</string>
     <string name="action_not_now">Халь мар</string>
-    <string name="update_72hour">Кашни 3 кун</string>
     <string name="theme_tealturquoise">Симӗс кӑвак</string>
     <string name="theme_monet">Куҫӑмлӑ</string>
     <string name="label_stats">Шутлавсем</string>

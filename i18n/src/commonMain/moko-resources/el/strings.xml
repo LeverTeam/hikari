@@ -73,13 +73,6 @@
     <string name="pref_library_columns">Στοιχεία ανά σειρά</string>
     <string name="portrait">Κατακόρυφα</string>
     <string name="landscape">Οριζόντια</string>
-    <string name="pref_library_update_interval">Αυτόματες ενημερώσεις</string>
-    <string name="update_never">Απενεργοποιημένο</string>
-    <string name="update_6hour">Κάθε 6 ώρες</string>
-    <string name="update_12hour">Κάθε 12 ώρες</string>
-    <string name="update_24hour">Καθημερινά</string>
-    <string name="update_48hour">Κάθε 2 ημέρες</string>
-    <string name="update_weekly">Εβδομαδιαία</string>
     <string name="all">Όλα</string>
     <string name="pref_library_update_restriction">Περιορισμοί αυτόματων ενημερώσεων συσκευής</string>
     <string name="charging">Κατά τη φόρτιση</string>
@@ -332,6 +325,8 @@
     <string name="pref_cutout_short">Εμφάνιση περιεχομένου στην περιοχή αποκοπής</string>
     <string name="ext_updates_pending">Εκκρεμούν ενημερώσεις</string>
     <string name="pref_category_library_update">Καθολική ενημέρωση</string>
+    <string name="pref_library_update_schedule">Πρόγραμμα ενημερώσεων</string>
+    <string name="update_schedule_none">Δεν έχουν επιλεγεί ώρες</string>
     <string name="pref_category_display">Προβολή</string>
     <string name="hide_notification_content">Απόκρυψη περιεχομένου ειδοποιήσεων</string>
     <string name="secure_screen_summary">Η ασφαλής οθόνη αποκρύπτει τα περιεχόμενα εφαρμογών κατά την εναλλαγή εφαρμογών και εμποδίζει τα στιγμιότυπα οθόνης</string>
@@ -541,7 +536,6 @@
     <string name="backup_info">Θα πρέπει να κρατάτε αντίγραφα αντιγράφων ασφαλείας και σε άλλα μέρη. Τα αντίγραφα ασφαλείας ενδέχεται να περιέχουν ευαίσθητα δεδομένα, συμπεριλαμβανομένων τυχόν αποθηκευμένων κωδικών πρόσβασης, να είστε προσεκτικοί αν τα μοιράζεστε.</string>
     <string name="notification_size_warning">Οι μεγάλες ενημερώσεις βλάπτουν τις πηγές και μπορεί να οδηγήσουν σε πιο αργές ενημερώσεις και σε αυξημένη χρήση της μπαταρίας. Πατήστε για να μάθετε περισσότερα.</string>
     <string name="connected_to_wifi">Μόνο σε Wi-Fi</string>
-    <string name="update_72hour">Κάθε 3 ημέρες</string>
     <string name="download_queue_size_warning">Προειδοποίηση: οι μαζικές λήψεις ενδέχεται να οδηγήσουν σε επιβράδυνση των πηγών ή/και αποκλεισμό του %s. Πατήστε για να μάθετε περισσότερα.</string>
     <string name="ext_update_all">Ενημέρωση όλων</string>
     <string name="channel_app_updates">Ενημερώσεις εφαρμογής</string>

@@ -84,7 +84,6 @@
     <string name="webtoon_viewer">وب تون(Webtoon)</string>
     <string name="filter_mode_darken">Burn / Darken</string>
     <string name="filter_mode_lighten">Dodge / Lighten</string>
-    <string name="update_12hour">هر ۱۲ ساعت یکبار</string>
     <string name="action_move_category">انتخاب دسته بندی</string>
     <string name="information_empty_category">هیچ دسته بندی وجود ندارد. با زدن دکمه به علاوه دسته بندی جدیدی بسازید.</string>
     <string name="information_empty_library">کتابخانه شما خالی است</string>
@@ -231,13 +230,9 @@
     <string name="pref_update_only_non_completed">با وضعیت \"کامل‌شده\"</string>
     <string name="charging">هنگام شارژ کردن</string>
     <string name="pref_library_update_restriction">محدودیت‌های دستگاهی به‌روزرسانی‌ خودکار</string>
-    <string name="update_weekly">هفتگی</string>
-    <string name="update_48hour">هر ۴۸ ساعت یکبار</string>
-    <string name="update_24hour">هر ۲۴ ساعت یکبار</string>
-    <string name="update_6hour">هر ۶ ساعت یکبار</string>
-    <string name="update_never">خاموش</string>
-    <string name="pref_library_update_interval">به‌روزرسانی‌های خودکار</string>
     <string name="pref_category_library_update">به‌روزرسانی همگانی</string>
+    <string name="pref_library_update_schedule">برنامه به‌روزرسانی</string>
+    <string name="update_schedule_none">هیچ زمانی انتخاب نشده است</string>
     <string name="landscape">افقی</string>
     <string name="portrait">عمودی</string>
     <string name="pref_library_columns">موارد در هر ردیف</string>
@@ -489,7 +484,6 @@
     <string name="restrictions">محدودیت‌ها: %s</string>
     <string name="pref_update_only_completely_read">با قسمت‌(های) خوانده‌نشده</string>
     <string name="relative_time_today">امروز</string>
-    <string name="update_72hour">هر 3 روز</string>
     <string name="connected_to_wifi">فقط روی Wi-Fi</string>
     <string name="categorized_display_settings">تنظیمات بر اساس دسته‌بندی برای ترتیب و نمایش</string>
     <string name="ext_app_info">اطلاعات برنامه</string>

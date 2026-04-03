@@ -22,6 +22,8 @@
     <string name="portrait">উল্লম্ব</string>
     <string name="landscape">অনুভূমিক</string>
     <string name="pref_category_library_update">সৰ্বসাধাৰণ সন্মিলনী</string>
+    <string name="pref_library_update_schedule">আপডেটৰ সময়সূচী</string>
+    <string name="update_schedule_none">কোনো সময় বাছনি কৰা হোৱা নাই</string>
     <string name="pref_library_update_restriction">স্বয়ংক্ৰিয় আপডেটৰ যন্ত্ৰৰ সীমাবদ্ধতা</string>
     <string name="connected_to_wifi">কেৱল Wi-Fi ত</string>
     <string name="network_not_metered">কেৱল অবিমিত নেটৱৰ্কত</string>
@@ -274,14 +276,6 @@
     <string name="relative_time_today">আজি</string>
     <string name="pref_category_display">প্ৰদৰ্শন</string>
     <string name="pref_library_columns">শাৰীপ্ৰতি বস্তুসমূহ</string>
-    <string name="pref_library_update_interval">স্বয়ংক্ৰিয় আপডেট</string>
-    <string name="update_never">বন্ধ</string>
-    <string name="update_12hour">প্ৰতি ১২ ঘণ্টা</string>
-    <string name="update_6hour">প্ৰতি ৬ ঘণ্টা</string>
-    <string name="update_24hour">প্ৰতি দিন</string>
-    <string name="update_48hour">প্ৰতি ২ দিন</string>
-    <string name="update_72hour">প্ৰতি ৩ দিন</string>
-    <string name="update_weekly">প্ৰতি সপ্তাহ</string>
     <string name="restrictions">সীমাবদ্ধতা: %s</string>
     <string name="pref_update_only_started">অ আৰম্ভিত প্ৰৱিষ্টিসমূহ আঁতৰাওক</string>
     <string name="pref_update_only_in_release_period">পৰৱৰ্তী মুক্তিৰ সময় অনুমান কৰক</string>

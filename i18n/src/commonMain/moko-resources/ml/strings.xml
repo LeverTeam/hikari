@@ -146,17 +146,11 @@
     <string name="action_open_log">ലോഗ് തുറക്കുക</string>
     <string name="ext_install">ഇൻസ്റ്റാൾ</string>
     <string name="ext_trust">വിശ്വസിക്കൂ</string>
-    <string name="update_48hour">എല്ലാ 2 ദിവസവും</string>
-    <string name="update_weekly">ആഴ്ചയിൽ ഒരിക്കൽ</string>
-    <string name="update_24hour">എല്ലാ ദിവസവും</string>
     <string name="obsolete_extension_message">ഈ എക്സ്റ്റൻഷൻ ഇനി ലഭ്യമല്ല. ഇത് ശരിയായി പ്രവർത്തിച്ചേക്കില്ല, ആപ്പിൽ പ്രശ്നങ്ങൾ ഉണ്ടാക്കാം. ഇത് അൺഇൻസ്റ്റാൾ ചെയ്യാൻ റെകമെൻഡ് ചെയ്യുന്നു.</string>
     <string name="charging">ചാർജ് ചെയ്യുമ്പോൾ</string>
-    <string name="update_never">അപ്ഡേറ്റ് ചെയ്യരുത്</string>
     <string name="action_webview_forward">മുന്നോട്ട്</string>
     <string name="action_webview_back">പുറകിലുള്ള</string>
     <string name="action_restore">റിസ്റ്റോർ</string>
-    <string name="update_12hour">ഓരോ 12 മണിക്കൂറിലും</string>
-    <string name="update_6hour">ഓരോ 6 മണിക്കൂറിലും</string>
     <string name="landscape">ലാൻഡ്സ്കേപ്പ്</string>
     <string name="pref_library_columns">ഗ്രിഡ് വലിപ്പം</string>
     <string name="ext_update">അപ്ഡേറ്റ്</string>

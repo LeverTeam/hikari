@@ -73,13 +73,6 @@
     <string name="pref_library_columns">Elements per fila</string>
     <string name="portrait">Vertical</string>
     <string name="landscape">Horitzontal</string>
-    <string name="pref_library_update_interval">Actualitzacions automàtiques</string>
-    <string name="update_never">Desactivades</string>
-    <string name="update_6hour">Cada 6 hores</string>
-    <string name="update_12hour">Cada 12 hores</string>
-    <string name="update_24hour">Cada dia</string>
-    <string name="update_48hour">Cada 2 dies</string>
-    <string name="update_weekly">Cada setmana</string>
     <string name="all">Tot</string>
     <string name="pref_library_update_restriction">Restriccions del dispositiu per a les actualitzacions automàtiques</string>
     <string name="charging">Quan s’estigui carregant</string>
@@ -286,6 +279,8 @@
     <string name="obsolete_extension_message">Aquesta extensió ja no està disponible. És possible que no funcioni correctament i pot causar problemes a l’aplicació. És recomanable que la desinstal·leu.</string>
     <string name="pref_date_format">Format de data</string>
     <string name="pref_category_library_update">Actualització global</string>
+    <string name="pref_library_update_schedule">Horari d’actualització</string>
+    <string name="update_schedule_none">No s’han seleccionat hores</string>
     <string name="logout_title">Voleu tancar la sessió a %1$s?</string>
     <string name="logout">Tanca la sessió</string>
     <string name="logout_success">S’ha tancat la sessió</string>
@@ -517,7 +512,6 @@
     <string name="theme_yinyang">Yin i yang</string>
     <string name="theme_yotsuba">Yotsuba</string>
     <string name="pref_dark_theme_pure_black">Mode fosc negre pur</string>
-    <string name="update_72hour">Cada 3 dies</string>
     <string name="connected_to_wifi">Només amb Wi-Fi</string>
     <string name="ext_installer_shizuku_unavailable_dialog">Instal·leu i inicieu el Shizuku per a utilitzar-lo com a instal·lador d’extensions.</string>
     <string name="pref_hide_threshold">Sensibilitat a l’hora d’amagar el menú en desplaçar</string>

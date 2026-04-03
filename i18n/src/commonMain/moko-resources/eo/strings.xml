@@ -102,8 +102,6 @@
     <string name="none">Nenio</string>
     <string name="default_category_summary">Ĉiam demandi</string>
     <string name="default_category">Defaŭlta kategorio</string>
-    <string name="update_weekly">Ĉiusemajne</string>
-    <string name="update_24hour">Ĉiutage</string>
     <string name="invalid_backup_file">Nevalida savkopia dosiero:</string>
     <string name="backup_created">Savkopio kreita</string>
     <string name="pref_create_backup">Krei savkopion</string>
@@ -166,12 +164,9 @@
     <string name="pref_fullscreen">Plenekrano</string>
     <string name="obsolete_extension_message">Ĉi tiu etendaĵo ne plu disponeblas. Ĝi eble ne funkcios ĝuste kaj povas kaŭzi problemojn pri la apo. Malinstalado de ĝi estas rekomendata.</string>
     <string name="all">Ĉio</string>
-    <string name="update_48hour">Ĉiun 2-an tagon</string>
-    <string name="update_12hour">Ĉiun 12-an horon</string>
-    <string name="update_6hour">Ĉiun 6-an horon</string>
-    <string name="update_never">Malŝaltitaj</string>
-    <string name="pref_library_update_interval">Aŭtomataj ĝisdatigoj</string>
     <string name="pref_category_library_update">Tuta ĝisdatigo</string>
+    <string name="pref_library_update_schedule">Ĝisdatiga horaro</string>
+    <string name="update_schedule_none">Neniu horo elektita</string>
     <string name="landscape">Horizontale</string>
     <string name="portrait">Vertikale</string>
     <string name="pref_category_display">Montrado</string>
@@ -558,7 +553,6 @@
     <string name="pref_firebase">Analitikoj kaj protokoloj</string>
     <string name="firebase_summary">Sendado de prikolapsaj protokoloj kaj analitikoj eblos al ni identigi kaj ripari problemojn, plibonigi rendimenton kaj igi estontajn ĝisdatigojn pli rilataj al viaj bezonoj</string>
     <string name="parental_controls_info">Tio ne preventas neoficialajn aŭ eventuale malĝuste markitajn etendaĵojn montri NSFW-enhavon (18+) ene de la apo.</string>
-    <string name="update_72hour">Ĉiun 3-an tagon</string>
     <string name="pref_update_only_started">Preterpasi nekomencitajn elementojn</string>
     <string name="pref_chapter_swipe_end">Ĉapitro je ŝovumo dekstren</string>
     <string name="ext_remove">Forigi</string>

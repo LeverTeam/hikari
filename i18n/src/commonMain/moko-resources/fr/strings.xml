@@ -58,12 +58,6 @@
     <string name="pref_library_columns">Éléments par ligne</string>
     <string name="portrait">Portrait</string>
     <string name="landscape">Paysage</string>
-    <string name="pref_library_update_interval">Mises à jour automatiques</string>
-    <string name="update_never">Désactivé</string>
-    <string name="update_6hour">Toutes les 6 heures</string>
-    <string name="update_12hour">Toutes les 12 heures</string>
-    <string name="update_24hour">Tous les jours</string>
-    <string name="update_48hour">Tous les 2 jours</string>
     <string name="all">Tout</string>
     <string name="pref_library_update_restriction">Restrictions matérielles pour les mises à jour automatiques</string>
     <string name="charging">Lors de la charge</string>
@@ -198,7 +192,6 @@
     <string name="manga">Séries de la bibliothèque</string>
     <string name="history">Historique</string>
     <string name="app_not_available">Application indisponible</string>
-    <string name="update_weekly">Chaque semaine</string>
     <string name="default_category">Catégorie par défaut</string>
     <string name="download_notifier_download_paused">Téléchargement en pause</string>
     <string name="local_source">Source locale</string>
@@ -285,6 +278,8 @@
     <string name="obsolete_extension_message">Cette extension n\'est plus disponible. Elle peut ne pas fonctionner correctement et causer des problèmes avec l\'application. Il est recommandé de la désinstaller.</string>
     <string name="pref_date_format">Format de date</string>
     <string name="pref_category_library_update">Mises à jour</string>
+    <string name="pref_library_update_schedule">Horaire de mise à jour</string>
+    <string name="update_schedule_none">Aucune heure sélectionnée</string>
     <string name="action_webview_back">Précédent</string>
     <string name="action_webview_forward">Suivant</string>
     <string name="action_webview_refresh">Actualiser</string>
@@ -541,7 +536,6 @@
     <string name="notification_size_warning">Les mises à jour importantes nuisent aux sources et peuvent entraîner un ralentissement des mises à jour ainsi qu\'une augmentation de l\'utilisation de la batterie. Appuyez pour en savoir plus.</string>
     <string name="backup_info">Vous devez également conserver des copies des sauvegardes à d\'autres endroits.</string>
     <string name="connected_to_wifi">Uniquement en Wi-Fi</string>
-    <string name="update_72hour">Tous les 3 jours</string>
     <string name="download_queue_size_warning">Attention : les téléchargements massifs peuvent entraîner un ralentissement des sources ou le blocage de %s. Appuyez pour en savoir plus.</string>
     <string name="ext_update_all">Tout mettre à jour</string>
     <string name="channel_app_updates">Mises à jour de l\'application</string>

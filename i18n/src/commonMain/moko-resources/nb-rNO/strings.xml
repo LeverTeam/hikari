@@ -66,12 +66,6 @@
     <string name="pref_category_downloads">Nedlastinger</string>
     <string name="pref_category_advanced">Avansert</string>
     <string name="pref_category_about">Om</string>
-    <string name="update_never">Av</string>
-    <string name="update_6hour">Hver sjette time</string>
-    <string name="update_12hour">Hver tolvte time</string>
-    <string name="update_24hour">Daglig</string>
-    <string name="update_48hour">Annenhver dag</string>
-    <string name="update_weekly">Ukentlig</string>
     <string name="all">Alle</string>
     <string name="charging">Lading</string>
     <string name="default_category">Standard kategori</string>
@@ -97,7 +91,6 @@
     <string name="pref_category_tracking">Sporing</string>
     <string name="portrait">Stående</string>
     <string name="landscape">Liggende</string>
-    <string name="pref_library_update_interval">Automatiske oppdateringer</string>
     <string name="pref_library_update_restriction">Enhetsbegrensninger for automatiske oppdateringer</string>
     <string name="pref_update_only_non_completed">Hopp over oppføringer med \"Fullført\" status</string>
     <string name="pref_auto_update_manga_sync">Oppdater fremdrift etter lesing</string>
@@ -289,6 +282,8 @@
     <string name="obsolete_extension_message">Denne utvidelsen er ikke lengre tilgjengelig. Den fungerer kankje ikke som den skal og kan forårsake problemer med appen. Avinstallering anbefales.</string>
     <string name="pref_date_format">Datoformat</string>
     <string name="pref_category_library_update">Global oppdatering</string>
+    <string name="pref_library_update_schedule">Oppdateringsplan</string>
+    <string name="update_schedule_none">Ingen tid valgt</string>
     <string name="logout_title">Logg ut fra %1$s?</string>
     <string name="logout">Logg ut</string>
     <string name="logout_success">Du er utlogget</string>
@@ -541,7 +536,6 @@
     <string name="notification_size_warning">Store oppdateringer skader kilder og kan føre til tregere oppdateringer samt økt batteribruk. Trykk for å lære mer.</string>
     <string name="backup_info">Du bør oppbevare ekstra kopier av sikkershetskopier andre steder også. Sikkerhetskopier kan inneholde sensitiv data, inkludert eventuelle lagrede passord. Vær forsiktig ved deling.</string>
     <string name="channel_app_updates">Appoppdateringer</string>
-    <string name="update_72hour">Hver 3. dag</string>
     <string name="connected_to_wifi">Bare på Wi-Fi</string>
     <string name="action_show_manga">Vis oppføring</string>
     <string name="privacy_policy">Personvernerklæring</string>

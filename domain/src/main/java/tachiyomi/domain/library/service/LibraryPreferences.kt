@@ -36,7 +36,8 @@ class LibraryPreferences(
         Preference.appStateKey("library_update_last_timestamp"),
         0L,
     )
-    val autoUpdateInterval: Preference<Int> = preferenceStore.getInt("pref_library_update_interval_key", 0)
+    val autoUpdateSchedule: Preference<Set<String>> =
+        preferenceStore.getStringSet("pref_library_update_schedule_key", emptySet())
 
     val autoUpdateDeviceRestrictions: Preference<Set<String>> = preferenceStore.getStringSet(
         "library_update_restriction",
