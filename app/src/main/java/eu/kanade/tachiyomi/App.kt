@@ -52,6 +52,7 @@ import kotlinx.coroutines.flow.onEach
 import logcat.AndroidLogcatLogger
 import logcat.LogPriority
 import logcat.LogcatLogger
+import eu.kanade.tachiyomi.data.library.LibraryUpdateJob
 import hikari.core.migration.Migrator
 import hikari.core.migration.migrations.migrations
 import org.conscrypt.Conscrypt
@@ -155,6 +156,8 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
         }
 
         initializeMigrator()
+
+        LibraryUpdateJob.setupTask(this)
     }
 
     private fun initializeMigrator() {

@@ -16,10 +16,6 @@ class DefaultMigrationStrategy(
 ) : MigrationStrategy {
 
     override operator fun invoke(migrations: List<Migration>): Deferred<Boolean> = with(scope) {
-        if (migrations.isEmpty()) {
-            return@with CompletableDeferred(false)
-        }
-
         val chain = migrationJobFactory.create(migrations)
 
         launch {
@@ -33,7 +29,7 @@ class DefaultMigrationStrategy(
 class InitialMigrationStrategy(private val strategy: DefaultMigrationStrategy) : MigrationStrategy {
 
     override operator fun invoke(migrations: List<Migration>): Deferred<Boolean> {
-        return strategy(migrations.filter { it.isAlways })
+        return strategy(migrations)
     }
 }
 

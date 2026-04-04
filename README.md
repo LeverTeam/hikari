@@ -1,48 +1,41 @@
 # Hikari
 
-> Manga reader for Android, featuring offline downloads, security features, and a unified library.
-> Based on [Mihon](https://github.com/mihonapp/mihon).
+Manga reader for Android based on Mihon featuring offline downloads and security features.
 
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=kotlin,android,gradle,sqlite" alt="Tech Stack" />
-</p>
-<p align="left">
-  <img src="https://img.shields.io/badge/Language-Kotlin-blue?style=flat-square&logo=kotlin" alt="Language" />
-  <img src="https://img.shields.io/badge/Platform-Android-green?style=flat-square&logo=android" alt="Platform" />
-</p>
+![Tech Stack](https://skillicons.dev/icons?i=kotlin,android,compose,gradle,sqlite,firebase)
+
+![Language](https://img.shields.io/badge/language-Kotlin-blue?style=flat-square)
+![License](https://img.shields.io/github/license/LeverTeam/hikari?style=flat-square)
+![Repo Size](https://img.shields.io/github/repo-size/LeverTeam/hikari?style=flat-square)
 
 ## Features
 
-- Fetches and manages manga extensions from multiple repositories
-- Reads and organizes manga into a customized library interface
-- Syncs the Keiyoushi extension repository out-of-the-box upon first launch
-- Downloads chapters for offline viewing
-- Biometric lock and security modes for privacy
-- Material You and modular UI based on Jetpack Compose
+- Extension management from multiple repositories
+- Library organization with customized interface
+- Out-of-the-box Keiyoushi extension sync
+- Chapter downloads for offline viewing
+- Biometric lock and security modes
+- Material You UI built with Jetpack Compose
+- Automatic library updates and background backups
 
 ## Installation
 
 ### Prerequisites
 
 - JDK 21
-- Android SDK / Android Studio
+- Android SDK
 
-### Build Setup
-
-Use Gradle to fetch dependencies and compile the debug application.
+### Build
 
 ```bash
-# Clone the repository
 git clone https://github.com/LeverTeam/hikari.git
 cd hikari
-
-# Build the debug APK (ensure gradlew is executable)
 chmod +x gradlew
 ./gradlew assembleDebug
 ```
 
 ## Usage
 
-1. Open the output directory after a successful build: `app/build/outputs/apk/debug/`.
-2. Sideload the built `app-debug.apk` directly onto an Android device or emulator.
-3. Upon launch, navigate to the **Browse** panel; the default extension repository will automatically initialize.
+1. Locate the built APK in `app/build/outputs/apk/debug/`
+2. Install the APK on an Android device
+3. Navigate to the Browse panel to initialize the default extension repository

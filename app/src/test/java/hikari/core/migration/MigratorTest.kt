@@ -47,7 +47,7 @@ class MigratorTest {
         execute.await()
 
         verify { migrationJobFactory.create(capture(migrations)) }
-        assertEquals(1, migrations.captured.size)
+        assertEquals(2, migrations.captured.size)
         eventually(2.seconds) { verify { migrationCompletedListener() } }
     }
 
@@ -72,9 +72,9 @@ class MigratorTest {
         val execute = strategy(emptyList())
 
         val result = execute.await()
-        assertFalse(result)
 
-        verify(exactly = 0) { migrationJobFactory.create(any()) }
+        verify { migrationJobFactory.create(any()) }
+        eventually(2.seconds) { verify { migrationCompletedListener() } }
     }
 
     @Test

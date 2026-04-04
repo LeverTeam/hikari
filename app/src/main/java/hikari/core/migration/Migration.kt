@@ -9,7 +9,7 @@ interface Migration {
         get() = version == ALWAYS
 
     companion object {
-        const val ALWAYS = -1f
+        const val ALWAYS = Float.MAX_VALUE
 
         fun of(version: Float, action: suspend (MigrationContext) -> Boolean): Migration = object : Migration {
             override val version: Float = version

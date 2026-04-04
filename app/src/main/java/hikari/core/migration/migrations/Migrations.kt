@@ -5,7 +5,6 @@ import hikari.core.migration.Migration
 val migrations: List<Migration>
     get() = listOf(
         SetupBackupCreateMigration(),
-        SetupLibraryUpdateMigration(),
         TrustExtensionRepositoryMigration(),
         DefaultExtensionReposMigration(),
         CategoryPreferencesCleanupMigration(),
