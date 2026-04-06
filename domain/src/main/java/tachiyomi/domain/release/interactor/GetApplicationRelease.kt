@@ -19,17 +19,16 @@ class GetApplicationRelease(
     suspend fun await(arguments: Arguments): Result {
         val now = Instant.now()
 
-        // Limit checks to once every 3 days at most
-        val nextCheckTime = Instant.ofEpochMilli(lastChecked.get()).plus(3, ChronoUnit.DAYS)
-        if (!arguments.forceCheck && now.isBefore(nextCheckTime)) {
+        if (!arguments.forceCheck && now.isBefore(
+                Instant.ofEpochMilli(lastChecked.get()).plus(1, ChronoUnit.MINUTES),
+            )
+        ) {
             return Result.NoNewUpdate
         }
 
         val release = service.latest(arguments) ?: return Result.NoNewUpdate
 
         lastChecked.set(now.toEpochMilli())
-
-        // Check if latest version is different from current version
         val isNewVersion = isNewVersion(
             arguments.commitCount,
             arguments.versionName,

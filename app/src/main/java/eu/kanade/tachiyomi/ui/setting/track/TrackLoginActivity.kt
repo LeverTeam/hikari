@@ -22,7 +22,7 @@ class TrackLoginActivity : BaseOAuthLoginActivity() {
 
         lifecycleScope.launch {
             when (uri.host) {
-                "anilist-auth" -> handleAniList(data["access_token"])
+                "anilist-auth" -> handleAniList(data["code"] ?: data["access_token"])
                 "bangumi-auth" -> handleBangumi(data["code"])
                 "myanimelist-auth" -> handleMyAnimeList(data["code"])
                 "shikimori-auth" -> handleShikimori(data["code"])

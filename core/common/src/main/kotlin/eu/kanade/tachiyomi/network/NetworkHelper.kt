@@ -31,7 +31,7 @@ class NetworkHelper(
             .build()
     }
 
-    private val clientBuilder: OkHttpClient.Builder = run {
+    private fun baseClientBuilder(): OkHttpClient.Builder {
         val builder = OkHttpClient.Builder()
             .cookieJar(cookieJar)
             .connectTimeout(30, TimeUnit.SECONDS)
@@ -48,17 +48,6 @@ class NetworkHelper(
             .addNetworkInterceptor(IgnoreGzipInterceptor())
             .addNetworkInterceptor(BrotliInterceptor)
 
-        if (preferences.enableCronet.get()) {
-            builder.addInterceptor(CronetInterceptor.newBuilder(cronetEngine).build())
-        }
-
-        if (preferences.verboseLogging.get()) {
-            val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.HEADERS
-            }
-            builder.addNetworkInterceptor(httpLoggingInterceptor)
-        }
-
         when (preferences.dohProvider.get()) {
             PREF_DOH_CLOUDFLARE -> builder.dohCloudflare()
             PREF_DOH_GOOGLE -> builder.dohGoogle()
@@ -72,8 +61,37 @@ class NetworkHelper(
             PREF_DOH_CONTROLD -> builder.dohControlD()
             PREF_DOH_NJALLA -> builder.dohNajalla()
             PREF_DOH_SHECAN -> builder.dohShecan()
-            else -> builder
         }
+
+        return builder
+    }
+
+    fun addCronetInterceptor(builder: OkHttpClient.Builder) {
+        if (preferences.enableCronet.get()) {
+            builder.addInterceptor(CronetInterceptor.newBuilder(cronetEngine).build())
+        }
+    }
+
+    fun addLoggingInterceptor(builder: OkHttpClient.Builder) {
+        if (preferences.verboseLogging.get()) {
+            val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.HEADERS
+            }
+            builder.addNetworkInterceptor(httpLoggingInterceptor)
+        }
+    }
+
+    fun baseClientBuilder(authenticated: Boolean): OkHttpClient.Builder {
+        val builder = baseClientBuilder()
+        if (authenticated) {
+            // Add a placeholder to be replaced or let caller add it first
+        }
+        return builder
+    }
+
+    private val clientBuilder = baseClientBuilder().also {
+        addCronetInterceptor(it)
+        addLoggingInterceptor(it)
     }
 
     val nonCloudflareClient = clientBuilder.build()

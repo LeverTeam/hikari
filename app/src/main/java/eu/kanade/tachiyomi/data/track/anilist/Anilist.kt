@@ -12,6 +12,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.serialization.json.Json
+import tachiyomi.core.common.util.system.logcat
 import tachiyomi.i18n.MR
 import uy.kohesive.injekt.injectLazy
 import tachiyomi.domain.track.model.Track as DomainTrack
@@ -35,9 +36,9 @@ class Anilist(id: Long) : BaseTracker(id, "AniList"), DeletableTracker {
 
     private val json: Json by injectLazy()
 
-    private val interceptor by lazy { AnilistInterceptor(this, getPassword()) }
+    private val interceptor by lazy { AnilistInterceptor(this) }
 
-    private val api by lazy { AnilistApi(client, interceptor) }
+    private val api by lazy { AnilistApi(interceptor) }
 
     override val supportsReadingDates: Boolean = true
 
@@ -46,10 +47,9 @@ class Anilist(id: Long) : BaseTracker(id, "AniList"), DeletableTracker {
     private val scorePreference = trackPreferences.anilistScoreType
 
     init {
-        // If the preference is an int from APIv1, logout user to force using APIv2
         try {
             scorePreference.get()
-        } catch (e: ClassCastException) {
+        } catch (_: ClassCastException) {
             logout()
             scorePreference.delete()
         }
@@ -216,10 +216,12 @@ class Anilist(id: Long) : BaseTracker(id, "AniList"), DeletableTracker {
         try {
             val oauth = api.createOAuth(token)
             interceptor.setAuth(oauth)
-            val (username, scoreType) = api.getCurrentUser()
+            val (userId, scoreType) = api.getCurrentUser()
+
             scorePreference.set(scoreType)
-            saveCredentials(username.toString(), oauth.accessToken)
+            saveCredentials(userId.toString(), oauth.accessToken)
         } catch (e: Throwable) {
+            logcat(logcat.LogPriority.ERROR, e) { "AniList login failed" }
             logout()
         }
     }
@@ -237,7 +239,7 @@ class Anilist(id: Long) : BaseTracker(id, "AniList"), DeletableTracker {
     fun loadOAuth(): ALOAuth? {
         return try {
             json.decodeFromString<ALOAuth>(trackPreferences.trackToken(this).get())
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
     }

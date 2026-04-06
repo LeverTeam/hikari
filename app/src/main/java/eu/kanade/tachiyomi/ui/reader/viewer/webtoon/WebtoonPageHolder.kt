@@ -24,8 +24,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 import logcat.LogPriority
-import okio.Buffer
 import okio.BufferedSource
+import okio.buffer
+import okio.source
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.withIOContext
@@ -147,6 +148,7 @@ class WebtoonPageHolder(
                             progressIndicator.setProgress(value)
                         }
                     }
+
                     Page.State.Ready -> setImage()
                     is Page.State.Error -> setError(state.error)
                 }
@@ -191,9 +193,11 @@ class WebtoonPageHolder(
 
         try {
             val (source, isAnimated) = withIOContext {
-                val source = streamFn().use { process(Buffer().readFrom(it)) }
-                val isAnimated = ImageUtil.isAnimatedAndSupported(source)
-                Pair(source, isAnimated)
+                val buffer = okio.Buffer()
+                streamFn().use { buffer.writeAll(it.source()) }
+                val isAnimated = ImageUtil.isAnimatedAndSupported(buffer)
+                val processedSource = process(buffer)
+                Pair(processedSource, isAnimated)
             }
             withUIContext {
                 frame.setImage(
@@ -217,11 +221,14 @@ class WebtoonPageHolder(
 
     private fun process(imageSource: BufferedSource): BufferedSource {
         if (viewer.config.dualPageRotateToFit) {
-            return rotateDualPage(imageSource)
+            val isDoublePage = ImageUtil.isWideImage(imageSource.peek())
+            if (isDoublePage) {
+                return rotateDualPage(imageSource)
+            }
         }
 
         if (viewer.config.dualPageSplit) {
-            val isDoublePage = ImageUtil.isWideImage(imageSource)
+            val isDoublePage = ImageUtil.isWideImage(imageSource.peek())
             if (isDoublePage) {
                 val upperSide = if (viewer.config.dualPageInvert) ImageUtil.Side.LEFT else ImageUtil.Side.RIGHT
                 return ImageUtil.splitAndMerge(imageSource, upperSide)

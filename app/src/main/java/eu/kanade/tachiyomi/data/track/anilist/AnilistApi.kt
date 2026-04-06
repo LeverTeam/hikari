@@ -20,6 +20,7 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import kotlinx.serialization.json.putJsonObject
+import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.toRequestBody
 import tachiyomi.core.common.util.lang.withIOContext
@@ -30,14 +31,25 @@ import java.time.ZonedDateTime
 import kotlin.time.Duration.Companion.minutes
 import tachiyomi.domain.track.model.Track as DomainTrack
 
-class AnilistApi(val client: OkHttpClient, interceptor: AnilistInterceptor) {
+import eu.kanade.tachiyomi.network.NetworkHelper
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
+
+class AnilistApi(interceptor: AnilistInterceptor) {
 
     private val json: Json by injectLazy()
 
-    private val authClient = client.newBuilder()
-        .addInterceptor(interceptor)
-        .rateLimit(permits = 85, period = 1.minutes)
-        .build()
+    private val networkHelper = Injekt.get<NetworkHelper>()
+
+    private val client = networkHelper.baseClientBuilder(authenticated = false).apply {
+        networkHelper.addCronetInterceptor(this)
+    }.build()
+
+    private val authClient = networkHelper.baseClientBuilder(authenticated = true).apply {
+        addInterceptor(interceptor)
+        networkHelper.addCronetInterceptor(this)
+        rateLimit(permits = 85, period = 1.minutes)
+    }.build()
 
     suspend fun addLibManga(track: Track): Track {
         return withIOContext {
@@ -281,7 +293,7 @@ class AnilistApi(val client: OkHttpClient, interceptor: AnilistInterceptor) {
     }
 
     fun createOAuth(token: String): ALOAuth {
-        return ALOAuth(token, "Bearer", System.currentTimeMillis() + 31536000000, 31536000000)
+        return ALOAuth(token, "Bearer", 31536000000, System.currentTimeMillis() + 31536000000)
     }
 
     suspend fun getCurrentUser(): Pair<Int, String> {
@@ -344,7 +356,7 @@ class AnilistApi(val client: OkHttpClient, interceptor: AnilistInterceptor) {
             return BASE_MANGA_URL + mediaId
         }
 
-        fun authUrl(): Uri = "${BASE_URL}oauth/authorize".toUri().buildUpon()
+        fun authUrl(): Uri = "https://anilist.co/api/v2/oauth/authorize".toUri().buildUpon()
             .appendQueryParameter("client_id", CLIENT_ID)
             .appendQueryParameter("response_type", "token")
             .build()
