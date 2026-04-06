@@ -56,6 +56,9 @@ class LibraryPreferences(
 
     val autoUpdateMetadata: Preference<Boolean> = preferenceStore.getBoolean("auto_update_metadata", false)
 
+    val libraryUpdateParallelSourceUpdates: Preference<Int> =
+        preferenceStore.getInt("library_update_parallel_source_updates", 5)
+
     val showContinueReadingButton: Preference<Boolean> = preferenceStore.getBoolean(
         "display_continue_reading_button",
         false,

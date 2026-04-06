@@ -43,7 +43,11 @@ class PreferenceBackupCreator(
     @Suppress("UNCHECKED_CAST")
     private fun Map<String, *>.toBackupPreferences(): List<BackupPreference> {
         return this
-            .filterKeys { !Preference.isAppState(it) }
+            .filterKeys {
+                !Preference.isAppState(it) ||
+                    it.contains("library_update_last_timestamp") ||
+                    it.contains("enabled_languages")
+            }
             .mapNotNull { (key, value) ->
                 when (value) {
                     is Int -> BackupPreference(key, IntPreferenceValue(value))
@@ -54,6 +58,7 @@ class PreferenceBackupCreator(
                     is Set<*> -> (value as? Set<String>)?.let {
                         BackupPreference(key, StringSetPreferenceValue(it))
                     }
+
                     else -> null
                 }
             }

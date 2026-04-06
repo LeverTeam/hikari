@@ -213,6 +213,20 @@ object SettingsLibraryScreen : SearchableSettings {
                     ),
                     title = stringResource(MR.strings.pref_library_update_smart_update),
                 ),
+                Preference.PreferenceItem.ListPreference(
+                    preference = libraryPreferences.libraryUpdateParallelSourceUpdates,
+                    entries = persistentMapOf(
+                        1 to "1",
+                        2 to "2",
+                        3 to "3",
+                        5 to "5 (${stringResource(MR.strings.label_default)})",
+                        10 to "10",
+                        15 to "15",
+                        20 to "20",
+                    ),
+                    title = stringResource(MR.strings.pref_library_update_parallel_sources),
+                    subtitle = stringResource(MR.strings.pref_library_update_parallel_sources_summary),
+                ),
                 Preference.PreferenceItem.SwitchPreference(
                     preference = libraryPreferences.newShowUpdatesCount,
                     title = stringResource(MR.strings.pref_library_update_show_tab_badge),
