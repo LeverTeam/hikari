@@ -51,7 +51,7 @@ Java_tachiyomi_core_common_util_system_NativeImageDecoder_nativeDecode(
 JNIEXPORT jboolean JNICALL
 Java_tachiyomi_core_common_util_system_NativeImageDecoder_nativeDecodeRegion(
     JNIEnv *env, jobject thiz, jobject bitmap, jint left, jint top, jint right,
-    jint bottom, jint sampleSize) {
+    jint bottom, jint sampleSize, jint filters) {
   if (bitmap == nullptr)
     return JNI_FALSE;
 
@@ -62,6 +62,15 @@ Java_tachiyomi_core_common_util_system_NativeImageDecoder_nativeDecodeRegion(
   void *pixels;
   if (AndroidBitmap_lockPixels(env, bitmap, &pixels) < 0)
     return JNI_FALSE;
+
+  if (filters > 0) {
+    if (filters & 1) { // SHARPEN
+    }
+    if (filters & 2) { // DENOISE
+    }
+    if (filters & 4) { // AI_UPSCALING
+    }
+  }
 
   AndroidBitmap_unlockPixels(env, bitmap);
   return JNI_TRUE;

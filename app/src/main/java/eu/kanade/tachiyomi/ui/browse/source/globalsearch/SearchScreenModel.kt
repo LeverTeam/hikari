@@ -14,16 +14,10 @@ import kotlinx.collections.immutable.mutate
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toPersistentMap
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.asCoroutineDispatcher
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import hikari.domain.manga.model.toDomainManga
 import tachiyomi.core.common.preference.toggle
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.manga.interactor.GetManga
@@ -32,7 +26,6 @@ import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.source.service.SourceManager
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
-import java.util.concurrent.Executors
 
 abstract class SearchScreenModel(
     initialState: State = State(),
@@ -44,7 +37,6 @@ abstract class SearchScreenModel(
     private val preferences: SourcePreferences = Injekt.get(),
 ) : StateScreenModel<SearchScreenModel.State>(initialState) {
 
-    private val coroutineDispatcher = Executors.newFixedThreadPool(5).asCoroutineDispatcher()
     private var searchJob: Job? = null
 
     private val enabledLanguages = sourcePreferences.enabledLanguages.get()
@@ -155,34 +147,23 @@ abstract class SearchScreenModel(
         }
 
         searchJob = ioCoroutineScope.launch {
-            sources.map { source ->
-                async {
-                    if (state.value.items[source] !is SearchItemResult.Loading) {
-                        return@async
+            GlobalSearchMultiplexer(sources, query, networkToLocalManga::invoke)
+                .search()
+                .collect { update ->
+                    val result = when (update) {
+                        is GlobalSearchUpdate.Success -> SearchItemResult.Success(update.result)
+                        is GlobalSearchUpdate.Error -> SearchItemResult.Error(update.throwable)
                     }
-
-                    try {
-                        val page = withContext(coroutineDispatcher) {
-                            source.getSearchManga(1, query, source.getFilterList())
-                        }
-
-                        val titles = page.mangas
-                            .map { it.toDomainManga(source.id) }
-                            .distinctBy { it.url }
-                            .let { networkToLocalManga(it) }
-
-                        if (isActive) {
-                            updateItem(source, SearchItemResult.Success(titles))
-                        }
-                    } catch (e: Exception) {
-                        if (isActive) {
-                            updateItem(source, SearchItemResult.Error(e))
-                        }
-                    }
+                    updateItem(update.source, result)
                 }
-            }
-                .awaitAll()
         }
+    }
+
+    private fun updateItem(source: CatalogueSource, result: SearchItemResult) {
+        val newItems = state.value.items.mutate {
+            it[source] = result
+        }
+        updateItems(newItems)
     }
 
     private fun updateItems(items: PersistentMap<CatalogueSource, SearchItemResult>) {
@@ -193,13 +174,6 @@ abstract class SearchScreenModel(
                     .toPersistentMap(),
             )
         }
-    }
-
-    private fun updateItem(source: CatalogueSource, result: SearchItemResult) {
-        val newItems = state.value.items.mutate {
-            it[source] = result
-        }
-        updateItems(newItems)
     }
 
     fun setMigrateDialog(currentId: Long, target: Manga) {

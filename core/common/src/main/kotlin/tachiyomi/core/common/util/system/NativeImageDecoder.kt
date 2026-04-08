@@ -10,6 +10,13 @@ import android.os.Build
  */
 object NativeImageDecoder {
 
+    /** Bitmask for sharpening filter */
+    const val FILTER_SHARPEN = 1 shl 0
+    /** Bitmask for denoising filter */
+    const val FILTER_DENOISE = 1 shl 1
+    /** Bitmask for AI-based upscaling */
+    const val FILTER_UPSCALING = 1 shl 2
+
     init {
         try {
             System.loadLibrary("hikari-image")
@@ -50,8 +57,9 @@ object NativeImageDecoder {
         right: Int,
         bottom: Int,
         sampleSize: Int,
+        filters: Int = 0,
     ): Boolean {
-        return nativeDecodeRegion(bitmap, left, top, right, bottom, sampleSize)
+        return nativeDecodeRegion(bitmap, left, top, right, bottom, sampleSize, filters)
     }
 
     /**
@@ -79,6 +87,7 @@ object NativeImageDecoder {
         right: Int,
         bottom: Int,
         sampleSize: Int,
+        filters: Int,
     ): Boolean
 
     private external fun nativeDecodeToHardwareBuffer(width: Int, height: Int): HardwareBuffer?
