@@ -57,6 +57,7 @@ class GlobalSearchScreen(
                             showSingleLoadingScreen = false
                         }
                     }
+
                     else -> showSingleLoadingScreen = false
                 }
             }
@@ -69,6 +70,8 @@ class GlobalSearchScreen(
                 getManga = { screenModel.getManga(it) },
                 onChangeSearchFilter = screenModel::setSourceFilter,
                 onToggleResults = screenModel::toggleFilterResults,
+                isDeduplicationEnabled = state.isDeduplicationEnabled,
+                onToggleDeduplication = screenModel::toggleDeduplication,
                 onClickSource = {
                     navigator.push(BrowseSourceScreen(it.id, state.searchQuery))
                 },

@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.Dispatchers
+import eu.kanade.tachiyomi.util.lang.normalizeTitle
 import hikari.domain.manga.model.toDomainManga
 import tachiyomi.domain.manga.model.Manga
 
@@ -19,7 +20,11 @@ sealed interface GlobalSearchUpdate {
     /**
      * Successfully received results from a source.
      */
-    data class Success(override val source: CatalogueSource, val result: List<Manga>) : GlobalSearchUpdate
+    data class Success(
+        override val source: CatalogueSource,
+        val result: List<Manga>,
+        val normalizedResults: Map<String, Manga>,
+    ) : GlobalSearchUpdate
 
     /**
      * Encountered an error while searching a source.
@@ -55,7 +60,9 @@ class GlobalSearchMultiplexer(
                             .distinctBy { it.url }
                             .let { networkToLocalManga(it) }
 
-                        emit(GlobalSearchUpdate.Success(source, titles))
+                        val normalized = titles.associateBy { it.title.normalizeTitle() }
+
+                        emit(GlobalSearchUpdate.Success(source, titles, normalized))
                     } catch (e: Exception) {
                         emit(GlobalSearchUpdate.Error(source, e))
                     }

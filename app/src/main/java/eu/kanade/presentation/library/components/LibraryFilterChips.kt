@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,7 +37,11 @@ internal fun LibraryFilterChips(
 
     LazyRow(
         state = lazyListState,
-        modifier = Modifier.padding(vertical = 8.dp),
+        modifier = Modifier
+            .padding(vertical = 8.dp)
+            .graphicsLayer {
+                translationX = -pagerState.currentPageOffsetFraction * 32.dp.toPx()
+            },
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {

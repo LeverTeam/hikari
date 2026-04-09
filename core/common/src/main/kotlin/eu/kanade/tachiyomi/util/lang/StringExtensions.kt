@@ -65,3 +65,13 @@ fun String.takeBytes(n: Int): String {
 fun String.htmlDecode(): String {
     return this.parseAsHtml().toString()
 }
+
+/**
+ * Normalizes a title for deduplication purposes.
+ * Strips special characters, converts to lowercase, and trims whitespace.
+ */
+fun String.normalizeTitle(): String {
+    return this.lowercase()
+        .replace(Regex("[^\\p{L}\\p{N}]"), "")
+        .trim()
+}

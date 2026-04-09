@@ -2,6 +2,7 @@ package eu.kanade.presentation.browse
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import eu.kanade.presentation.browse.components.GlobalSearchGroupedContent
 import eu.kanade.presentation.browse.components.GlobalSearchToolbar
 import eu.kanade.tachiyomi.source.CatalogueSource
 import eu.kanade.tachiyomi.ui.browse.source.globalsearch.SearchScreenModel
@@ -18,6 +19,8 @@ fun MigrateSearchScreen(
     onSearch: (String) -> Unit,
     onChangeSearchFilter: (SourceFilter) -> Unit,
     onToggleResults: () -> Unit,
+    isDeduplicationEnabled: Boolean,
+    onToggleDeduplication: () -> Unit,
     getManga: @Composable (Manga) -> State<Manga>,
     onClickSource: (CatalogueSource) -> Unit,
     onClickItem: (Manga) -> Unit,
@@ -37,18 +40,30 @@ fun MigrateSearchScreen(
                 onChangeSearchFilter = onChangeSearchFilter,
                 onlyShowHasResults = state.onlyShowHasResults,
                 onToggleResults = onToggleResults,
+                isDeduplicationEnabled = isDeduplicationEnabled,
+                onToggleDeduplication = onToggleDeduplication,
                 scrollBehavior = scrollBehavior,
             )
         },
     ) { paddingValues ->
-        GlobalSearchContent(
-            fromSourceId = fromSourceId,
-            items = state.filteredItems,
-            contentPadding = paddingValues,
-            getManga = getManga,
-            onClickSource = onClickSource,
-            onClickItem = onClickItem,
-            onLongClickItem = onLongClickItem,
-        )
+        if (isDeduplicationEnabled) {
+            GlobalSearchGroupedContent(
+                items = state.groupedItems,
+                contentPadding = paddingValues,
+                getManga = getManga,
+                onClickItem = onClickItem,
+                onLongClickItem = onLongClickItem,
+            )
+        } else {
+            GlobalSearchContent(
+                fromSourceId = fromSourceId,
+                items = state.filteredItems,
+                contentPadding = paddingValues,
+                getManga = getManga,
+                onClickSource = onClickSource,
+                onClickItem = onClickItem,
+                onLongClickItem = onLongClickItem,
+            )
+        }
     }
 }

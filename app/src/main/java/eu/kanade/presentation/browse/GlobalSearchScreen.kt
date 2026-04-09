@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import eu.kanade.presentation.browse.components.GlobalSearchCardRow
 import eu.kanade.presentation.browse.components.GlobalSearchErrorResultItem
 import eu.kanade.presentation.browse.components.GlobalSearchLoadingResultItem
+import eu.kanade.presentation.browse.components.GlobalSearchGroupedContent
 import eu.kanade.presentation.browse.components.GlobalSearchResultItem
 import eu.kanade.presentation.browse.components.GlobalSearchToolbar
 import eu.kanade.tachiyomi.source.CatalogueSource
@@ -26,6 +27,8 @@ fun GlobalSearchScreen(
     onSearch: (String) -> Unit,
     onChangeSearchFilter: (SourceFilter) -> Unit,
     onToggleResults: () -> Unit,
+    isDeduplicationEnabled: Boolean,
+    onToggleDeduplication: () -> Unit,
     getManga: @Composable (Manga) -> State<Manga>,
     onClickSource: (CatalogueSource) -> Unit,
     onClickItem: (Manga) -> Unit,
@@ -45,18 +48,30 @@ fun GlobalSearchScreen(
                 onChangeSearchFilter = onChangeSearchFilter,
                 onlyShowHasResults = state.onlyShowHasResults,
                 onToggleResults = onToggleResults,
+                isDeduplicationEnabled = isDeduplicationEnabled,
+                onToggleDeduplication = onToggleDeduplication,
                 scrollBehavior = scrollBehavior,
             )
         },
     ) { paddingValues ->
-        GlobalSearchContent(
-            items = state.filteredItems,
-            contentPadding = paddingValues,
-            getManga = getManga,
-            onClickSource = onClickSource,
-            onClickItem = onClickItem,
-            onLongClickItem = onLongClickItem,
-        )
+        if (state.isDeduplicationEnabled) {
+            GlobalSearchGroupedContent(
+                items = state.groupedItems,
+                contentPadding = paddingValues,
+                getManga = getManga,
+                onClickItem = onClickItem,
+                onLongClickItem = onLongClickItem,
+            )
+        } else {
+            GlobalSearchContent(
+                items = state.filteredItems,
+                contentPadding = paddingValues,
+                getManga = getManga,
+                onClickSource = onClickSource,
+                onClickItem = onClickItem,
+                onLongClickItem = onLongClickItem,
+            )
+        }
     }
 }
 
@@ -87,6 +102,7 @@ internal fun GlobalSearchContent(
                         SearchItemResult.Loading -> {
                             GlobalSearchLoadingResultItem()
                         }
+
                         is SearchItemResult.Success -> {
                             GlobalSearchCardRow(
                                 titles = result.result,
@@ -95,6 +111,7 @@ internal fun GlobalSearchContent(
                                 onLongClick = onLongClickItem,
                             )
                         }
+
                         is SearchItemResult.Error -> {
                             GlobalSearchErrorResultItem(message = result.throwable.message)
                         }

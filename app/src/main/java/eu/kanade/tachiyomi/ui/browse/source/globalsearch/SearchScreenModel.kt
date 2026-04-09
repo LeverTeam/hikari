@@ -62,6 +62,11 @@ abstract class SearchScreenModel(
                 mutableState.update { it.copy(onlyShowHasResults = state) }
             }
         }
+        screenModelScope.launch {
+            preferences.globalSearchDeduplicationView.changes().collectLatest { state ->
+                mutableState.update { it.copy(isDeduplicationEnabled = state) }
+            }
+        }
     }
 
     @Composable
@@ -114,6 +119,10 @@ abstract class SearchScreenModel(
         preferences.globalSearchFilterState.toggle()
     }
 
+    fun toggleDeduplication() {
+        preferences.globalSearchDeduplicationView.toggle()
+    }
+
     fun search() {
         val query = state.value.searchQuery
         val sourceFilter = state.value.sourceFilter
@@ -130,7 +139,10 @@ abstract class SearchScreenModel(
 
         val sources = getSelectedSources()
 
-        // Reuse previous results if possible
+        if (!sameQuery) {
+            mutableState.update { it.copy(items = persistentMapOf(), groupedItems = persistentMapOf()) }
+        }
+
         if (sameQuery) {
             val existingResults = state.value.items
             updateItems(
@@ -154,8 +166,27 @@ abstract class SearchScreenModel(
                         is GlobalSearchUpdate.Success -> SearchItemResult.Success(update.result)
                         is GlobalSearchUpdate.Error -> SearchItemResult.Error(update.throwable)
                     }
+
+                    if (update is GlobalSearchUpdate.Success) {
+                        updateGroupedItem(update.source, update.normalizedResults)
+                    }
+
                     updateItem(update.source, result)
                 }
+        }
+    }
+
+    private fun updateGroupedItem(source: CatalogueSource, normalized: Map<String, Manga>) {
+        mutableState.update { state ->
+            val newGroupedItems = state.groupedItems.mutate { map ->
+                normalized.forEach { (normTitle, manga) ->
+                    val currentList = map[normTitle] ?: emptyList()
+                    if (currentList.none { it.second.url == manga.url }) {
+                        map[normTitle] = currentList + (source to manga)
+                    }
+                }
+            }
+            state.copy(groupedItems = newGroupedItems)
         }
     }
 
@@ -193,7 +224,9 @@ abstract class SearchScreenModel(
         val searchQuery: String? = null,
         val sourceFilter: SourceFilter = SourceFilter.PinnedOnly,
         val onlyShowHasResults: Boolean = false,
+        val isDeduplicationEnabled: Boolean = false,
         val items: PersistentMap<CatalogueSource, SearchItemResult> = persistentMapOf(),
+        val groupedItems: PersistentMap<String, List<Pair<CatalogueSource, Manga>>> = persistentMapOf(),
         val dialog: Dialog? = null,
     ) {
         val progress: Int = items.count { it.value !is SearchItemResult.Loading }

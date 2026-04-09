@@ -66,6 +66,11 @@ class SourcePreferences(
         false,
     )
 
+    val globalSearchDeduplicationView: Preference<Boolean> = preferenceStore.getBoolean(
+        Preference.appStateKey("global_search_deduplication_view"),
+        true,
+    )
+
     val migrationSources: Preference<List<Long>> = preferenceStore.getLongArray("migration_sources", emptyList())
 
     val migrationFlags: Preference<Set<MigrationFlag>> = preferenceStore.getObjectFromInt(
