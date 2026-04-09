@@ -5,6 +5,8 @@
 ### Added
 - Native C++ image pipeline for reader performance and zero-copy bitmap operations
 - AGSL shader-based UI skinning system supporting Glass, Liquid, and Frosted materials
+- Global Search Deduplication Engine to group identical manga across multiple sources
+- Seamless Intelligent Zoom for Webtoon reader with aspect ratio preservation
 - Liquid pull-to-refresh animations with bouncy spring physics
 - Staggered "unfolding" entrance animations for manga details screen
 - Depth-shift perspective transitions for background elements during navigation
@@ -14,7 +16,7 @@
 - Physics-based bounce and squish micro-interactions for library grid and list items
 
 ### Changed
-- Refactored global search to a reactive streaming multiplexer for faster, non-blocking hits
+- Refactored global search to a reactive streaming multiplexer with automatic result clearing
 - Optimized database operations with batching for manga, chapters, and history
 - Optimized UpdatesScreenModel to avoid N+1 query patterns during bulk actions
 - Modernized coroutine usage across app modules and removed runBlocking from restoration pipelines
