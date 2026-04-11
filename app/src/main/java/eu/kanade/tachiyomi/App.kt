@@ -26,6 +26,7 @@ import coil3.util.DebugLogger
 import dev.mihon.injekt.patchInjekt
 import eu.kanade.domain.DomainModule
 import eu.kanade.domain.base.BasePreferences
+import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.domain.ui.UiPreferences
 import eu.kanade.domain.ui.model.setAppCompatDelegateThemeMode
 import eu.kanade.tachiyomi.crash.CrashActivity
@@ -38,6 +39,7 @@ import eu.kanade.tachiyomi.data.coil.TachiyomiImageDecoder
 import eu.kanade.tachiyomi.data.coil.WebtoonImageDecoder
 import eu.kanade.tachiyomi.data.notification.Notifications
 import eu.kanade.tachiyomi.di.AppModule
+import eu.kanade.tachiyomi.extension.util.ExtensionUpdateJob
 import eu.kanade.tachiyomi.di.PreferenceModule
 import eu.kanade.tachiyomi.network.NetworkHelper
 import eu.kanade.tachiyomi.network.NetworkPreferences
@@ -172,6 +174,11 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
         initializeMigrator()
 
         LibraryUpdateJob.setupTask(this)
+        ExtensionUpdateJob.setupTask(this)
+
+        Injekt.get<SourcePreferences>().autoUpdateExtensions.changes()
+            .onEach { ExtensionUpdateJob.setupTask(this@App) }
+            .launchIn(scope)
     }
 
     override val workManagerConfiguration: Configuration

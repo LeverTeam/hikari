@@ -45,19 +45,18 @@ class GetApplicationRelease(
         versionName: String,
         versionTag: String,
     ): Boolean {
-        // Removes prefixes like "r" or "v"
         val newVersion = versionTag.replace("[^\\d.]".toRegex(), "")
-        // Release builds: based on releases in "mihonapp/mihon" repo
-        // tagged as something like "v0.1.2"
         val oldVersion = versionName.replace("[^\\d.]".toRegex(), "")
 
-        val newSemVer = newVersion.split(".").map { it.toInt() }
-        val oldSemVer = oldVersion.split(".").map { it.toInt() }
+        val newSemVer = newVersion.split(".").mapNotNull { it.toIntOrNull() }
+        val oldSemVer = oldVersion.split(".").mapNotNull { it.toIntOrNull() }
 
-        oldSemVer.mapIndexed { index, i ->
-            if (newSemVer[index] > i) {
-                return true
-            }
+        val maxSize = maxOf(newSemVer.size, oldSemVer.size)
+        for (i in 0 until maxSize) {
+            val newPart = newSemVer.getOrElse(i) { 0 }
+            val oldPart = oldSemVer.getOrElse(i) { 0 }
+            if (newPart > oldPart) return true
+            if (newPart < oldPart) return false
         }
 
         return false

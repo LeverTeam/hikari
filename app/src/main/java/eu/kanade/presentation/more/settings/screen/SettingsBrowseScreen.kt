@@ -60,6 +60,10 @@ object SettingsBrowseScreen : SearchableSettings {
                             navigator.push(HiddenMangaSourcesScreen())
                         },
                     ),
+                    Preference.PreferenceItem.SwitchPreference(
+                        preference = sourcePreferences.autoUpdateExtensions,
+                        title = "Auto-update extensions",
+                    ),
                 ),
             ),
             Preference.PreferenceGroup(

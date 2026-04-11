@@ -55,6 +55,7 @@ import eu.kanade.presentation.manga.components.MangaBottomActionMenu
 import eu.kanade.presentation.manga.components.MangaChapterListItem
 import eu.kanade.presentation.manga.components.MangaInfoBox
 import eu.kanade.presentation.manga.components.MangaToolbar
+import eu.kanade.presentation.manga.components.MergedChapterListItem
 import eu.kanade.presentation.manga.components.MissingChapterCountListItem
 import eu.kanade.presentation.util.formatChapterNumber
 import eu.kanade.tachiyomi.data.download.model.Download
@@ -123,6 +124,7 @@ fun MangaScreen(
     onChapterSelected: (ChapterList.Item, Boolean, Boolean) -> Unit,
     onAllChapterSelected: (Boolean) -> Unit,
     onInvertSelection: () -> Unit,
+    onGroupClicked: (ChapterList.Group) -> Unit,
 ) {
     val context = LocalContext.current
     val onCopyTagToClipboard: (tag: String) -> Unit = {
@@ -165,6 +167,7 @@ fun MangaScreen(
             onChapterSelected = onChapterSelected,
             onAllChapterSelected = onAllChapterSelected,
             onInvertSelection = onInvertSelection,
+            onGroupClicked = onGroupClicked,
         )
     } else {
         MangaScreenLargeImpl(
@@ -200,6 +203,7 @@ fun MangaScreen(
             onChapterSelected = onChapterSelected,
             onAllChapterSelected = onAllChapterSelected,
             onInvertSelection = onInvertSelection,
+            onGroupClicked = onGroupClicked,
         )
     }
 }
@@ -251,6 +255,7 @@ private fun MangaScreenSmallImpl(
     onChapterSelected: (ChapterList.Item, Boolean, Boolean) -> Unit,
     onAllChapterSelected: (Boolean) -> Unit,
     onInvertSelection: () -> Unit,
+    onGroupClicked: (ChapterList.Group) -> Unit,
 ) {
     val chapterListState = rememberLazyListState()
 
@@ -437,6 +442,7 @@ private fun MangaScreenSmallImpl(
                         onDownloadChapter = onDownloadChapter,
                         onChapterSelected = onChapterSelected,
                         onChapterSwipe = onChapterSwipe,
+                        onGroupClicked = onGroupClicked,
                     )
                 }
             }
@@ -491,6 +497,7 @@ private fun MangaScreenLargeImpl(
     onChapterSelected: (ChapterList.Item, Boolean, Boolean) -> Unit,
     onAllChapterSelected: (Boolean) -> Unit,
     onInvertSelection: () -> Unit,
+    onGroupClicked: (ChapterList.Group) -> Unit,
 ) {
     val layoutDirection = LocalLayoutDirection.current
     val density = LocalDensity.current
@@ -672,6 +679,7 @@ private fun MangaScreenLargeImpl(
                                 onDownloadChapter = onDownloadChapter,
                                 onChapterSelected = onChapterSelected,
                                 onChapterSwipe = onChapterSwipe,
+                                onGroupClicked = onGroupClicked,
                             )
                         }
                     }
@@ -733,12 +741,14 @@ private fun LazyListScope.sharedChapterItems(
     onDownloadChapter: ((List<ChapterList.Item>, ChapterDownloadAction) -> Unit)?,
     onChapterSelected: (ChapterList.Item, Boolean, Boolean) -> Unit,
     onChapterSwipe: (ChapterList.Item, LibraryPreferences.ChapterSwipeAction) -> Unit,
+    onGroupClicked: (ChapterList.Group) -> Unit,
 ) {
     items(
         items = chapters,
         key = { item ->
             when (item) {
                 is ChapterList.MissingCount -> "missing-count-${item.id}"
+                is ChapterList.Group -> "group-${item.id}"
                 is ChapterList.Item -> "chapter-${item.id}"
             }
         },
@@ -749,6 +759,15 @@ private fun LazyListScope.sharedChapterItems(
         when (item) {
             is ChapterList.MissingCount -> {
                 MissingChapterCountListItem(count = item.count)
+            }
+
+            is ChapterList.Group -> {
+                MergedChapterListItem(
+                    name = item.name,
+                    chapterCount = item.chapters.size,
+                    isExpanded = item.isExpanded,
+                    onClick = { onGroupClicked(item) },
+                )
             }
 
             is ChapterList.Item -> {

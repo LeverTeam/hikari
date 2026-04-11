@@ -184,6 +184,7 @@ class MangaScreen(
                 onChapterSelected = screenModel::toggleSelection,
                 onAllChapterSelected = screenModel::toggleAllSelection,
                 onInvertSelection = screenModel::invertSelection,
+                onGroupClicked = screenModel::toggleGroupExpanded,
             )
         }
 
@@ -241,6 +242,8 @@ class MangaScreen(
                 onBookmarkedFilterChanged = screenModel::setBookmarkedFilter,
                 onSortModeChanged = screenModel::setSorting,
                 onDisplayModeChanged = screenModel::setDisplayMode,
+                smartChapterMerging = successState.smartChapterMerging,
+                onSmartChapterMergingChanged = screenModel::setSmartChapterMerging,
                 onSetAsDefault = screenModel::setCurrentSettingsAsDefault,
                 onResetToDefault = screenModel::resetToDefaultSettings,
                 scanlatorFilterActive = successState.scanlatorFilterActive,

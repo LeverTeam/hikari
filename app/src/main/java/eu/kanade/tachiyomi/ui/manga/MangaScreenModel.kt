@@ -228,6 +228,7 @@ class MangaScreenModel(
                     isRefreshingData = needRefreshInfo || needRefreshChapter,
                     dialog = null,
                     hideMissingChapters = libraryPreferences.hideMissingChapters.get(),
+                    smartChapterMerging = libraryPreferences.smartChapterMerging.get(),
                 )
             }
 
@@ -1129,6 +1130,21 @@ class MangaScreenModel(
         }
     }
 
+    fun toggleGroupExpanded(group: ChapterList.Group) {
+        updateSuccessState {
+            val expandedGroups = it.expandedGroups.toMutableSet()
+            if (!expandedGroups.add(group.id)) {
+                expandedGroups.remove(group.id)
+            }
+            it.copy(expandedGroups = expandedGroups)
+        }
+    }
+
+    fun setSmartChapterMerging(enabled: Boolean) {
+        libraryPreferences.smartChapterMerging.set(enabled)
+        updateSuccessState { it.copy(smartChapterMerging = enabled) }
+    }
+
     sealed interface State {
         @Immutable
         data object Loading : State
@@ -1147,6 +1163,8 @@ class MangaScreenModel(
             val dialog: Dialog? = null,
             val hasPromptedToAddBefore: Boolean = false,
             val hideMissingChapters: Boolean = false,
+            val smartChapterMerging: Boolean = false,
+            val expandedGroups: Set<String> = emptySet(),
         ) : State {
             val processedChapters by lazy {
                 chapters.applyFilters(manga).toList()
@@ -1161,7 +1179,7 @@ class MangaScreenModel(
                     return@lazy processedChapters
                 }
 
-                processedChapters.insertSeparators { before, after ->
+                val items = processedChapters.insertSeparators { before, after ->
                     val (lowerChapter, higherChapter) = if (manga.sortDescending()) {
                         after to before
                     } else {
@@ -1184,6 +1202,77 @@ class MangaScreenModel(
                                 count = missingCount,
                             )
                         }
+                }
+
+                if (!smartChapterMerging) {
+                    return@lazy items
+                }
+
+                val groupedItems = mutableListOf<ChapterList>()
+                val currentGroup = mutableListOf<ChapterList.Item>()
+                var currentGroupNumber = -1000
+
+                items.forEach { item ->
+                    if (item is ChapterList.MissingCount) {
+                        if (currentGroup.isNotEmpty()) {
+                            addGroupToItems(groupedItems, currentGroup, currentGroupNumber)
+                            currentGroup.clear()
+                            currentGroupNumber = -1000
+                        }
+                        groupedItems.add(item)
+                        return@forEach
+                    }
+
+                    val chapterItem = item as ChapterList.Item
+                    val chapterNumber = chapterItem.chapter.chapterNumber.toInt()
+                    val isDecimal = (chapterItem.chapter.chapterNumber % 1.0) != 0.0
+
+                    if (isDecimal && chapterNumber >= 0) {
+                        if (currentGroup.isNotEmpty() && currentGroupNumber != chapterNumber) {
+                            addGroupToItems(groupedItems, currentGroup, currentGroupNumber)
+                            currentGroup.clear()
+                        }
+                        currentGroup.add(chapterItem)
+                        currentGroupNumber = chapterNumber
+                    } else {
+                        if (currentGroup.isNotEmpty()) {
+                            addGroupToItems(groupedItems, currentGroup, currentGroupNumber)
+                            currentGroup.clear()
+                            currentGroupNumber = -1000
+                        }
+                        groupedItems.add(item)
+                    }
+                }
+                if (currentGroup.isNotEmpty()) {
+                    addGroupToItems(groupedItems, currentGroup, currentGroupNumber)
+                }
+
+                groupedItems
+            }
+
+            private fun addGroupToItems(
+                items: MutableList<ChapterList>,
+                groupChapters: List<ChapterList.Item>,
+                groupNumber: Int,
+            ) {
+                if (groupChapters.size == 1) {
+                    items.add(groupChapters.first())
+                    return
+                }
+
+                val groupId = groupNumber.toString()
+                val isExpanded = expandedGroups.contains(groupId)
+
+                items.add(
+                    ChapterList.Group(
+                        id = groupId,
+                        name = "Chapter $groupNumber extras",
+                        chapters = groupChapters,
+                        isExpanded = isExpanded,
+                    ),
+                )
+                if (isExpanded) {
+                    items.addAll(groupChapters)
                 }
             }
 
@@ -1218,6 +1307,14 @@ sealed class ChapterList {
     data class MissingCount(
         val id: String,
         val count: Int,
+    ) : ChapterList()
+
+    @Immutable
+    data class Group(
+        val id: String,
+        val name: String,
+        val chapters: List<Item>,
+        val isExpanded: Boolean,
     ) : ChapterList()
 
     @Immutable

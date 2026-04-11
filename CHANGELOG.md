@@ -9,6 +9,9 @@
 - Dynamic palette-aware UI skinning system with AGSL shaders for manga covers
 - High-performance native image upscaling using AMD FSR 1.0 (EASU) in the reader
 - Asynchronous color extraction for smoother transitions when opening manga details
+- Extension auto-update system with WorkManager scheduling and silent background installation support
+- Smart chapter merging feature to automatically group decimal and extra chapters in the manga list
+- MergedChapterListItem component with folder-style UI and interactive expand/collapse states
 
 ### Fixed
 

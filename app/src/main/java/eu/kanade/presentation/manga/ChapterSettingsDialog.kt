@@ -55,6 +55,8 @@ fun ChapterSettingsDialog(
     onScanlatorFilterClicked: (() -> Unit),
     onSortModeChanged: (Long) -> Unit,
     onDisplayModeChanged: (Long) -> Unit,
+    smartChapterMerging: Boolean,
+    onSmartChapterMergingChanged: (Boolean) -> Unit,
     onSetAsDefault: (applyToExistingManga: Boolean) -> Unit,
     onResetToDefault: () -> Unit,
 ) {
@@ -101,8 +103,7 @@ fun ChapterSettingsDialog(
                 0 -> {
                     FilterPage(
                         downloadFilter = manga?.downloadedFilter ?: TriState.DISABLED,
-                        onDownloadFilterChanged = onDownloadFilterChanged
-                            .takeUnless { downloadedOnly },
+                        onDownloadFilterChanged = onDownloadFilterChanged.takeUnless { downloadedOnly },
                         unreadFilter = manga?.unreadFilter ?: TriState.DISABLED,
                         onUnreadFilterChanged = onUnreadFilterChanged,
                         bookmarkedFilter = manga?.bookmarkedFilter ?: TriState.DISABLED,
@@ -111,6 +112,7 @@ fun ChapterSettingsDialog(
                         onScanlatorFilterClicked = onScanlatorFilterClicked,
                     )
                 }
+
                 1 -> {
                     SortPage(
                         sortingMode = manga?.sorting ?: 0,
@@ -118,10 +120,13 @@ fun ChapterSettingsDialog(
                         onItemSelected = onSortModeChanged,
                     )
                 }
+
                 2 -> {
                     DisplayPage(
                         displayMode = manga?.displayMode ?: 0,
                         onItemSelected = onDisplayModeChanged,
+                        smartChapterMerging = smartChapterMerging,
+                        onSmartChapterMergingChanged = onSmartChapterMergingChanged,
                     )
                 }
             }
@@ -201,7 +206,7 @@ private fun ColumnScope.SortPage(
         MR.strings.sort_by_number to Manga.CHAPTER_SORTING_NUMBER,
         MR.strings.sort_by_upload_date to Manga.CHAPTER_SORTING_UPLOAD_DATE,
         MR.strings.action_sort_alpha to Manga.CHAPTER_SORTING_ALPHABET,
-    ).map { (titleRes, mode) ->
+    ).forEach { (titleRes, mode) ->
         SortItem(
             label = stringResource(titleRes),
             sortDescending = sortDescending.takeIf { sortingMode == mode },
@@ -214,17 +219,26 @@ private fun ColumnScope.SortPage(
 private fun ColumnScope.DisplayPage(
     displayMode: Long,
     onItemSelected: (Long) -> Unit,
+    smartChapterMerging: Boolean,
+    onSmartChapterMergingChanged: (Boolean) -> Unit,
 ) {
     listOf(
         MR.strings.show_title to Manga.CHAPTER_DISPLAY_NAME,
         MR.strings.show_chapter_number to Manga.CHAPTER_DISPLAY_NUMBER,
-    ).map { (titleRes, mode) ->
+    ).forEach { (titleRes, mode) ->
         RadioItem(
             label = stringResource(titleRes),
             selected = displayMode == mode,
             onClick = { onItemSelected(mode) },
         )
     }
+
+    LabeledCheckbox(
+        modifier = Modifier.padding(horizontal = TabbedDialogPaddings.Horizontal, vertical = 12.dp),
+        label = "Smart chapter merging",
+        checked = smartChapterMerging,
+        onCheckedChange = onSmartChapterMergingChanged,
+    )
 }
 
 @Composable
