@@ -1,29 +1,38 @@
 # Changelog
 
-## [Unreleased] - 2026-04-17
+## [0.3.7] - 2026-04-17
 
 ### Added
 
-- Sectional dashboard layout for Advanced, Library, Reader, and Security setting screens
+- Sectional dashboard layout for Advanced, Library, Reader, Browse, Tracking, and Security screens
+- High-elevation SectionCard design system with integrated horizontal dividers
+- Premium "Welcome Experience" onboarding flow with integrated theme and permission cards
+- "Feature Spotlight" dashboard for the New Update screen with contained changelogs
 - Unified Security & Locking card with integrated biometrics and privacy controls
-- Horizontal dividers between logical preference subgroups for improved visual hierarchy
-- High-elevation SectionCard containers for all modernized settings modules
-- Native NDK-based image decoding system using `AImageDecoder` (API 30+) for high-performance image loading
-- High-performance EASU upscaling filter integrated directly into the reader and image loading pipeline
-- Manual update check trigger in the About screen via the version preference with status feedback
+- High-performance native NDK-based image decoding system using `AImageDecoder` (API 30+)
+- High-performance EASU upscaling filter integrated into the image loading pipeline
+- Manual update check trigger in the About screen with reactive status feedback
+
+### Itemization of UI Improvements
+
+- **Settings Modernization**: Restructured all technical preferences into cohesive sectional cards
+- **Dashboard Consistency**: Standardized elevation and container styling across the entire app
+- **True Transparency**: Achieved clean system bar transparency by removing legacy scrims
+- **Navigation Safety**: Optimized WindowInsets handling to prevent UI clipping in true edge-to-edge mode
+- **Onboarding Refresh**: Replaced legacy setup lists with interactive configuration dashboards
+- **Tracking Refinement**: Grouped all social tracking services into a unified sync dashboard
 
 ### Changed
 
-- Refactored settings screens to use a consistent card-and-divider design language
-- Modernized project README with technical specifications and feature roadmap
+- Refactored settings modules to use a unified card-and-divider design language
+- Modernized project README with updated technical specifications and feature roadmap
 - Simplified theme widgets by removing legacy BasePreferenceWidget wrappers
 - Standardized preference item rendering using unified PreferenceItem composables
-- Refactored library and update screens to reactively observe actual background update status
+- Refactored library and update screens to reactively observe background job status
 - Migrated extension manager to a reactive state flow for background fetching
 - Centralized WorkManager status observation in LibraryUpdateJob with integrated debounce
-- Standardized WorkManager tagging for automated library updates for strictly enforced device restrictions
-- Relaxed background update constraints for extensions to improve reliability on various network types
-- Enabled lenient JSON parsing in the global network stack to increase resilience against API response changes
+- Relaxed background update constraints for extensions to improve reliability on diverse networks
+- Enabled lenient JSON parsing in the global network stack for increased API resilience
 
 ### Fixed
 
@@ -31,15 +40,13 @@
 - Fixed InjektionException in LibraryScreenModel during context resolution
 - Removed legacy hardcoded delays from refresh indicators across the application
 - Resolved a race condition where background extension updates could run before initialization
-- Fixed persistent JSON parsing crashes in the app update checker on malformed or null changelog data
+- Fixed persistent JSON parsing crashes in the app update checker
 - Fixed NullPointerException in network layer when rebuilding responses with null bodies
 
 ### Removed
 
 - Removed legacy hardcoded restrictions (WiFi-only + Charging) for extension auto-updates
 - Removed unused LibraryFilterChips component
-
-## [Unreleased] - 2026-04-16
 
 ## [0.3.4] - 2026-04-12
 
