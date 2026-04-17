@@ -9,22 +9,17 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MultiChoiceSegmentedButtonRow
-import androidx.compose.material3.SegmentedButton
-import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.Text
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.components.material.padding
@@ -48,10 +43,10 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.hippo.unifile.UniFile
 import eu.kanade.presentation.more.settings.Preference
+import eu.kanade.presentation.more.settings.PreferenceItem
 import eu.kanade.presentation.more.settings.screen.data.CreateBackupScreen
 import eu.kanade.presentation.more.settings.screen.data.RestoreBackupScreen
 import eu.kanade.presentation.more.settings.screen.data.StorageInfo
-import eu.kanade.presentation.more.settings.widget.BasePreferenceWidget
 import eu.kanade.presentation.more.settings.widget.PrefsHorizontalPadding
 import eu.kanade.presentation.util.relativeTimeSpanString
 import eu.kanade.tachiyomi.data.backup.create.BackupCreateJob
@@ -111,9 +106,7 @@ object SettingsDataScreen : SearchableSettings {
         val storagePreferences = Injekt.get<StoragePreferences>()
 
         return persistentListOf(
-            getStorageLocationPref(storagePreferences = storagePreferences),
-            Preference.PreferenceItem.InfoPreference(stringResource(MR.strings.pref_storage_location_info)),
-
+            getStorageLocationGroup(storagePreferences = storagePreferences),
             getBackupAndRestoreGroup(backupPreferences = backupPreferences),
             getDataGroup(),
             getExportGroup(),
@@ -170,22 +163,43 @@ object SettingsDataScreen : SearchableSettings {
     }
 
     @Composable
-    private fun getStorageLocationPref(
+    private fun getStorageLocationGroup(
         storagePreferences: StoragePreferences,
-    ): Preference.PreferenceItem.TextPreference {
+    ): Preference.PreferenceGroup {
         val context = LocalContext.current
         val pickStorageLocation = storageLocationPicker(storagePreferences.baseStorageDirectory)
 
-        return Preference.PreferenceItem.TextPreference(
+        return Preference.PreferenceGroup(
             title = stringResource(MR.strings.pref_storage_location),
-            subtitle = storageLocationText(storagePreferences.baseStorageDirectory),
-            onClick = {
-                try {
-                    pickStorageLocation.launch(null)
-                } catch (e: ActivityNotFoundException) {
-                    context.toast(MR.strings.file_picker_error)
-                }
-            },
+            preferenceItems = persistentListOf(
+                Preference.PreferenceItem.CustomPreference(
+                    title = stringResource(MR.strings.pref_storage_location),
+                ) {
+                    SectionCard {
+                        Column {
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.TextPreference(
+                                    title = stringResource(MR.strings.pref_storage_location),
+                                    subtitle = storageLocationText(storagePreferences.baseStorageDirectory),
+                                    onClick = {
+                                        try {
+                                            pickStorageLocation.launch(null)
+                                        } catch (_: ActivityNotFoundException) {
+                                            context.toast(MR.strings.file_picker_error)
+                                        }
+                                    },
+                                ),
+                                highlightKey = null,
+                            )
+
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.InfoPreference(stringResource(MR.strings.pref_storage_location_info)),
+                                highlightKey = null,
+                            )
+                        }
+                    }
+                },
+            ),
         )
     }
 
@@ -234,67 +248,80 @@ object SettingsDataScreen : SearchableSettings {
                 ) {
                     val lastAutoBackupRelative = relativeTimeSpanString(lastAutoBackup)
                     SectionCard {
-                        Column(
-                            modifier = Modifier.padding(vertical = MaterialTheme.padding.small),
-                            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
-                        ) {
-                            Text(
-                                text = stringResource(MR.strings.last_auto_backup_info, lastAutoBackupRelative),
-                                style = MaterialTheme.typography.bodyMedium,
-                                modifier = Modifier.secondaryItemAlpha(),
-                            )
-
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                        Column {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = PrefsHorizontalPadding)
+                                    .padding(vertical = MaterialTheme.padding.small),
+                                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
                             ) {
-                                TextButton(
-                                    modifier = Modifier.weight(1f),
-                                    onClick = { navigator.push(CreateBackupScreen()) },
+                                Text(
+                                    text = stringResource(MR.strings.last_auto_backup_info, lastAutoBackupRelative),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    modifier = Modifier.secondaryItemAlpha(),
+                                )
+
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
                                 ) {
-                                    Text(stringResource(MR.strings.pref_create_backup))
-                                }
-                                TextButton(
-                                    modifier = Modifier.weight(1f),
-                                    onClick = {
-                                        if (!BackupRestoreJob.isRunning(context)) {
-                                            if (DeviceUtil.isMiui && DeviceUtil.isMiuiOptimizationDisabled()) {
-                                                context.toast(MR.strings.restore_miui_warning)
+                                    TextButton(
+                                        modifier = Modifier.weight(1f),
+                                        onClick = { navigator.push(CreateBackupScreen()) },
+                                    ) {
+                                        Text(stringResource(MR.strings.pref_create_backup))
+                                    }
+                                    TextButton(
+                                        modifier = Modifier.weight(1f),
+                                        onClick = {
+                                            if (!BackupRestoreJob.isRunning(context)) {
+                                                if (DeviceUtil.isMiui && DeviceUtil.isMiuiOptimizationDisabled()) {
+                                                    context.toast(MR.strings.restore_miui_warning)
+                                                }
+                                                chooseBackup.launch("*/*")
+                                            } else {
+                                                context.toast(MR.strings.restore_in_progress)
                                             }
-                                            chooseBackup.launch("*/*")
-                                        } else {
-                                            context.toast(MR.strings.restore_in_progress)
-                                        }
-                                    },
-                                ) {
-                                    Text(stringResource(MR.strings.pref_restore_backup))
+                                        },
+                                    ) {
+                                        Text(stringResource(MR.strings.pref_restore_backup))
+                                    }
                                 }
                             }
+
+                            HorizontalDivider()
+
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.MultiSelectListPreference(
+                                    preference = backupSchedulePref,
+                                    entries = hoursMap.toImmutableMap(),
+                                    title = stringResource(MR.strings.pref_backup_interval),
+                                    subtitle = if (backupSchedule.isEmpty()) {
+                                        stringResource(MR.strings.update_schedule_none)
+                                    } else {
+                                        backupSchedule
+                                            .map { it.toInt() }
+                                            .sorted()
+                                            .joinToString(", ") { hoursMap[it.toString()]!! }
+                                    },
+                                    onValueChanged = {
+                                        BackupCreateJob.setupTask(context)
+                                        true
+                                    },
+                                ),
+                                highlightKey = null,
+                            )
+
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.InfoPreference(
+                                    stringResource(MR.strings.backup_info),
+                                ),
+                                highlightKey = null,
+                            )
                         }
                     }
                 },
-
-                // Automatic backups
-                Preference.PreferenceItem.MultiSelectListPreference(
-                    preference = backupSchedulePref,
-                    entries = hoursMap.toImmutableMap(),
-                    title = stringResource(MR.strings.pref_backup_interval),
-                    subtitle = if (backupSchedule.isEmpty()) {
-                        stringResource(MR.strings.update_schedule_none)
-                    } else {
-                        backupSchedule
-                            .map { it.toInt() }
-                            .sorted()
-                            .joinToString(", ") { hoursMap[it.toString()]!! }
-                    },
-                    onValueChanged = {
-                        BackupCreateJob.setupTask(context)
-                        true
-                    },
-                ),
-                Preference.PreferenceItem.InfoPreference(
-                    stringResource(MR.strings.backup_info),
-                ),
             ),
         )
     }
@@ -315,37 +342,53 @@ object SettingsDataScreen : SearchableSettings {
                 Preference.PreferenceItem.CustomPreference(
                     title = stringResource(MR.strings.pref_storage_usage),
                 ) {
-                    BasePreferenceWidget(
-                        subcomponent = {
+                    SectionCard {
+                        Column {
                             StorageInfo(
-                                modifier = Modifier.padding(horizontal = PrefsHorizontalPadding),
+                                modifier = Modifier.padding(top = MaterialTheme.padding.small),
                             )
-                        },
-                    )
-                },
 
-                Preference.PreferenceItem.TextPreference(
-                    title = stringResource(MR.strings.pref_clear_chapter_cache),
-                    subtitle = stringResource(MR.strings.used_cache, cacheReadableSize),
-                    onClick = {
-                        scope.launchNonCancellable {
-                            try {
-                                val deletedFiles = chapterCache.clear()
-                                withUIContext {
-                                    context.toast(context.stringResource(MR.strings.cache_deleted, deletedFiles))
-                                    cacheReadableSizeSema++
-                                }
-                            } catch (e: Throwable) {
-                                logcat(LogPriority.ERROR, e)
-                                withUIContext { context.toast(MR.strings.cache_delete_error) }
-                            }
+                            HorizontalDivider()
+
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.TextPreference(
+                                    title = stringResource(MR.strings.pref_clear_chapter_cache),
+                                    subtitle = stringResource(MR.strings.used_cache, cacheReadableSize),
+                                    onClick = {
+                                        scope.launchNonCancellable {
+                                            try {
+                                                val deletedFiles = chapterCache.clear()
+                                                withUIContext {
+                                                    context.toast(
+                                                        context.stringResource(
+                                                            MR.strings.cache_deleted,
+                                                            deletedFiles,
+                                                        ),
+                                                    )
+                                                    cacheReadableSizeSema++
+                                                }
+                                            } catch (e: Throwable) {
+                                                logcat(LogPriority.ERROR, e)
+                                                withUIContext { context.toast(MR.strings.cache_delete_error) }
+                                            }
+                                        }
+                                    },
+                                ),
+                                highlightKey = null,
+                            )
+
+                            HorizontalDivider()
+
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.SwitchPreference(
+                                    preference = libraryPreferences.autoClearChapterCache,
+                                    title = stringResource(MR.strings.pref_auto_clear_chapter_cache),
+                                ),
+                                highlightKey = null,
+                            )
                         }
-                    },
-                ),
-                Preference.PreferenceItem.SwitchPreference(
-                    preference = libraryPreferences.autoClearChapterCache,
-                    title = stringResource(MR.strings.pref_auto_clear_chapter_cache),
-                ),
+                    }
+                },
             ),
         )
     }
@@ -405,10 +448,21 @@ object SettingsDataScreen : SearchableSettings {
         return Preference.PreferenceGroup(
             title = stringResource(MR.strings.export),
             preferenceItems = persistentListOf(
-                Preference.PreferenceItem.TextPreference(
-                    title = stringResource(MR.strings.library_list),
-                    onClick = { showDialog = true },
-                ),
+                Preference.PreferenceItem.CustomPreference(
+                    title = stringResource(MR.strings.export),
+                ) {
+                    SectionCard {
+                        Column {
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.TextPreference(
+                                    title = stringResource(MR.strings.library_list),
+                                    onClick = { showDialog = true },
+                                ),
+                                highlightKey = null,
+                            )
+                        }
+                    }
+                },
             ),
         )
     }

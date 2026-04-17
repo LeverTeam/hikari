@@ -39,6 +39,9 @@ import eu.kanade.tachiyomi.util.system.launchRequestPackageInstallsPermission
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.secondaryItemAlpha
+import tachiyomi.presentation.core.components.SectionCard
+import androidx.compose.material3.HorizontalDivider
+import tachiyomi.presentation.core.components.material.padding
 
 internal class PermissionStep : OnboardingStep {
 
@@ -73,43 +76,55 @@ internal class PermissionStep : OnboardingStep {
             }
         }
 
-        Column {
-            PermissionCheckbox(
-                title = stringResource(MR.strings.onboarding_permission_install_apps),
-                subtitle = stringResource(MR.strings.onboarding_permission_install_apps_description),
-                granted = installGranted,
-                onButtonClick = {
-                    context.launchRequestPackageInstallsPermission()
-                },
-            )
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                val permissionRequester = rememberLauncherForActivityResult(
-                    contract = ActivityResultContracts.RequestPermission(),
-                    onResult = {
-                        // no-op. resulting checks is being done on resume
+        SectionCard {
+            Column {
+                PermissionCheckbox(
+                    title = stringResource(MR.strings.onboarding_permission_install_apps),
+                    subtitle = stringResource(MR.strings.onboarding_permission_install_apps_description),
+                    granted = installGranted,
+                    onButtonClick = {
+                        context.launchRequestPackageInstallsPermission()
                     },
                 )
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    val permissionRequester = rememberLauncherForActivityResult(
+                        contract = ActivityResultContracts.RequestPermission(),
+                        onResult = {
+                        },
+                    )
+
+                    HorizontalDivider(
+                        modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
+                    )
+
+                    PermissionCheckbox(
+                        title = stringResource(MR.strings.onboarding_permission_notifications),
+                        subtitle = stringResource(MR.strings.onboarding_permission_notifications_description),
+                        granted = notificationGranted,
+                        onButtonClick = { permissionRequester.launch(Manifest.permission.POST_NOTIFICATIONS) },
+                    )
+                }
+
+                HorizontalDivider(
+                    modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
+                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
+                )
+
                 PermissionCheckbox(
-                    title = stringResource(MR.strings.onboarding_permission_notifications),
-                    subtitle = stringResource(MR.strings.onboarding_permission_notifications_description),
-                    granted = notificationGranted,
-                    onButtonClick = { permissionRequester.launch(Manifest.permission.POST_NOTIFICATIONS) },
+                    title = stringResource(MR.strings.onboarding_permission_ignore_battery_opts),
+                    subtitle = stringResource(MR.strings.onboarding_permission_ignore_battery_opts_description),
+                    granted = batteryGranted,
+                    onButtonClick = {
+                        @SuppressLint("BatteryLife")
+                        val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
+                            data = "package:${context.packageName}".toUri()
+                        }
+                        context.startActivity(intent)
+                    },
                 )
             }
-
-            PermissionCheckbox(
-                title = stringResource(MR.strings.onboarding_permission_ignore_battery_opts),
-                subtitle = stringResource(MR.strings.onboarding_permission_ignore_battery_opts_description),
-                granted = batteryGranted,
-                onButtonClick = {
-                    @SuppressLint("BatteryLife")
-                    val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
-                        data = "package:${context.packageName}".toUri()
-                    }
-                    context.startActivity(intent)
-                },
-            )
         }
     }
 

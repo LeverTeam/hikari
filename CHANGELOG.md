@@ -4,12 +4,20 @@
 
 ### Added
 
+- Sectional dashboard layout for Advanced, Library, Reader, and Security setting screens
+- Unified Security & Locking card with integrated biometrics and privacy controls
+- Horizontal dividers between logical preference subgroups for improved visual hierarchy
+- High-elevation SectionCard containers for all modernized settings modules
 - Native NDK-based image decoding system using `AImageDecoder` (API 30+) for high-performance image loading
 - High-performance EASU upscaling filter integrated directly into the reader and image loading pipeline
 - Manual update check trigger in the About screen via the version preference with status feedback
 
 ### Changed
 
+- Refactored settings screens to use a consistent card-and-divider design language
+- Modernized project README with technical specifications and feature roadmap
+- Simplified theme widgets by removing legacy BasePreferenceWidget wrappers
+- Standardized preference item rendering using unified PreferenceItem composables
 - Refactored library and update screens to reactively observe actual background update status
 - Migrated extension manager to a reactive state flow for background fetching
 - Centralized WorkManager status observation in LibraryUpdateJob with integrated debounce
@@ -19,6 +27,7 @@
 
 ### Fixed
 
+- Fixed unresolved reference error in SettingsReaderScreen navigation group
 - Fixed InjektionException in LibraryScreenModel during context resolution
 - Removed legacy hardcoded delays from refresh indicators across the application
 - Resolved a race condition where background extension updates could run before initialization

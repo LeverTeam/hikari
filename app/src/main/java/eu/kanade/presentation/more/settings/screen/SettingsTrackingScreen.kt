@@ -3,6 +3,7 @@ package eu.kanade.presentation.more.settings.screen
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -46,6 +47,7 @@ import dev.icerock.moko.resources.StringResource
 import eu.kanade.domain.track.model.AutoTrackState
 import eu.kanade.domain.track.service.TrackPreferences
 import eu.kanade.presentation.more.settings.Preference
+import eu.kanade.presentation.more.settings.PreferenceItem
 import eu.kanade.tachiyomi.data.track.EnhancedTracker
 import eu.kanade.tachiyomi.data.track.Tracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
@@ -66,6 +68,7 @@ import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
+import tachiyomi.presentation.core.components.SectionCard
 
 object SettingsTrackingScreen : SearchableSettings {
 
@@ -127,65 +130,125 @@ object SettingsTrackingScreen : SearchableSettings {
         }
 
         return listOf(
-            Preference.PreferenceItem.SwitchPreference(
-                preference = trackPreferences.autoUpdateTrack,
-                title = stringResource(MR.strings.pref_auto_update_manga_sync),
-            ),
-            Preference.PreferenceItem.ListPreference(
-                preference = trackPreferences.autoUpdateTrackOnMarkRead,
-                entries = AutoTrackState.entries
-                    .associateWith { stringResource(it.titleRes) }
-                    .toPersistentMap(),
-                title = stringResource(MR.strings.pref_auto_update_manga_on_mark_read),
-            ),
-            Preference.PreferenceGroup(
-                title = stringResource(MR.strings.services),
-                preferenceItems = persistentListOf(
-                    Preference.PreferenceItem.TrackerPreference(
-                        tracker = trackerManager.myAnimeList,
-                        login = { context.openInBrowser(MyAnimeListApi.authUrl(), forceDefaultBrowser = true) },
-                        logout = { dialog = LogoutDialog(trackerManager.myAnimeList) },
-                    ),
-                    Preference.PreferenceItem.TrackerPreference(
-                        tracker = trackerManager.aniList,
-                        login = { context.openInBrowser(AnilistApi.authUrl(), forceDefaultBrowser = true) },
-                        logout = { dialog = LogoutDialog(trackerManager.aniList) },
-                    ),
-                    Preference.PreferenceItem.TrackerPreference(
-                        tracker = trackerManager.kitsu,
-                        login = { dialog = LoginDialog(trackerManager.kitsu, MR.strings.email) },
-                        logout = { dialog = LogoutDialog(trackerManager.kitsu) },
-                    ),
-                    Preference.PreferenceItem.TrackerPreference(
-                        tracker = trackerManager.mangaUpdates,
-                        login = { dialog = LoginDialog(trackerManager.mangaUpdates, MR.strings.username) },
-                        logout = { dialog = LogoutDialog(trackerManager.mangaUpdates) },
-                    ),
-                    Preference.PreferenceItem.TrackerPreference(
-                        tracker = trackerManager.shikimori,
-                        login = { context.openInBrowser(ShikimoriApi.authUrl(), forceDefaultBrowser = true) },
-                        logout = { dialog = LogoutDialog(trackerManager.shikimori) },
-                    ),
-                    Preference.PreferenceItem.TrackerPreference(
-                        tracker = trackerManager.bangumi,
-                        login = { context.openInBrowser(BangumiApi.authUrl(), forceDefaultBrowser = true) },
-                        logout = { dialog = LogoutDialog(trackerManager.bangumi) },
-                    ),
-                    Preference.PreferenceItem.InfoPreference(stringResource(MR.strings.tracking_info)),
-                ),
-            ),
-            Preference.PreferenceGroup(
-                title = stringResource(MR.strings.enhanced_services),
-                preferenceItems = (
-                    enhancedTrackers.first
-                        .map { service ->
-                            Preference.PreferenceItem.TrackerPreference(
-                                tracker = service,
-                                login = { (service as EnhancedTracker).loginNoop() },
-                                logout = service::logout,
+            getAutomationGroup(trackPreferences),
+            getServicesGroup(context, trackerManager, { dialog = it }),
+            getEnhancedGroup(enhancedTrackers.first, enhancedTrackerInfo),
+        )
+    }
+ 
+    @Composable
+    private fun getAutomationGroup(trackPreferences: TrackPreferences): Preference.PreferenceGroup {
+        return Preference.PreferenceGroup(
+            title = stringResource(MR.strings.pref_category_tracking),
+            preferenceItems = persistentListOf(
+                Preference.PreferenceItem.CustomPreference(
+                    title = stringResource(MR.strings.pref_category_tracking),
+                ) {
+                    SectionCard {
+                        Column {
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.SwitchPreference(
+                                    preference = trackPreferences.autoUpdateTrack,
+                                    title = stringResource(MR.strings.pref_auto_update_manga_sync),
+                                ),
+                                highlightKey = null,
                             )
-                        } + listOf(Preference.PreferenceItem.InfoPreference(enhancedTrackerInfo))
-                    ).toImmutableList(),
+ 
+                            HorizontalDivider()
+ 
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.ListPreference(
+                                    preference = trackPreferences.autoUpdateTrackOnMarkRead,
+                                    entries = AutoTrackState.entries
+                                        .associateWith { stringResource(it.titleRes) }
+                                        .toPersistentMap(),
+                                    title = stringResource(MR.strings.pref_auto_update_manga_on_mark_read),
+                                ),
+                                highlightKey = null,
+                            )
+                        }
+                    }
+                },
+            ),
+        )
+    }
+ 
+    @Composable
+    private fun getServicesGroup(
+        context: android.content.Context,
+        trackerManager: TrackerManager,
+        setDialog: (Any?) -> Unit,
+    ): Preference.PreferenceGroup {
+        return Preference.PreferenceGroup(
+            title = stringResource(MR.strings.services),
+            preferenceItems = persistentListOf(
+                Preference.PreferenceItem.CustomPreference(
+                    title = stringResource(MR.strings.services),
+                ) {
+                    SectionCard {
+                        Column {
+                            val trackers = remember {
+                                listOf(
+                                    trackerManager.myAnimeList to { context.openInBrowser(MyAnimeListApi.authUrl(), forceDefaultBrowser = true) },
+                                    trackerManager.aniList to { context.openInBrowser(AnilistApi.authUrl(), forceDefaultBrowser = true) },
+                                    trackerManager.kitsu to { setDialog(LoginDialog(trackerManager.kitsu, MR.strings.email)) },
+                                    trackerManager.mangaUpdates to { setDialog(LoginDialog(trackerManager.mangaUpdates, MR.strings.username)) },
+                                    trackerManager.shikimori to { context.openInBrowser(ShikimoriApi.authUrl(), forceDefaultBrowser = true) },
+                                    trackerManager.bangumi to { context.openInBrowser(BangumiApi.authUrl(), forceDefaultBrowser = true) },
+                                )
+                            }
+ 
+                            trackers.forEachIndexed { index, (tracker, login) ->
+                                PreferenceItem(
+                                    item = Preference.PreferenceItem.TrackerPreference(
+                                        tracker = tracker,
+                                        login = login,
+                                        logout = { setDialog(LogoutDialog(tracker)) },
+                                    ),
+                                    highlightKey = null,
+                                )
+                                if (index < trackers.size - 1) {
+                                    HorizontalDivider()
+                                }
+                            }
+                        }
+                    }
+                },
+                Preference.PreferenceItem.InfoPreference(stringResource(MR.strings.tracking_info)),
+            ),
+        )
+    }
+ 
+    @Composable
+    private fun getEnhancedGroup(
+        enhancedTrackers: List<Tracker>,
+        info: String,
+    ): Preference.PreferenceGroup {
+        return Preference.PreferenceGroup(
+            title = stringResource(MR.strings.enhanced_services),
+            preferenceItems = persistentListOf(
+                Preference.PreferenceItem.CustomPreference(
+                    title = stringResource(MR.strings.enhanced_services),
+                ) {
+                    SectionCard {
+                        Column {
+                            enhancedTrackers.forEachIndexed { index, service ->
+                                PreferenceItem(
+                                    item = Preference.PreferenceItem.TrackerPreference(
+                                        tracker = service,
+                                        login = { (service as EnhancedTracker).loginNoop() },
+                                        logout = service::logout,
+                                    ),
+                                    highlightKey = null,
+                                )
+                                if (index < enhancedTrackers.size - 1) {
+                                    HorizontalDivider()
+                                }
+                            }
+                        }
+                    }
+                },
+                Preference.PreferenceItem.InfoPreference(info),
             ),
         )
     }

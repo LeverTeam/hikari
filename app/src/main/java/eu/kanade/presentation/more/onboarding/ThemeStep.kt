@@ -8,8 +8,14 @@ import eu.kanade.domain.ui.model.setAppCompatDelegateThemeMode
 import eu.kanade.presentation.more.settings.widget.AppThemeModePreferenceWidget
 import eu.kanade.presentation.more.settings.widget.AppThemePreferenceWidget
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
+import tachiyomi.presentation.core.components.SectionCard
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
+import tachiyomi.presentation.core.components.material.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Modifier
+import uy.kohesive.injekt.Injekt
 
 internal class ThemeStep : OnboardingStep {
 
@@ -28,20 +34,27 @@ internal class ThemeStep : OnboardingStep {
         val amoledPref = uiPreferences.themeDarkAmoled
         val amoled by amoledPref.collectAsState()
 
-        Column {
-            AppThemeModePreferenceWidget(
-                value = themeMode,
-                onItemClick = {
-                    themeModePref.set(it)
-                    setAppCompatDelegateThemeMode(it)
-                },
-            )
+        SectionCard {
+            Column {
+                AppThemeModePreferenceWidget(
+                    value = themeMode,
+                    onItemClick = {
+                        themeModePref.set(it)
+                        setAppCompatDelegateThemeMode(it)
+                    },
+                )
 
-            AppThemePreferenceWidget(
-                value = appTheme,
-                amoled = amoled,
-                onItemClick = { appThemePref.set(it) },
-            )
+                HorizontalDivider(
+                    modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
+                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
+                )
+
+                AppThemePreferenceWidget(
+                    value = appTheme,
+                    amoled = amoled,
+                    onItemClick = { appThemePref.set(it) },
+                )
+            }
         }
     }
 }
