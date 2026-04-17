@@ -87,6 +87,7 @@ class AppModule(val app: Application) : InjektModule {
             Json {
                 ignoreUnknownKeys = true
                 explicitNulls = false
+                isLenient = true
             }
         }
         addSingletonFactory {

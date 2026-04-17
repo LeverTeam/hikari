@@ -27,9 +27,11 @@ class ReleaseServiceImpl(
 
         return Release(
             version = release.version,
-            info = release.info.substringBeforeLast("<!-->").replace(gitHubUsernameMentionRegex) { mention ->
-                "[${mention.value}](https://github.com/${mention.value.substring(1)})"
-            },
+            info = (release.info ?: "")
+                .let { if (it.contains("<!-->")) it.substringBeforeLast("<!-->") else it }
+                .replace(gitHubUsernameMentionRegex) { mention ->
+                    "[${mention.value}](https://github.com/${mention.value.substring(1)})"
+                },
             releaseLink = release.releaseLink,
             downloadLink = downloadLink,
         )

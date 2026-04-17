@@ -94,6 +94,28 @@ object AboutScreen : Screen() {
                         onPreferenceClick = {
                             val deviceInfo = CrashLogUtil(context).getDebugInfo()
                             context.copyToClipboard("Debug information", deviceInfo)
+
+                            if (!isCheckingUpdates) {
+                                scope.launch {
+                                    isCheckingUpdates = true
+                                    context.toast(MR.strings.check_for_updates)
+                                    checkVersion(
+                                        context = context,
+                                        onAvailableUpdate = { result ->
+                                            val updateScreen = NewUpdateScreen(
+                                                versionName = result.release.version,
+                                                changelogInfo = result.release.info,
+                                                releaseLink = result.release.releaseLink,
+                                                downloadLink = result.release.downloadLink,
+                                            )
+                                            navigator.push(updateScreen)
+                                        },
+                                        onFinish = {
+                                            isCheckingUpdates = false
+                                        },
+                                    )
+                                }
+                            }
                         },
                     )
                 }
