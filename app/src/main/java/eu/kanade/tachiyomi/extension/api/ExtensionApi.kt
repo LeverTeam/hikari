@@ -44,7 +44,7 @@ internal class ExtensionApi {
         return withIOContext {
             var repos = getExtensionRepo.getAll()
             if (repos.isEmpty()) {
-                createExtensionRepo.await("https://raw.githubusercontent.com/keiyoushi/extensions/repo/index.min.json")
+                createExtensionRepo.await("https://raw.githubusercontent.com/LeverTeam/hikari-extensions/repo/index.min.json")
                 repos = getExtensionRepo.getAll()
             }
             repos
