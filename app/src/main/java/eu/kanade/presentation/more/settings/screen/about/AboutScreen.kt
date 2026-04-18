@@ -16,6 +16,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -37,10 +39,10 @@ import eu.kanade.tachiyomi.data.updater.AppUpdateChecker
 import eu.kanade.tachiyomi.data.updater.RELEASE_URL
 import eu.kanade.tachiyomi.ui.more.NewUpdateScreen
 import eu.kanade.tachiyomi.util.lang.toDateTimestampString
-import eu.kanade.tachiyomi.util.system.toast
 import eu.kanade.tachiyomi.util.system.updaterEnabled
 import kotlinx.coroutines.launch
 import logcat.LogPriority
+import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
@@ -71,6 +73,7 @@ object AboutScreen : Screen() {
         val uriHandler = LocalUriHandler.current
         val handleBack = LocalBackPress.current
         val navigator = LocalNavigator.currentOrThrow
+        val snackbarHostState = remember { SnackbarHostState() }
         var isCheckingUpdates by remember { mutableStateOf(false) }
 
         Scaffold(
@@ -81,6 +84,7 @@ object AboutScreen : Screen() {
                     scrollBehavior = scrollBehavior,
                 )
             },
+            snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         ) { contentPadding ->
             ScrollbarLazyColumn(
                 contentPadding = contentPadding,
@@ -92,45 +96,55 @@ object AboutScreen : Screen() {
                 }
 
                 item {
-                    SectionCard(titleRes = MR.strings.label_data) {
-                        if (updaterEnabled) {
-                            TextPreferenceWidget(
-                                title = stringResource(MR.strings.check_for_updates),
-                                widget = {
-                                    AnimatedVisibility(visible = isCheckingUpdates) {
-                                        CircularProgressIndicator(
-                                            modifier = Modifier.size(28.dp),
-                                            strokeWidth = 3.dp,
+                    SectionCard(titleRes = MR.strings.pref_category_about) {
+                        TextPreferenceWidget(
+                            title = stringResource(MR.strings.check_for_updates),
+                            widget = {
+                                AnimatedVisibility(visible = isCheckingUpdates) {
+                                    CircularProgressIndicator(
+                                        modifier = Modifier.size(28.dp),
+                                        strokeWidth = 3.dp,
+                                    )
+                                }
+                            },
+                            onPreferenceClick = {
+                                if (!isCheckingUpdates) {
+                                    scope.launch {
+                                        isCheckingUpdates = true
+ 
+                                        checkVersion(
+                                            context = context,
+                                            onAvailableUpdate = { result ->
+                                                val updateScreen = NewUpdateScreen(
+                                                    versionName = result.release.version,
+                                                    changelogInfo = result.release.info,
+                                                    releaseLink = result.release.releaseLink,
+                                                    downloadLink = result.release.downloadLink,
+                                                )
+                                                navigator.push(updateScreen)
+                                            },
+                                            onFinish = {
+                                                isCheckingUpdates = false
+                                            },
+                                            onError = { message ->
+                                                scope.launch {
+                                                    snackbarHostState.showSnackbar(message)
+                                                }
+                                            },
+                                            onNoUpdate = {
+                                                scope.launch {
+                                                    snackbarHostState.showSnackbar(
+                                                        context.stringResource(MR.strings.update_check_no_new_updates),
+                                                    )
+                                                }
+                                            },
                                         )
                                     }
-                                },
-                                onPreferenceClick = {
-                                    if (!isCheckingUpdates) {
-                                        scope.launch {
-                                            isCheckingUpdates = true
-
-                                            checkVersion(
-                                                context = context,
-                                                onAvailableUpdate = { result ->
-                                                    val updateScreen = NewUpdateScreen(
-                                                        versionName = result.release.version,
-                                                        changelogInfo = result.release.info,
-                                                        releaseLink = result.release.releaseLink,
-                                                        downloadLink = result.release.downloadLink,
-                                                    )
-                                                    navigator.push(updateScreen)
-                                                },
-                                                onFinish = {
-                                                    isCheckingUpdates = false
-                                                },
-                                            )
-                                        }
-                                    }
-                                },
-                            )
-
-                            HorizontalDivider()
-                        }
+                                }
+                            },
+                        )
+ 
+                        HorizontalDivider()
 
                         if (!BuildConfig.DEBUG) {
                             TextPreferenceWidget(
@@ -207,6 +221,8 @@ object AboutScreen : Screen() {
         context: Context,
         onAvailableUpdate: (GetApplicationRelease.Result.NewUpdate) -> Unit,
         onFinish: () -> Unit,
+        onNoUpdate: () -> Unit,
+        onError: (String) -> Unit,
     ) {
         val updateChecker = AppUpdateChecker()
         withUIContext {
@@ -217,15 +233,15 @@ object AboutScreen : Screen() {
                     }
 
                     is GetApplicationRelease.Result.NoNewUpdate -> {
-                        context.toast(MR.strings.update_check_no_new_updates)
+                        onNoUpdate()
                     }
 
                     is GetApplicationRelease.Result.OsTooOld -> {
-                        context.toast(MR.strings.update_check_eol)
+                        onError(context.stringResource(MR.strings.update_check_eol))
                     }
                 }
             } catch (e: Exception) {
-                context.toast(e.message)
+                onError(e.message ?: "Unknown error")
                 logcat(LogPriority.ERROR, e)
             } finally {
                 onFinish()

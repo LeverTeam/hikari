@@ -39,7 +39,7 @@ class NativeImageRegionDecoder : ImageRegionDecoder {
 
         provider.openStream().use { stream ->
             val inputStream = checkNotNull(stream) { "Failed to open image stream" }
-            decoder = checkNotNull(BitmapRegionDecoder.newInstance(inputStream, false)) {
+            decoder = checkNotNull(BitmapRegionDecoder.newInstance(inputStream)) {
                 "Failed to create BitmapRegionDecoder"
             }
         }

@@ -13,6 +13,7 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.ForegroundInfo
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.OutOfQuotaPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkQuery
@@ -481,8 +482,6 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
                     val request = PeriodicWorkRequestBuilder<LibraryUpdateJob>(
                         24,
                         TimeUnit.HOURS,
-                        10,
-                        TimeUnit.MINUTES,
                     )
                         .addTag(TAG)
                         .addTag(WORK_NAME_AUTO)
@@ -517,6 +516,7 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
             val request = OneTimeWorkRequestBuilder<LibraryUpdateJob>()
                 .addTag(TAG)
                 .addTag(WORK_NAME_MANUAL)
+                .setExpedited(OutOfQuotaPolicy.DROP_WORK_REQUEST)
                 .setInputData(inputData)
                 .build()
             wm.enqueueUniqueWork(WORK_NAME_MANUAL, ExistingWorkPolicy.KEEP, request)

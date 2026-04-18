@@ -82,3 +82,9 @@
 # Firebase
 -keep class com.google.firebase.installations.** { *; }
 -keep interface com.google.firebase.installations.** { *; }
+
+# Android Window Extensions (provided by the system at runtime)
+-dontwarn androidx.window.**
+
+# JSoup optional re2j dependency
+-dontwarn com.google.re2j.**

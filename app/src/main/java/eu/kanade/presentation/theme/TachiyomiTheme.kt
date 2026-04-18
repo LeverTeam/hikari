@@ -69,7 +69,6 @@ private fun BaseTachiyomiTheme(
             SkinType.LIQUID -> LiquidSkin
             SkinType.FROSTED -> FrostedSkin
             SkinType.DEFAULT -> DefaultSkin
-            else -> DefaultSkin
         }
     }
     ProvideSkin(skin) {

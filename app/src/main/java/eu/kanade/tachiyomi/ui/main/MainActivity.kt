@@ -23,6 +23,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -87,6 +89,7 @@ import kotlinx.coroutines.launch
 import logcat.LogPriority
 import hikari.core.migration.Migrator
 import tachiyomi.core.common.Constants
+import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.library.service.LibraryPreferences
@@ -138,6 +141,7 @@ class MainActivity : BaseActivity() {
             var incognito by remember { mutableStateOf(getIncognitoState.await(null)) }
             val downloadOnly by preferences.downloadedOnly.collectAsState()
             val indexing by downloadCache.isInitializing.collectAsState()
+            val snackbarHostState = remember { SnackbarHostState() }
 
             val isSystemInDarkTheme = isSystemInDarkTheme()
             val statusBarBackgroundColor = when {
@@ -187,6 +191,7 @@ class MainActivity : BaseActivity() {
                             modifier = Modifier.windowInsetsPadding(scaffoldInsets),
                         )
                     },
+                    snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
                     contentWindowInsets = scaffoldInsets,
                 ) { contentPadding ->
                     // Consume insets already used by app state banners
@@ -219,7 +224,7 @@ class MainActivity : BaseActivity() {
 
                 HandleOnNewIntent(context = context, navigator = navigator)
 
-                CheckForUpdates()
+                CheckForUpdates(snackbarHostState)
                 ShowOnboarding()
             }
 
@@ -279,7 +284,7 @@ class MainActivity : BaseActivity() {
     }
 
     @Composable
-    private fun CheckForUpdates() {
+    private fun CheckForUpdates(snackbarHostState: SnackbarHostState) {
         val context = LocalContext.current
         val navigator = LocalNavigator.currentOrThrow
 
@@ -287,7 +292,15 @@ class MainActivity : BaseActivity() {
         LaunchedEffect(Unit) {
             if (updaterEnabled) {
                 try {
-                    val result = AppUpdateChecker().checkForUpdate(context)
+                    val snackbarJob = launch {
+                        snackbarHostState.showSnackbar(
+                            message = context.stringResource(MR.strings.update_check_look_for_updates),
+                        )
+                    }
+
+                    val result = AppUpdateChecker().checkForUpdate(context, forceCheck = true)
+                    snackbarJob.cancel()
+
                     if (result is GetApplicationRelease.Result.NewUpdate) {
                         val updateScreen = NewUpdateScreen(
                             versionName = result.release.version,

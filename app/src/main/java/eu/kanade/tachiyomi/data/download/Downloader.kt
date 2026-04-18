@@ -60,6 +60,7 @@ import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.io.File
 import java.util.Locale
+import kotlinx.coroutines.DelicateCoroutinesApi
 
 /**
  * This class is the one in charge of downloading chapters.
@@ -110,7 +111,7 @@ class Downloader(
     var isPaused: Boolean = false
 
     init {
-        launchNow {
+        @OptIn(DelicateCoroutinesApi::class) launchNow {
             addAllToQueue(store.restore())
         }
     }
@@ -141,9 +142,7 @@ class Downloader(
      */
     fun stop(reason: String? = null) {
         cancelDownloaderJob()
-        queueState.value
-            .filter { it.status == Download.State.DOWNLOADING }
-            .forEach { it.status = Download.State.ERROR }
+        queueState.value.filter { it.status == Download.State.DOWNLOADING }.forEach { it.status = Download.State.ERROR }
 
         if (reason != null) {
             notifier.onWarning(reason)
@@ -166,9 +165,7 @@ class Downloader(
      */
     fun pause() {
         cancelDownloaderJob()
-        queueState.value
-            .filter { it.status == Download.State.DOWNLOADING }
-            .forEach { it.status = Download.State.QUEUE }
+        queueState.value.filter { it.status == Download.State.DOWNLOADING }.forEach { it.status = Download.State.QUEUE }
         isPaused = true
     }
 
@@ -196,23 +193,18 @@ class Downloader(
                 while (true) {
                     val activeDownloads = queue.asSequence()
                         // Ignore completed downloads, leave them in the queue
-                        .filter { it.status.value <= Download.State.DOWNLOADING.value }
-                        .groupBy { it.source }
-                        .toList()
-                        .take(parallelCount)
-                        .map { (_, downloads) -> downloads.first() }
+                        .filter { it.status.value <= Download.State.DOWNLOADING.value }.groupBy { it.source }.toList()
+                        .take(parallelCount).map { (_, downloads) -> downloads.first() }
                     emit(activeDownloads)
 
                     if (activeDownloads.isEmpty()) break
                     // Suspend until a download enters the ERROR state
-                    val activeDownloadsErroredFlow =
-                        combine(activeDownloads.map(Download::statusFlow)) { states ->
-                            states.contains(Download.State.ERROR)
-                        }.filter { it }
+                    val activeDownloadsErroredFlow = combine(activeDownloads.map(Download::statusFlow)) { states ->
+                        states.contains(Download.State.ERROR)
+                    }.filter { it }
                     activeDownloadsErroredFlow.first()
                 }
-            }
-                .distinctUntilChanged()
+            }.distinctUntilChanged()
 
             // Use supervisorScope to cancel child jobs when the downloader job is cancelled
             supervisorScope {
@@ -281,8 +273,7 @@ class Downloader(
             // Filter out those already enqueued.
             .filter { chapter -> queueState.value.none { it.chapter.id == chapter.id } }
             // Create a download for each one.
-            .map { Download(source, manga, it) }
-            .toList()
+            .map { Download(source, manga, it) }.toList()
 
         if (chaptersToQueue.isNotEmpty()) {
             addAllToQueue(chaptersToQueue)
@@ -290,15 +281,10 @@ class Downloader(
             // Start downloader if needed
             if (autoStart && wasEmpty) {
                 val queuedDownloads = queueState.value.count { it.source !is UnmeteredSource }
-                val maxDownloadsFromSource = queueState.value
-                    .groupBy { it.source }
-                    .filterKeys { it !is UnmeteredSource }
-                    .maxOfOrNull { it.value.size }
-                    ?: 0
-                if (
-                    queuedDownloads > DOWNLOADS_QUEUED_WARNING_THRESHOLD ||
-                    maxDownloadsFromSource > CHAPTERS_PER_SOURCE_QUEUE_WARNING_THRESHOLD
-                ) {
+                val maxDownloadsFromSource =
+                    queueState.value.groupBy { it.source }.filterKeys { it !is UnmeteredSource }
+                        .maxOfOrNull { it.value.size } ?: 0
+                if (queuedDownloads > DOWNLOADS_QUEUED_WARNING_THRESHOLD || maxDownloadsFromSource > CHAPTERS_PER_SOURCE_QUEUE_WARNING_THRESHOLD) {
                     notifier.onWarning(
                         context.stringResource(
                             MR.strings.download_queue_size_warning,
@@ -360,9 +346,7 @@ class Downloader(
             }
 
             // Delete all temporary (unfinished) files
-            tmpDir.listFiles()
-                ?.filter { it.extension == "tmp" }
-                ?.forEach { it.delete() }
+            tmpDir.listFiles()?.filter { it.extension == "tmp" }?.forEach { it.delete() }
 
             download.status = Download.State.DOWNLOADING
 
@@ -381,10 +365,8 @@ class Downloader(
 
                     withIOContext { getOrDownloadImage(page, download, tmpDir) }
                     emit(page)
-                }
-                    .flowOn(Dispatchers.IO)
-            }
-                .collect {
+                }.flowOn(Dispatchers.IO)
+            }.collect {
                     // Do when page is downloaded.
                     notifier.onProgressChange(download)
                 }
@@ -507,8 +489,7 @@ class Downloader(
                 } else {
                     false
                 }
-            }
-            .first()
+            }.first()
     }
 
     /**
@@ -548,8 +529,9 @@ class Downloader(
 
         try {
             val filenamePrefix = "%03d".format(Locale.ENGLISH, page.number)
-            val imageFile = tmpDir.listFiles()?.firstOrNull { it.name.orEmpty().startsWith(filenamePrefix) }
-                ?: error(context.stringResource(MR.strings.download_notifier_split_page_not_found, page.number))
+            val imageFile = tmpDir.listFiles()?.firstOrNull { it.name.orEmpty().startsWith(filenamePrefix) } ?: error(
+                context.stringResource(MR.strings.download_notifier_split_page_not_found, page.number),
+            )
 
             // If the original page was previously split, then skip
             if (imageFile.name.orEmpty().startsWith("${filenamePrefix}__")) return
@@ -620,12 +602,9 @@ class Downloader(
         source: HttpSource,
     ) {
         val categories = getCategories.await(manga.id).map { it.name.trim() }.takeUnless { it.isEmpty() }
-        val urls = getTracks.await(manga.id)
-            .mapNotNull { track ->
+        val urls = getTracks.await(manga.id).mapNotNull { track ->
                 track.remoteUrl.takeUnless { url -> url.isBlank() }?.trim()
-            }
-            .plus(source.getChapterUrl(chapter.toSChapter()).trim())
-            .distinct()
+            }.plus(source.getChapterUrl(chapter.toSChapter()).trim()).distinct()
 
         val comicInfo = getComicInfo(
             manga,

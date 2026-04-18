@@ -41,6 +41,7 @@ import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.math.RoundingMode
 import java.text.NumberFormat
+import kotlinx.coroutines.DelicateCoroutinesApi
 
 class LibraryUpdateNotifier(
     private val context: Context,
@@ -209,6 +210,7 @@ class LibraryUpdateNotifier(
 
         // Per-manga notification
         if (!securityPreferences.hideNotificationContent.get()) {
+            @OptIn(DelicateCoroutinesApi::class)
             launchUI {
                 context.notify(
                     updates.map { (manga, chapters) ->

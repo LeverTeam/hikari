@@ -38,6 +38,6 @@ class AppUpdateChecker {
 
 val GITHUB_REPO = "LeverTeam/hikari"
 
-val RELEASE_TAG = "v${BuildConfig.VERSION_NAME}"
+val RELEASE_TAG = BuildConfig.VERSION_NAME
 
 val RELEASE_URL = "https://github.com/LeverTeam/hikari/releases/tag/$RELEASE_TAG"
