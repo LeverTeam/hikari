@@ -19,8 +19,8 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import tachiyomi.presentation.core.components.HikariSnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -73,7 +73,7 @@ fun MangaCoverDialog(
         ),
     ) {
         Scaffold(
-            snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+            snackbarHost = { HikariSnackbarHost(hostState = snackbarHostState) },
             containerColor = Color.Transparent,
             bottomBar = {
                 Row(

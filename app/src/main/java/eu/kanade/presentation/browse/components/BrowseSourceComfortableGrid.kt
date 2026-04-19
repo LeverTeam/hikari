@@ -6,21 +6,19 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import eu.kanade.presentation.library.components.CommonMangaItemDefaults
 import eu.kanade.presentation.library.components.MangaComfortableGridItem
-import kotlinx.coroutines.flow.StateFlow
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.MangaCover
 import tachiyomi.presentation.core.util.plus
 
 @Composable
 fun BrowseSourceComfortableGrid(
-    mangaList: LazyPagingItems<StateFlow<Manga>>,
+    mangaList: LazyPagingItems<Manga>,
+    favoriteIds: Set<Long>,
     columns: GridCells,
     contentPadding: PaddingValues,
     onMangaClick: (Manga) -> Unit,
@@ -39,9 +37,10 @@ fun BrowseSourceComfortableGrid(
         }
 
         items(count = mangaList.itemCount) { index ->
-            val manga by mangaList[index]?.collectAsState() ?: return@items
+            val manga = mangaList[index] ?: return@items
+            val isFavorite = favoriteIds.contains(manga.id)
             BrowseSourceComfortableGridItem(
-                manga = manga,
+                manga = manga.copy(favorite = isFavorite),
                 onClick = { onMangaClick(manga) },
                 onLongClick = { onMangaLongClick(manga) },
             )

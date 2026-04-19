@@ -14,7 +14,7 @@ class DefaultExtensionReposMigration : Migration {
             migrationContext.get<ExtensionRepoRepository>() ?: return@withIOContext false
         val createExtensionRepo = migrationContext.get<CreateExtensionRepo>() ?: return@withIOContext false
 
-        val defaultRepo = "https://raw.githubusercontent.com/LeverTeam/hikari-extensions/repo/index.min.json"
+        val defaultRepo = "https://raw.githubusercontent.com/keiyoushi/extensions/repo/index.min.json"
         val baseUrl = defaultRepo.removeSuffix("/index.min.json")
 
         if (extensionRepositoryRepository.getRepo(baseUrl) == null) {

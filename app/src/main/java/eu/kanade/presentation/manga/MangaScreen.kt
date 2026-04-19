@@ -25,8 +25,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SmallExtendedFloatingActionButton
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import tachiyomi.presentation.core.components.HikariSnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.material3.animateFloatingActionButton
 import androidx.compose.runtime.Composable
@@ -324,7 +324,7 @@ private fun MangaScreenSmallImpl(
                 fillFraction = 1f,
             )
         },
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        snackbarHost = { HikariSnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
             val isFABVisible = remember(chapters) {
                 chapters.fastAny { !it.chapter.read } && !isAnySelected
@@ -564,7 +564,7 @@ private fun MangaScreenLargeImpl(
                 )
             }
         },
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        snackbarHost = { HikariSnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
             val isFABVisible = remember(chapters) {
                 chapters.fastAny { !it.chapter.read } && !isAnySelected

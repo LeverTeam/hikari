@@ -7,8 +7,8 @@ import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.HelpOutline
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import tachiyomi.presentation.core.components.HikariSnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -157,7 +157,7 @@ data object LibraryTab : Tab {
                     },
                 )
             },
-            snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+            snackbarHost = { HikariSnackbarHost(hostState = snackbarHostState) },
         ) { contentPadding ->
             when {
                 state.isLoading -> {

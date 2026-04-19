@@ -7,7 +7,7 @@ class BackupPreferences(
     preferenceStore: PreferenceStore,
 ) {
 
-    val backupSchedule: Preference<Set<String>> = preferenceStore.getStringSet("backup_schedule", emptySet())
+    val backupSchedule: Preference<Int> = preferenceStore.getInt("backup_schedule", 0)
 
     val lastAutoBackupTimestamp: Preference<Long> = preferenceStore.getLong(
         Preference.appStateKey("last_auto_backup_timestamp"),

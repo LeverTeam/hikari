@@ -4,8 +4,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FilterList
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SmallExtendedFloatingActionButton
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import tachiyomi.presentation.core.components.HikariSnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.material3.animateFloatingActionButton
 import androidx.compose.runtime.Composable
@@ -85,7 +85,7 @@ data class MigrateSourceSearchScreen(
                     ),
                 )
             },
-            snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+            snackbarHost = { HikariSnackbarHost(hostState = snackbarHostState) },
         ) { paddingValues ->
             val openMigrateDialog: (Manga) -> Unit = {
                 val migrateListScreen = navigator.items

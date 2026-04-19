@@ -71,9 +71,7 @@ import tachiyomi.i18n.MR
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.io.File
-import java.time.Duration
 import java.time.Instant
-import java.time.LocalDateTime
 import java.time.ZonedDateTime
 import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.TimeUnit
@@ -102,7 +100,7 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
     private var mangaToUpdate: List<LibraryManga> = mutableListOf()
 
     override suspend fun doWork(): Result {
-        if (tags.contains(WORK_NAME_AUTO) || tags.any { it.startsWith(WORK_NAME_AUTO_PREFIX) }) {
+        if (tags.contains(WORK_NAME_AUTO)) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
                 val preferences = Injekt.get<LibraryPreferences>()
                 val restrictions = preferences.autoUpdateDeviceRestrictions.get()
@@ -406,7 +404,6 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
     companion object {
         const val TAG = "LibraryUpdate"
         private const val WORK_NAME_AUTO = "LibraryUpdate-auto"
-        private const val WORK_NAME_AUTO_PREFIX = "LibraryUpdate-auto-"
         private const val WORK_NAME_MANUAL = "LibraryUpdate-manual"
 
         private const val ERROR_LOG_HELP_URL = "https://mihon.app/docs/guides/troubleshooting/"
@@ -427,7 +424,7 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
 
         fun setupTask(context: Context) {
             val preferences = Injekt.get<LibraryPreferences>()
-            val schedule = preferences.autoUpdateSchedule.get().map { it.toInt() }
+            val interval = preferences.autoUpdateSchedule.get()
 
             // Cancel any old-style interval work
             context.workManager.cancelUniqueWork(WORK_NAME_AUTO)
@@ -438,16 +435,12 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
                 .build()
             val currentWorks = context.workManager.getWorkInfos(workQuery).get()
             currentWorks.forEach { workInfo ->
-                val hourTag = workInfo.tags.firstOrNull { it.startsWith(WORK_NAME_AUTO_PREFIX) }
-                if (hourTag != null) {
-                    val hour = hourTag.removePrefix(WORK_NAME_AUTO_PREFIX).toIntOrNull()
-                    if (hour == null || hour !in schedule) {
-                        context.workManager.cancelWorkById(workInfo.id)
-                    }
+                if (workInfo.tags.any { it.startsWith(WORK_NAME_AUTO) }) {
+                    context.workManager.cancelWorkById(workInfo.id)
                 }
             }
 
-            if (schedule.isNotEmpty()) {
+            if (interval > 0) {
                 val restrictions = preferences.autoUpdateDeviceRestrictions.get()
                 val networkType = when {
                     DEVICE_ONLY_ON_WIFI in restrictions -> NetworkType.UNMETERED
@@ -470,33 +463,22 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
                     }
                     .build()
 
-                val now = LocalDateTime.now()
-                schedule.forEach { hour ->
-                    val target = now.withHour(hour).withMinute(0).withSecond(0).withNano(0)
-                    val initialDelay = when {
-                        hour == now.hour -> 0L
-                        target.isBefore(now) -> Duration.between(now, target.plusDays(1)).toMillis()
-                        else -> Duration.between(now, target).toMillis()
-                    }
+                val request = PeriodicWorkRequestBuilder<LibraryUpdateJob>(
+                    interval.toLong(),
+                    TimeUnit.HOURS,
+                )
+                    .addTag(TAG)
+                    .addTag(WORK_NAME_AUTO)
+                    .setConstraints(constraints)
+                    .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.MINUTES)
+                    .setInitialDelay(interval.toLong(), TimeUnit.HOURS)
+                    .build()
 
-                    val request = PeriodicWorkRequestBuilder<LibraryUpdateJob>(
-                        24,
-                        TimeUnit.HOURS,
-                    )
-                        .addTag(TAG)
-                        .addTag(WORK_NAME_AUTO)
-                        .addTag("$WORK_NAME_AUTO_PREFIX$hour")
-                        .setConstraints(constraints)
-                        .setInitialDelay(initialDelay, TimeUnit.MILLISECONDS)
-                        .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.MINUTES)
-                        .build()
-
-                    context.workManager.enqueueUniquePeriodicWork(
-                        "$WORK_NAME_AUTO_PREFIX$hour",
-                        ExistingPeriodicWorkPolicy.UPDATE,
-                        request,
-                    )
-                }
+                context.workManager.enqueueUniquePeriodicWork(
+                    WORK_NAME_AUTO,
+                    ExistingPeriodicWorkPolicy.UPDATE,
+                    request,
+                )
             }
         }
 
@@ -535,7 +517,7 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
                     wm.cancelWorkById(it.id)
 
                     // Re-enqueue cancelled scheduled work
-                    if (it.tags.any { tag -> tag.startsWith(WORK_NAME_AUTO_PREFIX) }) {
+                    if (it.tags.contains(WORK_NAME_AUTO)) {
                         setupTask(context)
                     }
                 }

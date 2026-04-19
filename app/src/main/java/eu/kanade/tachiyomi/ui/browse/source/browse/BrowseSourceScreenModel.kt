@@ -18,7 +18,6 @@ import eu.kanade.domain.manga.interactor.UpdateManga
 import eu.kanade.domain.source.interactor.GetIncognitoState
 import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.domain.track.interactor.AddTracks
-import eu.kanade.presentation.util.ioCoroutineScope
 import eu.kanade.tachiyomi.data.cache.CoverCache
 import eu.kanade.tachiyomi.source.CatalogueSource
 import eu.kanade.tachiyomi.source.model.FilterList
@@ -39,6 +38,7 @@ import tachiyomi.core.common.preference.CheckboxState
 import tachiyomi.core.common.preference.mapAsCheckboxState
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.category.interactor.GetCategories
+import tachiyomi.domain.manga.interactor.GetFavorites
 import tachiyomi.domain.category.interactor.SetMangaCategories
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.chapter.interactor.SetMangaDefaultChapterFlags
@@ -71,6 +71,7 @@ class BrowseSourceScreenModel(
     private val updateManga: UpdateManga = Injekt.get(),
     private val addTracks: AddTracks = Injekt.get(),
     private val getIncognitoState: GetIncognitoState = Injekt.get(),
+    private val getFavorites: GetFavorites = Injekt.get(),
 ) : StateScreenModel<BrowseSourceScreenModel.State>(State(Listing.valueOf(listingQuery))) {
 
     var displayMode by sourcePreferences.sourceDisplayMode.asState(screenModelScope)
@@ -107,8 +108,11 @@ class BrowseSourceScreenModel(
     private val hideInLibraryItems = sourcePreferences.hideInLibraryItems.get()
     private val showHiddenManga = sourcePreferences.showHiddenManga.get()
     private val locallyHiddenMangaIds = MutableStateFlow(emptySet<Long>())
+    val favoriteIds = getFavorites.subscribe(sourceId)
+        .map { it.map { m -> m.id }.toSet() }
+        .stateIn(screenModelScope, SharingStarted.Lazily, emptySet())
 
-    val mangaPagerFlowFlow: kotlinx.coroutines.flow.StateFlow<kotlinx.coroutines.flow.Flow<androidx.paging.PagingData<kotlinx.coroutines.flow.StateFlow<Manga>>>> =
+    val mangaPagerFlowFlow: kotlinx.coroutines.flow.StateFlow<kotlinx.coroutines.flow.Flow<androidx.paging.PagingData<Manga>>> =
         state.map { it.listing }
             .distinctUntilChanged()
             .map { listing ->
@@ -116,23 +120,20 @@ class BrowseSourceScreenModel(
                     getRemoteManga(sourceId, listing.query ?: "", listing.filters)
                 }.flow.map { pagingData ->
                     pagingData.map { manga ->
-                        getManga.subscribe(manga.url, manga.source)
-                            .map { it ?: manga }
-                            .stateIn(ioCoroutineScope)
+                        getManga.await(manga.url, manga.source) ?: manga
                     }
                 }
-                    .cachedIn(ioCoroutineScope)
+                    .cachedIn(screenModelScope)
 
                 combine(innerPager, locallyHiddenMangaIds) { pagingData, localHidden ->
-                    pagingData.filter {
-                        val m = it.value
+                    pagingData.filter { m ->
                         (!hideInLibraryItems || !m.favorite) && (showHiddenManga || !m.hidden) && !localHidden.contains(
                             m.id,
                         )
                     }
                 }
             }
-            .stateIn(ioCoroutineScope, SharingStarted.Lazily, emptyFlow())
+            .stateIn(screenModelScope, SharingStarted.Lazily, emptyFlow())
 
     fun getColumnsPreference(orientation: Int): GridCells {
         val isLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE

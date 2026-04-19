@@ -12,8 +12,8 @@ import androidx.compose.material.icons.outlined.Public
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import tachiyomi.presentation.core.components.HikariSnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -84,7 +84,7 @@ object AboutScreen : Screen() {
                     scrollBehavior = scrollBehavior,
                 )
             },
-            snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+            snackbarHost = { HikariSnackbarHost(hostState = snackbarHostState) },
         ) { contentPadding ->
             ScrollbarLazyColumn(
                 contentPadding = contentPadding,

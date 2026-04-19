@@ -46,8 +46,6 @@ import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
-import java.text.DateFormat
-import java.util.Calendar
 
 object SettingsLibraryScreen : SearchableSettings {
 
@@ -171,14 +169,12 @@ object SettingsLibraryScreen : SearchableSettings {
             )
         }
 
-        val hoursMap = remember {
-            val timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT)
-            (0..23).associate { h ->
-                val cal = Calendar.getInstance().apply {
-                    set(Calendar.HOUR_OF_DAY, h)
-                    set(Calendar.MINUTE, 0)
-                }
-                h.toString() to timeFormatter.format(cal.time)
+        val intervals = persistentListOf(0, 3, 6, 12, 24, 48, 72)
+        val intervalsMap = intervals.associateWith { interval ->
+            when {
+                interval == 0 -> stringResource(MR.strings.disabled)
+                interval % 24 == 0 -> pluralStringResource(MR.plurals.num_days, count = interval / 24, interval / 24)
+                else -> pluralStringResource(MR.plurals.num_hours, count = interval, interval)
             }
         }
 
@@ -191,17 +187,14 @@ object SettingsLibraryScreen : SearchableSettings {
                     SectionCard {
                         Column {
                             PreferenceItem(
-                                item = Preference.PreferenceItem.MultiSelectListPreference(
+                                item = Preference.PreferenceItem.ListPreference(
                                     preference = autoUpdateSchedulePref,
-                                    entries = hoursMap.toImmutableMap(),
+                                    entries = intervalsMap.toImmutableMap(),
                                     title = stringResource(MR.strings.pref_library_update_schedule),
-                                    subtitle = if (autoUpdateSchedule.isEmpty()) {
-                                        stringResource(MR.strings.update_schedule_none)
-                                    } else {
-                                        autoUpdateSchedule
-                                            .map { it.toInt() }
-                                            .sorted()
-                                            .joinToString(", ") { hoursMap[it.toString()]!! }
+                                    subtitle = when {
+                                        autoUpdateSchedule == 0 -> stringResource(MR.strings.update_schedule_none)
+                                        autoUpdateSchedule % 24 == 0 -> pluralStringResource(MR.plurals.num_days, count = autoUpdateSchedule / 24, autoUpdateSchedule / 24)
+                                        else -> pluralStringResource(MR.plurals.num_hours, count = autoUpdateSchedule, autoUpdateSchedule)
                                     },
                                     onValueChanged = {
                                         ContextCompat.getMainExecutor(context)
@@ -224,7 +217,7 @@ object SettingsLibraryScreen : SearchableSettings {
                                     ),
                                     title = stringResource(MR.strings.pref_library_update_restriction),
                                     subtitle = stringResource(MR.strings.restrictions),
-                                    enabled = autoUpdateSchedule.isNotEmpty(),
+                                    enabled = autoUpdateSchedule != 0,
                                     onValueChanged = {
                                         ContextCompat.getMainExecutor(context)
                                             .execute { LibraryUpdateJob.setupTask(context) }

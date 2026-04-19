@@ -3,21 +3,19 @@ package eu.kanade.presentation.browse.components
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import eu.kanade.presentation.library.components.CommonMangaItemDefaults
 import eu.kanade.presentation.library.components.MangaListItem
-import kotlinx.coroutines.flow.StateFlow
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.MangaCover
 import tachiyomi.presentation.core.util.plus
 
 @Composable
 fun BrowseSourceList(
-    mangaList: LazyPagingItems<StateFlow<Manga>>,
+    mangaList: LazyPagingItems<Manga>,
+    favoriteIds: Set<Long>,
     contentPadding: PaddingValues,
     onMangaClick: (Manga) -> Unit,
     onMangaLongClick: (Manga) -> Unit,
@@ -32,9 +30,10 @@ fun BrowseSourceList(
         }
 
         items(count = mangaList.itemCount) { index ->
-            val manga by mangaList[index]?.collectAsState() ?: return@items
+            val manga = mangaList[index] ?: return@items
+            val isFavorite = favoriteIds.contains(manga.id)
             BrowseSourceListItem(
-                manga = manga,
+                manga = manga.copy(favorite = isFavorite),
                 onClick = { onMangaClick(manga) },
                 onLongClick = { onMangaLongClick(manga) },
             )

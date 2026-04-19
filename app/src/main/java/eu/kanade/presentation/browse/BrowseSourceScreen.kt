@@ -23,7 +23,6 @@ import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.util.formattedMessage
 import eu.kanade.tachiyomi.source.Source
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.coroutines.flow.StateFlow
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.domain.manga.model.Manga
@@ -39,7 +38,8 @@ import tachiyomi.source.local.LocalSource
 @Composable
 fun BrowseSourceContent(
     source: Source?,
-    mangaList: LazyPagingItems<StateFlow<Manga>>,
+    mangaList: LazyPagingItems<Manga>,
+    favoriteIds: Set<Long>,
     columns: GridCells,
     displayMode: LibraryDisplayMode,
     snackbarHostState: SnackbarHostState,
@@ -121,23 +121,28 @@ fun BrowseSourceContent(
         LibraryDisplayMode.ComfortableGrid -> {
             BrowseSourceComfortableGrid(
                 mangaList = mangaList,
+                favoriteIds = favoriteIds,
                 columns = columns,
                 contentPadding = contentPadding,
                 onMangaClick = onMangaClick,
                 onMangaLongClick = onMangaLongClick,
             )
         }
+
         LibraryDisplayMode.List -> {
             BrowseSourceList(
                 mangaList = mangaList,
+                favoriteIds = favoriteIds,
                 contentPadding = contentPadding,
                 onMangaClick = onMangaClick,
                 onMangaLongClick = onMangaLongClick,
             )
         }
+
         LibraryDisplayMode.CompactGrid, LibraryDisplayMode.CoverOnlyGrid -> {
             BrowseSourceCompactGrid(
                 mangaList = mangaList,
+                favoriteIds = favoriteIds,
                 columns = columns,
                 contentPadding = contentPadding,
                 onMangaClick = onMangaClick,

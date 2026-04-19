@@ -11,8 +11,8 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import tachiyomi.presentation.core.components.HikariSnackbarHost
 import androidx.compose.material3.Tab
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -53,7 +53,7 @@ fun TabbedScreen(
                 actions = { AppBarActions(tab.actions) },
             )
         },
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        snackbarHost = { HikariSnackbarHost(hostState = snackbarHostState) },
     ) { contentPadding ->
         Column(
             modifier = Modifier.padding(

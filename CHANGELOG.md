@@ -1,5 +1,29 @@
 # Changelog
 
+## [Unreleased] - 2026-04-19
+
+### Added
+
+- ID-based cross-source deduplication for grouping manga across extensions
+
+### Changed
+
+- Simplified UI by removing AGSL shader-based skins and dynamic color extraction
+- Restored standard Material 3 components for pull-to-refresh and reader navigation
+- Migrated default extension repository to LeverTeam/hikari-extensions
+- Updated project documentation for technical accuracy
+
+### Fixed
+
+- Corrected aspect ratio calculation in image decoder to prevent stretched cover images
+- Resolved auto-update issues in the application updater
+
+### Removed
+
+- Deleted AGSL shader implementations for Glass, Liquid, and Frosted materials
+- Removed dynamic skin color extraction from manga covers
+- Disabled the update-checking snackbar on launch and limited automatic check frequency to 12 hours
+
 ## [0.3.7] - 2026-04-17
 
 ### Added

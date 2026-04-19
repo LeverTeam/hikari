@@ -176,9 +176,7 @@ fun AdaptiveSheet(
                         orientation = Orientation.Vertical,
                         enabled = enableSwipeDismiss,
                         flingBehavior = flingBehavior,
-                    )
-                    .navigationBarsPadding()
-                    .statusBarsPadding(),
+                    ),
                 shape = MaterialTheme.shapes.extraLarge,
                 color = MaterialTheme.colorScheme.surfaceContainerHigh,
                 content = {
@@ -186,7 +184,13 @@ fun AdaptiveSheet(
                         enabled = anchoredDraggableState.targetValue == 0,
                         onBack = internalOnDismissRequest,
                     )
-                    content()
+                    Box(
+                        modifier = Modifier
+                            .navigationBarsPadding()
+                            .statusBarsPadding(),
+                    ) {
+                        content()
+                    }
                 },
             )
 

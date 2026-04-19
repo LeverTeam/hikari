@@ -72,13 +72,12 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.components.material.TextButton
 import tachiyomi.presentation.core.components.material.padding
+import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
 import tachiyomi.presentation.core.util.secondaryItemAlpha
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
-import java.text.DateFormat
-import java.util.Calendar
 
 object SettingsDataScreen : SearchableSettings {
 
@@ -126,11 +125,6 @@ object SettingsDataScreen : SearchableSettings {
                 val flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or
                     Intent.FLAG_GRANT_WRITE_URI_PERMISSION
 
-                // For some reason InkBook devices do not implement the SAF properly. Persistable URI grants do not
-                // work. However, simply retrieving the URI and using it works fine for these devices. Access is not
-                // revoked after the app is closed or the device is restarted.
-                // This also holds for some Samsung devices. Thus, we simply execute inside of a try-catch block and
-                // ignore the exception if it is thrown.
                 try {
                     context.contentResolver.takePersistableUriPermission(uri, flags)
                 } catch (e: SecurityException) {
@@ -230,14 +224,12 @@ object SettingsDataScreen : SearchableSettings {
 
         val backupSchedulePref = backupPreferences.backupSchedule
         val backupSchedule by backupSchedulePref.collectAsState()
-        val hoursMap = remember {
-            val timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT)
-            (0..23).associate { h ->
-                val cal = Calendar.getInstance().apply {
-                    set(Calendar.HOUR_OF_DAY, h)
-                    set(Calendar.MINUTE, 0)
-                }
-                h.toString() to timeFormatter.format(cal.time)
+        val intervals = persistentListOf(0, 3, 6, 12, 24, 48, 72)
+        val intervalsMap = intervals.associateWith { interval ->
+            when {
+                interval == 0 -> stringResource(MR.strings.disabled)
+                interval % 24 == 0 -> pluralStringResource(MR.plurals.num_days, count = interval / 24, interval / 24)
+                else -> pluralStringResource(MR.plurals.num_hours, count = interval, interval)
             }
         }
 
@@ -295,17 +287,14 @@ object SettingsDataScreen : SearchableSettings {
                             HorizontalDivider()
 
                             PreferenceItem(
-                                item = Preference.PreferenceItem.MultiSelectListPreference(
+                                item = Preference.PreferenceItem.ListPreference(
                                     preference = backupSchedulePref,
-                                    entries = hoursMap.toImmutableMap(),
+                                    entries = intervalsMap.toImmutableMap(),
                                     title = stringResource(MR.strings.pref_backup_interval),
-                                    subtitle = if (backupSchedule.isEmpty()) {
-                                        stringResource(MR.strings.update_schedule_none)
-                                    } else {
-                                        backupSchedule
-                                            .map { it.toInt() }
-                                            .sorted()
-                                            .joinToString(", ") { hoursMap[it.toString()]!! }
+                                    subtitle = when {
+                                        backupSchedule == 0 -> stringResource(MR.strings.update_schedule_none)
+                                        backupSchedule % 24 == 0 -> pluralStringResource(MR.plurals.num_days, count = backupSchedule / 24, backupSchedule / 24)
+                                        else -> pluralStringResource(MR.plurals.num_hours, count = backupSchedule, backupSchedule)
                                     },
                                     onValueChanged = {
                                         BackupCreateJob.setupTask(context)

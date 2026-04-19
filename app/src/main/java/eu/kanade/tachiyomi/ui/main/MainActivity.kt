@@ -23,7 +23,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SnackbarHost
+import tachiyomi.presentation.core.components.HikariSnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -110,7 +110,6 @@ class MainActivity : BaseActivity() {
 
     private val getIncognitoState: GetIncognitoState by injectLazy()
 
-    // To be checked by splash screen. If true then splash screen will be removed.
     var ready = false
 
     private var navigator: Navigator? = null
@@ -122,7 +121,6 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val isLaunch = savedInstanceState == null
 
-        // Prevent splash screen showing up on configuration changes
         val splashScreen = if (isLaunch) installSplashScreen() else null
 
         super.onCreate(savedInstanceState)
@@ -151,7 +149,6 @@ class MainActivity : BaseActivity() {
                 else -> MaterialTheme.colorScheme.surface
             }
             LaunchedEffect(isSystemInDarkTheme, statusBarBackgroundColor) {
-                // Draw edge-to-edge and set system bars color to transparent
                 val lightStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.BLACK)
                 val darkStyle = SystemBarStyle.dark(Color.TRANSPARENT)
                 enableEdgeToEdge(
@@ -168,7 +165,6 @@ class MainActivity : BaseActivity() {
                     this@MainActivity.navigator = navigator
 
                     if (isLaunch) {
-                        // Set start screen
                         handleIntentAction(intent, navigator)
 
                         // Reset Incognito Mode on relaunch
@@ -182,6 +178,7 @@ class MainActivity : BaseActivity() {
                 }
 
                 val scaffoldInsets = WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal)
+
                 Scaffold(
                     topBar = {
                         AppStateBanners(
@@ -191,10 +188,9 @@ class MainActivity : BaseActivity() {
                             modifier = Modifier.windowInsetsPadding(scaffoldInsets),
                         )
                     },
-                    snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+                    snackbarHost = { HikariSnackbarHost(hostState = snackbarHostState) },
                     contentWindowInsets = scaffoldInsets,
                 ) { contentPadding ->
-                    // Consume insets already used by app state banners
                     Box {
                         // Shows current screen
                         DefaultNavigatorScreenTransition(
@@ -206,7 +202,6 @@ class MainActivity : BaseActivity() {
                     }
                 }
 
-                // Pop source-related screens when incognito mode is turned off
                 LaunchedEffect(Unit) {
                     preferences.incognitoMode.changes()
                         .drop(1)
@@ -223,8 +218,7 @@ class MainActivity : BaseActivity() {
                 }
 
                 HandleOnNewIntent(context = context, navigator = navigator)
-
-                CheckForUpdates(snackbarHostState)
+                CheckForUpdates()
                 ShowOnboarding()
             }
 
@@ -284,22 +278,14 @@ class MainActivity : BaseActivity() {
     }
 
     @Composable
-    private fun CheckForUpdates(snackbarHostState: SnackbarHostState) {
+    private fun CheckForUpdates() {
         val context = LocalContext.current
         val navigator = LocalNavigator.currentOrThrow
 
-        // App updates
         LaunchedEffect(Unit) {
             if (updaterEnabled) {
                 try {
-                    val snackbarJob = launch {
-                        snackbarHostState.showSnackbar(
-                            message = context.stringResource(MR.strings.update_check_look_for_updates),
-                        )
-                    }
-
-                    val result = AppUpdateChecker().checkForUpdate(context, forceCheck = true)
-                    snackbarJob.cancel()
+                    val result = AppUpdateChecker().checkForUpdate(context, forceCheck = false)
 
                     if (result is GetApplicationRelease.Result.NewUpdate) {
                         val updateScreen = NewUpdateScreen(
@@ -316,7 +302,6 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        // Extensions updates
         LaunchedEffect(Unit) {
             try {
                 ExtensionApi().checkForUpdates(context)
@@ -412,7 +397,6 @@ class MainActivity : BaseActivity() {
                 // If the intent match the "standard" Android search intent
                 // or the Google-specific search intent (triggered by saying or typing "search *query* on *Tachiyomi*" in Google Search/Google Assistant)
 
-                // Get the search query provided in extras, and if not null, perform a global search with it.
                 val query = intent.getStringExtra(SearchManager.QUERY) ?: intent.getStringExtra(Intent.EXTRA_TEXT)
                 if (!query.isNullOrEmpty()) {
                     navigator.popUntilRoot()
@@ -432,12 +416,10 @@ class MainActivity : BaseActivity() {
             }
 
             Intent.ACTION_VIEW -> {
-                // Handling opening of backup files
                 if (intent.data.toString().endsWith(".tachibk")) {
                     navigator.popUntilRoot()
                     navigator.push(RestoreBackupScreen(intent.data.toString()))
                 }
-                // Deep link to add extension repo
                 else if (intent.scheme == "tachiyomi" && intent.data?.host == "add-repo") {
                     intent.data?.getQueryParameter("url")?.let { repoUrl ->
                         navigator.popUntilRoot()
@@ -465,7 +447,6 @@ class MainActivity : BaseActivity() {
     }
 }
 
-// Splash screen
 private const val SPLASH_MIN_DURATION = 500 // ms
 private const val SPLASH_MAX_DURATION = 5000 // ms
 private const val SPLASH_EXIT_ANIM_DURATION = 400L // ms
