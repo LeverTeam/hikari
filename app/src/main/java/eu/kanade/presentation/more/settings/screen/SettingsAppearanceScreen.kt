@@ -131,7 +131,6 @@ object SettingsAppearanceScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -182,9 +181,11 @@ object SettingsAppearanceScreen : SearchableSettings {
                                     entries = DateFormats
                                         .associateWith {
                                             val formattedDate = UiPreferences.dateFormat(it).format(now)
-                                            "${it.ifEmpty {
-                                                stringResource(MR.strings.label_default)
-                                            }} ($formattedDate)"
+                                            "${
+                                                it.ifEmpty {
+                                                    stringResource(MR.strings.label_default)
+                                                }
+                                            } ($formattedDate)"
                                         }
                                         .toImmutableMap(),
                                     title = stringResource(MR.strings.pref_date_format),

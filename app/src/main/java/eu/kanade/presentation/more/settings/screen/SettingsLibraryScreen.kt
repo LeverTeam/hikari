@@ -101,7 +101,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -193,8 +192,17 @@ object SettingsLibraryScreen : SearchableSettings {
                                     title = stringResource(MR.strings.pref_library_update_schedule),
                                     subtitle = when {
                                         autoUpdateSchedule == 0 -> stringResource(MR.strings.update_schedule_none)
-                                        autoUpdateSchedule % 24 == 0 -> pluralStringResource(MR.plurals.num_days, count = autoUpdateSchedule / 24, autoUpdateSchedule / 24)
-                                        else -> pluralStringResource(MR.plurals.num_hours, count = autoUpdateSchedule, autoUpdateSchedule)
+                                        autoUpdateSchedule % 24 == 0 -> pluralStringResource(
+                                            MR.plurals.num_days,
+                                            count = autoUpdateSchedule / 24,
+                                            autoUpdateSchedule / 24,
+                                        )
+
+                                        else -> pluralStringResource(
+                                            MR.plurals.num_hours,
+                                            count = autoUpdateSchedule,
+                                            autoUpdateSchedule,
+                                        )
                                     },
                                     onValueChanged = {
                                         ContextCompat.getMainExecutor(context)

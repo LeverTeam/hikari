@@ -5,15 +5,17 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.material3.ElevatedCard
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import dev.icerock.moko.resources.StringResource
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
-import tachiyomi.presentation.core.util.secondaryItemAlpha
 
 @Composable
 fun SectionCard(
@@ -30,16 +32,20 @@ fun SectionCard(
             )
         }
 
-        ElevatedCard(
+        Card(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
                     horizontal = MaterialTheme.padding.medium,
                     vertical = MaterialTheme.padding.small,
                 ),
-            shape = MaterialTheme.shapes.extraLarge,
+            shape = RoundedCornerShape(24.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+            ),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         ) {
-            Column(modifier = Modifier.padding(MaterialTheme.padding.medium)) {
+            Column(modifier = Modifier.padding(MaterialTheme.padding.large)) {
                 content()
             }
         }

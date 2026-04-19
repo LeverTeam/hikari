@@ -99,9 +99,11 @@ data class MigrateSourceSearchScreen(
                     navigator.popUntil { screen -> screen is MigrationListScreen }
                 }
             }
+            val favoriteIds by screenModel.favoriteIds.collectAsState()
             BrowseSourceContent(
                 source = screenModel.source,
                 mangaList = screenModel.mangaPagerFlowFlow.collectAsLazyPagingItems(),
+                favoriteIds = favoriteIds,
                 columns = screenModel.getColumnsPreference(LocalConfiguration.current.orientation),
                 displayMode = screenModel.displayMode,
                 snackbarHostState = snackbarHostState,
@@ -134,6 +136,7 @@ data class MigrateSourceSearchScreen(
                     onUpdate = screenModel::setFilters,
                 )
             }
+
             is BrowseSourceScreenModel.Dialog.Migrate -> {
                 MigrateMangaDialog(
                     current = currentManga,
@@ -150,6 +153,7 @@ data class MigrateSourceSearchScreen(
                     },
                 )
             }
+
             else -> {}
         }
     }

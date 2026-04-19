@@ -284,7 +284,6 @@ object SettingsDataScreen : SearchableSettings {
                                 }
                             }
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -293,8 +292,17 @@ object SettingsDataScreen : SearchableSettings {
                                     title = stringResource(MR.strings.pref_backup_interval),
                                     subtitle = when {
                                         backupSchedule == 0 -> stringResource(MR.strings.update_schedule_none)
-                                        backupSchedule % 24 == 0 -> pluralStringResource(MR.plurals.num_days, count = backupSchedule / 24, backupSchedule / 24)
-                                        else -> pluralStringResource(MR.plurals.num_hours, count = backupSchedule, backupSchedule)
+                                        backupSchedule % 24 == 0 -> pluralStringResource(
+                                            MR.plurals.num_days,
+                                            count = backupSchedule / 24,
+                                            backupSchedule / 24,
+                                        )
+
+                                        else -> pluralStringResource(
+                                            MR.plurals.num_hours,
+                                            count = backupSchedule,
+                                            backupSchedule,
+                                        )
                                     },
                                     onValueChanged = {
                                         BackupCreateJob.setupTask(context)
@@ -338,8 +346,6 @@ object SettingsDataScreen : SearchableSettings {
                             StorageInfo(
                                 modifier = Modifier.padding(top = MaterialTheme.padding.small),
                             )
-
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
