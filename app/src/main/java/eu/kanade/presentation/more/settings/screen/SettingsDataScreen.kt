@@ -17,7 +17,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -374,7 +373,6 @@ object SettingsDataScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(

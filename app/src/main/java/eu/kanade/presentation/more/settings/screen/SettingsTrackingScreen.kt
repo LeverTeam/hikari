@@ -15,7 +15,6 @@ import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -154,7 +153,6 @@ object SettingsTrackingScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -214,8 +212,7 @@ object SettingsTrackingScreen : SearchableSettings {
                                     highlightKey = null,
                                 )
                                 if (index < trackers.size - 1) {
-                                    HorizontalDivider()
-                                }
+                                        }
                             }
                         }
                     }
@@ -248,8 +245,7 @@ object SettingsTrackingScreen : SearchableSettings {
                                     highlightKey = null,
                                 )
                                 if (index < enhancedTrackers.size - 1) {
-                                    HorizontalDivider()
-                                }
+                                        }
                             }
                         }
                     }

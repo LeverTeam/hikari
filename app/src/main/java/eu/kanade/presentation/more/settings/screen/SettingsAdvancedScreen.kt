@@ -10,7 +10,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -129,7 +128,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -140,7 +138,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -153,7 +150,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -215,7 +211,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -230,7 +225,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -240,7 +234,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -249,8 +242,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -292,8 +283,7 @@ object SettingsAdvancedScreen : SearchableSettings {
                                         val packageName: String = context.packageName
                                         if (!context.powerManager.isIgnoringBatteryOptimizations(packageName)) {
                                             try {
-                                                @SuppressLint("BatteryLife")
-                                                val intent = Intent().apply {
+                                                @SuppressLint("BatteryLife") val intent = Intent().apply {
                                                     action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
                                                     data = "package:$packageName".toUri()
                                                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -312,7 +302,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -377,7 +366,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.EditTextPreference(
@@ -398,7 +386,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -441,7 +428,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -464,7 +450,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -475,7 +460,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -517,20 +501,17 @@ object SettingsAdvancedScreen : SearchableSettings {
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = basePreferences.hardwareBitmapThreshold,
-                                    entries = GLUtil.CUSTOM_TEXTURE_LIMIT_OPTIONS
-                                        .mapIndexed { index, option ->
-                                            val display = if (index == 0) {
-                                                stringResource(
-                                                    MR.strings.pref_hardware_bitmap_threshold_default,
-                                                    option,
-                                                )
-                                            } else {
-                                                option.toString()
-                                            }
-                                            option to display
+                                    entries = GLUtil.CUSTOM_TEXTURE_LIMIT_OPTIONS.mapIndexed { index, option ->
+                                        val display = if (index == 0) {
+                                            stringResource(
+                                                MR.strings.pref_hardware_bitmap_threshold_default,
+                                                option,
+                                            )
+                                        } else {
+                                            option.toString()
                                         }
-                                        .toMap()
-                                        .toImmutableMap(),
+                                        option to display
+                                    }.toMap().toImmutableMap(),
                                     title = stringResource(MR.strings.pref_hardware_bitmap_threshold),
                                     subtitleProvider = { value, options ->
                                         stringResource(
@@ -538,13 +519,11 @@ object SettingsAdvancedScreen : SearchableSettings {
                                             options[value].orEmpty(),
                                         )
                                     },
-                                    enabled = !ImageUtil.HARDWARE_BITMAP_UNSUPPORTED &&
-                                        GLUtil.DEVICE_TEXTURE_LIMIT > GLUtil.SAFE_TEXTURE_LIMIT,
+                                    enabled = !ImageUtil.HARDWARE_BITMAP_UNSUPPORTED && GLUtil.DEVICE_TEXTURE_LIMIT > GLUtil.SAFE_TEXTURE_LIMIT,
                                 ),
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -557,7 +536,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -620,22 +598,17 @@ object SettingsAdvancedScreen : SearchableSettings {
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = extensionInstallerPref,
-                                    entries = extensionInstallerPref.entries
-                                        .filter {
-                                            // TODO: allow private option in stable versions once URL handling is more fleshed out
-                                            if (isReleaseBuildType) {
-                                                it != BasePreferences.ExtensionInstaller.PRIVATE
-                                            } else {
-                                                true
-                                            }
+                                    entries = extensionInstallerPref.entries.filter {
+                                        // TODO: allow private option in stable versions once URL handling is more fleshed out
+                                        if (isReleaseBuildType) {
+                                            it != BasePreferences.ExtensionInstaller.PRIVATE
+                                        } else {
+                                            true
                                         }
-                                        .associateWith { stringResource(it.titleRes) }
-                                        .toImmutableMap(),
+                                    }.associateWith { stringResource(it.titleRes) }.toImmutableMap(),
                                     title = stringResource(MR.strings.ext_installer_pref),
                                     onValueChanged = {
-                                        if (it == BasePreferences.ExtensionInstaller.SHIZUKU &&
-                                            !context.isShizukuInstalled
-                                        ) {
+                                        if (it == BasePreferences.ExtensionInstaller.SHIZUKU && !context.isShizukuInstalled) {
                                             shizukuMissing = true
                                             false
                                         } else {
@@ -646,7 +619,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(

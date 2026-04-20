@@ -19,7 +19,6 @@ import androidx.compose.foundation.text.input.clearText
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -136,7 +135,6 @@ class SettingsSearchScreen : Screen() {
                             }
                         },
                     )
-                    HorizontalDivider()
                 }
             },
         ) { contentPadding ->

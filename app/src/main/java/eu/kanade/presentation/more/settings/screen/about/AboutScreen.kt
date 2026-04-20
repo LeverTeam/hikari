@@ -3,16 +3,21 @@ package eu.kanade.presentation.more.settings.screen.about
 import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Gavel
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Policy
 import androidx.compose.material.icons.outlined.Public
+import androidx.compose.material.icons.outlined.SystemUpdate
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
+import tachiyomi.presentation.core.components.CommunityTile
 import tachiyomi.presentation.core.components.HikariSnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,7 +34,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.domain.ui.UiPreferences
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.more.LogoHeader
-import eu.kanade.presentation.more.settings.widget.TextPreferenceWidget
 import eu.kanade.presentation.util.LocalBackPress
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.BuildConfig
@@ -37,7 +41,6 @@ import eu.kanade.tachiyomi.data.updater.AppUpdateChecker
 import eu.kanade.tachiyomi.data.updater.RELEASE_URL
 import eu.kanade.tachiyomi.ui.more.NewUpdateScreen
 import eu.kanade.tachiyomi.util.lang.toDateTimestampString
-import eu.kanade.tachiyomi.util.system.updaterEnabled
 import kotlinx.coroutines.launch
 import logcat.LogPriority
 import tachiyomi.core.common.i18n.stringResource
@@ -46,7 +49,6 @@ import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.release.interactor.GetApplicationRelease
 import tachiyomi.i18n.MR
-import tachiyomi.presentation.core.components.LinkIcon
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.components.material.Scaffold
@@ -96,117 +98,165 @@ object AboutScreen : Screen() {
                 }
 
                 item {
-                    SectionCard(titleRes = MR.strings.pref_category_about) {
-                        TextPreferenceWidget(
-                            title = stringResource(MR.strings.check_for_updates),
-                            widget = {
-                                AnimatedVisibility(visible = isCheckingUpdates) {
-                                    CircularProgressIndicator(
-                                        modifier = Modifier.size(28.dp),
-                                        strokeWidth = 3.dp,
+                    SectionCard(
+                        titleRes = MR.strings.pref_category_about,
+                        highEmphasis = true,
+                        showAccent = false,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = MaterialTheme.padding.medium)
+                                .padding(vertical = MaterialTheme.padding.small),
+                            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                            ) {
+                                CommunityTile(
+                                    label = stringResource(MR.strings.check_for_updates),
+                                    icon = Icons.Outlined.SystemUpdate,
+                                    horizontal = true,
+                                    modifier = Modifier.weight(1f),
+                                    trailingWidget = {
+                                        AnimatedVisibility(visible = isCheckingUpdates) {
+                                            CircularProgressIndicator(
+                                                modifier = Modifier.size(18.dp),
+                                                strokeWidth = 2.dp,
+                                            )
+                                        }
+                                    },
+                                    onClick = {
+                                        if (!isCheckingUpdates) {
+                                            scope.launch {
+                                                isCheckingUpdates = true
+                                                checkVersion(
+                                                    context = context,
+                                                    onAvailableUpdate = { result ->
+                                                        val updateScreen = NewUpdateScreen(
+                                                            versionName = result.release.version,
+                                                            changelogInfo = result.release.info,
+                                                            releaseLink = result.release.releaseLink,
+                                                            downloadLink = result.release.downloadLink,
+                                                        )
+                                                        navigator.push(updateScreen)
+                                                    },
+                                                    onFinish = { isCheckingUpdates = false },
+                                                    onError = { message ->
+                                                        scope.launch { snackbarHostState.showSnackbar(message) }
+                                                    },
+                                                    onNoUpdate = {
+                                                        scope.launch {
+                                                            snackbarHostState.showSnackbar(
+                                                                context.stringResource(MR.strings.update_check_no_new_updates),
+                                                            )
+                                                        }
+                                                    },
+                                                )
+                                            }
+                                        }
+                                    },
+                                )
+                                CommunityTile(
+                                    label = stringResource(MR.strings.licenses),
+                                    icon = Icons.Outlined.Gavel,
+                                    horizontal = true,
+                                    modifier = Modifier.weight(1f),
+                                    onClick = { navigator.push(OpenSourceLicensesScreen()) },
+                                )
+                            }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                            ) {
+                                if (!BuildConfig.DEBUG) {
+                                    CommunityTile(
+                                        label = stringResource(MR.strings.whats_new),
+                                        icon = Icons.Outlined.Info,
+                                        horizontal = true,
+                                        modifier = Modifier.weight(1f),
+                                        url = RELEASE_URL,
                                     )
                                 }
-                            },
-                            onPreferenceClick = {
-                                if (!isCheckingUpdates) {
-                                    scope.launch {
-                                        isCheckingUpdates = true
-
-                                        checkVersion(
-                                            context = context,
-                                            onAvailableUpdate = { result ->
-                                                val updateScreen = NewUpdateScreen(
-                                                    versionName = result.release.version,
-                                                    changelogInfo = result.release.info,
-                                                    releaseLink = result.release.releaseLink,
-                                                    downloadLink = result.release.downloadLink,
-                                                )
-                                                navigator.push(updateScreen)
-                                            },
-                                            onFinish = {
-                                                isCheckingUpdates = false
-                                            },
-                                            onError = { message ->
-                                                scope.launch {
-                                                    snackbarHostState.showSnackbar(message)
-                                                }
-                                            },
-                                            onNoUpdate = {
-                                                scope.launch {
-                                                    snackbarHostState.showSnackbar(
-                                                        context.stringResource(MR.strings.update_check_no_new_updates),
-                                                    )
-                                                }
-                                            },
-                                        )
-                                    }
-                                }
-                            },
-                        )
-
-                        HorizontalDivider()
-
-                        if (!BuildConfig.DEBUG) {
-                            TextPreferenceWidget(
-                                title = stringResource(MR.strings.whats_new),
-                                onPreferenceClick = { uriHandler.openUri(RELEASE_URL) },
-                            )
-
-                            HorizontalDivider()
+                                CommunityTile(
+                                    label = stringResource(MR.strings.privacy_policy),
+                                    icon = Icons.Outlined.Policy,
+                                    horizontal = true,
+                                    modifier = Modifier.weight(1f),
+                                    url = "https://mihon.app/privacy/",
+                                )
+                            }
                         }
-
-                        TextPreferenceWidget(
-                            title = stringResource(MR.strings.licenses),
-                            onPreferenceClick = { navigator.push(OpenSourceLicensesScreen()) },
-                        )
-
-                        HorizontalDivider()
-
-                        TextPreferenceWidget(
-                            title = stringResource(MR.strings.privacy_policy),
-                            onPreferenceClick = { uriHandler.openUri("https://mihon.app/privacy/") },
-                        )
                     }
                 }
 
                 item {
-                    SectionCard(titleRes = MR.strings.label_more) {
-                        Row(
+                    SectionCard(
+                        titleRes = MR.strings.label_more,
+                        highEmphasis = true,
+                        showAccent = false,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    ) {
+                        Column(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .padding(horizontal = MaterialTheme.padding.medium)
                                 .padding(vertical = MaterialTheme.padding.small),
-                            horizontalArrangement = Arrangement.SpaceEvenly,
+                            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
                         ) {
-                            LinkIcon(
-                                label = stringResource(MR.strings.website),
-                                icon = Icons.Outlined.Public,
-                                url = "https://mihon.app",
-                            )
-                            LinkIcon(
-                                label = "Discord",
-                                icon = CustomIcons.Discord,
-                                url = "https://discord.gg/mihon",
-                            )
-                            LinkIcon(
-                                label = "X",
-                                icon = CustomIcons.X,
-                                url = "https://x.com/mihonapp",
-                            )
-                            LinkIcon(
-                                label = "Facebook",
-                                icon = CustomIcons.Facebook,
-                                url = "https://facebook.com/mihonapp",
-                            )
-                            LinkIcon(
-                                label = "Reddit",
-                                icon = CustomIcons.Reddit,
-                                url = "https://www.reddit.com/r/mihonapp",
-                            )
-                            LinkIcon(
-                                label = "GitHub",
-                                icon = CustomIcons.Github,
-                                url = "https://github.com/mihonapp",
-                            )
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                            ) {
+                                CommunityTile(
+                                    label = stringResource(MR.strings.website),
+                                    icon = Icons.Outlined.Public,
+                                    url = "https://mihon.app",
+                                    modifier = Modifier.weight(1f),
+                                )
+                                CommunityTile(
+                                    label = "Discord",
+                                    icon = CustomIcons.Discord,
+                                    url = "https://discord.gg/mihon",
+                                    modifier = Modifier.weight(1f),
+                                )
+                            }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                            ) {
+                                CommunityTile(
+                                    label = "X",
+                                    icon = CustomIcons.X,
+                                    url = "https://x.com/mihonapp",
+                                    modifier = Modifier.weight(1f),
+                                )
+                                CommunityTile(
+                                    label = "Facebook",
+                                    icon = CustomIcons.Facebook,
+                                    url = "https://facebook.com/mihonapp",
+                                    modifier = Modifier.weight(1f),
+                                )
+                            }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                            ) {
+                                CommunityTile(
+                                    label = "Reddit",
+                                    icon = CustomIcons.Reddit,
+                                    url = "https://www.reddit.com/r/mihonapp",
+                                    modifier = Modifier.weight(1f),
+                                )
+                                CommunityTile(
+                                    label = "GitHub",
+                                    icon = CustomIcons.Github,
+                                    url = "https://github.com/mihonapp",
+                                    modifier = Modifier.weight(1f),
+                                )
+                            }
                         }
                     }
                 }

@@ -1,7 +1,6 @@
 package eu.kanade.presentation.more.settings.screen
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
@@ -67,7 +66,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -82,7 +80,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -93,7 +90,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -104,7 +100,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -143,7 +138,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -159,7 +153,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -169,7 +162,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -180,7 +172,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -190,7 +181,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -235,7 +225,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SliderPreference(
@@ -249,7 +238,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SliderPreference(
@@ -267,7 +255,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -310,7 +297,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -320,7 +306,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -330,7 +315,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -378,7 +362,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -397,7 +380,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -411,7 +393,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -425,7 +406,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -435,7 +415,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -445,7 +424,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -456,7 +434,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -467,7 +444,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -481,7 +457,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -493,7 +468,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -507,7 +481,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -558,7 +531,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -577,7 +549,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SliderPreference(
@@ -592,7 +563,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -613,7 +583,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -623,7 +592,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -637,7 +605,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -649,7 +616,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -663,7 +629,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -674,7 +639,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -684,7 +648,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -720,7 +683,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -731,7 +693,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -741,7 +702,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(

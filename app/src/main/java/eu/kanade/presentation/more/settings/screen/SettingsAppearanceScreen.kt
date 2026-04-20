@@ -2,7 +2,6 @@ package eu.kanade.presentation.more.settings.screen
 
 import android.app.Activity
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
@@ -135,8 +134,7 @@ object SettingsAppearanceScreen : SearchableSettings {
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = uiPreferences.tabletUiMode,
-                                    entries = TabletUiMode.entries
-                                        .associateWith { stringResource(it.titleRes) }
+                                    entries = TabletUiMode.entries.associateWith { stringResource(it.titleRes) }
                                         .toImmutableMap(),
                                     title = stringResource(MR.strings.pref_tablet_ui_mode),
                                     onValueChanged = {
@@ -178,22 +176,19 @@ object SettingsAppearanceScreen : SearchableSettings {
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = uiPreferences.dateFormat,
-                                    entries = DateFormats
-                                        .associateWith {
+                                    entries = DateFormats.associateWith {
                                             val formattedDate = UiPreferences.dateFormat(it).format(now)
                                             "${
                                                 it.ifEmpty {
                                                     stringResource(MR.strings.label_default)
                                                 }
                                             } ($formattedDate)"
-                                        }
-                                        .toImmutableMap(),
+                                        }.toImmutableMap(),
                                     title = stringResource(MR.strings.pref_date_format),
                                 ),
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -208,7 +203,6 @@ object SettingsAppearanceScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(

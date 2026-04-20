@@ -1,7 +1,6 @@
 package eu.kanade.presentation.more.settings.screen
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.collectAsState
@@ -76,7 +75,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -86,7 +84,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -127,7 +124,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SliderPreference(
@@ -167,7 +163,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -185,7 +180,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -195,7 +189,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = getExcludedCategoriesPreference(
@@ -273,7 +266,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -284,7 +276,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-                            HorizontalDivider()
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
