@@ -1,13 +1,21 @@
 # Changelog
 
-## [Unreleased] - 2026-04-19
+## [Unreleased] - 2026-04-22
 
 ### Added
 
 - ID-based cross-source deduplication for grouping manga across extensions
+- Unified dark header system for bottom sheets in the presentation layer
+- Jelly indicator and dynamic typography for modernized tab navigation
+- DataModule and ScreenModelModule for structured Koin dependency injection
 
 ### Changed
 
+- Migrated the entire codebase from Injekt to Koin for dependency injection
+- Redesigned the settings UI and About screen with a Minimalist Edge aesthetic
+- Updated settings cards with tonal depth and refined visual hierarchy
+- Modularized presentation utilities and common logic into cohesive packages
+- Modernized background jobs and UI components for improved browse performance
 - Simplified UI by removing AGSL shader-based skins and dynamic color extraction
 - Restored standard Material 3 components for pull-to-refresh and reader navigation
 - Migrated default extension repository to LeverTeam/hikari-extensions
@@ -20,6 +28,8 @@
 
 ### Removed
 
+- Deleted legacy AppModule and unused DummyTracker classes
+- Removed Injekt dependency and associated boilerplate from all modules
 - Deleted AGSL shader implementations for Glass, Liquid, and Frosted materials
 - Removed dynamic skin color extraction from manga covers
 - Disabled the update-checking snackbar on launch and limited automatic check frequency to 12 hours
