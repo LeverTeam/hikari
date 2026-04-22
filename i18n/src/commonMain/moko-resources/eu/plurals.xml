@@ -14,7 +14,8 @@
     </plurals>
     <plurals name="missing_chapters_warning">
         <item quantity="one">Kapitulu bat saltatzen, iturria falta da edo iragazia izan da</item>
-        <item quantity="other">%d kapitulu saltatzen, iturria falta da edo iragaziak izan dira</item>
+        <item quantity="other">%d kapitulu saltatzen, iturria falta da edo iragaziak izan dira
+        </item>
     </plurals>
     <plurals name="notification_new_chapters_summary">
         <item quantity="one">Titulu baterako</item>

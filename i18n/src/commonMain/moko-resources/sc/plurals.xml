@@ -41,8 +41,12 @@
         <item quantity="other">%d arrastadores</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">Brinchende %d capìtulu, sa fonte non lu tenet o est istadu bogadu cun unu filtru</item>
-        <item quantity="other">Brinchende %d capìtulos, sa fonte non los tenet o sunt istados bogados cun unu filtru</item>
+        <item quantity="one">Brinchende %d capìtulu, sa fonte non lu tenet o est istadu bogadu cun
+            unu filtru
+        </item>
+        <item quantity="other">Brinchende %d capìtulos, sa fonte non los tenet o sunt istados
+            bogados cun unu filtru
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="one">Eris</item>

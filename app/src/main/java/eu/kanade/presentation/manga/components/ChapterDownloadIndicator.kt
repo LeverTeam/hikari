@@ -33,7 +33,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.components.DropdownMenu
 import eu.kanade.tachiyomi.R
-import eu.kanade.tachiyomi.data.download.model.Download
+import tachiyomi.domain.download.model.DownloadState
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.IconButtonTokens
 import tachiyomi.presentation.core.i18n.stringResource
@@ -49,30 +49,33 @@ enum class ChapterDownloadAction {
 @Composable
 fun ChapterDownloadIndicator(
     enabled: Boolean,
-    downloadStateProvider: () -> Download.State,
+    downloadStateProvider: () -> DownloadState,
     downloadProgressProvider: () -> Int,
     onClick: (ChapterDownloadAction) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     when (val downloadState = downloadStateProvider()) {
-        Download.State.NOT_DOWNLOADED -> NotDownloadedIndicator(
+        DownloadState.NOT_DOWNLOADED -> NotDownloadedIndicator(
             enabled = enabled,
             modifier = modifier,
             onClick = onClick,
         )
-        Download.State.QUEUE, Download.State.DOWNLOADING -> DownloadingIndicator(
+
+        DownloadState.QUEUE, DownloadState.DOWNLOADING -> DownloadingIndicator(
             enabled = enabled,
             modifier = modifier,
             downloadState = downloadState,
             downloadProgressProvider = downloadProgressProvider,
             onClick = onClick,
         )
-        Download.State.DOWNLOADED -> DownloadedIndicator(
+
+        DownloadState.DOWNLOADED -> DownloadedIndicator(
             enabled = enabled,
             modifier = modifier,
             onClick = onClick,
         )
-        Download.State.ERROR -> ErrorIndicator(
+
+        DownloadState.ERROR -> ErrorIndicator(
             enabled = enabled,
             modifier = modifier,
             onClick = onClick,
@@ -110,7 +113,7 @@ private fun NotDownloadedIndicator(
 @Composable
 private fun DownloadingIndicator(
     enabled: Boolean,
-    downloadState: Download.State,
+    downloadState: DownloadState,
     downloadProgressProvider: () -> Int,
     onClick: (ChapterDownloadAction) -> Unit,
     modifier: Modifier = Modifier,
@@ -130,8 +133,8 @@ private fun DownloadingIndicator(
         val arrowColor: Color
         val strokeColor = MaterialTheme.colorScheme.onSurfaceVariant
         val downloadProgress = downloadProgressProvider()
-        val indeterminate = downloadState == Download.State.QUEUE ||
-            (downloadState == Download.State.DOWNLOADING && downloadProgress == 0)
+        val indeterminate = downloadState == DownloadState.QUEUE ||
+            (downloadState == DownloadState.DOWNLOADING && downloadProgress == 0)
         if (indeterminate) {
             arrowColor = strokeColor
             CircularProgressIndicator(

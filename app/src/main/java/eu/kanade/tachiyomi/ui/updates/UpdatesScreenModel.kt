@@ -10,14 +10,11 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import eu.kanade.core.preference.asState
 import eu.kanade.core.util.addOrRemove
 import eu.kanade.core.util.insertSeparators
-import eu.kanade.domain.chapter.interactor.SetReadStatus
 import eu.kanade.presentation.manga.components.ChapterDownloadAction
 import eu.kanade.presentation.updates.UpdatesUiModel
 import eu.kanade.tachiyomi.data.download.DownloadCache
 import eu.kanade.tachiyomi.data.download.DownloadManager
-import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.data.library.LibraryUpdateJob
-import eu.kanade.tachiyomi.util.lang.toLocalDate
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.mutate
 import kotlinx.collections.immutable.persistentListOf
@@ -40,10 +37,13 @@ import logcat.LogPriority
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.launchNonCancellable
+import tachiyomi.core.common.util.lang.toLocalDate
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.chapter.interactor.GetChapter
+import tachiyomi.domain.chapter.interactor.SetReadStatus
 import tachiyomi.domain.chapter.interactor.UpdateChapter
 import tachiyomi.domain.chapter.model.ChapterUpdate
+import tachiyomi.domain.download.model.DownloadState
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.manga.interactor.GetManga
 import tachiyomi.domain.manga.model.applyFilter
@@ -54,6 +54,7 @@ import tachiyomi.domain.updates.service.UpdatesPreferences
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.time.ZonedDateTime
+import tachiyomi.domain.download.model.Download as DomainDownload
 
 class UpdatesScreenModel(
     private val sourceManager: SourceManager = Injekt.get(),
@@ -121,7 +122,7 @@ class UpdatesScreenModel(
         screenModelScope.launchIO {
             merge(downloadManager.statusFlow(), downloadManager.progressFlow())
                 .catch { logcat(LogPriority.ERROR, it) }
-                .collect(this@UpdatesScreenModel::updateDownloadState)
+                .collect { updateDownloadState(it) }
         }
 
         getUpdatesItemPreferenceFlow()
@@ -156,7 +157,7 @@ class UpdatesScreenModel(
 
         val filterFnDownloaded: (UpdatesItem) -> Boolean = {
             applyFilter(filterDownloaded) {
-                it.downloadStateProvider() == Download.State.DOWNLOADED
+                it.downloadStateProvider() == DownloadState.DOWNLOADED
             }
         }
 
@@ -178,8 +179,8 @@ class UpdatesScreenModel(
                 )
                 val downloadState = when {
                     activeDownload != null -> activeDownload.status
-                    downloaded -> Download.State.DOWNLOADED
-                    else -> Download.State.NOT_DOWNLOADED
+                    downloaded -> DownloadState.DOWNLOADED
+                    else -> DownloadState.NOT_DOWNLOADED
                 }
                 UpdatesItem(
                     update = update,
@@ -203,10 +204,10 @@ class UpdatesScreenModel(
      *
      * @param download download object containing progress.
      */
-    private fun updateDownloadState(download: Download) {
+    private fun updateDownloadState(download: DomainDownload) {
         mutableState.update { state ->
             val newItems = state.items.mutate { list ->
-                val modifiedIndex = list.indexOfFirst { it.update.chapterId == download.chapter.id }
+                val modifiedIndex = list.indexOfFirst { it.update.chapterId == download.chapterId }
                 if (modifiedIndex < 0) return@mutate
 
                 val item = list[modifiedIndex]
@@ -225,7 +226,7 @@ class UpdatesScreenModel(
             when (action) {
                 ChapterDownloadAction.START -> {
                     downloadChapters(items)
-                    if (items.any { it.downloadStateProvider() == Download.State.ERROR }) {
+                    if (items.any { it.downloadStateProvider() == DownloadState.ERROR }) {
                         downloadManager.startDownloads()
                     }
                 }
@@ -254,8 +255,8 @@ class UpdatesScreenModel(
 
     private fun cancelDownload(chapterId: Long) {
         val activeDownload = downloadManager.getQueuedDownloadOrNull(chapterId) ?: return
-        downloadManager.cancelQueuedDownloads(listOf(activeDownload))
-        updateDownloadState(activeDownload.apply { status = Download.State.NOT_DOWNLOADED })
+        downloadManager.cancelQueuedDownloads(listOf(chapterId))
+        updateDownloadState(activeDownload.copy(status = DownloadState.NOT_DOWNLOADED))
     }
 
     /**
@@ -509,7 +510,7 @@ private fun TriState.toBooleanOrNull(): Boolean? {
 @Immutable
 data class UpdatesItem(
     val update: UpdatesWithRelations,
-    val downloadStateProvider: () -> Download.State,
+    val downloadStateProvider: () -> DownloadState,
     val downloadProgressProvider: () -> Int,
     val selected: Boolean = false,
 )

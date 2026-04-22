@@ -30,13 +30,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.util.fastForEach
 import eu.kanade.core.util.fastFilterNot
-import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.presentation.components.AdaptiveSheet
-import hikari.domain.migration.models.MigrationFlag
 import hikari.feature.common.utils.getLabel
 import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.getAndSet
 import tachiyomi.core.common.preference.toggle
+import tachiyomi.domain.source.model.MigrationFlag
+import tachiyomi.domain.source.service.SourcePreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.Button
 import tachiyomi.presentation.core.components.material.Switch

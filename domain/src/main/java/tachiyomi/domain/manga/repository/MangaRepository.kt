@@ -40,6 +40,10 @@ interface MangaRepository {
 
     suspend fun setMangaCategories(mangaId: Long, categoryIds: List<Long>)
 
+    suspend fun getExcludedScanlators(mangaId: Long): Set<String>
+    fun getExcludedScanlatorsAsFlow(mangaId: Long): Flow<Set<String>>
+    suspend fun setExcludedScanlators(mangaId: Long, scanlators: Set<String>)
+
     suspend fun update(update: MangaUpdate): Boolean
 
     suspend fun updateAll(mangaUpdates: List<MangaUpdate>): Boolean

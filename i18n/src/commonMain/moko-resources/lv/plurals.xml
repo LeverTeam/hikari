@@ -36,9 +36,13 @@
         <item quantity="other">Priekš %d ierakstiem</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="zero">Izlaisti %d nodaļu, vai nu to nav avotā, vai arī tie ir izfiltrēti</item>
-        <item quantity="one">Izlaists %d nodaļa, vai nu tā nav avotā, vai arī tā ir izfiltrēta</item>
-        <item quantity="other">Izlaistas %d nodaļas, vai nu tās nav avotā, vai arī tās ir izfiltrētas</item>
+        <item quantity="zero">Izlaisti %d nodaļu, vai nu to nav avotā, vai arī tie ir izfiltrēti
+        </item>
+        <item quantity="one">Izlaists %d nodaļa, vai nu tā nav avotā, vai arī tā ir izfiltrēta
+        </item>
+        <item quantity="other">Izlaistas %d nodaļas, vai nu tās nav avotā, vai arī tās ir
+            izfiltrētas
+        </item>
     </plurals>
     <plurals name="notification_chapters_generic">
         <item quantity="zero">%1$d jaunu nodaļu</item>

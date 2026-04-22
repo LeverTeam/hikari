@@ -14,11 +14,12 @@ import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.time.Instant
 import java.time.ZonedDateTime
+import tachiyomi.domain.manga.interactor.UpdateManga as DomainUpdateManga
 
 class UpdateManga(
     private val mangaRepository: MangaRepository,
     private val fetchInterval: FetchInterval,
-) {
+) : DomainUpdateManga {
 
     suspend fun await(mangaUpdate: MangaUpdate): Boolean {
         return mangaRepository.update(mangaUpdate)
@@ -60,6 +61,7 @@ class UpdateManga(
                     coverCache.deleteFromCache(localManga, false)
                     null
                 }
+
                 else -> {
                     coverCache.deleteFromCache(localManga, false)
                     Instant.now().toEpochMilli()
@@ -89,17 +91,17 @@ class UpdateManga(
         return success
     }
 
-    suspend fun awaitUpdateFetchInterval(
+    override suspend fun awaitUpdateFetchInterval(
         manga: Manga,
-        dateTime: ZonedDateTime = ZonedDateTime.now(),
-        window: Pair<Long, Long> = fetchInterval.getWindow(dateTime),
+        dateTime: ZonedDateTime,
+        window: Pair<Long, Long>,
     ): Boolean {
         return mangaRepository.update(
             fetchInterval.toMangaUpdate(manga, dateTime, window),
         )
     }
 
-    suspend fun awaitUpdateLastUpdate(mangaId: Long): Boolean {
+    override suspend fun awaitUpdateLastUpdate(mangaId: Long): Boolean {
         return mangaRepository.update(MangaUpdate(id = mangaId, lastUpdate = Instant.now().toEpochMilli()))
     }
 

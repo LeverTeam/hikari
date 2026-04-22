@@ -3,6 +3,8 @@ package tachiyomi.domain.manga.model
 import androidx.compose.runtime.Immutable
 import eu.kanade.tachiyomi.source.model.UpdateStrategy
 import tachiyomi.core.common.preference.TriState
+import tachiyomi.domain.reader.model.ReaderOrientation
+import tachiyomi.domain.reader.model.ReadingMode
 import java.io.Serializable
 
 @Immutable
@@ -48,6 +50,12 @@ data class Manga(
 
     val bookmarkedFilterRaw: Long
         get() = chapterFlags and CHAPTER_BOOKMARKED_MASK
+
+    val readingMode: Long
+        get() = viewerFlags and ReadingMode.MASK.toLong()
+
+    val readerOrientation: Long
+        get() = viewerFlags and ReaderOrientation.MASK.toLong()
 
     val unreadFilter: TriState
         get() = when (unreadFilterRaw) {
@@ -125,4 +133,38 @@ data class Manga(
             hidden = false,
         )
     }
+}
+
+fun Manga.toSManga(): eu.kanade.tachiyomi.source.model.SManga = eu.kanade.tachiyomi.source.model.SManga.create().also {
+    it.url = url
+    it.title = title
+    it.artist = artist
+    it.author = author
+    it.description = description
+    it.genre = genre.orEmpty().joinToString()
+    it.status = status.toInt()
+    it.thumbnail_url = thumbnailUrl
+    it.initialized = initialized
+}
+
+fun Manga.copyFrom(other: eu.kanade.tachiyomi.source.model.SManga): Manga {
+    val author = other.author ?: author
+    val artist = other.artist ?: artist
+    val description = other.description ?: description
+    val genres = if (other.genre != null) {
+        other.getGenres()
+    } else {
+        genre
+    }
+    val thumbnailUrl = other.thumbnail_url ?: thumbnailUrl
+    return this.copy(
+        author = author,
+        artist = artist,
+        description = description,
+        genre = genres,
+        thumbnailUrl = thumbnailUrl,
+        status = other.status.toLong(),
+        updateStrategy = other.update_strategy,
+        initialized = other.initialized && initialized,
+    )
 }

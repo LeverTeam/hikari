@@ -15,14 +15,9 @@ import eu.kanade.core.preference.asState
 import eu.kanade.core.util.addOrRemove
 import eu.kanade.core.util.insertSeparators
 import eu.kanade.domain.chapter.interactor.GetAvailableScanlators
-import eu.kanade.domain.chapter.interactor.SetReadStatus
-import eu.kanade.domain.chapter.interactor.SyncChaptersWithSource
-import eu.kanade.domain.manga.interactor.GetExcludedScanlators
-import eu.kanade.domain.manga.interactor.SetExcludedScanlators
 import eu.kanade.domain.manga.interactor.UpdateManga
 import eu.kanade.domain.manga.model.chaptersFiltered
 import eu.kanade.domain.manga.model.downloadedFilter
-import eu.kanade.domain.manga.model.toSManga
 import eu.kanade.domain.track.interactor.AddTracks
 import eu.kanade.domain.track.interactor.RefreshTracks
 import eu.kanade.domain.track.interactor.TrackChapter
@@ -33,12 +28,10 @@ import eu.kanade.presentation.manga.components.ChapterDownloadAction
 import eu.kanade.presentation.util.formattedMessage
 import eu.kanade.tachiyomi.data.download.DownloadCache
 import eu.kanade.tachiyomi.data.download.DownloadManager
-import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.data.track.EnhancedTracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.network.HttpException
 import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
 import eu.kanade.tachiyomi.util.chapter.getNextUnread
 import eu.kanade.tachiyomi.util.removeCovers
 import eu.kanade.tachiyomi.util.system.toast
@@ -69,20 +62,27 @@ import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.category.interactor.SetMangaCategories
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.chapter.interactor.SetMangaDefaultChapterFlags
+import tachiyomi.domain.chapter.interactor.SetReadStatus
+import tachiyomi.domain.chapter.interactor.SyncChaptersWithSource
 import tachiyomi.domain.chapter.interactor.UpdateChapter
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.chapter.model.ChapterUpdate
 import tachiyomi.domain.chapter.model.NoChaptersException
 import tachiyomi.domain.chapter.service.calculateChapterGap
 import tachiyomi.domain.chapter.service.getChapterSort
+import tachiyomi.domain.download.model.DownloadState
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.manga.interactor.GetDuplicateLibraryManga
+import tachiyomi.domain.manga.interactor.GetExcludedScanlators
 import tachiyomi.domain.manga.interactor.GetMangaWithChapters
+import tachiyomi.domain.manga.interactor.SetExcludedScanlators
 import tachiyomi.domain.manga.interactor.SetMangaChapterFlags
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.MangaWithChapterCount
 import tachiyomi.domain.manga.model.applyFilter
+import tachiyomi.domain.manga.model.toSManga
 import tachiyomi.domain.manga.repository.MangaRepository
+import tachiyomi.domain.reader.service.ReaderPreferences
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.track.interactor.GetTracks
 import tachiyomi.i18n.MR
@@ -90,6 +90,7 @@ import tachiyomi.source.local.isLocal
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import kotlin.math.floor
+import tachiyomi.domain.download.model.Download as DomainDownload
 
 class MangaScreenModel(
     private val context: Context,
@@ -392,6 +393,8 @@ class MangaScreenModel(
                 updateManga.awaitUpdateFetchInterval(
                     // Custom intervals are negative
                     manga.copy(fetchInterval = -interval),
+                    java.time.ZonedDateTime.now(),
+                    0L to 0L,
                 )
             ) {
                 val updatedManga = mangaRepository.getMangaById(manga.id)
@@ -477,7 +480,7 @@ class MangaScreenModel(
     private fun observeDownloads() {
         screenModelScope.launchIO {
             downloadManager.statusFlow()
-                .filter { it.manga.id == successState?.manga?.id }
+                .filter { it.mangaId == successState?.manga?.id }
                 .catch { error -> logcat(LogPriority.ERROR, error) }
                 .flowWithLifecycle(lifecycle)
                 .collect {
@@ -489,7 +492,7 @@ class MangaScreenModel(
 
         screenModelScope.launchIO {
             downloadManager.progressFlow()
-                .filter { it.manga.id == successState?.manga?.id }
+                .filter { it.mangaId == successState?.manga?.id }
                 .catch { error -> logcat(LogPriority.ERROR, error) }
                 .flowWithLifecycle(lifecycle)
                 .collect {
@@ -500,9 +503,9 @@ class MangaScreenModel(
         }
     }
 
-    private fun updateDownloadState(download: Download) {
+    private fun updateDownloadState(download: DomainDownload) {
         updateSuccessState { successState ->
-            val modifiedIndex = successState.chapters.indexOfFirst { it.id == download.chapter.id }
+            val modifiedIndex = successState.chapters.indexOfFirst { it.id == download.chapterId }
             if (modifiedIndex < 0) return@updateSuccessState successState
 
             val newChapters = successState.chapters.toMutableList().apply {
@@ -535,8 +538,8 @@ class MangaScreenModel(
             }
             val downloadState = when {
                 activeDownload != null -> activeDownload.status
-                downloaded -> Download.State.DOWNLOADED
-                else -> Download.State.NOT_DOWNLOADED
+                downloaded -> DownloadState.DOWNLOADED
+                else -> DownloadState.NOT_DOWNLOADED
             }
 
             ChapterList.Item(
@@ -612,15 +615,15 @@ class MangaScreenModel(
 
             LibraryPreferences.ChapterSwipeAction.Download -> {
                 val downloadAction: ChapterDownloadAction = when (chapterItem.downloadState) {
-                    Download.State.ERROR,
-                    Download.State.NOT_DOWNLOADED,
-                    -> ChapterDownloadAction.START_NOW
+                    DownloadState.ERROR,
+                    DownloadState.NOT_DOWNLOADED,
+                        -> ChapterDownloadAction.START_NOW
 
-                    Download.State.QUEUE,
-                    Download.State.DOWNLOADING,
-                    -> ChapterDownloadAction.CANCEL
+                    DownloadState.QUEUE,
+                    DownloadState.DOWNLOADING,
+                        -> ChapterDownloadAction.CANCEL
 
-                    Download.State.DOWNLOADED -> ChapterDownloadAction.DELETE
+                    DownloadState.DOWNLOADED -> ChapterDownloadAction.DELETE
                 }
                 runChapterDownloadActions(
                     items = listOf(chapterItem),
@@ -643,7 +646,7 @@ class MangaScreenModel(
     private fun getUnreadChapters(): List<Chapter> {
         val chapterItems = if (skipFiltered) filteredChapters.orEmpty() else allChapters.orEmpty()
         return chapterItems
-            .filter { (chapter, dlStatus) -> !chapter.read && dlStatus == Download.State.NOT_DOWNLOADED }
+            .filter { (chapter, dlStatus) -> !chapter.read && dlStatus == DownloadState.NOT_DOWNLOADED }
             .map { it.chapter }
     }
 
@@ -656,7 +659,7 @@ class MangaScreenModel(
     private fun getBookmarkedChapters(): List<Chapter> {
         val chapterItems = if (skipFiltered) filteredChapters.orEmpty() else allChapters.orEmpty()
         return chapterItems
-            .filter { (chapter, dlStatus) -> chapter.bookmark && dlStatus == Download.State.NOT_DOWNLOADED }
+            .filter { (chapter, dlStatus) -> chapter.bookmark && dlStatus == DownloadState.NOT_DOWNLOADED }
             .map { it.chapter }
     }
 
@@ -697,7 +700,7 @@ class MangaScreenModel(
         when (action) {
             ChapterDownloadAction.START -> {
                 startDownload(items.map { it.chapter }, false)
-                if (items.any { it.downloadState == Download.State.ERROR }) {
+                if (items.any { it.downloadState == DownloadState.ERROR }) {
                     downloadManager.startDownloads()
                 }
             }
@@ -734,8 +737,8 @@ class MangaScreenModel(
 
     private fun cancelDownload(chapterId: Long) {
         val activeDownload = downloadManager.getQueuedDownloadOrNull(chapterId) ?: return
-        downloadManager.cancelQueuedDownloads(listOf(activeDownload))
-        updateDownloadState(activeDownload.apply { status = Download.State.NOT_DOWNLOADED })
+        downloadManager.cancelQueuedDownloads(listOf(chapterId))
+        updateDownloadState(activeDownload.copy(status = DownloadState.NOT_DOWNLOADED))
     }
 
     fun markPreviousChapterRead(pointer: Chapter) {
@@ -1320,11 +1323,11 @@ sealed class ChapterList {
     @Immutable
     data class Item(
         val chapter: Chapter,
-        val downloadState: Download.State,
+        val downloadState: DownloadState,
         val downloadProgress: Int,
         val selected: Boolean = false,
     ) : ChapterList() {
         val id = chapter.id
-        val isDownloaded = downloadState == Download.State.DOWNLOADED
+        val isDownloaded = downloadState == DownloadState.DOWNLOADED
     }
 }

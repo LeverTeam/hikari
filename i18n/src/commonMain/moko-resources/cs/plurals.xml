@@ -46,9 +46,12 @@
         <item quantity="other">Pro %d položek</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">Přeskočena %d kapitola, buď chybí ve zdroji nebo byla vyfiltrována</item>
-        <item quantity="few">Přeskočeny %d kapitoly, buď chybí ve zdroji nebo byly vyfiltrovány</item>
-        <item quantity="other">Přeskočeno %d kapitol, buď chybí ve zdroji nebo byly vyfiltrovány</item>
+        <item quantity="one">Přeskočena %d kapitola, buď chybí ve zdroji nebo byla vyfiltrována
+        </item>
+        <item quantity="few">Přeskočeny %d kapitoly, buď chybí ve zdroji nebo byly vyfiltrovány
+        </item>
+        <item quantity="other">Přeskočeno %d kapitol, buď chybí ve zdroji nebo byly vyfiltrovány
+        </item>
     </plurals>
     <plurals name="num_trackers">
         <item quantity="one">%d sledovač</item>

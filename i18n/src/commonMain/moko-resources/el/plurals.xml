@@ -41,8 +41,12 @@
         <item quantity="other">%d ιχνηλάτες</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">Παραλείπεται %d κεφάλαιο, είτε λείπει από την πηγή είτε έχει φιλτραριστεί</item>
-        <item quantity="other">Παραλείπονται %d κεφάλαια, είτε λείπουν από την πηγή είτε έχουν φιλτραριστεί</item>
+        <item quantity="one">Παραλείπεται %d κεφάλαιο, είτε λείπει από την πηγή είτε έχει
+            φιλτραριστεί
+        </item>
+        <item quantity="other">Παραλείπονται %d κεφάλαια, είτε λείπουν από την πηγή είτε έχουν
+            φιλτραριστεί
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="one">Εχθές</item>

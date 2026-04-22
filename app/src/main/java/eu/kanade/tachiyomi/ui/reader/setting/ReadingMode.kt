@@ -1,5 +1,6 @@
 package eu.kanade.tachiyomi.ui.reader.setting
 
+
 import androidx.annotation.DrawableRes
 import dev.icerock.moko.resources.StringResource
 import eu.kanade.tachiyomi.R
@@ -9,82 +10,79 @@ import eu.kanade.tachiyomi.ui.reader.viewer.pager.L2RPagerViewer
 import eu.kanade.tachiyomi.ui.reader.viewer.pager.R2LPagerViewer
 import eu.kanade.tachiyomi.ui.reader.viewer.pager.VerticalPagerViewer
 import eu.kanade.tachiyomi.ui.reader.viewer.webtoon.WebtoonViewer
+import tachiyomi.domain.reader.model.ReadingMode
 import tachiyomi.i18n.MR
 
-enum class ReadingMode(
-    val stringRes: StringResource,
-    @DrawableRes val iconRes: Int,
-    val flagValue: Int,
-    val direction: Direction? = null,
-    val type: ViewerType? = null,
-) {
-    DEFAULT(MR.strings.label_default, R.drawable.ic_reader_default_24dp, 0x00000000),
-    LEFT_TO_RIGHT(
-        MR.strings.left_to_right_viewer,
-        R.drawable.ic_reader_ltr_24dp,
-        0x00000001,
-        Direction.Horizontal,
-        ViewerType.Pager,
-    ),
-    RIGHT_TO_LEFT(
-        MR.strings.right_to_left_viewer,
-        R.drawable.ic_reader_rtl_24dp,
-        0x00000002,
-        Direction.Horizontal,
-        ViewerType.Pager,
-    ),
-    VERTICAL(
-        MR.strings.vertical_viewer,
-        R.drawable.ic_reader_vertical_24dp,
-        0x00000003,
-        Direction.Vertical,
-        ViewerType.Pager,
-    ),
-    WEBTOON(
-        MR.strings.webtoon_viewer,
-        R.drawable.ic_reader_webtoon_24dp,
-        0x00000004,
-        Direction.Vertical,
-        ViewerType.Webtoon,
-    ),
-    CONTINUOUS_VERTICAL(
-        MR.strings.vertical_plus_viewer,
-        R.drawable.ic_reader_continuous_vertical_24dp,
-        0x00000005,
-        Direction.Vertical,
-        ViewerType.Webtoon,
-    ),
-    ;
+val ReadingMode.flag: Int
+    get() = flagValue
 
-    companion object {
-        const val MASK = 0x00000007
-
-        fun fromPreference(preference: Int?): ReadingMode = entries.find { it.flagValue == preference } ?: DEFAULT
-
-        fun isPagerType(preference: Int): Boolean {
-            val mode = fromPreference(preference)
-            return mode.type is ViewerType.Pager
-        }
-
-        fun toViewer(preference: Int?, activity: ReaderActivity): Viewer {
-            return when (fromPreference(preference)) {
-                LEFT_TO_RIGHT -> L2RPagerViewer(activity)
-                RIGHT_TO_LEFT -> R2LPagerViewer(activity)
-                VERTICAL -> VerticalPagerViewer(activity)
-                WEBTOON -> WebtoonViewer(activity)
-                CONTINUOUS_VERTICAL -> WebtoonViewer(activity, isContinuous = false)
-                DEFAULT -> throw IllegalStateException("Preference value must be resolved: $preference")
-            }
-        }
+val ReadingMode.stringRes: StringResource
+    get() = when (this) {
+        ReadingMode.DEFAULT -> MR.strings.label_default
+        ReadingMode.LEFT_TO_RIGHT -> MR.strings.left_to_right_viewer
+        ReadingMode.RIGHT_TO_LEFT -> MR.strings.right_to_left_viewer
+        ReadingMode.VERTICAL -> MR.strings.vertical_viewer
+        ReadingMode.WEBTOON -> MR.strings.webtoon_viewer
+        ReadingMode.CONTINUOUS_VERTICAL -> MR.strings.vertical_plus_viewer
     }
 
-    sealed interface Direction {
-        data object Horizontal : Direction
-        data object Vertical : Direction
+@get:DrawableRes
+val ReadingMode.iconRes: Int
+    get() = when (this) {
+        ReadingMode.DEFAULT -> R.drawable.ic_reader_default_24dp
+        ReadingMode.LEFT_TO_RIGHT -> R.drawable.ic_reader_ltr_24dp
+        ReadingMode.RIGHT_TO_LEFT -> R.drawable.ic_reader_rtl_24dp
+        ReadingMode.VERTICAL -> R.drawable.ic_reader_vertical_24dp
+        ReadingMode.WEBTOON -> R.drawable.ic_reader_webtoon_24dp
+        ReadingMode.CONTINUOUS_VERTICAL -> R.drawable.ic_reader_continuous_vertical_24dp
     }
 
-    sealed interface ViewerType {
-        data object Pager : ViewerType
-        data object Webtoon : ViewerType
+val ReadingMode.direction: ReadingModeDirection?
+    get() = when (this) {
+        ReadingMode.DEFAULT -> null
+        ReadingMode.LEFT_TO_RIGHT -> ReadingModeDirection.Horizontal
+        ReadingMode.RIGHT_TO_LEFT -> ReadingModeDirection.Horizontal
+        ReadingMode.VERTICAL -> ReadingModeDirection.Vertical
+        ReadingMode.WEBTOON -> ReadingModeDirection.Vertical
+        ReadingMode.CONTINUOUS_VERTICAL -> ReadingModeDirection.Vertical
     }
+
+val ReadingMode.type: ReadingModeType?
+    get() = when (this) {
+        ReadingMode.DEFAULT -> null
+        ReadingMode.LEFT_TO_RIGHT -> ReadingModeType.Pager
+        ReadingMode.RIGHT_TO_LEFT -> ReadingModeType.Pager
+        ReadingMode.VERTICAL -> ReadingModeType.Pager
+        ReadingMode.WEBTOON -> ReadingModeType.Webtoon
+        ReadingMode.CONTINUOUS_VERTICAL -> ReadingModeType.Webtoon
+    }
+
+fun ReadingMode.toViewer(activity: ReaderActivity): Viewer {
+    return when (this) {
+        ReadingMode.LEFT_TO_RIGHT -> L2RPagerViewer(activity)
+        ReadingMode.RIGHT_TO_LEFT -> R2LPagerViewer(activity)
+        ReadingMode.VERTICAL -> VerticalPagerViewer(activity)
+        ReadingMode.WEBTOON -> WebtoonViewer(activity)
+        ReadingMode.CONTINUOUS_VERTICAL -> WebtoonViewer(activity, isContinuous = false)
+        ReadingMode.DEFAULT -> throw IllegalStateException("Preference value must be resolved")
+    }
+}
+
+fun ReadingMode.Companion.isPagerType(preference: Int): Boolean {
+    val mode = fromPreference(preference)
+    return mode.type == ReadingModeType.Pager
+}
+
+fun ReadingMode.Companion.toViewer(preference: Int, activity: ReaderActivity): Viewer {
+    return fromPreference(preference).toViewer(activity)
+}
+
+enum class ReadingModeDirection {
+    Horizontal,
+    Vertical,
+}
+
+enum class ReadingModeType {
+    Pager,
+    Webtoon,
 }

@@ -2,7 +2,6 @@ package eu.kanade.tachiyomi.data.download
 
 import android.content.Context
 import com.hippo.unifile.UniFile
-import eu.kanade.domain.chapter.model.toSChapter
 import eu.kanade.domain.manga.model.getComicInfo
 import eu.kanade.tachiyomi.data.cache.ChapterCache
 import eu.kanade.tachiyomi.data.download.model.Download
@@ -52,6 +51,8 @@ import tachiyomi.core.metadata.comicinfo.COMIC_INFO_FILE
 import tachiyomi.core.metadata.comicinfo.ComicInfo
 import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.chapter.model.Chapter
+import tachiyomi.domain.chapter.model.toSChapter
+import tachiyomi.domain.download.model.DownloadState
 import tachiyomi.domain.download.service.DownloadPreferences
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.source.service.SourceManager
@@ -128,8 +129,8 @@ class Downloader(
             return false
         }
 
-        val pending = queueState.value.filter { it.status != Download.State.DOWNLOADED }
-        pending.forEach { if (it.status != Download.State.QUEUE) it.status = Download.State.QUEUE }
+        val pending = queueState.value.filter { it.status != DownloadState.DOWNLOADED }
+        pending.forEach { if (it.status != DownloadState.QUEUE) it.status = DownloadState.QUEUE }
 
         isPaused = false
 
@@ -143,7 +144,7 @@ class Downloader(
      */
     fun stop(reason: String? = null) {
         cancelDownloaderJob()
-        queueState.value.filter { it.status == Download.State.DOWNLOADING }.forEach { it.status = Download.State.ERROR }
+        queueState.value.filter { it.status == DownloadState.DOWNLOADING }.forEach { it.status = DownloadState.ERROR }
 
         if (reason != null) {
             notifier.onWarning(reason)
@@ -166,7 +167,7 @@ class Downloader(
      */
     fun pause() {
         cancelDownloaderJob()
-        queueState.value.filter { it.status == Download.State.DOWNLOADING }.forEach { it.status = Download.State.QUEUE }
+        queueState.value.filter { it.status == DownloadState.DOWNLOADING }.forEach { it.status = DownloadState.QUEUE }
         isPaused = true
     }
 
@@ -194,14 +195,14 @@ class Downloader(
                 while (true) {
                     val activeDownloads = queue.asSequence()
                         // Ignore completed downloads, leave them in the queue
-                        .filter { it.status.value <= Download.State.DOWNLOADING.value }.groupBy { it.source }.toList()
+                        .filter { it.status.value <= DownloadState.DOWNLOADING.value }.groupBy { it.source }.toList()
                         .take(parallelCount).map { (_, downloads) -> downloads.first() }
                     emit(activeDownloads)
 
                     if (activeDownloads.isEmpty()) break
                     // Suspend until a download enters the ERROR state
                     val activeDownloadsErroredFlow = combine(activeDownloads.map(Download::statusFlow)) { states ->
-                        states.contains(Download.State.ERROR)
+                        states.contains(DownloadState.ERROR)
                     }.filter { it }
                     activeDownloadsErroredFlow.first()
                 }
@@ -232,7 +233,7 @@ class Downloader(
             downloadChapter(download)
 
             // Remove successful download from queue
-            if (download.status == Download.State.DOWNLOADED) {
+            if (download.status == DownloadState.DOWNLOADED) {
                 removeFromQueue(download)
             }
             if (areAllDownloadsFinished()) {
@@ -309,14 +310,14 @@ class Downloader(
      */
     private suspend fun downloadChapter(download: Download) {
         val mangaDir = provider.getMangaDir(download.manga.title, download.source).getOrElse { e ->
-            download.status = Download.State.ERROR
+            download.status = DownloadState.ERROR
             notifier.onError(e.message, download.chapter.name, download.manga.title, download.manga.id)
             return
         }
 
         val availSpace = DiskUtil.getAvailableStorageSpace(mangaDir)
         if (availSpace != -1L && availSpace < MIN_DISK_SPACE) {
-            download.status = Download.State.ERROR
+            download.status = DownloadState.ERROR
             notifier.onError(
                 context.stringResource(MR.strings.download_insufficient_space),
                 download.chapter.name,
@@ -351,7 +352,7 @@ class Downloader(
             // Delete all temporary (unfinished) files
             tmpDir.listFiles()?.filter { it.extension == "tmp" }?.forEach { it.delete() }
 
-            download.status = Download.State.DOWNLOADING
+            download.status = DownloadState.DOWNLOADING
 
             // Start downloading images, consider we can have downloaded images already
             pageList.asFlow().flatMapMerge(concurrency = downloadPreferences.parallelPageLimit.get()) { page ->
@@ -377,7 +378,7 @@ class Downloader(
             // Do after download completes
 
             if (!isDownloadSuccessful(download, tmpDir)) {
-                download.status = Download.State.ERROR
+                download.status = DownloadState.ERROR
                 return
             }
 
@@ -398,12 +399,12 @@ class Downloader(
 
             DiskUtil.createNoMediaFile(tmpDir, context)
 
-            download.status = Download.State.DOWNLOADED
+            download.status = DownloadState.DOWNLOADED
         } catch (error: Throwable) {
             if (error is CancellationException) throw error
             // If the page list threw, it will resume here
             logcat(LogPriority.ERROR, error)
-            download.status = Download.State.ERROR
+            download.status = DownloadState.ERROR
             notifier.onError(error.message, download.chapter.name, download.manga.title, download.manga.id)
         }
     }
@@ -629,13 +630,13 @@ class Downloader(
      * Returns true if all the queued downloads are in DOWNLOADED or ERROR state.
      */
     private fun areAllDownloadsFinished(): Boolean {
-        return queueState.value.none { it.status.value <= Download.State.DOWNLOADING.value }
+        return queueState.value.none { it.status.value <= DownloadState.DOWNLOADING.value }
     }
 
     private fun addAllToQueue(downloads: List<Download>) {
         _queueState.update {
             downloads.forEach { download ->
-                download.status = Download.State.QUEUE
+                download.status = DownloadState.QUEUE
             }
             store.addAll(downloads)
             it + downloads
@@ -645,8 +646,8 @@ class Downloader(
     private fun removeFromQueue(download: Download) {
         _queueState.update {
             store.remove(download)
-            if (download.status == Download.State.DOWNLOADING || download.status == Download.State.QUEUE) {
-                download.status = Download.State.NOT_DOWNLOADED
+            if (download.status == DownloadState.DOWNLOADING || download.status == DownloadState.QUEUE) {
+                download.status = DownloadState.NOT_DOWNLOADED
             }
             it - download
         }
@@ -657,8 +658,8 @@ class Downloader(
             val downloads = queue.filter { predicate(it) }
             store.removeAll(downloads)
             downloads.forEach { download ->
-                if (download.status == Download.State.DOWNLOADING || download.status == Download.State.QUEUE) {
-                    download.status = Download.State.NOT_DOWNLOADED
+                if (download.status == DownloadState.DOWNLOADING || download.status == DownloadState.QUEUE) {
+                    download.status = DownloadState.NOT_DOWNLOADED
                 }
             }
             queue - downloads
@@ -677,8 +678,8 @@ class Downloader(
     private fun internalClearQueue() {
         _queueState.update {
             it.forEach { download ->
-                if (download.status == Download.State.DOWNLOADING || download.status == Download.State.QUEUE) {
-                    download.status = Download.State.NOT_DOWNLOADED
+                if (download.status == DownloadState.DOWNLOADING || download.status == DownloadState.QUEUE) {
+                    download.status = DownloadState.NOT_DOWNLOADED
                 }
             }
             store.clear()

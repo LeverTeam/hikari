@@ -110,6 +110,7 @@ internal class ExtensionInstaller(
 
                 context.startActivity(intent)
             }
+
             BasePreferences.ExtensionInstaller.PRIVATE -> {
                 try {
                     if (ExtensionLoader.installPrivateExtensionFile(context, tempFile)) {
@@ -124,6 +125,7 @@ internal class ExtensionInstaller(
 
                 tempFile.delete()
             }
+
             else -> {
                 val intent = ExtensionInstallService.getIntent(
                     context,

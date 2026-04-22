@@ -2,9 +2,9 @@ package eu.kanade.domain.extension.interactor
 
 import android.content.pm.PackageInfo
 import androidx.core.content.pm.PackageInfoCompat
-import eu.kanade.domain.source.service.SourcePreferences
 import hikari.domain.extensionrepo.repository.ExtensionRepoRepository
 import tachiyomi.core.common.preference.getAndSet
+import tachiyomi.domain.source.service.SourcePreferences
 
 class TrustExtension(
     private val extensionRepoRepository: ExtensionRepoRepository,

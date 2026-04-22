@@ -56,6 +56,7 @@ object ChapterRecognition {
             numberMatch.none() -> {
                 return chapterNumber ?: -1.0
             }
+
             numberMatch.count() > 1 -> {
                 // Remove unwanted tags.
                 unwanted.replace(cleanChapterName, "").let { name ->

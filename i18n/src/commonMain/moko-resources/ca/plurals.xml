@@ -51,9 +51,15 @@
         <item quantity="other">%d serveis de seguiment</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">S’ha omès %d capítol. És possible que manqui a la font o que hagi estat filtrat</item>
-        <item quantity="many">S’han omès %d capítols. És possible que manquin a la font o que hagin estat filtrats</item>
-        <item quantity="other">S’han omès %d capítols. És possible que manquin a la font o que hagin estat filtrats</item>
+        <item quantity="one">S’ha omès %d capítol. És possible que manqui a la font o que hagi estat
+            filtrat
+        </item>
+        <item quantity="many">S’han omès %d capítols. És possible que manquin a la font o que hagin
+            estat filtrats
+        </item>
+        <item quantity="other">S’han omès %d capítols. És possible que manquin a la font o que hagin
+            estat filtrats
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="one">Ahir</item>

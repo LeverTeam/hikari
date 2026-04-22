@@ -23,7 +23,9 @@
     <string name="action_display_comfortable_grid">Komfortabelt grid</string>
     <string name="action_display_cover_only_grid">Kun covers som grid</string>
     <string name="information_empty_library">Dit bibliotek er tomt</string>
-    <string name="information_empty_category">Du har ikke nogen kategorier. Tryk på plusset for at oprette en og organisere dit bibliotek.</string>
+    <string name="information_empty_category">Du har ikke nogen kategorier. Tryk på plusset for at
+        oprette en og organisere dit bibliotek.
+    </string>
     <string name="label_more">Mere</string>
     <string name="label_library">Bibliotek</string>
     <string name="categories">Kategorier</string>
@@ -137,16 +139,22 @@
     <string name="lock_with_biometrics">Kræv oplåsning</string>
     <string name="pref_category_nsfw_content">NSFW (18+) kilder</string>
     <string name="pref_show_nsfw_source">Vis i kilder og udvidelsesliste</string>
-    <string name="parental_controls_info">Dette forhindrer ikke uofficielle eller potentielt ukorrekt markerede udvidelser fra at vise NSFW (18+) indhold i appen.</string>
+    <string name="parental_controls_info">Dette forhindrer ikke uofficielle eller potentielt
+        ukorrekt markerede udvidelser fra at vise NSFW (18+) indhold i appen.
+    </string>
     <string name="relative_time_today">I dag</string>
     <string name="lock_when_idle">Lås ved inaktivitet</string>
     <string name="lock_always">Altid</string>
     <string name="lock_never">Aldrig</string>
     <string name="hide_notification_content">Skjul notifikationsindhold</string>
     <string name="secure_screen">Sikker skærm</string>
-    <string name="secure_screen_summary">Sikker skærm skjuler app indhold, når der skiftes mellem apps, og blokerer for skærmbilleder</string>
+    <string name="secure_screen_summary">Sikker skærm skjuler app indhold, når der skiftes mellem
+        apps, og blokerer for skærmbilleder
+    </string>
     <string name="pref_category_display">Vis</string>
-    <string name="pref_library_update_restriction">Enhedsbegrænsninger for automatiske opdateringer</string>
+    <string name="pref_library_update_restriction">Enhedsbegrænsninger for automatiske
+        opdateringer
+    </string>
     <string name="connected_to_wifi">Kun på WiFi</string>
     <string name="pref_library_columns">Elementer per række</string>
     <string name="landscape">Liggende</string>
@@ -161,7 +169,9 @@
     <string name="pref_update_only_started">Der ikke er blevet startet</string>
     <string name="multi_lang">Multi</string>
     <string name="delete_category_confirmation">Ønsker du at slette kategorien \"%s\"?</string>
-    <string name="pref_library_update_refresh_metadata_summary">Søg efter nyt cover og detaljer, når biblioteket opdateres</string>
+    <string name="pref_library_update_refresh_metadata_summary">Søg efter nyt cover og detaljer, når
+        biblioteket opdateres
+    </string>
     <string name="pref_library_update_refresh_metadata">Opdater automatisk metadata</string>
     <string name="default_category">Standard kategori</string>
     <string name="action_sort_last_manga_update">Nyeste manga opdateringer</string>
@@ -169,7 +179,9 @@
     <string name="delete_category">Slet kategori</string>
     <string name="exclude">Ekskluder: %s</string>
     <string name="default_category_summary">Spørg altid</string>
-    <string name="pref_library_update_categories_details">Manga i ekskluderede kategorier vil ikke blive opdateret selv hvis de også er i inkluderede kategorier.</string>
+    <string name="pref_library_update_categories_details">Manga i ekskluderede kategorier vil ikke
+        blive opdateret selv hvis de også er i inkluderede kategorier.
+    </string>
     <string name="all">Alle</string>
     <string name="none">Ingen</string>
     <string name="include">Inkluder: %s</string>
@@ -177,7 +189,8 @@
     <string name="action_remove_everything">Fjern alt</string>
     <string name="login">Login</string>
     <string name="unknown_error">Ukendt fejl</string>
-    <string name="internal_error">InternalError: Tjek nedbrudslogfiler for yderligere information</string>
+    <string name="internal_error">InternalError: Tjek nedbrudslogfiler for yderligere information
+    </string>
     <string name="logout_success">Du er nu logget ud</string>
     <string name="login_success">Logget ind</string>
     <string name="logout_title">Log af %1$s?</string>

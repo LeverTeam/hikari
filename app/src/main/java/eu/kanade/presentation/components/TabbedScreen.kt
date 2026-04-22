@@ -18,9 +18,9 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.zIndex
 import dev.icerock.moko.resources.StringResource
-import kotlin.math.absoluteValue
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
@@ -39,6 +38,7 @@ import tachiyomi.presentation.core.components.HikariSnackbarHost
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.material.TabText
 import tachiyomi.presentation.core.i18n.stringResource
+import kotlin.math.absoluteValue
 
 @Composable
 fun TabbedScreen(
@@ -89,7 +89,8 @@ fun TabbedScreen(
                         val indicatorWidth = lerp(currentTab.width, targetTab.width, fraction.absoluteValue)
                         val indicatorOffset = lerp(currentTab.left, targetTab.left, fraction.absoluteValue)
 
-                        val stretch = (targetTab.left - currentTab.left).value.absoluteValue.dp * fraction.absoluteValue * 0.4f
+                        val stretch =
+                            (targetTab.left - currentTab.left).value.absoluteValue.dp * fraction.absoluteValue * 0.4f
 
                         Box(
                             Modifier

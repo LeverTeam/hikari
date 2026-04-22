@@ -23,3 +23,11 @@ data class Source(
         }
     }
 }
+
+object LocalSource {
+    const val ID = 0L
+}
+
+fun Source.isLocal(): Boolean = id == LocalSource.ID
+
+fun eu.kanade.tachiyomi.source.Source.isLocal(): Boolean = id == LocalSource.ID

@@ -15,14 +15,14 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<HistoryScreenMo
     private val multiPage = HistoryScreenModel.State(
         searchQuery = null,
         list =
-        listOf(HistoryUiModelExamples.headerToday)
-            .asSequence()
-            .plus(HistoryUiModelExamples.items().take(3))
-            .plus(HistoryUiModelExamples.header { it.minus(1, ChronoUnit.DAYS) })
-            .plus(HistoryUiModelExamples.items().take(1))
-            .plus(HistoryUiModelExamples.header { it.minus(2, ChronoUnit.DAYS) })
-            .plus(HistoryUiModelExamples.items().take(7))
-            .toList(),
+            listOf(HistoryUiModelExamples.headerToday)
+                .asSequence()
+                .plus(HistoryUiModelExamples.items().take(3))
+                .plus(HistoryUiModelExamples.header { it.minus(1, ChronoUnit.DAYS) })
+                .plus(HistoryUiModelExamples.items().take(1))
+                .plus(HistoryUiModelExamples.header { it.minus(2, ChronoUnit.DAYS) })
+                .plus(HistoryUiModelExamples.items().take(7))
+                .toList(),
         dialog = null,
     )
 

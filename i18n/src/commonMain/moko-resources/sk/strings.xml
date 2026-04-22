@@ -76,7 +76,8 @@
     <string name="portrait">Na výšku</string>
     <string name="landscape">Na šírku</string>
     <string name="all">Všetko</string>
-    <string name="pref_library_update_restriction">Automatické aktualizácie obmedzení zariadenia</string>
+    <string name="pref_library_update_restriction">Automatické aktualizácie obmedzení zariadenia
+    </string>
     <string name="charging">Pri nabíjaní</string>
     <string name="pref_update_only_non_completed">So stavom \"Dokončené\"</string>
     <string name="pref_auto_update_manga_sync">Aktualizácia priebehu po prečítaní</string>
@@ -92,11 +93,14 @@
     <string name="ext_untrusted">Odobrať dôveru</string>
     <string name="ext_uninstall">Odinštalovať</string>
     <string name="untrusted_extension">Nedôveryhodné rozšírenie</string>
-    <string name="untrusted_extension_message">Toto rozšírenie bolo podpísané nedôveryhodným certifikátom a nebolo aktivované.
-\n
-\nŠkodlivé rozšírenie môže čítať všetky prihlasovacie údaje uložené v Mihon alebo spúšťať ľubovoľný kód.
-\n
-\nDôverovaním tohto certifikátu akceptujete tieto riziká.</string>
+    <string name="untrusted_extension_message">Toto rozšírenie bolo podpísané nedôveryhodným
+        certifikátom a nebolo aktivované.
+        \n
+        \nŠkodlivé rozšírenie môže čítať všetky prihlasovacie údaje uložené v Mihon alebo spúšťať
+        ľubovoľný kód.
+        \n
+        \nDôverovaním tohto certifikátu akceptujete tieto riziká.
+    </string>
     <string name="pref_fullscreen">Na celú obrazovku</string>
     <string name="pref_page_transitions">Animácia prechodov strán</string>
     <string name="pref_double_tap_anim_speed">Rýchlosť animácie pre dvojité ťuknutie</string>
@@ -123,7 +127,8 @@
     <string name="left_to_right_viewer">Zľava doprava</string>
     <string name="right_to_left_viewer">Sprava doľava</string>
     <string name="vertical_viewer">Vertikálne</string>
-    <string name="webtoon_viewer">Ako Webtoon - Zhora dole a strany sa spájajú do jednej dlhej</string>
+    <string name="webtoon_viewer">Ako Webtoon - Zhora dole a strany sa spájajú do jednej dlhej
+    </string>
     <string name="pager_viewer">Stránkovanie</string>
     <string name="pref_image_scale_type">Mód škálovania</string>
     <string name="scale_type_fit_screen">Prispôsobiť obrazovke</string>
@@ -175,7 +180,9 @@
     <string name="pref_clear_cookies">Vymazať cookies</string>
     <string name="cookies_cleared">Súbory cookie boli vymazané</string>
     <string name="pref_clear_database">Vymazať databázu</string>
-    <string name="pref_clear_database_summary">Odstránenie histórie mangy, ktorá nie je uložená vo vašej knižnici</string>
+    <string name="pref_clear_database_summary">Odstránenie histórie mangy, ktorá nie je uložená vo
+        vašej knižnici
+    </string>
     <string name="action_webview_back">Späť</string>
     <string name="action_webview_forward">Vpred</string>
     <string name="action_webview_refresh">Obnoviť</string>
@@ -185,7 +192,9 @@
     <string name="clear_database_completed">Záznamy boli odstránené</string>
     <string name="version">Verzia</string>
     <string name="pref_enable_acra">Odosielať správy o zlyhaní</string>
-    <string name="pref_acra_summary">Pomáha opraviť akékoľvek chyby. Nebudú odoslané žiadne citlivé údaje</string>
+    <string name="pref_acra_summary">Pomáha opraviť akékoľvek chyby. Nebudú odoslané žiadne citlivé
+        údaje
+    </string>
     <string name="login_title">Prihláste sa do %1$s</string>
     <string name="username">Užívateľské meno</string>
     <string name="password">Heslo</string>
@@ -207,7 +216,8 @@
     <string name="manga_removed_library">Odstránené z knižnice</string>
     <string name="delete_downloads_for_manga">Odstrániť stiahnuté kapitoly?</string>
     <string name="copied_to_clipboard">Skopírované do schránky:
-\n%1$s</string>
+        \n%1$s
+    </string>
     <string name="source_not_installed">Zdroj nie je nainštalovaný: %1$s</string>
     <string name="display_mode_chapter">Kapitola %1$s</string>
     <string name="chapter_downloading_progress">Sťahovanie (%1$d/%2$d)</string>
@@ -234,7 +244,9 @@
     <string name="track_type">Typ</string>
     <string name="error_category_exists">Kategória s týmto názvom už existuje!</string>
     <string name="snack_categories_deleted">Kategórie boli odstránené</string>
-    <string name="dialog_with_checkbox_remove_description">Týmto sa odstráni dátum prečítania tejto kapitoly. Si si istý?</string>
+    <string name="dialog_with_checkbox_remove_description">Týmto sa odstráni dátum prečítania tejto
+        kapitoly. Si si istý?
+    </string>
     <string name="dialog_with_checkbox_reset">Resetovať všetky kapitoly mangy</string>
     <string name="snack_add_to_library">Pridať mangu do knižnice?</string>
     <string name="picture_saved">Obrázok bol uložený</string>
@@ -256,10 +268,14 @@
     <string name="migration_dialog_what_to_include">Vyberte data, ktoré chcete zahrnúť</string>
     <string name="migrate">Migrovať</string>
     <string name="copy">Kopírovať</string>
-    <string name="download_queue_error">Nepodarilo sa stiahnuť kapitoly. Môžete to skúsiť znova v sekcii na stiahnutie</string>
+    <string name="download_queue_error">Nepodarilo sa stiahnuť kapitoly. Môžete to skúsiť znova v
+        sekcii na stiahnutie
+    </string>
     <string name="notification_new_chapters">Boli nájdené nové kapitoly</string>
     <string name="notification_cover_update_failed">Chyba pri aktualizácii obalu</string>
-    <string name="notification_first_add_to_library">Predtým, ako to urobíte, pridajte do svojej knižnice mangu</string>
+    <string name="notification_first_add_to_library">Predtým, ako to urobíte, pridajte do svojej
+        knižnice mangu
+    </string>
     <string name="file_select_cover">Vyberte obrázok obalu</string>
     <string name="file_select_backup">Vyberte záložný súbor</string>
     <string name="update_check_confirm">Stiahnuť</string>
@@ -272,10 +288,14 @@
     <string name="information_no_recent">Žiadne nedávne aktualizácie</string>
     <string name="information_no_recent_manga">Nič nedávno čítané</string>
     <string name="information_empty_library">Vaša knižnica je prázdna</string>
-    <string name="information_empty_category">Nemáte žiadne kategórie. Ťuknutím na tlačidlo plus si ju vytvorte a usporiadajte knižnicu.</string>
+    <string name="information_empty_category">Nemáte žiadne kategórie. Ťuknutím na tlačidlo plus si
+        ju vytvorte a usporiadajte knižnicu.
+    </string>
     <string name="download_notifier_downloader_title">Preberanie</string>
     <string name="download_notifier_title_error">Chyba</string>
-    <string name="download_notifier_unknown_error">Kapitolu sa nepodarilo stiahnuť z dôvodu neočakávanej chyby</string>
+    <string name="download_notifier_unknown_error">Kapitolu sa nepodarilo stiahnuť z dôvodu
+        neočakávanej chyby
+    </string>
     <string name="download_notifier_text_only_wifi">WiFi pripojenie nie je dostupné</string>
     <string name="download_notifier_no_network">Sieťové pripojenie nie je dostupné</string>
     <string name="download_notifier_download_paused">Sťahovanie bolo pozastavené</string>
@@ -289,8 +309,11 @@
     <string name="action_newest">Najnovšie</string>
     <string name="action_oldest">Najstaršie</string>
     <string name="action_move_to_top">Presunúť navrch</string>
-    <string name="information_webview_outdated">Prosím aktualizujte si aplikáciu WebView pre lepšiu kompatibilitu</string>
-    <string name="information_cloudflare_bypass_failure">Nepodarilo sa obísť službu Cloudflare</string>
+    <string name="information_webview_outdated">Prosím aktualizujte si aplikáciu WebView pre lepšiu
+        kompatibilitu
+    </string>
+    <string name="information_cloudflare_bypass_failure">Nepodarilo sa obísť službu Cloudflare
+    </string>
     <string name="paused">Pozastavené</string>
     <string name="unread">Neprečítané</string>
     <string name="hide_notification_content">Skryť obsah upozornení</string>
@@ -325,7 +348,9 @@
     <string name="cancel_all_for_series">Zrušiť všetko pre túto sériu</string>
     <string name="action_order_by_chapter_number">Podľa čísla kapitoly</string>
     <string name="action_start_downloading_now">Začať sťahovať teraz</string>
-    <string name="secure_screen_summary">Skryť obsah aplikácie pri prepínaní aplikácie a blokovať tvorbu snímkov obrazovky</string>
+    <string name="secure_screen_summary">Skryť obsah aplikácie pri prepínaní aplikácie a blokovať
+        tvorbu snímkov obrazovky
+    </string>
     <string name="action_asc">Vzostupne</string>
     <string name="action_desc">Zostupne</string>
     <string name="action_move_to_bottom">Presunúť na spodok</string>
@@ -353,12 +378,16 @@
     <string name="restrictions">Obmedzenia: %s</string>
     <string name="pref_update_only_completely_read">S neprečítanými kapitolami</string>
     <string name="pref_update_only_started">Ktoré sa ešte nezačali</string>
-    <string name="parental_controls_info">Toto nastavenie avšak nebráni tomu, aby sa v aplikácii objavil neoficiálny alebo potenciálne nesprávne označený obsah NSFW (18+).</string>
+    <string name="parental_controls_info">Toto nastavenie avšak nebráni tomu, aby sa v aplikácii
+        objavil neoficiálny alebo potenciálne nesprávne označený obsah NSFW (18+).
+    </string>
     <string name="pref_category_library_update">Globálna aktualizácia</string>
     <string name="pref_library_update_schedule">Aktualizačný plán</string>
     <string name="update_schedule_none">Nevybraný čas</string>
     <string name="pref_library_update_refresh_metadata">Automatický obnoviť metadata</string>
-    <string name="pref_library_update_refresh_metadata_summary">Pri aktualizácii knižnice skontrolujte nový obal a podrobnosti</string>
+    <string name="pref_library_update_refresh_metadata_summary">Pri aktualizácii knižnice
+        skontrolujte nový obal a podrobnosti
+    </string>
     <string name="pref_category_display">Zobraziť</string>
     <string name="update_already_running">Aktualizácia už prebieha</string>
     <string name="empty_backup_error">Žiadne záznami v knižnici k zálohovaniu</string>
@@ -376,9 +405,13 @@
     <string name="pref_reset_viewer_flags">Obnovenie nastavení čítačky pre jednotlivé série</string>
     <string name="clear_history_completed">História bola odstránená</string>
     <string name="clear_history_confirmation">Ste si istý? Celá história sa stratí.</string>
-    <string name="confirm_set_chapter_settings">Naozaj chcete tieto nastavenia uložiť ako predvolené?</string>
+    <string name="confirm_set_chapter_settings">Naozaj chcete tieto nastavenia uložiť ako
+        predvolené?
+    </string>
     <string name="add_to_library">Pridať do knižnice</string>
-    <string name="pref_show_reading_mode_summary">Krátko zobrazí aktuálny režim pri otvorení čítačky</string>
+    <string name="pref_show_reading_mode_summary">Krátko zobrazí aktuálny režim pri otvorení
+        čítačky
+    </string>
     <string name="pref_grayscale">Odtiene šedej</string>
     <string name="pref_highest">Najvyššie</string>
     <string name="backup_in_progress">Zálohovanie už prebieha</string>
@@ -393,7 +426,9 @@
     <string name="tracking_guide">Príručka k sledovačom</string>
     <string name="enhanced_services">Vylepšené sledovače</string>
     <string name="label_network">Sieť</string>
-    <string name="pref_auto_clear_chapter_cache">Vymazanie vyrovnávacej pamäte kapitoly pri zatvorení aplikácie</string>
+    <string name="pref_auto_clear_chapter_cache">Vymazanie vyrovnávacej pamäte kapitoly pri
+        zatvorení aplikácie
+    </string>
     <string name="whats_new">Čo je nové</string>
     <string name="help_translate">Pomôžte s prekladom</string>
     <string name="licenses">Licencia Open Source</string>
@@ -405,14 +440,18 @@
     <string name="reading_list">Zoznam čítania</string>
     <string name="track_finished_reading_date">Dátum ukončenia</string>
     <string name="updates_last_update_info">Posledná aktualizácia knižnice: %s</string>
-    <string name="appwidget_updates_description">Pozrite si svoju nedávno aktualizovanú mangu</string>
+    <string name="appwidget_updates_description">Pozrite si svoju nedávno aktualizovanú mangu
+    </string>
     <string name="pref_hide_threshold">Citlivosť pre skrytie ponuky pri posúvaní</string>
     <string name="page_list_empty_error">Nenašli sa žiadne stránky</string>
-    <string name="pref_always_show_chapter_transition">Vždy zobraziť prechod medzi kapitolami</string>
+    <string name="pref_always_show_chapter_transition">Vždy zobraziť prechod medzi kapitolami
+    </string>
     <string name="pref_low">Nízke</string>
     <string name="backup_restore_content_full">Údaje zo záložného súboru sa obnovia.
-\n
-\nBudete musieť nainštalovať všetky chýbajúce rozšírenia a potom sa prihlásiť do sledovacích služieb, aby ste ich mohli používať.</string>
+        \n
+        \nBudete musieť nainštalovať všetky chýbajúce rozšírenia a potom sa prihlásiť do sledovacích
+        služieb, aby ste ich mohli používať.
+    </string>
     <string name="pref_reset_viewer_flags_error">Nepodarilo sa obnoviť nastavenia čítačky</string>
     <string name="pref_tablet_ui_mode">Používateľské rozhranie tabletu</string>
     <string name="manga_from_library">Manga z knižnice</string>
@@ -420,7 +459,9 @@
     <string name="on_hold_list">Zoznam pozastavených položiek</string>
     <string name="download_ahead">Stiahnuť dopredu</string>
     <string name="auto_download_while_reading">Automatické sťahovanie počas čítania</string>
-    <string name="download_ahead_info">Funguje iba na položkách v knižnici a ak je aktuálna kapitola a nasledujúca kapitola už stiahnutá.</string>
+    <string name="download_ahead_info">Funguje iba na položkách v knižnici a ak je aktuálna kapitola
+        a nasledujúca kapitola už stiahnutá.
+    </string>
     <string name="unknown_status">Neznámy stav</string>
     <string name="on_hiatus">Prestávka</string>
     <string name="add_tracking">Pridať sledovanie</string>
@@ -431,16 +472,22 @@
     <string name="tapping_inverted_both">Obe</string>
     <string name="nav_zone_prev">Predchádzajúci</string>
     <string name="pref_high">Vysoké</string>
-    <string name="restore_miui_warning">Zálohovanie/obnovenie nemusí fungovať správne, ak je vypnutá optimalizácia MIUI.</string>
+    <string name="restore_miui_warning">Zálohovanie/obnovenie nemusí fungovať správne, ak je vypnutá
+        optimalizácia MIUI.
+    </string>
     <string name="pref_disable_battery_optimization">Zakázať optimalizáciu batérie</string>
     <string name="logout_success">Teraz ste odhlásení</string>
     <string name="local_source_help_guide">Príručka pre lokálne zdroje</string>
     <string name="unknown_author">Neznámy autor</string>
     <string name="clipboard_copy_error">Nepodarilo sa skopírovať do schránky</string>
-    <string name="download_notifier_split_page_path_not_found">Nepodarilo sa nájsť cestu k súboru stránky %d</string>
+    <string name="download_notifier_split_page_path_not_found">Nepodarilo sa nájsť cestu k súboru
+        stránky %d
+    </string>
     <string name="channel_errors">Chyby</string>
     <string name="off">Vyp.</string>
-    <string name="download_insufficient_space">Nepodarilo sa stiahnuť kapitoly z dôvodu nedostatku úložného priestoru</string>
+    <string name="download_insufficient_space">Nepodarilo sa stiahnuť kapitoly z dôvodu nedostatku
+        úložného priestoru
+    </string>
     <string name="action_sort_count">Celkový počet</string>
     <string name="ext_installer_legacy">Pôvodný</string>
     <string name="automatic_background">Automatický</string>
@@ -453,13 +500,16 @@
     <string name="right_and_left_nav">Vpravo a vľavo</string>
     <string name="nav_zone_left">Vľavo</string>
     <string name="rotation_reverse_portrait">Obrátený portrét</string>
-    <string name="pref_remove_bookmarked_chapters">Povoliť odstraňovanie kapitol so záložkami</string>
+    <string name="pref_remove_bookmarked_chapters">Povoliť odstraňovanie kapitol so záložkami
+    </string>
     <string name="channel_ext_updates">Aktualizácie rozšírení</string>
     <string name="pref_app_language">Jazyk aplikácie</string>
     <string name="ext_info_language">Jazyk</string>
     <string name="ext_installer_pref">Inštalátor</string>
     <string name="ext_installer_shizuku_stopped">Shizuku nebeží</string>
-    <string name="ext_installer_shizuku_unavailable_dialog">Nainštalujte a spustite Shizuku, aby ste mohli používať Shizuku ako inštalátor rozšírení.</string>
+    <string name="ext_installer_shizuku_unavailable_dialog">Nainštalujte a spustite Shizuku, aby ste
+        mohli používať Shizuku ako inštalátor rozšírení.
+    </string>
     <string name="pref_show_navigation_mode_summary">Krátko ukázať, keď je čítačka otvorená</string>
     <string name="pref_dual_page_invert">Prevrátiť rozdelenie na dve strany</string>
     <string name="nav_zone_right">Vpravo</string>
@@ -475,26 +525,38 @@
     <string name="pref_clear_history">Vymazať históriu</string>
     <string name="error_saving_cover">Chyba pri ukladaní obalu</string>
     <string name="set_chapter_settings_as_default">Nastaviť ako predvolené</string>
-    <string name="tracking_info">Jednosmerná synchronizácia postupu v mange na externé sledovacie služby (sledovače). Nastavte sledovanie pre jednotlivé položky mangy z ich tlačidla sledovania.</string>
+    <string name="tracking_info">Jednosmerná synchronizácia postupu v mange na externé sledovacie
+        služby (sledovače). Nastavte sledovanie pre jednotlivé položky mangy z ich tlačidla
+        sledovania.
+    </string>
     <string name="pref_category_reading_mode">Režim čítania</string>
     <string name="channel_new_chapters">Aktualizácie kapitol</string>
-    <string name="clear_database_source_item_count">V databáze je manga %1$d, ktorá sa nenachádza v knižnici</string>
+    <string name="clear_database_source_item_count">V databáze je manga %1$d, ktorá sa nenachádza v
+        knižnici
+    </string>
     <string name="updating_library">Aktualizácia knižnice</string>
     <string name="track_started_reading_date">Dátum začatia</string>
-    <string name="pref_reset_viewer_flags_summary">Obnovenie režimu čítania a orientácie pre všetky série</string>
+    <string name="pref_reset_viewer_flags_summary">Obnovenie režimu čítania a orientácie pre všetky
+        série
+    </string>
     <string name="pref_verbose_logging">Podrobné logovanie</string>
     <string name="check_for_updates">Skontrolovať aktualizácie</string>
     <string name="recent_manga_time">Kap. %1$s - %2$s</string>
-    <string name="download_notifier_split_page_not_found">Strana %d sa pri rozdeľovaní nenašla</string>
+    <string name="download_notifier_split_page_not_found">Strana %d sa pri rozdeľovaní nenašla
+    </string>
     <string name="publishing_finished">Publikovanie ukončené</string>
     <string name="no_pinned_sources">Nemáte žiadne pripnuté zdroje</string>
     <string name="update_check_eol">Táto verzia systému Android už nie je podporovaná</string>
     <string name="action_sort_unread_count">Počet neprečítaných</string>
     <string name="kindlish_nav">Podobné Kindl-u</string>
     <string name="pref_lowest">Najnižšie</string>
-    <string name="categorized_display_settings">Nastavenia triedenia a zobrazenia pre jednotlivé kategórie</string>
+    <string name="categorized_display_settings">Nastavenia triedenia a zobrazenia pre jednotlivé
+        kategórie
+    </string>
     <string name="backup_restore_missing_sources">Chýbajúce zdroje:</string>
-    <string name="pref_verbose_logging_summary">Výpis podrobných logov do systémových logov (znižuje výkon aplikácie)</string>
+    <string name="pref_verbose_logging_summary">Výpis podrobných logov do systémových logov (znižuje
+        výkon aplikácie)
+    </string>
     <string name="network_not_metered">Iba v nemeranej sieti</string>
     <string name="ext_update_all">Aktualizovať všetko</string>
     <string name="extension_api_error">Nepodarilo sa získať zoznam rozšírení</string>
@@ -504,12 +566,15 @@
     <string name="gray_background">Šedivá</string>
     <string name="rotation_landscape">Na šírku</string>
     <string name="restore_in_progress">Obnovenie už prebieha</string>
-    <string name="pref_dump_crash_logs_summary">Uložiť logy o chybách do súboru na zdieľanie s vývojármi</string>
+    <string name="pref_dump_crash_logs_summary">Uložiť logy o chybách do súboru na zdieľanie s
+        vývojármi
+    </string>
     <string name="manga_cover">Obal</string>
     <string name="cover_saved">Obal uložený</string>
     <string name="delete_category_confirmation">Prajete si vymazať kategóriu %s?</string>
     <string name="tapping_inverted_vertical">Vertikálne</string>
-    <string name="backup_restore_missing_trackers">Sledovače, do ktorých nie ste prihlásení:</string>
+    <string name="backup_restore_missing_trackers">Sledovače, do ktorých nie ste prihlásení:
+    </string>
     <string name="pref_dns_over_https">DNS cez HTTPS (DoH)</string>
     <string name="invalid_backup_file">Neplatný záložný súbor</string>
     <string name="restore_duration">%1$02d min., %2$02d s</string>
@@ -531,47 +596,69 @@
     <string name="share_page_info">%1$s: %2$s, strana %3$d</string>
     <string name="rotation_type">Typ rotácie</string>
     <string name="action_close">Zatvoriť</string>
-    <string name="pref_library_update_categories_details">Záznamy vo vylúčených kategóriách nebudú aktualizované, aj keď sú tiež v zahrnutých kategóriách.</string>
+    <string name="pref_library_update_categories_details">Záznamy vo vylúčených kategóriách nebudú
+        aktualizované, aj keď sú tiež v zahrnutých kategóriách.
+    </string>
     <string name="ext_updates_pending">Čakajúce aktualizácie</string>
     <string name="spen_next_page">Ďalšia strana</string>
     <string name="update_check_open">Otvoriť na GitHub-e</string>
     <string name="getting_started_guide">Príručka pre začiatočníkov</string>
     <string name="notification_incognito_text">Zakázať režim inkognito</string>
     <string name="manga_info_collapse">Menej</string>
-    <string name="enhanced_tracking_info">Služby, ktoré poskytujú rozšírené funkcie pre konkrétne zdroje. Mangy sú automaticky sledované po pridaní do vašej knižnice.</string>
+    <string name="enhanced_tracking_info">Služby, ktoré poskytujú rozšírené funkcie pre konkrétne
+        zdroje. Mangy sú automaticky sledované po pridaní do vašej knižnice.
+    </string>
     <string name="pref_dual_page_split">Rozdelenie na dve strany</string>
     <string name="action_sort_last_manga_update">Posledná aktualizácia</string>
     <string name="action_remove_everything">Odstrániť všetko</string>
     <string name="internal_error">InternalError: Skontrolujte záznmy pre ďalšie informácie</string>
     <string name="ext_nsfw_short">18+</string>
-    <string name="ext_nsfw_warning">Zdroje z tohto rozšírenia môžu obsahovať obsah pre dospleých (18+)</string>
-    <string name="pref_dual_page_invert_summary">Ak umiestnenie rozdelenia na dve strany nezodpovedá smeru čítania</string>
+    <string name="ext_nsfw_warning">Zdroje z tohto rozšírenia môžu obsahovať obsah pre dospleých
+        (18+)
+    </string>
+    <string name="pref_dual_page_invert_summary">Ak umiestnenie rozdelenia na dve strany nezodpovedá
+        smeru čítania
+    </string>
     <string name="pref_show_reading_mode">Zobraziť režim čítania</string>
     <string name="invalid_backup_file_missing_manga">Záloha neobsahuje žiadnu mangu.</string>
     <string name="l_nav">V tvare písmena L</string>
-    <string name="backup_info">Dôrazne sa odporúča automatické zálohovanie. Kópie by ste si mali uchovávať aj na iných miestach.</string>
+    <string name="backup_info">Dôrazne sa odporúča automatické zálohovanie. Kópie by ste si mali
+        uchovávať aj na iných miestach.
+    </string>
     <string name="pref_dump_crash_logs">Výpis logu o zlyhaní</string>
     <string name="pref_reset_user_agent_string">Obnoviť predvolený reťazec User-Agent</string>
     <string name="action_global_search_query">Globálne vyhľadať \"%1$s\"</string>
     <string name="description_placeholder">Bez popisu</string>
     <string name="chapter_settings">Nastavenia kapitoly</string>
-    <string name="also_set_chapter_settings_for_library">Taktiež nastaviť pre všetky mangy v mojej knižnici</string>
+    <string name="also_set_chapter_settings_for_library">Taktiež nastaviť pre všetky mangy v mojej
+        knižnici
+    </string>
     <string name="source_filter_empty_screen">Nenašiel sa žiadny nainštalovaný zdroj</string>
     <string name="pref_navigate_pan">Prejsť na posúvanie</string>
-    <string name="cant_open_last_read_chapter">Nie je možné otvoriť poslednú prečítanú kapitolu</string>
+    <string name="cant_open_last_read_chapter">Nie je možné otvoriť poslednú prečítanú kapitolu
+    </string>
     <string name="learn_more">Klepnutím sa dozviete viac</string>
     <string name="downloaded_chapters">Stiahnuté kapitoly</string>
     <string name="migration_help_guide">Príručka k migrácií zdrojov</string>
     <string name="pref_reset_viewer_flags_success">Všetky nastavenia čítačky sa obnovia</string>
     <string name="label_background_activity">Aktivita na pozadí</string>
-    <string name="pref_disable_battery_optimization_summary">Pomáha s aktualizáciami a zálohovaním knižnice na pozadí</string>
+    <string name="pref_disable_battery_optimization_summary">Pomáha s aktualizáciami a zálohovaním
+        knižnice na pozadí
+    </string>
     <string name="battery_optimization_disabled">Optimalizácia batérie je už vypnutá</string>
-    <string name="battery_optimization_setting_activity_not_found">Nepodarilo sa otvoriť nastavenia zariadenia</string>
-    <string name="about_dont_kill_my_app">Niektorí výrobcovia majú ďalšie obmedzenia aplikácií, ktoré vypínajú služby na pozadí. Na tejto webovej stránke nájdete viac informácií o tom, ako to opraviť.</string>
+    <string name="battery_optimization_setting_activity_not_found">Nepodarilo sa otvoriť nastavenia
+        zariadenia
+    </string>
+    <string name="about_dont_kill_my_app">Niektorí výrobcovia majú ďalšie obmedzenia aplikácií,
+        ktoré vypínajú služby na pozadí. Na tejto webovej stránke nájdete viac informácií o tom, ako
+        to opraviť.
+    </string>
     <string name="viewer">Režim čítania</string>
     <string name="error_saving_picture">Chyba pri ukladaní obrázka</string>
     <string name="channel_app_updates">Aktualizácie aplikácie</string>
-    <string name="appwidget_unavailable_locked">Widget nie je k dispozícii, keď je povolený zámok aplikácie</string>
+    <string name="appwidget_unavailable_locked">Widget nie je k dispozícii, keď je povolený zámok
+        aplikácie
+    </string>
     <string name="local_filter_order_by">Zoradiť podľa</string>
     <string name="local_invalid_format">Neplatný formát kapitoly</string>
     <string name="exclude">Vylúčiť: %s</string>
@@ -581,13 +668,19 @@
     <string name="on">Zap.</string>
     <string name="chapter_settings_updated">Aktualizované predvolené nastavenia kapitol</string>
     <string name="pref_inverted_colors">Inverzný</string>
-    <string name="pref_download_new_categories_details">Mangy vo vylúčených kategóriách nebudú stiahnuté, aj keď sú tiež v zahrnutých kategóriách.</string>
+    <string name="pref_download_new_categories_details">Mangy vo vylúčených kategóriách nebudú
+        stiahnuté, aj keď sú tiež v zahrnutých kategóriách.
+    </string>
     <string name="database_clean">Čistenie databázy</string>
     <string name="pref_clear_webview_data">Vymazanie údajov WebView</string>
     <string name="webview_data_deleted">Údaje WebView boli vymazané</string>
     <string name="manga_info_expand">Viac</string>
-    <string name="download_queue_size_warning">Upozornenie: Veľké hromadné sťahovanie môže viesť k spomaleniu zdrojov a/alebo blokovaniu %s. Klepnutím sa dozviete viac.</string>
-    <string name="notification_size_warning">Veľké aktualizácie poškodzujú zdroje a môžu viesť k pomalším aktualizáciám a tiež k zvýšeniu spotreby batérie. Klepnutím sa dozviete viac.</string>
+    <string name="download_queue_size_warning">Upozornenie: Veľké hromadné sťahovanie môže viesť k
+        spomaleniu zdrojov a/alebo blokovaniu %s. Klepnutím sa dozviete viac.
+    </string>
+    <string name="notification_size_warning">Veľké aktualizácie poškodzujú zdroje a môžu viesť k
+        pomalším aktualizáciám a tiež k zvýšeniu spotreby batérie. Klepnutím sa dozviete viac.
+    </string>
     <string name="notification_update_error">Zlyhané aktualizácie: %1$d</string>
     <string name="creating_backup_error">Zálohovanie zlyhalo</string>
     <string name="action_track">Sledovať</string>
@@ -606,10 +699,13 @@
     <string name="email">Emailová adresa</string>
     <string name="pref_skip_filtered_chapters">Preskočiť filtrované kapitoly</string>
     <string name="in_library">V knižnici</string>
-    <string name="library_errors_help">Pomoc s opravou chýb aktualizácie knižnice nájdete v %1$s</string>
+    <string name="library_errors_help">Pomoc s opravou chýb aktualizácie knižnice nájdete v %1$s
+    </string>
     <string name="skipped_reason_completed">Preskočené, pretože séria je dokončená</string>
-    <string name="skipped_reason_not_caught_up">Preskočené, pretože obsahuje neprečítané kapitoly</string>
-    <string name="skipped_reason_not_started">Preskočené, pretože neboli prečítané žiadne kapitoly</string>
+    <string name="skipped_reason_not_caught_up">Preskočené, pretože obsahuje neprečítané kapitoly
+    </string>
+    <string name="skipped_reason_not_started">Preskočené, pretože neboli prečítané žiadne kapitoly
+    </string>
     <string name="label_local">Lokálna</string>
     <string name="label_downloaded">Stiahnuté</string>
     <string name="label_stats">Štatistiky</string>
@@ -625,11 +721,14 @@
     <string name="action_move_to_bottom_all_for_series">Presunúť sériu na spodok</string>
     <string name="onboarding_action_next">Ďalej</string>
     <string name="onboarding_action_skip">Preskočiť</string>
-    <string name="onboarding_permission_install_apps">Povolenie na inštalovanie ľubovoľných aplikácii</string>
+    <string name="onboarding_permission_install_apps">Povolenie na inštalovanie ľubovoľných
+        aplikácii
+    </string>
     <string name="pref_security">Bezpečnosť</string>
     <string name="onboarding_action_finish">Začíname</string>
     <string name="ext_confirm_remove">Odstrániť rozšírenie?</string>
-    <string name="remove_private_extension_message">Naozaj chcete odstrániť \"%s\" rozšírenie?</string>
+    <string name="remove_private_extension_message">Naozaj chcete odstrániť \"%s\" rozšírenie?
+    </string>
     <string name="pref_flash_duration_summary">%1$s ms</string>
     <string name="no_location_set">Nie je nastavené miesto uloženia</string>
     <string name="onboarding_storage_selection_required">Priečinok musí byť vybraný</string>
@@ -658,60 +757,104 @@
     <string name="action_not_now">Nie teraz</string>
     <string name="action_add_anyway">Ajtak pridať</string>
     <string name="pref_onboarding_guide">Príručka na úvod</string>
-    <string name="onboarding_description">Poďme najprv nastaviť nejaké veci. Vždy ich môžete neskôr zmeniť.</string>
-    <string name="onboarding_storage_info">Vyberte priečinok, kde %1$s bude ukladať stiahnuté kapitoly, zálohy a ďalšie.\n\nOdporúčame použiť samostatný priečinok špecificky pre túto aplikáciu.\n\nVybraný priečinok: %2$s</string>
-    <string name="onboarding_storage_help_info">Aktualizujete zo staršej verzie, a nie ste si istí, čo vybrať? Viac informácií nájdete v príručke úložiska.</string>
+    <string name="onboarding_description">Poďme najprv nastaviť nejaké veci. Vždy ich môžete neskôr
+        zmeniť.
+    </string>
+    <string name="onboarding_storage_info">Vyberte priečinok, kde %1$s bude ukladať stiahnuté
+        kapitoly, zálohy a ďalšie.\n\nOdporúčame použiť samostatný priečinok špecificky pre túto
+        aplikáciu.\n\nVybraný priečinok: %2$s
+    </string>
+    <string name="onboarding_storage_help_info">Aktualizujete zo staršej verzie, a nie ste si istí,
+        čo vybrať? Viac informácií nájdete v príručke úložiska.
+    </string>
     <string name="onboarding_storage_help_action">Príručka úložiska</string>
-    <string name="onboarding_permission_install_apps_description">Na inštaláciu rozšírení zdrojov.</string>
+    <string name="onboarding_permission_install_apps_description">Na inštaláciu rozšírení zdrojov.
+    </string>
     <string name="onboarding_permission_notifications">Povolenie posielania notifikácii</string>
-    <string name="onboarding_permission_notifications_description">Notifikácie o aktualizáciach v knižnici a podobne.</string>
+    <string name="onboarding_permission_notifications_description">Notifikácie o aktualizáciach v
+        knižnici a podobne.
+    </string>
     <string name="onboarding_permission_ignore_battery_opts">Využitie batérie v pozadí</string>
-    <string name="onboarding_permission_ignore_battery_opts_description">Vyhnite sa prerušeniam aktualizácie knižnice, sťahovania a obnovy záloh.</string>
-    <string name="onboarding_permission_crashlytics">Poslať záznamy v prípade zlyhania aplikácie</string>
-    <string name="onboarding_permission_crashlytics_description">Poslať anonymizované záznamy v prípade zlyhania aplikácie vývojárom.</string>
+    <string name="onboarding_permission_ignore_battery_opts_description">Vyhnite sa prerušeniam
+        aktualizácie knižnice, sťahovania a obnovy záloh.
+    </string>
+    <string name="onboarding_permission_crashlytics">Poslať záznamy v prípade zlyhania aplikácie
+    </string>
+    <string name="onboarding_permission_crashlytics_description">Poslať anonymizované záznamy v
+        prípade zlyhania aplikácie vývojárom.
+    </string>
     <string name="onboarding_permission_analytics">Povoliť analytické dáta</string>
-    <string name="onboarding_permission_analytics_description">Posielať anonymizované dáta o používaní aplikácie vývojárom pre zlepšenie zážitku.</string>
+    <string name="onboarding_permission_analytics_description">Posielať anonymizované dáta o
+        používaní aplikácie vývojárom pre zlepšenie zážitku.
+    </string>
     <string name="onboarding_permission_action_grant">Povoliť</string>
-    <string name="onboarding_guides_new_user">Prvý krát používate %s? Odporúčame prečítať si príručku pre začiatočníkov.</string>
+    <string name="onboarding_guides_new_user">Prvý krát používate %s? Odporúčame prečítať si
+        príručku pre začiatočníkov.
+    </string>
     <string name="onboarding_guides_returning_user">Inštalujete %s znovu?</string>
     <string name="pref_appearance_summary">Téma, dátum a formát času</string>
     <string name="track_activity_name">Prihlásenie do sledovača</string>
-    <string name="private_settings">Zahrnúť citlivé nastavenia (napr. prihlasovacie údaje do sledovačov)</string>
-    <string name="confirm_tracker_update">Aktualizovať postup na sledovačoch po kapitolu %d?</string>
+    <string name="private_settings">Zahrnúť citlivé nastavenia (napr. prihlasovacie údaje do
+        sledovačov)
+    </string>
+    <string name="confirm_tracker_update">Aktualizovať postup na sledovačoch po kapitolu %d?
+    </string>
     <string name="trackers_updated_summary">Sledovače aktualizované na kapitolu %d</string>
     <string name="label_tracker_section">Sledovače</string>
-    <string name="pref_library_summary">Kategórie, globálna aktualizácia, prechádzanie kapitolami</string>
+    <string name="pref_library_summary">Kategórie, globálna aktualizácia, prechádzanie kapitolami
+    </string>
     <string name="pref_reader_summary">Režim čítania, displej, navigácia</string>
     <string name="pref_downloads_summary">Automatické sťahovanie, sťahovanie dopredu</string>
-    <string name="pref_tracking_summary">Jednosmerná synchronizácia postupu, vylepšená synchronizácia</string>
+    <string name="pref_tracking_summary">Jednosmerná synchronizácia postupu, vylepšená
+        synchronizácia
+    </string>
     <string name="pref_browse_summary">Zdroje, rozšírenia, globálne vyhľadávanie</string>
     <string name="pref_backup_summary">Manuálne &amp; automatické zálohy, miesto v úložisku</string>
     <string name="pref_security_summary">Zamknutie aplikácie, bezpečná obrazovka</string>
-    <string name="pref_advanced_summary">Uložiť záznamy o zlyhaní aplikácie, optimalizácie batérie</string>
+    <string name="pref_advanced_summary">Uložiť záznamy o zlyhaní aplikácie, optimalizácie batérie
+    </string>
     <string name="pref_relative_format">Relatívne časové značky</string>
     <string name="pref_relative_format_summary">\"%1$s\" namiesto \"%2$s\"</string>
     <string name="pref_display_images_description">Zobraziť obrázky v popisoch mangy</string>
     <string name="pref_firebase">Analytické dáta a záznamy v prípade zlyhania</string>
-    <string name="firebase_summary">Posielaním záznamov v prípade zlyhania aplikácie a analytických údajov nám umožníte identifikovať a opraviť chyby, zlepšiť rýchlost aplikácie a urobiť aplikáciu viac relevantnejšiu pre vaše potreby</string>
+    <string name="firebase_summary">Posielaním záznamov v prípade zlyhania aplikácie a analytických
+        údajov nám umožníte identifikovať a opraviť chyby, zlepšiť rýchlost aplikácie a urobiť
+        aplikáciu viac relevantnejšiu pre vaše potreby
+    </string>
     <string name="pref_library_update_smart_update">Inteligentné aktualizácie</string>
-    <string name="pref_library_update_show_tab_badge">Zobraziť počet neprečítaných na ikone Aktualizácii</string>
+    <string name="pref_library_update_show_tab_badge">Zobraziť počet neprečítaných na ikone
+        Aktualizácii
+    </string>
     <string name="pref_behavior">Správanie</string>
     <string name="pref_chapter_swipe_end">Kapitola po potiahnutí prstom doprava</string>
     <string name="pref_chapter_swipe_start">Kapitola po potiahnutí prstom doľava</string>
-    <string name="pref_mark_duplicate_read_chapter_read">Označiť duplikátne kapitoly ako prečítané</string>
+    <string name="pref_mark_duplicate_read_chapter_read">Označiť duplikátne kapitoly ako prečítané
+    </string>
     <string name="pref_mark_duplicate_read_chapter_read_existing">Po prečítaní kapitoly</string>
     <string name="pref_mark_duplicate_read_chapter_read_new">Po získaní novej kapitoly</string>
-    <string name="pref_hide_missing_chapter_indicators">Schovať chýbajúce indikátory kapitol</string>
-    <string name="pref_disallow_non_ascii_filenames">Zakázať názvy súborov, ktoré nie sú v kódovaní ASCII</string>
-    <string name="pref_disallow_non_ascii_filenames_details">Zaručí kompatibilitu s niektorými úložiskami, ktoré nepodporujú kódovanie Unicode. Keď je táto možnosť zvolená, budete musieť manuálne premenovať priečinky zdrojov a mangy tak, že nahradíte znaky, ktoré nie sú podporované v kódovaní ASCII, ich malými hexadecimálnymi reprezentáciami. Súbory kapitol netreba premenovávať.</string>
+    <string name="pref_hide_missing_chapter_indicators">Schovať chýbajúce indikátory kapitol
+    </string>
+    <string name="pref_disallow_non_ascii_filenames">Zakázať názvy súborov, ktoré nie sú v kódovaní
+        ASCII
+    </string>
+    <string name="pref_disallow_non_ascii_filenames_details">Zaručí kompatibilitu s niektorými
+        úložiskami, ktoré nepodporujú kódovanie Unicode. Keď je táto možnosť zvolená, budete musieť
+        manuálne premenovať priečinky zdrojov a mangy tak, že nahradíte znaky, ktoré nie sú
+        podporované v kódovaní ASCII, ich malými hexadecimálnymi reprezentáciami. Súbory kapitol
+        netreba premenovávať.
+    </string>
     <string name="ext_remove">Odstrániť</string>
-    <string name="ext_permission_install_apps_warning">Na inštaláciu rozšírení sú potrebné povolenia. Ťuknite sem, aby ste ich udelili.</string>
+    <string name="ext_permission_install_apps_warning">Na inštaláciu rozšírení sú potrebné
+        povolenia. Ťuknite sem, aby ste ich udelili.
+    </string>
     <string name="ext_revoke_trust">Odstrániť status \"dôveryhodné\" z neznámych rozšírení</string>
     <string name="label_extension_repos">Repozitáre rozšírení</string>
     <string name="information_empty_repos">Nemáte nastavené žiadne repozitáre.</string>
     <string name="action_add_repo">Pridať repozitár</string>
     <string name="label_add_repo_input">URL Repozitára</string>
-    <string name="action_add_repo_message">Pridať ďalšie repozitáre do %s. Hodnota by mala byť URL, ktorá končí \"index.min.json\".</string>
+    <string name="action_add_repo_message">Pridať ďalšie repozitáre do %s. Hodnota by mala byť URL,
+        ktorá končí \"index.min.json\".
+    </string>
     <string name="error_repo_exists">Tento repozitár už existuje!</string>
     <string name="action_delete_repo">Odstrániť repozitár</string>
     <string name="invalid_repo_name">Neplatná URL repozitára</string>
@@ -719,7 +862,9 @@
     <string name="add_repo_confirmation">Chcete pridať repozitár \"%s\"?</string>
     <string name="action_open_repo">Open-source repozitár</string>
     <string name="action_replace_repo_title">Otlačok podpisového kľúča už existuje</string>
-    <string name="action_replace_repo_message">Repozitár %1$s má rovnaký otlačok podpisového kľúča ako %2$s.\nAk je toto očakávané, %2$s bude nahradený, inak kontaktuje manažéra repozitára.</string>
+    <string name="action_replace_repo_message">Repozitár %1$s má rovnaký otlačok podpisového kľúča
+        ako %2$s.\nAk je toto očakávané, %2$s bude nahradený, inak kontaktuje manažéra repozitára.
+    </string>
     <string name="pref_page_rotate">Otočiť široké strany, aby sa zmestili</string>
     <string name="pref_page_rotate_invert">Preklopiť orientáciu otočených širokých strán</string>
     <string name="pref_double_tap_zoom">Dvojťuk pre priblíženie</string>
@@ -733,6 +878,10 @@
     <string name="pref_flash_style_white_black">Čiernou aj Bielou</string>
     <string name="pref_hardware_bitmap_threshold">Vlastný prah pre hardvérové bitmapy</string>
     <string name="pref_hardware_bitmap_threshold_default">Predvolený (%d)</string>
-    <string name="pref_hardware_bitmap_threshold_summary">Ak čítacie rozhranie načítava prázdne obrázky, postupne znížte prah.\nVybrané: %s</string>
-    <string name="pref_always_decode_long_strip_with_ssiv_2">Použiť starší dekodér pre čítacie rozhranie \"dlhé pásy\"</string>
+    <string name="pref_hardware_bitmap_threshold_summary">Ak čítacie rozhranie načítava prázdne
+        obrázky, postupne znížte prah.\nVybrané: %s
+    </string>
+    <string name="pref_always_decode_long_strip_with_ssiv_2">Použiť starší dekodér pre čítacie
+        rozhranie \"dlhé pásy\"
+    </string>
 </resources>

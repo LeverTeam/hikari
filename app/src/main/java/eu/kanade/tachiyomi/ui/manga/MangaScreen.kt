@@ -33,7 +33,6 @@ import coil3.request.allowHardware
 import coil3.size.Size
 import eu.kanade.core.util.ifSourcesLoaded
 import eu.kanade.domain.manga.model.hasCustomCover
-import eu.kanade.domain.manga.model.toSManga
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
 import eu.kanade.presentation.components.NavigatorAdaptiveSheet
 import eu.kanade.presentation.manga.ChapterSettingsDialog
@@ -67,6 +66,7 @@ import hikari.feature.migration.dialog.MigrateMangaDialog
 import kotlinx.coroutines.launch
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.manga.model.Manga
+import tachiyomi.domain.manga.model.toSManga
 import tachiyomi.presentation.core.screens.LoadingScreen
 
 class MangaScreen(

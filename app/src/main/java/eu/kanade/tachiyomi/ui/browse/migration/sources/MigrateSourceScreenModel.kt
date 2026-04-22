@@ -3,9 +3,6 @@ package eu.kanade.tachiyomi.ui.browse.migration.sources
 import androidx.compose.runtime.Immutable
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import eu.kanade.domain.source.interactor.GetSourcesWithFavoriteCount
-import eu.kanade.domain.source.interactor.SetMigrateSorting
-import eu.kanade.domain.source.service.SourcePreferences
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
@@ -19,7 +16,10 @@ import kotlinx.coroutines.flow.update
 import logcat.LogPriority
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.system.logcat
+import tachiyomi.domain.source.interactor.GetSourcesWithFavoriteCount
+import tachiyomi.domain.source.interactor.SetMigrateSorting
 import tachiyomi.domain.source.model.Source
+import tachiyomi.domain.source.service.SourcePreferences
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

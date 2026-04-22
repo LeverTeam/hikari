@@ -65,8 +65,10 @@
         <item quantity="other">%d ტრეკერი</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">გამოტოვებულია %d ტავი. ან წყარო აღმოჩენილი არაა, ან ფილტრში მოჰყვა</item>
-        <item quantity="other">გამოტოვებულია %d ტავი. ან წყარო აღმოჩენილი არაა, ან ფილტრში მოჰყვა</item>
+        <item quantity="one">გამოტოვებულია %d ტავი. ან წყარო აღმოჩენილი არაა, ან ფილტრში მოჰყვა
+        </item>
+        <item quantity="other">გამოტოვებულია %d ტავი. ან წყარო აღმოჩენილი არაა, ან ფილტრში მოჰყვა
+        </item>
     </plurals>
     <plurals name="num_repos">
         <item quantity="one">%d რეპო</item>

@@ -41,8 +41,12 @@
         <item quantity="other">%d na tracker</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">Nilaktawan ang %d na kabanata, maaaring ito ay wala sa source o na-filter ang mga ito</item>
-        <item quantity="other">Nilaktawan ang %d na mga kabanata, maaaring wala sa source o na-filter ang mga ito</item>
+        <item quantity="one">Nilaktawan ang %d na kabanata, maaaring ito ay wala sa source o
+            na-filter ang mga ito
+        </item>
+        <item quantity="other">Nilaktawan ang %d na mga kabanata, maaaring wala sa source o
+            na-filter ang mga ito
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="one">Kahapon</item>

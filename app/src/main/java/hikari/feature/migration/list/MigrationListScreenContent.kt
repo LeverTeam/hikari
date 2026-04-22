@@ -266,6 +266,7 @@ fun MigrationListItemResult(
                     CircularProgressIndicator()
                 }
             }
+
             MigratingManga.SearchResult.NotFound -> {
                 Column(
                     Modifier
@@ -289,6 +290,7 @@ fun MigrationListItemResult(
                     )
                 }
             }
+
             is MigratingManga.SearchResult.Success -> {
                 MigrationListItem(
                     modifier = Modifier.fillMaxSize(),
@@ -324,6 +326,7 @@ private fun MigrationListItemAction(
                     )
                 }
             }
+
             MigratingManga.SearchResult.NotFound, is MigratingManga.SearchResult.Success -> {
                 IconButton(onClick = { menuExpanded = true }) {
                     Icon(

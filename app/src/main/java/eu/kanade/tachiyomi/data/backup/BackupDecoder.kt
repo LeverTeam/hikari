@@ -34,6 +34,7 @@ class BackupDecoder(
                 MAGIC_JSON_SIGNATURE1, MAGIC_JSON_SIGNATURE2, MAGIC_JSON_SIGNATURE3 -> {
                     throw IOException(context.stringResource(MR.strings.invalid_backup_file_json))
                 }
+
                 else -> source
             }.use { it.readByteArray() }
 

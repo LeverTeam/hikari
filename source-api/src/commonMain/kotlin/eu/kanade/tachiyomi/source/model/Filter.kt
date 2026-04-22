@@ -7,6 +7,7 @@ sealed class Filter<T>(val name: String, var state: T) {
         name,
         state,
     )
+
     abstract class Text(name: String, state: String = "") : Filter<String>(name, state)
     abstract class CheckBox(name: String, state: Boolean = false) : Filter<Boolean>(name, state)
     abstract class TriState(name: String, state: Int = STATE_IGNORE) : Filter<Int>(name, state) {

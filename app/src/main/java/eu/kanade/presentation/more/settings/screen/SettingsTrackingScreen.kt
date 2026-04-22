@@ -57,7 +57,6 @@ import eu.kanade.tachiyomi.data.track.shikimori.ShikimoriApi
 import eu.kanade.tachiyomi.util.system.openInBrowser
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentMap
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.withUIContext
@@ -104,6 +103,7 @@ object SettingsTrackingScreen : SearchableSettings {
                         onDismissRequest = { dialog = null },
                     )
                 }
+
                 is LogoutDialog -> {
                     TrackingLogoutDialog(
                         tracker = tracker,
@@ -212,7 +212,7 @@ object SettingsTrackingScreen : SearchableSettings {
                                     highlightKey = null,
                                 )
                                 if (index < trackers.size - 1) {
-                                        }
+                                }
                             }
                         }
                     }
@@ -245,7 +245,7 @@ object SettingsTrackingScreen : SearchableSettings {
                                     highlightKey = null,
                                 )
                                 if (index < enhancedTrackers.size - 1) {
-                                        }
+                                }
                             }
                         }
                     }

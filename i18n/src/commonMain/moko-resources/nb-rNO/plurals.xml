@@ -33,8 +33,12 @@
         <item quantity="other">%d trackere</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">Hopper over %d kapittel, enten så mangler kilden den eller så har den blitt filtrert ut</item>
-        <item quantity="other">Hopper over %d kapitler, enten så mangler kilden de eller så har de blitt filtrert ut</item>
+        <item quantity="one">Hopper over %d kapittel, enten så mangler kilden den eller så har den
+            blitt filtrert ut
+        </item>
+        <item quantity="other">Hopper over %d kapitler, enten så mangler kilden de eller så har de
+            blitt filtrert ut
+        </item>
     </plurals>
     <plurals name="update_check_notification_ext_updates">
         <item quantity="one">Utvidelsesoppdatering tilgjengelig</item>

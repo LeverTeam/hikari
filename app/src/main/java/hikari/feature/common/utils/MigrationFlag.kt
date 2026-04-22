@@ -1,7 +1,7 @@
 package hikari.feature.common.utils
 
 import dev.icerock.moko.resources.StringResource
-import hikari.domain.migration.models.MigrationFlag
+import tachiyomi.domain.source.model.MigrationFlag
 import tachiyomi.i18n.MR
 
 fun MigrationFlag.getLabel(): StringResource {

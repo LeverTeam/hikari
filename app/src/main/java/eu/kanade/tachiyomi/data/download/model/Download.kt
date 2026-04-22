@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import tachiyomi.domain.chapter.interactor.GetChapter
 import tachiyomi.domain.chapter.model.Chapter
+import tachiyomi.domain.download.model.DownloadState
 import tachiyomi.domain.manga.interactor.GetManga
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.source.service.SourceManager
@@ -32,11 +33,11 @@ data class Download(
         get() = pages?.count { it.status == Page.State.Ready } ?: 0
 
     @Transient
-    private val _statusFlow = MutableStateFlow(State.NOT_DOWNLOADED)
+    private val _statusFlow = MutableStateFlow(DownloadState.NOT_DOWNLOADED)
 
     @Transient
     val statusFlow = _statusFlow.asStateFlow()
-    var status: State
+    var status: DownloadState
         get() = _statusFlow.value
         set(status) {
             _statusFlow.value = status
@@ -62,14 +63,6 @@ data class Download(
             val pages = pages ?: return 0
             return pages.map(Page::progress).average().toInt()
         }
-
-    enum class State(val value: Int) {
-        NOT_DOWNLOADED(0),
-        QUEUE(1),
-        DOWNLOADING(2),
-        DOWNLOADED(3),
-        ERROR(4),
-    }
 
     companion object {
         suspend fun fromChapterId(

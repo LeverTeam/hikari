@@ -1,9 +1,9 @@
-import java.util.Properties
 import hikari.gradle.Config
 import hikari.gradle.getBuildTime
 import hikari.gradle.getLatestCommitCount
 import hikari.gradle.getLatestCommitSha
 import hikari.gradle.tasks.ReplaceShortcutsPlaceholderTask
+import java.util.Properties
 
 plugins {
     alias(hikarix.plugins.android.application)

@@ -2,10 +2,11 @@
 <resources>
     <string name="obsolete_extension_message">ይህ ቅጥያ ከእንግዲህ አይገኝም።</string>
     <string name="untrusted_extension_message">ይህ ቅጥያ ባልታመነ የእውቅና ማረጋገጫ ተፈርሟል እና አልነቃም።
-\n
-\nተንኮል አዘል ቅጥያ በታቺሚሚ ውስጥ የተከማቸውን ማንኛውንም የመግቢያ ማስረጃዎችን በማንበብ ወይም የዘፈቀደ ኮድን ሊፈጽም ይችላል ፡፡
-\n
-\nበዚህ የምስክር ወረቀት በመተማመን እነዚህን አደጋዎች ይቀበላሉ ፡፡</string>
+        \n
+        \nተንኮል አዘል ቅጥያ በታቺሚሚ ውስጥ የተከማቸውን ማንኛውንም የመግቢያ ማስረጃዎችን በማንበብ ወይም የዘፈቀደ ኮድን ሊፈጽም ይችላል ፡፡
+        \n
+        \nበዚህ የምስክር ወረቀት በመተማመን እነዚህን አደጋዎች ይቀበላሉ ፡፡
+    </string>
     <string name="untrusted_extension">የማይታመን ቅጥያ</string>
     <string name="ext_uninstall">ማራገፍ</string>
     <string name="ext_untrusted">የማይታመን</string>
@@ -21,7 +22,9 @@
     <string name="all">ሁሉም</string>
     <string name="default_category_summary">ሁል ጊዜም ይጠይቁ</string>
     <string name="default_category">ነባሪ ምድብ</string>
-    <string name="pref_library_update_refresh_metadata_summary">ቤተ-መጽሐፍትን ሲያዘምኑ አዲስ ሽፋን እና ዝርዝሮችን ይፈልጉ</string>
+    <string name="pref_library_update_refresh_metadata_summary">ቤተ-መጽሐፍትን ሲያዘምኑ አዲስ ሽፋን እና ዝርዝሮችን
+        ይፈልጉ
+    </string>
     <string name="pref_library_update_refresh_metadata">ዲበ ውሂብን በራስ-ሰር አድስ</string>
     <string name="pref_update_only_non_completed">ቀጣይ ማንጋን ብቻ ያዘምኑ</string>
     <string name="charging">ኃይል በመሙላት ላይ</string>
@@ -33,9 +36,12 @@
     <string name="portrait">የቁም ስዕል</string>
     <string name="pref_library_columns">ዕቃዎች በአንድ ረድፍ</string>
     <string name="pref_category_display">ማሳያ</string>
-    <string name="parental_controls_info">ይህ በይፋዊ ወይም በስህተት የተጠቆሙ ሊሆኑ የሚችሉ ቅጥያዎች በመተግበሪያው ውስጥ 18+ ይዘትን እንዳያሳዩ አያግደውም ፡፡</string>
+    <string name="parental_controls_info">ይህ በይፋዊ ወይም በስህተት የተጠቆሙ ሊሆኑ የሚችሉ ቅጥያዎች በመተግበሪያው ውስጥ 18+
+        ይዘትን እንዳያሳዩ አያግደውም ፡፡
+    </string>
     <string name="hide_notification_content">የማሳወቂያ ይዘትን ደብቅ</string>
-    <string name="secure_screen_summary">መተግበሪያዎችን ሲቀይሩ የመተግበሪያ ይዘቶችን ደብቅ እና ቅጽበታዊ ገጽ እይታዎችን ያግዳል</string>
+    <string name="secure_screen_summary">መተግበሪያዎችን ሲቀይሩ የመተግበሪያ ይዘቶችን ደብቅ እና ቅጽበታዊ ገጽ እይታዎችን ያግዳል
+    </string>
     <string name="secure_screen">ደህንነቱ የተጠበቀ ማያ ገጽ</string>
     <string name="lock_never">በጭራሽ</string>
     <string name="lock_always">ሁል ጊዜ</string>
@@ -133,7 +139,9 @@
     <string name="chapters">ምዕራፎች</string>
     <string name="manga">ማንጋ</string>
     <string name="categories">ምድቦች</string>
-    <string name="information_empty_category">ምንም ምድቦች የሉዎትም። ቤተ-መጽሐፍትዎን ለማደራጀት አንድ ለመፍጠር የመደመር አዝራሩን መታ ያድርጉ።</string>
+    <string name="information_empty_category">ምንም ምድቦች የሉዎትም። ቤተ-መጽሐፍትዎን ለማደራጀት አንድ ለመፍጠር የመደመር
+        አዝራሩን መታ ያድርጉ።
+    </string>
     <string name="information_empty_library">ቤተ-መጽሐፍትዎ ባዶ ነው ተከታታዮችን ከአሰሳ ወደ ቤተ-መጽሐፍትዎ ያክሉ።</string>
     <string name="information_no_recent_manga">በቅርቡ የተነበበ ነገር የለም</string>
     <string name="information_no_recent">የቅርብ ጊዜ ዝመናዎች የሉም</string>
@@ -239,7 +247,9 @@
     <string name="pref_restore_backup">ምትኬ ወደነበረበት</string>
     <string name="pref_create_backup_summ">የአሁኑን ቤተ-መጽሐፍት ወደነበረበት ለመመለስ ሊያገለግል ይችላል</string>
     <string name="pref_create_backup">ምትኬን ይፍጠሩ</string>
-    <string name="tracking_info">በክትትል አገልግሎቶች ውስጥ የምዕራፍ እድገትን ለማዘመን የአንድ-መንገድ ማመሳሰል። ከመከታተያ አዝራራቸው የግለሰቦችን የማንጋ ግቤቶች መከታተልን ያዘጋጁ።</string>
+    <string name="tracking_info">በክትትል አገልግሎቶች ውስጥ የምዕራፍ እድገትን ለማዘመን የአንድ-መንገድ ማመሳሰል። ከመከታተያ አዝራራቸው
+        የግለሰቦችን የማንጋ ግቤቶች መከታተልን ያዘጋጁ።
+    </string>
     <string name="services">አገልግሎቶች</string>
     <string name="pref_auto_update_manga_sync">ካነበቡ በኋላ የምዕራፍ እድገትን ያዘምኑ</string>
     <string name="pref_download_new">አዳዲስ ምዕራፎችን ያውርዱ</string>

@@ -17,7 +17,7 @@ class GetRemoteManga(
     }
 
     companion object {
-        const val QUERY_POPULAR = "eu.kanade.domain.source.interactor.POPULAR"
-        const val QUERY_LATEST = "eu.kanade.domain.source.interactor.LATEST"
+        const val QUERY_POPULAR = "tachiyomi.domain.source.interactor.POPULAR"
+        const val QUERY_LATEST = "tachiyomi.domain.source.interactor.LATEST"
     }
 }

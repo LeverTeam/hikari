@@ -46,7 +46,8 @@
     </plurals>
     <plurals name="missing_chapters_warning">
         <item quantity="one">Skipping %d अध्यायः, स्रोतः तस्य अभावः वा तस्य निष्कासनं अस्ति</item>
-        <item quantity="other">Skipping %d अध्यायाः, स्रोतः तेषां अभावः वा तेषां निष्कासनं अस्ति</item>
+        <item quantity="other">Skipping %d अध्यायाः, स्रोतः तेषां अभावः वा तेषां निष्कासनं अस्ति
+        </item>
     </plurals>
     <plurals name="next_unread_chapters">
         <item quantity="one">अगला अपठितः अध्यायः</item>

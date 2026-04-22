@@ -51,9 +51,15 @@
         <item quantity="other">%d monitoradores</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">Pulando %d capítulo, ou ele está faltando na fonte, ou ele foi filtrado</item>
-        <item quantity="many">Pulando %d capítulos, ou eles estão faltando na fonte, ou eles foram filtrados</item>
-        <item quantity="other">Pulando %d capítulos, ou eles estão faltando na fonte, ou eles foram filtrados</item>
+        <item quantity="one">Pulando %d capítulo, ou ele está faltando na fonte, ou ele foi
+            filtrado
+        </item>
+        <item quantity="many">Pulando %d capítulos, ou eles estão faltando na fonte, ou eles foram
+            filtrados
+        </item>
+        <item quantity="other">Pulando %d capítulos, ou eles estão faltando na fonte, ou eles foram
+            filtrados
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="one">Ontem</item>
@@ -88,21 +94,21 @@
     <plurals name="migrationListScreen.migrateDialog.migrateTitle">
         <item quantity="one">Migrar %1$d entrada?</item>
         <item quantity="many">Migrar %1$d entradas?</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <plurals name="migrationListScreen.migrateDialog.copyTitle">
         <item quantity="one">Copiar %1$d entrada?</item>
         <item quantity="many">Copiar %1$d entradas?</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <plurals name="migrationListScreen.migrateDialog.skipText">
         <item quantity="one">Uma entrada foi ignorada</item>
         <item quantity="many">%1$d entradas foram ignoradas</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <plurals name="pref_pages">
         <item quantity="one">1 página</item>
         <item quantity="many">%1$s páginas</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
 </resources>

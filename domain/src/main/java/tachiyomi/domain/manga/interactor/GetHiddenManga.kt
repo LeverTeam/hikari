@@ -11,6 +11,7 @@ class GetHiddenManga(
     suspend fun await(sourceId: Long): List<Manga> {
         return mangaRepository.getHiddenMangaBySourceId(sourceId)
     }
+
     suspend fun await(): List<Manga> {
         return mangaRepository.getHiddenManga()
     }

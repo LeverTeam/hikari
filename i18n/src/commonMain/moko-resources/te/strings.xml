@@ -26,7 +26,8 @@
     <string name="action_remove_bookmark">అధ్యాయ గుర్తు చిహ్నాన్ని తొలగించుము</string>
     <string name="action_bookmark">అధ్యాయమును గుర్తు పెట్టుకొనుము</string>
     <string name="action_download">దిగుమతి</string>
-    <string name="action_mark_previous_as_read">దీని మునుపటివాటికి చదివినట్లు గుర్తును పెట్టుము</string>
+    <string name="action_mark_previous_as_read">దీని మునుపటివాటికి చదివినట్లు గుర్తును పెట్టుము
+    </string>
     <string name="action_mark_as_unread">చదవనట్లు గుర్తును పెట్టుము</string>
     <string name="action_mark_as_read">చదివినట్లు గుర్తును పెట్టుము</string>
     <string name="action_select_inverse">ఎంపికలను విపరీతమును చేయుము</string>
@@ -50,7 +51,9 @@
     <string name="chapters">అధ్యాయాలు</string>
     <string name="manga">లైబ్రరీ ఎంట్రీలు</string>
     <string name="categories">విభాగములు</string>
-    <string name="information_empty_category">మీ దగ్గర ఏ విభాగములు లేవు। మీ గ్రంథాలయాన్ని సరికూర్చుకోడానికి ప్లస్ చిహ్నాన్ని నొక్కి కొత్త దాన్ని సృష్టించుకోండి॥</string>
+    <string name="information_empty_category">మీ దగ్గర ఏ విభాగములు లేవు। మీ గ్రంథాలయాన్ని
+        సరికూర్చుకోడానికి ప్లస్ చిహ్నాన్ని నొక్కి కొత్త దాన్ని సృష్టించుకోండి॥
+    </string>
     <string name="information_empty_library">మీ గ్రంథాలయము ఖాళీగా ఉన్నది</string>
     <string name="information_no_recent_manga">ఈ మధ్య మీరు ఏమి చదవలేదు</string>
     <string name="information_no_recent">కొత్త నవీకరణలు లేవు</string>
@@ -128,7 +131,9 @@
     <string name="action_show_errors">తప్పిద వివరములను చూచుటకై నొక్కుము</string>
     <string name="lock_never">ఎప్పుడూ వద్దు</string>
     <string name="secure_screen">తెరను సంరక్షించుము</string>
-    <string name="secure_screen_summary">అనువర్తనములను మారునపుడు వర్తక విషయములను దాయుము మరియు తెర యొక్క చిత్రములను తీయుటను నిరోధించుము</string>
+    <string name="secure_screen_summary">అనువర్తనములను మారునపుడు వర్తక విషయములను దాయుము మరియు తెర
+        యొక్క చిత్రములను తీయుటను నిరోధించుము
+    </string>
     <string name="hide_notification_content">సూచన విషయములను దాయుము</string>
     <string name="pref_category_nsfw_content">పెద్దలకు మాత్రమే (+18) మూలాలు</string>
     <string name="pref_show_nsfw_source">మూలాలు మరియు పొడిగింపుల జాబితాలలో చూపుము</string>
@@ -142,7 +147,8 @@
     <string name="label_stats">గణాంకాలు</string>
     <string name="label_started">ప్రారంభించారు</string>
     <string name="action_close">బంజేయండి</string>
-    <string name="action_display_show_continue_reading_button">చదవడం కొనసాగించే బటన్ చూపియండి</string>
+    <string name="action_display_show_continue_reading_button">చదవడం కొనసాగించే బటన్ చూపియండి
+    </string>
     <string name="label_local">లోకల్</string>
     <string name="label_downloaded">డౌన్లోడ్ అయినవి</string>
     <string name="on">ఓన్</string>
@@ -151,13 +157,15 @@
     <string name="action_sort_unread_count">చదవని లెక్క</string>
     <string name="action_sort_last_manga_update">చివరి అప్డేట్ తనిఖీ</string>
     <string name="action_remove_everything">మొత్తం తీసేయండి</string>
-    <string name="delete_category_confirmation">మీరు \"%s\" క్యాటగిరీ తీసివేయాలి అనుకుంటున్నారా?</string>
+    <string name="delete_category_confirmation">మీరు \"%s\" క్యాటగిరీ తీసివేయాలి అనుకుంటున్నారా?
+    </string>
     <string name="delete_category">క్యాటగిరీ తీసేయండి</string>
     <string name="action_move_to_top_all_for_series">సిరీస్ పైన పెట్టండి</string>
     <string name="action_search_hint">అన్వేషించండి…</string>
     <string name="action_not_now">ఇప్పుడు కాదు</string>
     <string name="action_open_random_manga">ఏదైనా తెరవండి</string>
-    <string name="internal_error">అంతర్గత లోపం: మరింత సమాచారం కోసం క్రాష్ లాగ్‌లను తనిఖీ చేయండి</string>
+    <string name="internal_error">అంతర్గత లోపం: మరింత సమాచారం కోసం క్రాష్ లాగ్‌లను తనిఖీ చేయండి
+    </string>
     <string name="pref_appearance_summary">థీమ్, తేదీ మరియు సమయ ఆకృతి</string>
     <string name="channel_errors">లోపాలూ</string>
     <string name="website">జాలగూడు</string>

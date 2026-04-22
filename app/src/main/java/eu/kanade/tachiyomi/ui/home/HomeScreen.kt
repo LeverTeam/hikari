@@ -32,7 +32,6 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.presentation.util.Screen
 import eu.kanade.presentation.util.isTabletUi
 import eu.kanade.tachiyomi.ui.browse.BrowseTab
@@ -50,6 +49,7 @@ import kotlinx.coroutines.launch
 import soup.compose.material.motion.animation.materialFadeThroughIn
 import soup.compose.material.motion.animation.materialFadeThroughOut
 import tachiyomi.domain.library.service.LibraryPreferences
+import tachiyomi.domain.source.service.SourcePreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.AnimatedNavigationBarItem
 import tachiyomi.presentation.core.components.material.NavigationBar
@@ -162,6 +162,7 @@ object HomeScreen : Screen() {
                                 }
                                 BrowseTab
                             }
+
                             is Tab.More -> MoreTab
                         }
 
@@ -261,6 +262,7 @@ object HomeScreen : Screen() {
                             }
                         }
                     }
+
                     BrowseTab::class.isInstance(tab) -> {
                         val count by produceState(initialValue = 0) {
                             Injekt.get<SourcePreferences>().extensionUpdatesCount.changes()

@@ -18,6 +18,7 @@ class StubSource(
 
     override suspend fun getChapterList(manga: SManga): List<SChapter> =
         throw SourceNotInstalledException()
+
     override suspend fun getPageList(chapter: SChapter): List<Page> =
         throw SourceNotInstalledException()
 

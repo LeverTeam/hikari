@@ -72,6 +72,7 @@ class MangaRepositoryImpl(
     override suspend fun getHiddenMangaBySourceId(sourceId: Long): List<Manga> {
         return handler.awaitList { mangasQueries.getHiddenMangaBySourceId(sourceId, MangaMapper::mapManga) }
     }
+
     override suspend fun getHiddenManga(): List<Manga> {
         return handler.awaitList { mangasQueries.getHiddenManga(MangaMapper::mapManga) }
     }
@@ -106,6 +107,34 @@ class MangaRepositoryImpl(
             mangas_categoriesQueries.deleteMangaCategoryByMangaId(mangaId)
             categoryIds.map { categoryId ->
                 mangas_categoriesQueries.insert(mangaId, categoryId)
+            }
+        }
+    }
+
+    override suspend fun getExcludedScanlators(mangaId: Long): Set<String> {
+        return handler.awaitList {
+            excluded_scanlatorsQueries.getExcludedScanlatorsByMangaId(mangaId)
+        }.toSet()
+    }
+
+    override fun getExcludedScanlatorsAsFlow(mangaId: Long): Flow<Set<String>> {
+        return handler.subscribeToList {
+            excluded_scanlatorsQueries.getExcludedScanlatorsByMangaId(mangaId)
+        }.map { it.toSet() }
+    }
+
+    override suspend fun setExcludedScanlators(mangaId: Long, scanlators: Set<String>) {
+        handler.await(inTransaction = true) {
+            val currentExcluded = handler.awaitList {
+                excluded_scanlatorsQueries.getExcludedScanlatorsByMangaId(mangaId)
+            }.toSet()
+            val toAdd = scanlators.minus(currentExcluded)
+            for (scanlator in toAdd) {
+                excluded_scanlatorsQueries.insert(mangaId, scanlator)
+            }
+            val toRemove = currentExcluded.minus(scanlators)
+            if (toRemove.isNotEmpty()) {
+                excluded_scanlatorsQueries.remove(mangaId, toRemove.toList())
             }
         }
     }

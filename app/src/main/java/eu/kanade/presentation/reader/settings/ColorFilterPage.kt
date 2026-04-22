@@ -10,9 +10,10 @@ import androidx.core.graphics.alpha
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
-import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences.Companion.ColorFilterMode
+import eu.kanade.tachiyomi.ui.reader.setting.ColorFilterMode
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderSettingsScreenModel
 import tachiyomi.core.common.preference.getAndSet
+import tachiyomi.domain.reader.service.ReaderPreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.CheckboxItem
 import tachiyomi.presentation.core.components.SettingsChipRow
@@ -104,7 +105,7 @@ internal fun ColumnScope.ColorFilterPage(screenModel: ReaderSettingsScreenModel)
 
         val colorFilterMode by screenModel.preferences.colorFilterMode.collectAsState()
         SettingsChipRow(MR.strings.pref_color_filter_mode) {
-            ColorFilterMode.mapIndexed { index, it ->
+            ReaderPreferences.ColorFilterMode.mapIndexed { index, it ->
                 FilterChip(
                     selected = colorFilterMode == index,
                     onClick = { screenModel.preferences.colorFilterMode.set(index) },
@@ -127,6 +128,7 @@ internal fun ColumnScope.ColorFilterPage(screenModel: ReaderSettingsScreenModel)
 private fun getColorValue(currentColor: Int, color: Int, mask: Long, bitShift: Int): Int {
     return (color shl bitShift) or (currentColor and mask.inv().toInt())
 }
+
 private const val ALPHA_MASK: Long = 0xFF000000
 private const val RED_MASK: Long = 0x00FF0000
 private const val GREEN_MASK: Long = 0x0000FF00

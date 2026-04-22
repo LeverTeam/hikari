@@ -44,6 +44,8 @@ import uy.kohesive.injekt.api.addSingleton
 import uy.kohesive.injekt.api.addSingletonFactory
 import uy.kohesive.injekt.api.get
 import java.lang.ref.WeakReference
+import tachiyomi.domain.download.service.DownloadManager as DomainDownloadManager
+import tachiyomi.domain.download.service.DownloadProvider as DomainDownloadProvider
 
 private val lock = Any()
 
@@ -115,7 +117,9 @@ class AppModule(val app: Application) : InjektModule {
         addSingletonFactory { ExtensionManager(app) }
 
         addSingletonFactory { DownloadProvider(app) }
+        addSingletonFactory<DomainDownloadProvider> { get<DownloadProvider>() }
         addSingletonFactory { DownloadManager(app) }
+        addSingletonFactory<DomainDownloadManager> { get<DownloadManager>() }
         addSingletonFactory { DownloadCache(app) }
 
         addSingletonFactory { TrackerManager() }

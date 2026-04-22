@@ -62,7 +62,9 @@
     <string name="cover_updated">Обложка обновлена</string>
     <string name="custom_filter">Пользовательский фильтр</string>
     <string name="decode_image_error">Не удалось загрузить изображение</string>
-    <string name="dialog_with_checkbox_remove_description">Это действие удалит дату прочтения этой главы. Вы уверены?</string>
+    <string name="dialog_with_checkbox_remove_description">Это действие удалит дату прочтения этой
+        главы. Вы уверены?
+    </string>
     <string name="dialog_with_checkbox_reset">Сбросить все главы для этой серии</string>
     <string name="disabled">Отключено</string>
     <string name="display_mode_chapter">Глава %1$s</string>
@@ -70,8 +72,12 @@
     <string name="download_notifier_no_network">Нет соединения с сетью</string>
     <string name="download_notifier_text_only_wifi">Нет соединения Wi-Fi</string>
     <string name="download_notifier_title_error">Ошибка</string>
-    <string name="download_notifier_unknown_error">Невозможно скачать главу из-за непредвиденной ошибки</string>
-    <string name="download_queue_error">Невозможно скачать главы. Можете попробовать ещё раз в очереди загрузок</string>
+    <string name="download_notifier_unknown_error">Невозможно скачать главу из-за непредвиденной
+        ошибки
+    </string>
+    <string name="download_queue_error">Невозможно скачать главы. Можете попробовать ещё раз в
+        очереди загрузок
+    </string>
     <string name="download_unread">Непрочитанные главы</string>
     <string name="dropped">Брошено</string>
     <string name="error_category_exists">Категория с таким названием уже существует!</string>
@@ -102,7 +108,9 @@
     <string name="name">Название</string>
     <string name="no_next_chapter">Следующая глава не найдена</string>
     <string name="notification_cover_update_failed">Не удалось обновить обложку</string>
-    <string name="notification_first_add_to_library">Пожалуйста, добавьте серию в библиотеку перед тем, как делать это</string>
+    <string name="notification_first_add_to_library">Пожалуйста, добавьте серию в библиотеку перед
+        тем, как делать это
+    </string>
     <string name="notification_new_chapters">Найдены новые главы</string>
     <string name="on_hold">Отложено</string>
     <string name="ongoing">Выпускается</string>
@@ -110,7 +118,9 @@
     <string name="picture_saved">Картинка сохранена</string>
     <string name="plan_to_read">Планирую прочесть</string>
     <string name="portrait">Портретная</string>
-    <string name="pref_acra_summary">Помогает исправлять все возможные ошибки. Данные пользователя не передаются</string>
+    <string name="pref_acra_summary">Помогает исправлять все возможные ошибки. Данные пользователя
+        не передаются
+    </string>
     <string name="pref_auto_update_manga_sync">Обновлять прогресс после прочтения</string>
     <string name="pref_category_about">Информация</string>
     <string name="pref_category_advanced">Дополнительно</string>
@@ -121,7 +131,9 @@
     <string name="pref_clear_chapter_cache">Очистить кэш глав</string>
     <string name="pref_clear_cookies">Очистить cookies</string>
     <string name="pref_clear_database">Очистить базу данных</string>
-    <string name="pref_clear_database_summary">Удалить историю для серий, которые не находятся в библиотеке</string>
+    <string name="pref_clear_database_summary">Удалить историю для серий, которые не находятся в
+        библиотеке
+    </string>
     <string name="pref_custom_brightness">Пользовательская яркость</string>
     <string name="pref_custom_color_filter">Пользовательский светофильтр</string>
     <string name="pref_download_new">Загружать новые главы</string>
@@ -135,7 +147,8 @@
     <string name="pref_read_with_volume_keys">Клавиши громкости</string>
     <string name="pref_reader_navigation">Навигация</string>
     <string name="pref_reader_theme">Цвет фона</string>
-    <string name="pref_remove_after_marked_as_read">Удалять помеченое вручную как «Прочитано»</string>
+    <string name="pref_remove_after_marked_as_read">Удалять помеченое вручную как «Прочитано»
+    </string>
     <string name="pref_remove_after_read">Удалять после прочтения</string>
     <string name="pref_rotation_type">Ориентация по умолчанию</string>
     <string name="pref_show_page_number">Номер страницы</string>
@@ -170,7 +183,8 @@
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="update_check_confirm">Загрузить</string>
     <string name="update_check_no_new_updates">Нет обновлений</string>
-    <string name="update_check_notification_download_complete">Нажмите для установки обновления</string>
+    <string name="update_check_notification_download_complete">Нажмите для установки обновления
+    </string>
     <string name="update_check_notification_download_error">Ошибка загрузки</string>
     <string name="update_check_notification_download_in_progress">Загрузка…</string>
     <string name="update_check_notification_update_available">Доступно обновление!</string>
@@ -202,7 +216,9 @@
     <string name="no_more_results">Больше нет результатов</string>
     <string name="pref_backup_interval">Частота автоматических резервных копий</string>
     <string name="pref_create_backup">Создать резервную копию</string>
-    <string name="pref_create_backup_summ">Можно использовать для восстановления текущей библиотеки</string>
+    <string name="pref_create_backup_summ">Можно использовать для восстановления текущей
+        библиотеки
+    </string>
     <string name="pref_crop_borders">Обрезать поля</string>
     <string name="pref_restore_backup">Восстановить из резервной копии</string>
     <string name="pref_restore_backup_summ">Восстановить библиотеку из резервной копии</string>
@@ -221,7 +237,9 @@
     <string name="latest">Последние</string>
     <string name="browse">Поисковик</string>
     <string name="channel_common">Общий</string>
-    <string name="information_empty_category">Нет категорий в библиотеке. Нажмите кнопку «Добавить» чтобы создать категорию для организации вашей библиотеки.</string>
+    <string name="information_empty_category">Нет категорий в библиотеке. Нажмите кнопку «Добавить»
+        чтобы создать категорию для организации вашей библиотеки.
+    </string>
     <string name="label_migration">Перенос</string>
     <string name="label_extensions">Расширения</string>
     <string name="label_extension_info">Информация о расширении</string>
@@ -234,9 +252,11 @@
     <string name="ext_untrusted">Ненадёжное</string>
     <string name="ext_uninstall">Удалить</string>
     <string name="untrusted_extension">Ненадёжное расширение</string>
-    <string name="untrusted_extension_message">Вредоносные расширения могут считывать любые хранящиеся учётные данные для входа или выполнять произвольный код.
-\n
-\nДоверяя этому расширению, вы принимаете эти риски.</string>
+    <string name="untrusted_extension_message">Вредоносные расширения могут считывать любые
+        хранящиеся учётные данные для входа или выполнять произвольный код.
+        \n
+        \nДоверяя этому расширению, вы принимаете эти риски.
+    </string>
     <string name="pref_double_tap_anim_speed">Скорость анимации при двойном нажатии</string>
     <string name="double_tap_anim_speed_0">Без анимации</string>
     <string name="double_tap_anim_speed_normal">Нормальная</string>
@@ -244,7 +264,8 @@
     <string name="manga_added_library">Добавлено в библиотеку</string>
     <string name="manga_removed_library">Удалено из библиотеки</string>
     <string name="copied_to_clipboard">Скопировано в буфер обмена:
-\n%1$s</string>
+        \n%1$s
+    </string>
     <string name="migration_dialog_what_to_include">Какие данные перенести</string>
     <string name="migrate">Перенести</string>
     <string name="copy">Копировать</string>
@@ -279,7 +300,9 @@
     <string name="action_webview_refresh">Обновить</string>
     <string name="pref_category_library">Библиотека</string>
     <string name="ext_obsolete">Устаревшее</string>
-    <string name="obsolete_extension_message">Это расширение больше недоступно. Оно может работать неправильно, а также вызвать проблемы с приложением. Рекомендуется его удалить.</string>
+    <string name="obsolete_extension_message">Это расширение больше недоступно. Оно может работать
+        неправильно, а также вызвать проблемы с приложением. Рекомендуется его удалить.
+    </string>
     <string name="pref_date_format">Формат даты</string>
     <string name="pref_category_library_update">Глобальное обновление</string>
     <string name="pref_library_update_schedule">План обновлений</string>
@@ -305,7 +328,9 @@
     <string name="ext_updates_pending">Доступны обновления</string>
     <string name="pref_cutout_short">Показывать содержимое в вырезанной области</string>
     <string name="information_cloudflare_bypass_failure">Не удалось обойти Cloudflare</string>
-    <string name="information_webview_outdated">Пожалуйста, обновите WebView для лучшей совместимости</string>
+    <string name="information_webview_outdated">Пожалуйста, обновите WebView для лучшей
+        совместимости
+    </string>
     <string name="channel_new_chapters">Обновления глав</string>
     <string name="notification_chapters_single_and_more">Глава %1$s и ещё %2$d</string>
     <string name="notification_chapters_multiple">Главы %1$s</string>
@@ -313,12 +338,16 @@
     <string name="pref_category_display">Отображение</string>
     <string name="updating_library">Обновление библиотеки</string>
     <string name="battery_optimization_disabled">Оптимизация батареи уже выключена</string>
-    <string name="pref_disable_battery_optimization_summary">Помогает с обновлением библиотеки и резервной копией в фоне</string>
+    <string name="pref_disable_battery_optimization_summary">Помогает с обновлением библиотеки и
+        резервной копией в фоне
+    </string>
     <string name="pref_disable_battery_optimization">Отключить оптимизацию батареи</string>
     <string name="email">Адрес электронной почты</string>
     <string name="pref_always_show_chapter_transition">Переход между главами</string>
     <string name="hide_notification_content">Скрыть содержимое уведомлений</string>
-    <string name="secure_screen_summary">Защита экрана скрывает содержимое при переключении между приложениями, а также блокирует создание скриншотов</string>
+    <string name="secure_screen_summary">Защита экрана скрывает содержимое при переключении между
+        приложениями, а также блокирует создание скриншотов
+    </string>
     <string name="action_oldest">Старейший</string>
     <string name="action_newest">Новейший</string>
     <string name="action_move_to_top">В начало</string>
@@ -357,15 +386,21 @@
     <string name="viewer">Режим чтения</string>
     <string name="pref_category_for_this_series">Для этой серии</string>
     <string name="gray_background">Серый</string>
-    <string name="battery_optimization_setting_activity_not_found">Не удалось открыть настройки устройства</string>
+    <string name="battery_optimization_setting_activity_not_found">Не удалось открыть настройки
+        устройства
+    </string>
     <string name="pref_refresh_library_covers">Обновить обложки серий</string>
-    <string name="tracking_info">Односторонняя синхронизация для обновления прогресса в сторонних сервисах отслеживания. Настройте отслеживание при помощи кнопки «Отслеживание».</string>
+    <string name="tracking_info">Односторонняя синхронизация для обновления прогресса в сторонних
+        сервисах отслеживания. Настройте отслеживание при помощи кнопки «Отслеживание».
+    </string>
     <string name="sort_by_upload_date">Дата добавления</string>
     <string name="label_data">Данные</string>
     <string name="backup_restore_missing_sources">Отсутствующие источники:</string>
     <string name="invalid_backup_file_missing_manga">Резервная копия не содержит серий.</string>
     <string name="invalid_backup_file">Неверный файл резервной копии:</string>
-    <string name="pref_library_update_refresh_metadata_summary">При обновлении библиотеки проверять наличие новой обложки и сведений</string>
+    <string name="pref_library_update_refresh_metadata_summary">При обновлении библиотеки проверять
+        наличие новой обложки и сведений
+    </string>
     <string name="pref_library_update_refresh_metadata">Обновлять метаданные</string>
     <string name="action_display_comfortable_grid">Удобная сетка</string>
     <string name="action_migrate">Перенести</string>
@@ -374,12 +409,15 @@
     <string name="page_list_empty_error">Страницы не найдены</string>
     <string name="action_enable_all">Включить всё</string>
     <string name="action_disable_all">Отключить всё</string>
-    <string name="pref_show_reading_mode_summary">Ненадолго показать режим чтения при открытии читалки</string>
+    <string name="pref_show_reading_mode_summary">Ненадолго показать режим чтения при открытии
+        читалки
+    </string>
     <string name="pref_show_reading_mode">Показать режим чтения</string>
     <string name="action_start">Начать</string>
     <string name="loader_not_implemented_error">Источник не найден</string>
     <string name="action_disable">Отключить</string>
-    <string name="requires_app_restart">Для вступления в силу требуется перезапуск приложения</string>
+    <string name="requires_app_restart">Для вступления в силу требуется перезапуск приложения
+    </string>
     <string name="label_network">Сеть</string>
     <string name="tapping_inverted_both">Обе оси</string>
     <string name="tapping_inverted_vertical">Вертикально</string>
@@ -390,7 +428,9 @@
     <string name="unknown_author">Неизвестный автор</string>
     <string name="updated_version">Обновлено до %1$s</string>
     <string name="whats_new">Что нового</string>
-    <string name="download_insufficient_space">Не удалось загрузить главы из-за малого объема хранилища</string>
+    <string name="download_insufficient_space">Не удалось загрузить главы из-за малого объема
+        хранилища
+    </string>
     <string name="action_global_search_query">Искать \"%1$s\" глобально</string>
     <string name="pref_category_reading_mode">Режим чтения</string>
     <string name="pref_category_theme">Тема</string>
@@ -399,17 +439,27 @@
     <string name="channel_complete">Завершено</string>
     <string name="channel_progress">Прогресс</string>
     <string name="channel_errors">Ошибки</string>
-    <string name="backup_restore_missing_trackers">Сервисы отслеживания в которые не выполнен вход:</string>
+    <string name="backup_restore_missing_trackers">Сервисы отслеживания в которые не выполнен
+        вход:
+    </string>
     <string name="pref_remove_bookmarked_chapters">Удалять главы с закладками</string>
     <string name="pref_category_delete_chapters">Удаление глав</string>
-    <string name="ext_nsfw_warning">Источики из этого расширения могут содержать контент NSFW (18+)</string>
+    <string name="ext_nsfw_warning">Источики из этого расширения могут содержать контент NSFW
+        (18+)
+    </string>
     <string name="ext_nsfw_short">18+</string>
-    <string name="parental_controls_info">Это не предотвращает появление внутри приложения контента NSFW (18+) из неофициальных или потенциально неправильно помеченных расширений.</string>
+    <string name="parental_controls_info">Это не предотвращает появление внутри приложения контента
+        NSFW (18+) из неофициальных или потенциально неправильно помеченных расширений.
+    </string>
     <string name="no_chapters_error">Нет глав</string>
     <string name="chapter_settings_updated">Настройки главы по умолчанию были обновлены</string>
     <string name="set_chapter_settings_as_default">Установить по умолчанию</string>
-    <string name="also_set_chapter_settings_for_library">Также применить ко всем сериям в моей библиотеке</string>
-    <string name="confirm_set_chapter_settings">Вы уверены, что хотите сохранить эти настройки по умолчанию?</string>
+    <string name="also_set_chapter_settings_for_library">Также применить ко всем сериям в моей
+        библиотеке
+    </string>
+    <string name="confirm_set_chapter_settings">Вы уверены, что хотите сохранить эти настройки по
+        умолчанию?
+    </string>
     <string name="chapter_settings">Настройки главы</string>
     <string name="share_page_info">%1$s: %2$s, страница %3$d</string>
     <string name="action_search_settings">Искать настройки</string>
@@ -433,7 +483,9 @@
     <string name="l_nav">L-образная</string>
     <string name="track_finished_reading_date">Дата окончания</string>
     <string name="track_started_reading_date">Дата начала</string>
-    <string name="pref_dump_crash_logs_summary">Сохраняет журнал сбоев в файл для отправки разработчикам</string>
+    <string name="pref_dump_crash_logs_summary">Сохраняет журнал сбоев в файл для отправки
+        разработчикам
+    </string>
     <string name="pref_dump_crash_logs">Поделиться журналом сбоев</string>
     <string name="action_desc">По убыванию</string>
     <string name="action_asc">По возрастанию</string>
@@ -444,8 +496,12 @@
     <string name="right_and_left_nav">Справа и слева</string>
     <string name="pref_dual_page_split">Разделение широких страниц</string>
     <string name="pref_dual_page_invert">Разделение широких страниц наоборот</string>
-    <string name="pref_dual_page_invert_summary">Если разделение широких страниц не соответствует направлению чтения</string>
-    <string name="backup_restore_content_full">Вам будет нужно установить все недостающие расширения и после этого авторизоваться в сервисах отслеживания для их использования.</string>
+    <string name="pref_dual_page_invert_summary">Если разделение широких страниц не соответствует
+        направлению чтения
+    </string>
+    <string name="backup_restore_content_full">Вам будет нужно установить все недостающие расширения
+        и после этого авторизоваться в сервисах отслеживания для их использования.
+    </string>
     <string name="nav_zone_left">Слева</string>
     <string name="nav_zone_right">Справа</string>
     <string name="nav_zone_next">Следующая</string>
@@ -457,15 +513,21 @@
     <string name="exclude">Исключать: %s</string>
     <string name="include">Включать: %s</string>
     <string name="action_sort_chapter_fetch_date">Последнее получение главы</string>
-    <string name="pref_download_new_categories_details">Серии в исключённых категориях не будут загружаться, даже если находятся во включённых категориях.</string>
-    <string name="pref_library_update_categories_details">Серии в исключённых категориях не будут обновляться, даже если находятся во включённых категориях.</string>
+    <string name="pref_download_new_categories_details">Серии в исключённых категориях не будут
+        загружаться, даже если находятся во включённых категориях.
+    </string>
+    <string name="pref_library_update_categories_details">Серии в исключённых категориях не будут
+        обновляться, даже если находятся во включённых категориях.
+    </string>
     <string name="pref_category_auto_download">Автозагрузка</string>
     <string name="action_show_errors">Нажать, чтобы увидеть подробности</string>
     <string name="update_check_eol">Эта версия Android больше не поддерживается</string>
     <string name="clipboard_copy_error">Не удалось скопировать в буфер обмена</string>
     <string name="rotation_landscape">Альбомная</string>
     <string name="rotation_portrait">Портретная</string>
-    <string name="pref_create_folder_per_manga_summary">Создавать папки в соответствии с названием серии</string>
+    <string name="pref_create_folder_per_manga_summary">Создавать папки в соответствии с названием
+        серии
+    </string>
     <string name="pref_create_folder_per_manga">Сохранять страницы в отдельные папки</string>
     <string name="pref_reader_actions">Действия</string>
     <string name="rotation_type">Ориентация</string>
@@ -488,15 +550,24 @@
     <string name="error_saving_cover">Ошибка сохранения обложки</string>
     <string name="cover_saved">Обложка сохранена</string>
     <string name="manga_cover">Обложка</string>
-    <string name="categorized_display_settings">Каждая категория имеет собственные настройки сортировки</string>
+    <string name="categorized_display_settings">Каждая категория имеет собственные настройки
+        сортировки
+    </string>
     <string name="tracking_guide">Руководство по отслеживанию</string>
     <string name="information_empty_category_dialog">Ваша библиотека не имеет категорий.</string>
     <string name="action_start_downloading_now">Начать загрузку сейчас</string>
     <string name="pref_app_theme">Тема приложения</string>
     <string name="pref_dark_theme_pure_black">Тёмный режим с чистым чёрным</string>
-    <string name="about_dont_kill_my_app">У некоторых производителей есть дополнительные ограничения для приложений, которые убивают фоновые службы. На этом сайте есть более подробная информация о том, как это исправить.</string>
-    <string name="restore_miui_warning">Резервная копия/Восстановление может не работать должным образом, если отключена «Оптимизация MIUI».</string>
-    <string name="enhanced_tracking_info">Предоставляет расширенные возможности для определённых источников. Серии будут автоматически отслеживаться при добавлении в библиотеку.</string>
+    <string name="about_dont_kill_my_app">У некоторых производителей есть дополнительные ограничения
+        для приложений, которые убивают фоновые службы. На этом сайте есть более подробная
+        информация о том, как это исправить.
+    </string>
+    <string name="restore_miui_warning">Резервная копия/Восстановление может не работать должным
+        образом, если отключена «Оптимизация MIUI».
+    </string>
+    <string name="enhanced_tracking_info">Предоставляет расширенные возможности для определённых
+        источников. Серии будут автоматически отслеживаться при добавлении в библиотеку.
+    </string>
     <string name="enhanced_services">Расширенные сервисы отслеживания</string>
     <string name="theme_monet">Динамическая</string>
     <string name="label_background_activity">Фоновая активность</string>
@@ -507,7 +578,8 @@
     <string name="pref_hide_threshold">Чувствительность скрытия меню при прокрутке</string>
     <string name="pref_inverted_colors">Цвета наоборот</string>
     <string name="relative_time_today">Сегодня</string>
-    <string name="confirm_lock_change">Выполните аутентификацию, чтобы подтвердить изменение</string>
+    <string name="confirm_lock_change">Выполните аутентификацию, чтобы подтвердить изменение
+    </string>
     <string name="label_default">По умолчанию</string>
     <string name="pref_category_appearance">Отображение</string>
     <string name="getting_started_guide">Руководство по началу работы с приложением</string>
@@ -516,29 +588,43 @@
     <string name="pref_remove_exclude_categories">Исключённые категории</string>
     <string name="help_translate">Помочь с переводом</string>
     <string name="ext_app_info">О приложении</string>
-    <string name="ext_installer_shizuku_unavailable_dialog">Установите и запустите Shizuku, чтобы использовать его как установщик расширений.</string>
+    <string name="ext_installer_shizuku_unavailable_dialog">Установите и запустите Shizuku, чтобы
+        использовать его как установщик расширений.
+    </string>
     <string name="ext_installer_shizuku_stopped">Shizuku не работает</string>
     <string name="ext_installer_legacy">По умолчанию</string>
     <string name="ext_installer_pref">Установщик</string>
     <string name="ext_install_service_notif">Установка расширения…</string>
     <string name="action_sort_count">Всего серий</string>
     <string name="pref_verbose_logging">Подробное ведение журнала</string>
-    <string name="pref_verbose_logging_summary">Записывать подробный журнал в системный журнал (Снижает производительность приложения)</string>
+    <string name="pref_verbose_logging_summary">Записывать подробный журнал в системный журнал
+        (Снижает производительность приложения)
+    </string>
     <string name="action_display_language_badge">Язык</string>
     <string name="label_warning">Предупреждение</string>
-    <string name="notification_size_warning">Большое количество обновлений может привести к замедлению работы источников и увеличению расхода батареи. Нажмите для подробностей.</string>
-    <string name="backup_info">Настоятельно рекомендуется хранить резервные копии в других местах или сервисах. Резервные копии могут содержать конфиденциальную информацию, как, например, пароли. Будьте осторожны при их отправке.</string>
+    <string name="notification_size_warning">Большое количество обновлений может привести к
+        замедлению работы источников и увеличению расхода батареи. Нажмите для подробностей.
+    </string>
+    <string name="backup_info">Настоятельно рекомендуется хранить резервные копии в других местах
+        или сервисах. Резервные копии могут содержать конфиденциальную информацию, как, например,
+        пароли. Будьте осторожны при их отправке.
+    </string>
     <string name="connected_to_wifi">Только по Wi-Fi</string>
-    <string name="download_queue_size_warning">Предупреждение: Большое количество загрузок может привести к замедлению работы источников и/или блокировке %s. Нажмите для подробностей.</string>
+    <string name="download_queue_size_warning">Предупреждение: Большое количество загрузок может
+        привести к замедлению работы источников и/или блокировке %s. Нажмите для подробностей.
+    </string>
     <string name="ext_update_all">Обновить все</string>
     <string name="channel_app_updates">Обновления приложения</string>
     <string name="pref_auto_clear_chapter_cache">Очищать кэш глав при запуске приложения</string>
-    <string name="clear_database_source_item_count">%1$d не библиотечных серий в базе данных</string>
+    <string name="clear_database_source_item_count">%1$d не библиотечных серий в базе данных
+    </string>
     <string name="database_clean">Нечего очищать</string>
     <string name="extension_api_error">Не удалось получить доступные расширения</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
-    <string name="pref_update_only_completely_read">Пропускать серии с непрочитанными главами</string>
-    <string name="library_errors_help">Для помощи в исправлении ошибок библиотеки, нажмите %1$s</string>
+    <string name="pref_update_only_completely_read">Пропускать серии с непрочитанными главами
+    </string>
+    <string name="library_errors_help">Для помощи в исправлении ошибок библиотеки, нажмите %1$s
+    </string>
     <string name="save_chapter_as_cbz">Сохранить как архив CBZ</string>
     <string name="cancelled">Отменено</string>
     <string name="on_hiatus">Перерыв</string>
@@ -566,11 +652,15 @@
     <string name="source_empty_screen">Не найдено источников</string>
     <string name="action_sort_last_manga_update">Последняя проверка обновления</string>
     <string name="action_sort_unread_count">Оставшиеся главы</string>
-    <string name="download_notifier_split_page_not_found">Страница %d не найдена, при разделении</string>
+    <string name="download_notifier_split_page_not_found">Страница %d не найдена, при разделении
+    </string>
     <string name="split_tall_images_summary">Улучшает производительность читалки</string>
-    <string name="download_notifier_split_page_path_not_found">Путь к файлам страницы %d не найден</string>
+    <string name="download_notifier_split_page_path_not_found">Путь к файлам страницы %d не найден
+    </string>
     <string name="pref_reset_viewer_flags">Сбросить настройки читалки для каждой серии</string>
-    <string name="pref_reset_viewer_flags_summary">Сбрасывает режим чтения и ориентацию для всех серий</string>
+    <string name="pref_reset_viewer_flags_summary">Сбрасывает режим чтения и ориентацию для всех
+        серий
+    </string>
     <string name="pref_reset_viewer_flags_success">Все настройки читалки сброшены</string>
     <string name="pref_reset_viewer_flags_error">Не удалось сбросить настройки читалки</string>
     <string name="empty_screen">Упс, ошибочка вышла</string>
@@ -583,44 +673,58 @@
     <string name="wish_list">Хочу прочесть</string>
     <string name="unfinished_list">Не закончено</string>
     <string name="network_not_metered">Только в безлимитной сети</string>
-    <string name="cant_open_last_read_chapter">Не удаётся открыть последнюю прочитанную главу</string>
+    <string name="cant_open_last_read_chapter">Не удаётся открыть последнюю прочитанную главу
+    </string>
     <string name="custom_cover">Пользовательская обложка</string>
     <string name="not_installed">Не установлено</string>
     <string name="pref_app_language">Язык приложения</string>
     <string name="description_placeholder">Без описания</string>
-    <string name="internal_error">InternalError: Проверьте журнал сбоев для дополнительной информации</string>
+    <string name="internal_error">InternalError: Проверьте журнал сбоев для дополнительной
+        информации
+    </string>
     <string name="delete_category_confirmation">Хотите ли вы удалить категорию \"%s\"?</string>
     <string name="delete_category">Удалить категорию</string>
     <string name="pref_user_agent_string">User agent по умолчанию</string>
     <string name="pref_reset_user_agent_string">Сбросить user agent по умолчанию</string>
     <string name="action_remove_everything">Удалить всё</string>
-    <string name="appwidget_unavailable_locked">Виджет недоступен при включённой блокировке биометрией</string>
-    <string name="appwidget_updates_description">Посмотреть недавно обновлённые серии в библиотеке</string>
+    <string name="appwidget_unavailable_locked">Виджет недоступен при включённой блокировке
+        биометрией
+    </string>
+    <string name="appwidget_updates_description">Посмотреть недавно обновлённые серии в библиотеке
+    </string>
     <string name="update_already_running">Обновление уже запущено</string>
     <string name="error_user_agent_string_blank">User agent не может быть пустым</string>
     <string name="download_ahead">Загрузить наперёд</string>
     <string name="auto_download_while_reading">При чтении</string>
-    <string name="download_ahead_info">Работает только если текущая + следующая главы уже загружены.</string>
+    <string name="download_ahead_info">Работает только если текущая + следующая главы уже
+        загружены.
+    </string>
     <string name="are_you_sure">Вы уверены?</string>
     <string name="multi_lang">Многоязыковое</string>
     <string name="remove_manga">Вы собираетесь удалить \"%s\" из вашей библиотеки</string>
     <string name="updates_last_update_info">Последнее обновление библиотеки: %s</string>
     <string name="popular">Популярное</string>
     <string name="missing_storage_permission">Не предоставлены разрешения на хранение</string>
-    <string name="skipped_reason_not_always_update">Пропущено, т.к серия не нуждается в обновлении</string>
+    <string name="skipped_reason_not_always_update">Пропущено, т.к серия не нуждается в обновлении
+    </string>
     <string name="action_search_hint">Искать…</string>
     <string name="crash_screen_restart_application">Перезапустить приложение</string>
     <string name="pref_appearance_summary">Тема, формат даты и времени</string>
-    <string name="pref_library_summary">Категории, глобальное обновление, перелистывание глав</string>
+    <string name="pref_library_summary">Категории, глобальное обновление, перелистывание глав
+    </string>
     <string name="pref_reader_summary">Режим чтения, отображение, навигация</string>
     <string name="pref_downloads_summary">Автоматическая загрузка, загрузка наперёд</string>
-    <string name="pref_tracking_summary">Односторонняя синхронизация прогресса, расширенная синхронизация</string>
+    <string name="pref_tracking_summary">Односторонняя синхронизация прогресса, расширенная
+        синхронизация
+    </string>
     <string name="pref_browse_summary">Источники, расширения, глобальный поиск</string>
     <string name="pref_backup_summary">Ручные и автоматические резервные копий, хранилище</string>
     <string name="pref_security_summary">Блокировка приложения, защита экрана</string>
     <string name="pref_advanced_summary">Выгрузка журнала сбоев, оптимизация батареи</string>
     <string name="crash_screen_title">Ой, ошибочка вышла!</string>
-    <string name="crash_screen_description">%s столкнулось с непредвиденной ошибкой. Мы рекомендуем поделиться журналом сбоев в нашем Discord-сервере в ветке поддержки.</string>
+    <string name="crash_screen_description">%s столкнулось с непредвиденной ошибкой. Мы рекомендуем
+        поделиться журналом сбоев в нашем Discord-сервере в ветке поддержки.
+    </string>
     <string name="unknown_title">Неизвестное название</string>
     <string name="invalid_location">Недопустимое расположение: %s</string>
     <string name="error_user_agent_string_invalid">Недопустимый параметр user agent</string>
@@ -629,13 +733,19 @@
     <string name="information_no_entries_found">В этой категории нет серий</string>
     <string name="action_open_random_manga">Открыть случайную серию</string>
     <string name="fdroid_warning">Сборки F-Droid официально не поддерживаются.
-\nНажмите, чтобы узнать больше.</string>
+        \nНажмите, чтобы узнать больше.
+    </string>
     <string name="action_display_show_continue_reading_button">Кнопка «Продолжить чтение»</string>
-    <string name="track_remove_finish_date_conf_text">Это удалит ранее выбранную дату окончания из %s</string>
+    <string name="track_remove_finish_date_conf_text">Это удалит ранее выбранную дату окончания из
+        %s
+    </string>
     <string name="track_remove_date_conf_title">Удалить дату?</string>
-    <string name="track_remove_start_date_conf_text">Это удалит ранее выбранную дату начала из %s</string>
+    <string name="track_remove_start_date_conf_text">Это удалит ранее выбранную дату начала из %s
+    </string>
     <string name="pref_invalidate_download_cache">Переиндексировать загрузки</string>
-    <string name="pref_invalidate_download_cache_summary">Принуждает приложение перепроверить загруженные главы</string>
+    <string name="pref_invalidate_download_cache_summary">Принуждает приложение перепроверить
+        загруженные главы
+    </string>
     <string name="label_started">Начато</string>
     <string name="label_read_duration">Продолжительность чтения</string>
     <string name="label_overview_section">Обзор</string>
@@ -658,7 +768,9 @@
     <string name="label_local">На устройстве</string>
     <string name="action_not_now">Не сейчас</string>
     <string name="information_no_manga_category">Категория пуста</string>
-    <string name="pref_library_update_show_tab_badge">Количество непрочитанных глав на иконке «Обновления»</string>
+    <string name="pref_library_update_show_tab_badge">Количество непрочитанных глав на иконке
+        «Обновления»
+    </string>
     <string name="copied_to_clipboard_plain">Скопировано в буфер обмена</string>
     <string name="enhanced_services_not_installed">Доступно, но источник не установлен: %s</string>
     <string name="pref_skip_dupe_chapters">Пропускать повторяющиеся главы</string>
@@ -680,7 +792,9 @@
     <string name="manga_display_interval_title">Оценивать каждые</string>
     <string name="action_set_interval">Задать интервал</string>
     <string name="manga_display_modified_interval_title">Задать обновления каждые</string>
-    <string name="skipped_reason_not_in_release_period">Пропущено, т.к сегодня не ожидается выпуска</string>
+    <string name="skipped_reason_not_in_release_period">Пропущено, т.к сегодня не ожидается
+        выпуска
+    </string>
     <string name="track_delete_title">Удалить отслеживание %s?</string>
     <string name="track_delete_text">Это удалит отслеживание в приложении.</string>
     <string name="track_delete_remote_text">Также удалить из %s</string>
@@ -689,7 +803,8 @@
     <string name="has_results">Имеет результаты</string>
     <string name="library_sync_complete">Синхронизация библиотеки завершена</string>
     <string name="syncing_library">Синхронизация библиотеки</string>
-    <string name="information_cloudflare_help">Нажмите здесь, чтобы получить помощь с Cloudflare</string>
+    <string name="information_cloudflare_help">Нажмите здесь, чтобы получить помощь с Cloudflare
+    </string>
     <string name="download_cache_invalidated">Пересоздаётся индекс загрузок</string>
     <string name="create_backup_file_error">Не удалось создать файл резервной копии</string>
     <string name="track_activity_name">Вход в сервис отслеживания</string>
@@ -722,39 +837,59 @@
     <string name="action_menu_overflow_description">Другие опции</string>
     <string name="action_bar_up_description">Перейти вверх</string>
     <string name="pref_storage_location">Путь хранилища</string>
-    <string name="pref_storage_location_info">Используется для автоматических резевных копии, загрузок глав и источнике на устройстве.</string>
+    <string name="pref_storage_location_info">Используется для автоматических резевных копии,
+        загрузок глав и источнике на устройстве.
+    </string>
     <string name="onboarding_storage_action_select">Выбрать папку</string>
     <string name="pref_onboarding_guide">Руководство для начинающих</string>
-    <string name="onboarding_guides_new_user">Новичок в %s? Мы настоятельно рекомендуем ознакомиться с нашим руководством.</string>
+    <string name="onboarding_guides_new_user">Новичок в %s? Мы настоятельно рекомендуем ознакомиться
+        с нашим руководством.
+    </string>
     <string name="onboarding_action_finish">Начать</string>
     <string name="onboarding_storage_selection_required">Необходимо выбрать папку</string>
     <string name="onboarding_heading">Добро пожаловать!</string>
     <string name="onboarding_guides_returning_user">Переустанавливаете %s?</string>
     <string name="onboarding_action_skip">Пропустить</string>
     <string name="onboarding_action_next">Следующее</string>
-    <string name="onboarding_description">Давайте настроем парочку вещей. Вы всегда можете их поменять позже в настройках.</string>
+    <string name="onboarding_description">Давайте настроем парочку вещей. Вы всегда можете их
+        поменять позже в настройках.
+    </string>
     <string name="no_location_set">Не указан путь хранилища</string>
-    <string name="onboarding_storage_info">Выберите папку где %1$s будет хранить загруженные главы, резервные копии и другое.
-\n
-\nРекомендуется использовать выделенную папку.
-\n
-\nВыбранная папка: %2$s</string>
+    <string name="onboarding_storage_info">Выберите папку где %1$s будет хранить загруженные главы,
+        резервные копии и другое.
+        \n
+        \nРекомендуется использовать выделенную папку.
+        \n
+        \nВыбранная папка: %2$s
+    </string>
     <string name="onboarding_permission_notifications">Разрешения для уведомлений</string>
     <string name="onboarding_permission_install_apps">Разрешения для установки приложений</string>
-    <string name="onboarding_permission_ignore_battery_opts_description">Позволит избежать прерывания длительных обновлений библиотеки, загрузок и восстановлений резервных копий.</string>
+    <string name="onboarding_permission_ignore_battery_opts_description">Позволит избежать
+        прерывания длительных обновлений библиотеки, загрузок и восстановлений резервных копий.
+    </string>
     <string name="onboarding_permission_ignore_battery_opts">Использование батареи в фоне</string>
-    <string name="onboarding_permission_install_apps_description">Позволит устанавливать расширения источников.</string>
-    <string name="onboarding_permission_notifications_description">Получать уведомления об обновлениях библиотеки и т.д.</string>
+    <string name="onboarding_permission_install_apps_description">Позволит устанавливать расширения
+        источников.
+    </string>
+    <string name="onboarding_permission_notifications_description">Получать уведомления об
+        обновлениях библиотеки и т.д.
+    </string>
     <string name="onboarding_permission_action_grant">Предоставить</string>
     <string name="available_disk_space_info">Доступно: %1$s / Всего: %2$s</string>
-    <string name="ext_permission_install_apps_warning">Нужны разрешения для установки расширений. Нажмите сюда, чтобы их предоставить.</string>
-    <string name="private_settings">Включать конфиденциальные настройки (например, токены для входа в службы отслеживания)</string>
+    <string name="ext_permission_install_apps_warning">Нужны разрешения для установки расширений.
+        Нажмите сюда, чтобы их предоставить.
+    </string>
+    <string name="private_settings">Включать конфиденциальные настройки (например, токены для входа
+        в службы отслеживания)
+    </string>
     <string name="invalid_backup_file_error">Полная ошибка:</string>
     <string name="manga_interval_custom_amount">Настраиваемая частота обновления:</string>
     <string name="error_repo_exists">Этот репозиторий уже существует!</string>
     <string name="pref_library_update_smart_update">Умное обновление</string>
     <string name="invalid_repo_name">Недопустимый URL-адрес репозитория</string>
-    <string name="action_add_repo_message">Добавить дополнительные репозиторий в %s. Это должны быть URL-адреса которые заканчиваться на \"index.min.json\".</string>
+    <string name="action_add_repo_message">Добавить дополнительные репозиторий в %s. Это должны быть
+        URL-адреса которые заканчиваться на \"index.min.json\".
+    </string>
     <string name="delete_repo_confirmation">Хотите ли вы удалить репозиторий \"%s\"?</string>
     <string name="action_delete_repo">Удалить репозиторий</string>
     <string name="action_add_repo">Добавить репозиторий</string>
@@ -762,17 +897,24 @@
     <string name="label_extension_repos">Репозитории расширений</string>
     <string name="label_add_repo_input">URL-адрес репозитория</string>
     <string name="onboarding_storage_help_action">Руководство по хранению</string>
-    <string name="onboarding_storage_help_info">Обновляетесь со старой версии и не знаете, что выбрать? Обратите внимание на руководство по хранению для большей информации.</string>
+    <string name="onboarding_storage_help_info">Обновляетесь со старой версии и не знаете, что
+        выбрать? Обратите внимание на руководство по хранению для большей информации.
+    </string>
     <string name="ext_revoke_trust">Убрать доверие к ненадёжным расширениям</string>
     <string name="action_open_repo">Открыть репозиторий источника</string>
     <string name="pref_webtoon_disable_zoom_out">Отключить уменьшение масштаба</string>
     <string name="action_add_anyway">Добавить в любом случае</string>
     <string name="pref_display_profile">Пользовательский профиль отображения</string>
     <string name="action_replace_repo">Заменить</string>
-    <string name="action_replace_repo_message">Репозиторий %1$s имеет тот же подписанный ключ отпечатка, что и %2$s.
-\nЕсли это так и задумано, %2$s будет заменён, в противном случае, свяжитесь с сопровождающим вашего репозитория.</string>
+    <string name="action_replace_repo_message">Репозиторий %1$s имеет тот же подписанный ключ
+        отпечатка, что и %2$s.
+        \nЕсли это так и задумано, %2$s будет заменён, в противном случае, свяжитесь с
+        сопровождающим вашего репозитория.
+    </string>
     <string name="action_replace_repo_title">Подписанный ключ отпечатка уже существует</string>
-    <string name="file_picker_uri_permission_unsupported">Не удалось получить постоянный доступ к папке. Приложение может работать некорректно.</string>
+    <string name="file_picker_uri_permission_unsupported">Не удалось получить постоянный доступ к
+        папке. Приложение может работать некорректно.
+    </string>
     <string name="pref_flash_duration">Продолжительность вспышки</string>
     <string name="pref_flash_duration_summary">%1$s мс</string>
     <string name="pref_flash_with">Вспышка с</string>
@@ -780,44 +922,73 @@
     <string name="pref_flash_style_white">Белая</string>
     <string name="pref_flash_style_white_black">Белая и чёрная</string>
     <string name="pref_flash_page_interval">Вспышка каждую</string>
-    <string name="manga_interval_expected_update_null">Эта серия либо завершена, либо дата ее выхода неизвестна.</string>
+    <string name="manga_interval_expected_update_null">Эта серия либо завершена, либо дата ее выхода
+        неизвестна.
+    </string>
     <string name="invalid_backup_file_unknown">Файл резервной копии поврежден</string>
-    <string name="invalid_backup_file_json">Резервное копирование в формате JSON не поддерживается</string>
+    <string name="invalid_backup_file_json">Резервное копирование в формате JSON не поддерживается
+    </string>
     <string name="extensionRepo_settings">Репозитории расширений</string>
     <string name="action_copy_link">Копировать ссылку</string>
-    <string name="pref_download_new_unread_chapters_only">Пропустить скачивание повторяющихся прочитанных глав</string>
+    <string name="pref_download_new_unread_chapters_only">Пропустить скачивание повторяющихся
+        прочитанных глав
+    </string>
     <string name="add_repo_confirmation">Хотите ли вы добавить репозиторий \"%s\"?</string>
     <string name="confirm_tracker_update">Обновить сервисы отслеживания для главы %d?</string>
     <string name="onboarding_permission_analytics">Разрешить аналитику</string>
     <string name="pref_firebase">Аналитика и Журнал сбоев</string>
     <string name="onboarding_permission_crashlytics">Отправить журнал сбоев</string>
-    <string name="onboarding_permission_crashlytics_description">Отправить анонимно журнал сбоев разработчикам.</string>
-    <string name="firebase_summary">Отправляя журнал сбоев и аналитику, вы позволите нам обнаружить и исправить ошибки, улучшить производительность и сделать будущие обновления более актуальными для ваших потребностей</string>
-    <string name="onboarding_permission_analytics_description">Отправить анонимно данные об использовании для улучшения функций приложения.</string>
+    <string name="onboarding_permission_crashlytics_description">Отправить анонимно журнал сбоев
+        разработчикам.
+    </string>
+    <string name="firebase_summary">Отправляя журнал сбоев и аналитику, вы позволите нам обнаружить
+        и исправить ошибки, улучшить производительность и сделать будущие обновления более
+        актуальными для ваших потребностей
+    </string>
+    <string name="onboarding_permission_analytics_description">Отправить анонимно данные об
+        использовании для улучшения функций приложения.
+    </string>
     <string name="pref_security">Безопасность</string>
     <string name="action_sort_random">Случайно</string>
     <string name="ext_remove">Удалить</string>
     <string name="ext_confirm_remove">Удалить расширение?</string>
-    <string name="remove_private_extension_message">Вы действительно хотите удалить расширение \"%s\"?</string>
+    <string name="remove_private_extension_message">Вы действительно хотите удалить расширение
+        \"%s\"?
+    </string>
     <string name="non_library_settings">Все прочитанные серии</string>
     <string name="trackers_updated_summary">Сервисы отслеживания обновлены для главы %d</string>
-    <string name="pref_auto_update_manga_on_mark_read">Обновлять прогресс, когда отмечено как «Прочитано»</string>
-    <string name="pref_hardware_bitmap_threshold_summary">Если читалка загружает пустое изображение, постепенно уменьшайте пороговую обработку.\nВыбрано: %s</string>
-    <string name="pref_hardware_bitmap_threshold">Пользовательская аппаратная пороговая обработка растрового изображения</string>
+    <string name="pref_auto_update_manga_on_mark_read">Обновлять прогресс, когда отмечено как
+        «Прочитано»
+    </string>
+    <string name="pref_hardware_bitmap_threshold_summary">Если читалка загружает пустое изображение,
+        постепенно уменьшайте пороговую обработку.\nВыбрано: %s
+    </string>
+    <string name="pref_hardware_bitmap_threshold">Пользовательская аппаратная пороговая обработка
+        растрового изображения
+    </string>
     <string name="pref_hardware_bitmap_threshold_default">По умолчанию (%d)</string>
-    <string name="pref_always_decode_long_strip_with_ssiv_summary">Влияет на производительность. Включите этот параметр, если пороговая обработка растрового изображения не помогает с ошибками, связанными с пустыми изображениями</string>
-    <string name="pref_incognito_mode_extension_summary">Приостановить историю чтения для расширений</string>
+    <string name="pref_always_decode_long_strip_with_ssiv_summary">Влияет на производительность.
+        Включите этот параметр, если пороговая обработка растрового изображения не помогает с
+        ошибками, связанными с пустыми изображениями
+    </string>
+    <string name="pref_incognito_mode_extension_summary">Приостановить историю чтения для
+        расширений
+    </string>
     <string name="label_auto">Авто</string>
     <string name="tracked_privately">Отслеживается приватно</string>
     <string name="action_toggle_private_on">Отслеживать приватно</string>
     <string name="action_toggle_private_off">Отслеживать публично</string>
-    <string name="pref_always_decode_long_strip_with_ssiv_2">Использовать старый декодер для читалки с длинными страницами</string>
+    <string name="pref_always_decode_long_strip_with_ssiv_2">Использовать старый декодер для читалки
+        с длинными страницами
+    </string>
     <string name="export">Экспортировать</string>
     <string name="artist">Художник</string>
     <string name="library_exported">Библиотека экспортирована</string>
     <string name="author">Автор</string>
     <string name="library_list">Список библиотеки</string>
-    <string name="pref_mark_duplicate_read_chapter_read">Отмечать дублированную прочитанную главу как \"Прочитано\"</string>
+    <string name="pref_mark_duplicate_read_chapter_read">Отмечать дублированную прочитанную главу
+        как \"Прочитано\"
+    </string>
     <string name="action_display_unread_badge">Непрочитанные главы</string>
     <string name="pref_behavior">Поведение</string>
     <string name="pref_mark_duplicate_read_chapter_read_existing">После прочтения главы</string>
@@ -826,15 +997,25 @@
     <string name="action_notes">Заметки</string>
     <string name="action_edit_notes">Изменить заметки</string>
     <string name="possible_duplicates_title">Возможные дупликаты</string>
-    <string name="possible_duplicates_summary">В вашей библиотеке есть серии с похожим названием.\n\nВыберите серию, чтобы её перенести, или же добавить как дупликат.</string>
+    <string name="possible_duplicates_summary">В вашей библиотеке есть серии с похожим
+        названием.\n\nВыберите серию, чтобы её перенести, или же добавить как дупликат.
+    </string>
     <string name="clear_db_exclude_read">Оставлять серии с прочитанными главами</string>
-    <string name="clear_database_history_warning">Прочитанные главы и прогресс не библиотечных серий будет потерян</string>
+    <string name="clear_database_history_warning">Прочитанные главы и прогресс не библиотечных серий
+        будет потерян
+    </string>
     <string name="clear_database_text">Вы собираетесь удалить записи из базы данных</string>
     <string name="storage_failed_to_create_directory">Ошибка при создании папки: %s</string>
-    <string name="storage_failed_to_create_download_directory">Ошибка при создании папки для загрузок</string>
+    <string name="storage_failed_to_create_download_directory">Ошибка при создании папки для
+        загрузок
+    </string>
     <string name="logging_in">Вход…</string>
-    <string name="pref_update_library_manga_titles">Обновлять названия серий в библиотеке для соответствия в источнике</string>
-    <string name="pref_update_library_manga_titles_summary">Внимание: Если серия была переименована, она будет удалена из очереди загрузок (если присутствует).</string>
+    <string name="pref_update_library_manga_titles">Обновлять названия серий в библиотеке для
+        соответствия в источнике
+    </string>
+    <string name="pref_update_library_manga_titles_summary">Внимание: Если серия была переименована,
+        она будет удалена из очереди загрузок (если присутствует).
+    </string>
     <string name="migrationConfigScreen.selectedHeader">Выбрано</string>
     <string name="migrationConfigScreen.availableHeader">Доступно</string>
     <string name="migrationConfigScreen.selectAllLabel">Выбрать всё</string>
@@ -842,18 +1023,36 @@
     <string name="migrationConfigScreen.selectPinnedLabel">Выбрать закреплённые источники</string>
     <string name="migrationConfigScreen.continueButtonText">Продолжить</string>
     <string name="migrationConfigScreen.selectNoneLabel">Ничего не выбирать</string>
-    <string name="migrationConfigScreen.enhancedOptionsWarning">Эти настройки медленные и опасные а также могут привести к ограничениям источников</string>
+    <string name="migrationConfigScreen.enhancedOptionsWarning">Эти настройки медленные и опасные а
+        также могут привести к ограничениям источников
+    </string>
     <string name="migrationConfigScreen.dataToMigrateHeader">Какие данные перенести</string>
-    <string name="migrationConfigScreen.removeDownloadsTitle">Удалить загрузки текущей серии после переноса</string>
-    <string name="migrationConfigScreen.additionalSearchQuerySupportingText">Помогает сузить результаты поиска добавляя ключевые слова</string>
-    <string name="migrationConfigScreen.hideWithoutUpdatesSubtitle">Показывать серии только, если соответствие имеет дополнительные главы</string>
-    <string name="migrationConfigScreen.additionalSearchQueryLabel">Дополнительные ключевые слова (опционально)</string>
+    <string name="migrationConfigScreen.removeDownloadsTitle">Удалить загрузки текущей серии после
+        переноса
+    </string>
+    <string name="migrationConfigScreen.additionalSearchQuerySupportingText">Помогает сузить
+        результаты поиска добавляя ключевые слова
+    </string>
+    <string name="migrationConfigScreen.hideWithoutUpdatesSubtitle">Показывать серии только, если
+        соответствие имеет дополнительные главы
+    </string>
+    <string name="migrationConfigScreen.additionalSearchQueryLabel">Дополнительные ключевые слова
+        (опционально)
+    </string>
     <string name="migrationConfigScreen.hideUnmatchedTitle">Скрывать серии без совпадений</string>
-    <string name="migrationConfigScreen.hideWithoutUpdatesTitle">Скрывать серии без новых глав</string>
+    <string name="migrationConfigScreen.hideWithoutUpdatesTitle">Скрывать серии без новых глав
+    </string>
     <string name="migrationConfigScreen.deepSearchModeTitle">Расширенный глубокий поиск</string>
-    <string name="migrationConfigScreen.deepSearchModeSubtitle">Разделяет название на ключевые слова для более обширного поиска</string>
-    <string name="migrationConfigScreen.prioritizeByChaptersTitle">Соответствие основанное на количестве глав</string>
-    <string name="migrationConfigScreen.prioritizeByChaptersSubtitle">Если включено, выбирает соответствие находящиеся дальше всех. В противном случает, выбирает первое соответствие по приоритету источника.</string>
+    <string name="migrationConfigScreen.deepSearchModeSubtitle">Разделяет название на ключевые слова
+        для более обширного поиска
+    </string>
+    <string name="migrationConfigScreen.prioritizeByChaptersTitle">Соответствие основанное на
+        количестве глав
+    </string>
+    <string name="migrationConfigScreen.prioritizeByChaptersSubtitle">Если включено, выбирает
+        соответствие находящиеся дальше всех. В противном случает, выбирает первое соответствие по
+        приоритету источника.
+    </string>
     <string name="migrationListScreenTitle">Перенос</string>
     <string name="migrationListScreenTitleWithProgress">Перенос (%1$d/%2$d)</string>
     <string name="migrationListScreen.copyActionLabel">Копировать</string>
@@ -868,20 +1067,32 @@
     <string name="migrationListScreen.migrateDialog.copyLabel">Копировать</string>
     <string name="migrationListScreen.migrateDialog.migrateLabel">Перенести</string>
     <string name="migrationListScreen.progressDialog.cancelLabel">Отменить</string>
-    <string name="migrationListScreen.matchWithoutChapterToast">Не найдено глав, эта серия не может быть использована для переноса</string>
+    <string name="migrationListScreen.matchWithoutChapterToast">Не найдено глав, эта серия не может
+        быть использована для переноса
+    </string>
     <string name="migrationListScreen.copyNowActionLabel">Копировать сейчас</string>
     <string name="migrationListScreen.searchManuallyActionLabel">Искать вручную</string>
     <string name="migrationListScreen.migrateNowActionLabel">Перенести сейчас</string>
     <string name="migrationListScreen.migrateDialog.cancelLabel">Отменить</string>
-    <string name="pref_hide_missing_chapter_indicators">Скрывать индикаторы отсутствующих глав</string>
-    <string name="pref_display_images_description">Отрисововать изображения в описаниях серий</string>
+    <string name="pref_hide_missing_chapter_indicators">Скрывать индикаторы отсутствующих глав
+    </string>
+    <string name="pref_display_images_description">Отрисововать изображения в описаниях серий
+    </string>
     <string name="label_donate">Спонсорство</string>
-    <string name="pref_disallow_non_ascii_filenames">Не позволять наименования файлов в виде non-ASCII</string>
-    <string name="pref_disallow_non_ascii_filenames_details">Обеспечивает совместимость с некоторыми носителями информации, которые не поддерживают Unicode. Когда этот функция включена, вам нужно будет вручную переименовать папки серий и источников, заменив non-ASCII символы на шестнадцатеричные UTF-8 в нижнем регистре. Файлы глав можно не переименовать.</string>
+    <string name="pref_disallow_non_ascii_filenames">Не позволять наименования файлов в виде
+        non-ASCII
+    </string>
+    <string name="pref_disallow_non_ascii_filenames_details">Обеспечивает совместимость с некоторыми
+        носителями информации, которые не поддерживают Unicode. Когда этот функция включена, вам
+        нужно будет вручную переименовать папки серий и источников, заменив non-ASCII символы на
+        шестнадцатеричные UTF-8 в нижнем регистре. Файлы глав можно не переименовать.
+    </string>
     <string name="pref_download_concurrent_sources">Параллельные загрузки с источников</string>
     <string name="action_webview_close_tab">Закрыть вкладку</string>
     <string name="pref_download_concurrent_pages">Параллельные загрузки страниц</string>
-    <string name="pref_download_concurrent_pages_summary">Число одновременных загрузок страниц с источника</string>
+    <string name="pref_download_concurrent_pages_summary">Число одновременных загрузок страниц с
+        источника
+    </string>
     <string name="action_filter_excluded_scanlators">Фильтровать исключенных переводчиков</string>
     <string name="download_bookmarked">В закладках</string>
 </resources>

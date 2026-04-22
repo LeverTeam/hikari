@@ -1,17 +1,17 @@
 package tachiyomi.presentation.core.components.material
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import tachiyomi.presentation.core.components.Pill
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.runtime.getValue
 
 @Composable
 fun TabText(text: String, badgeCount: Int? = null, selected: Boolean) {

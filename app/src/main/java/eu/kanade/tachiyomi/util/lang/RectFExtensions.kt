@@ -1,9 +1,9 @@
 package eu.kanade.tachiyomi.util.lang
 
 import android.graphics.RectF
-import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
+import tachiyomi.domain.reader.model.TappingInvertMode
 
-fun RectF.invert(invertMode: ReaderPreferences.TappingInvertMode): RectF {
+fun RectF.invert(invertMode: TappingInvertMode): RectF {
     val horizontal = invertMode.shouldInvertHorizontal
     val vertical = invertMode.shouldInvertVertical
     return when {

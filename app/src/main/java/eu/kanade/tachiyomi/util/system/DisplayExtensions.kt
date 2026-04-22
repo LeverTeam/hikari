@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
 import android.view.View
-import eu.kanade.domain.ui.UiPreferences
-import eu.kanade.domain.ui.model.TabletUiMode
+import tachiyomi.domain.ui.UiPreferences
+import tachiyomi.domain.ui.model.TabletUiMode
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
@@ -31,6 +31,7 @@ fun Context.prepareTabletUiContext(): Context {
                 Configuration.ORIENTATION_PORTRAIT -> TABLET_UI_MIN_SCREEN_WIDTH_PORTRAIT_DP
                 else -> TABLET_UI_MIN_SCREEN_WIDTH_LANDSCAPE_DP
             }
+
         TabletUiMode.ALWAYS -> true
         TabletUiMode.LANDSCAPE -> configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         TabletUiMode.NEVER -> false

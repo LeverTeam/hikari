@@ -11,8 +11,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
 import kotlinx.coroutines.delay
+import tachiyomi.domain.reader.model.FlashColor
+import tachiyomi.domain.reader.service.ReaderPreferences
 import tachiyomi.presentation.core.util.collectAsState
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -65,13 +66,13 @@ fun DisplayRefreshHost(
         }
 
         val refreshDurationHalf = refreshDuration.milliseconds / 2
-        currentColor = if (flashMode == ReaderPreferences.FlashColor.BLACK) {
+        currentColor = if (flashMode == FlashColor.BLACK) {
             Color.Black
         } else {
             Color.White
         }
         delay(refreshDurationHalf)
-        if (flashMode == ReaderPreferences.FlashColor.WHITE_BLACK) {
+        if (flashMode == FlashColor.WHITE_BLACK) {
             currentColor = Color.Black
         }
         delay(refreshDurationHalf)

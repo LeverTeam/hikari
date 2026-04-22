@@ -113,7 +113,9 @@
     <string name="action_menu">Menu</string>
     <string name="track">Ngelacak</string>
     <string name="chapters">Bab</string>
-    <string name="information_empty_category">Sampeyan ora duwe kategori. Dhemok tombol tambah kanggo nggawe siji kategori kanggo ngatur perpustakaane sampeyan.</string>
+    <string name="information_empty_category">Sampeyan ora duwe kategori. Dhemok tombol tambah
+        kanggo nggawe siji kategori kanggo ngatur perpustakaane sampeyan.
+    </string>
     <string name="information_empty_library">Koleksine sampeyan kosong</string>
     <string name="pref_category_about">Babagan</string>
     <string name="pref_category_advanced">Majeng</string>
@@ -168,7 +170,9 @@
     <string name="theme_system">Tumuti sistem</string>
     <string name="pref_app_theme">Tema aplikasi</string>
     <string name="theme_monet">Dinamis</string>
-    <string name="parental_controls_info">Iki ora nyegah ekstensi kang ora resmi utawa salah dilabeli kanggo nampilake konten NSFW (18+) ing aplikasi.</string>
+    <string name="parental_controls_info">Iki ora nyegah ekstensi kang ora resmi utawa salah
+        dilabeli kanggo nampilake konten NSFW (18+) ing aplikasi.
+    </string>
     <string name="relative_time_today">Dinten puniki</string>
     <string name="pref_category_security">Kaamanan</string>
     <string name="lock_always">Tansah</string>
@@ -176,7 +180,9 @@
     <string name="pref_show_nsfw_source">Tampilaken ing sumber lan dhaptar ekstensi</string>
     <string name="pref_update_only_completely_read">Karo bab durung diwaca</string>
     <string name="pref_manage_notifications">Kelola notifikasi</string>
-    <string name="secure_screen_summary">Amanaken layar sembunikan konten aplikasi wektu ngaleh aplikasi lan blokir tangkapan layar</string>
+    <string name="secure_screen_summary">Amanaken layar sembunikan konten aplikasi wektu ngaleh
+        aplikasi lan blokir tangkapan layar
+    </string>
     <string name="lock_when_idle">Kunci wektu meneng</string>
     <string name="action_move_to_top_all_for_series">Pindah seri mendhuwur</string>
     <string name="pref_dark_theme_pure_black">Mode ireng banget</string>
@@ -185,7 +191,9 @@
     <string name="connected_to_wifi">Namung ing Wi-Fi</string>
     <string name="ext_untrusted">Ora kapracaya</string>
     <string name="pref_update_only_started">Iku durung diwiwiti</string>
-    <string name="pref_library_update_refresh_metadata_summary">periksa sampul lan rinci anyar wektu memerbarui pustaka</string>
+    <string name="pref_library_update_refresh_metadata_summary">periksa sampul lan rinci anyar wektu
+        memerbarui pustaka
+    </string>
     <string name="default_category">kategori gawan</string>
     <string name="include">Kalebu: %s</string>
     <string name="exclude">Kajaba: %s</string>
@@ -212,7 +220,9 @@
     <string name="ext_install_service_notif">Masang ekstensi…</string>
     <string name="ext_installer_pref">Pemasang</string>
     <string name="ext_installer_shizuku_stopped">Shizuku ora lumaku</string>
-    <string name="ext_installer_shizuku_unavailable_dialog">Pasang lan wiwit Shizuku kanggo migunakake Shizuku dadi pemasang ekstensi.</string>
+    <string name="ext_installer_shizuku_unavailable_dialog">Pasang lan wiwit Shizuku kanggo
+        migunakake Shizuku dadi pemasang ekstensi.
+    </string>
     <string name="tapping_inverted_none">Ora</string>
     <string name="tapping_inverted_both">Kaping duane</string>
     <string name="pref_reader_theme">Werna latar</string>
@@ -232,28 +242,43 @@
     <string name="pref_library_update_refresh_metadata">Nganyari metadata otomatis</string>
     <string name="network_not_metered">Jaringan gak kebates tok</string>
     <string name="pref_app_language">Bohoso aplikasi</string>
-    <string name="untrusted_extension_message">Ekstensi iki ditandatangani nganggo sertifikat sing ora dipercaya lan ora diaktifake.\n\nEkstensi angkoro bisa maca kredensial login sing disimpen ing Mihon utawa nglakokake kode sewenang-wenang. Kanthi percaya karo sertifikat iki, sampeyan nampa risiko kasebut.</string>
+    <string name="untrusted_extension_message">Ekstensi iki ditandatangani nganggo sertifikat sing
+        ora dipercaya lan ora diaktifake.\n\nEkstensi angkoro bisa maca kredensial login sing
+        disimpen ing Mihon utawa nglakokake kode sewenang-wenang. Kanthi percaya karo sertifikat
+        iki, sampeyan nampa risiko kasebut.
+    </string>
     <string name="ext_downloading">Ndownload</string>
     <string name="pref_show_navigation_mode">Tampilake overlay zona tutul</string>
-    <string name="pref_library_update_categories_details">Manga ing kategori sing ora kalebu ora bakal dianyari sanajan uga ana ing kategori sing kalebu.</string>
+    <string name="pref_library_update_categories_details">Manga ing kategori sing ora kalebu ora
+        bakal dianyari sanajan uga ana ing kategori sing kalebu.
+    </string>
     <string name="none">Ora ono</string>
     <string name="ext_pending">Ketunda</string>
     <string name="ext_info_version">Versine</string>
     <string name="ext_info_language">Bohoso</string>
     <string name="ext_info_age_rating">Rating umur</string>
     <string name="ext_app_info">Infone aplikasi</string>
-    <string name="pref_show_navigation_mode_summary">Tampilake kanthi ringkes nalika maca dibukak</string>
+    <string name="pref_show_navigation_mode_summary">Tampilake kanthi ringkes nalika maca dibukak
+    </string>
     <string name="pref_dual_page_split">Pamisahan kaca kaping pindho</string>
     <string name="pref_library_update_restriction">Nganyari otomatis watesan piranti</string>
-    <string name="categorized_display_settings">Setelan saben kategori kanggo ngurutake lan tampilan</string>
+    <string name="categorized_display_settings">Setelan saben kategori kanggo ngurutake lan
+        tampilan
+    </string>
     <string name="delete_category_confirmation">Apa sampeyan pengin mbusak kategori \"%s\"?</string>
     <string name="delete_category">Busak kategori</string>
-    <string name="pref_show_reading_mode_summary">Tampilake mode saiki kanthi ringkes nalika maca dibukak</string>
-    <string name="internal_error">InternalError: Priksa log kacilakan kanggo informasi luwih lengkap</string>
+    <string name="pref_show_reading_mode_summary">Tampilake mode saiki kanthi ringkes nalika maca
+        dibukak
+    </string>
+    <string name="internal_error">InternalError: Priksa log kacilakan kanggo informasi luwih
+        lengkap
+    </string>
     <string name="on">Morop</string>
     <string name="pref_crop_borders">Ketok pinggiran</string>
     <string name="pref_dual_page_invert">Ganti panggonan pamisah kaca kaping pindho</string>
-    <string name="pref_dual_page_invert_summary">Yen panggonan pamisah kaca dobel ora cocog karo arah maca</string>
+    <string name="pref_dual_page_invert_summary">Yen panggonan pamisah kaca dobel ora cocog karo
+        arah maca
+    </string>
     <string name="off">Seda</string>
     <string name="pref_custom_brightness">Padhang khusus</string>
     <string name="pref_page_transitions">Animasi transisi kaca</string>
@@ -318,9 +343,14 @@
     <string name="action_add_anyway">Tambahaken mawon</string>
     <string name="pref_onboarding_guide">Panuntun wiwitan</string>
     <string name="onboarding_heading">Sugeng rawuh!</string>
-    <string name="onboarding_description">Ayo awakdewe atur sawetara perkara ndhisik. Sampeyan uga mesthi isa ngowahi ing menu setelan mengko.</string>
+    <string name="onboarding_description">Ayo awakdewe atur sawetara perkara ndhisik. Sampeyan uga
+        mesthi isa ngowahi ing menu setelan mengko.
+    </string>
     <string name="onboarding_action_next">Terusane</string>
     <string name="onboarding_action_finish">Rampung</string>
     <string name="onboarding_action_skip">Nglangkungi</string>
-    <string name="onboarding_storage_info">Milih direktori kanggo nyimpen isi saka %1$s, kalebu unduhan bab, data backup, lan liya-liyane. \n \nApike kudu nganggo direktori kapisah. \n \ndirektori ingkang dipunpilih: %2$s</string>
+    <string name="onboarding_storage_info">Milih direktori kanggo nyimpen isi saka %1$s, kalebu
+        unduhan bab, data backup, lan liya-liyane. \n \nApike kudu nganggo direktori kapisah. \n
+        \ndirektori ingkang dipunpilih: %2$s
+    </string>
 </resources>

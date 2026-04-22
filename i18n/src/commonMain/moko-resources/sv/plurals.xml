@@ -41,8 +41,12 @@
         <item quantity="other">%d spårare</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">Hoppar över %d kapitel, antingen saknar källan det eller så har det filtrerats bort</item>
-        <item quantity="other">Hoppar över %d kapitel, antingen saknar källan dem eller så har de filtrerats bort</item>
+        <item quantity="one">Hoppar över %d kapitel, antingen saknar källan det eller så har det
+            filtrerats bort
+        </item>
+        <item quantity="other">Hoppar över %d kapitel, antingen saknar källan dem eller så har de
+            filtrerats bort
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="one">Igår</item>

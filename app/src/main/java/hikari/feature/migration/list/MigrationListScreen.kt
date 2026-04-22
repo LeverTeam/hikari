@@ -83,18 +83,21 @@ class MigrationListScreen(private val mangaIds: Collection<Long>, private val ex
                     },
                 )
             }
+
             is MigrationListScreenModel.Dialog.Progress -> {
                 MigrationProgressDialog(
                     progress = dialog.progress,
                     exitMigration = screenModel::cancelMigrate,
                 )
             }
+
             MigrationListScreenModel.Dialog.Exit -> {
                 MigrationExitDialog(
                     onDismissRequest = screenModel::dismissDialog,
                     exitMigration = navigator::pop,
                 )
             }
+
             null -> Unit
         }
 

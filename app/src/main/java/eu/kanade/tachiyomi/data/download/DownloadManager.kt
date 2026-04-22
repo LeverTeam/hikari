@@ -21,12 +21,15 @@ import tachiyomi.core.common.util.system.ImageUtil
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.chapter.model.Chapter
+import tachiyomi.domain.download.model.DownloadState
 import tachiyomi.domain.download.service.DownloadPreferences
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.i18n.MR
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
+import tachiyomi.domain.download.model.Download as DomainDownload
+import tachiyomi.domain.download.service.DownloadManager as DomainDownloadManager
 
 /**
  * This class is used to manage chapter downloads in the application. It must be instantiated once
@@ -40,7 +43,7 @@ class DownloadManager(
     private val getCategories: GetCategories = Injekt.get(),
     private val sourceManager: SourceManager = Injekt.get(),
     private val downloadPreferences: DownloadPreferences = Injekt.get(),
-) {
+) : DomainDownloadManager {
 
     /**
      * Downloader whose only task is to download chapters.
@@ -100,12 +103,16 @@ class DownloadManager(
      *
      * @param chapterId the chapter to check.
      */
-    fun getQueuedDownloadOrNull(chapterId: Long): Download? {
+    override fun getQueuedDownloadOrNull(chapterId: Long): DomainDownload? {
+        return queueState.value.find { it.chapter.id == chapterId }?.toDomain()
+    }
+
+    fun getQueuedDownloadImplOrNull(chapterId: Long): Download? {
         return queueState.value.find { it.chapter.id == chapterId }
     }
 
     suspend fun startDownloadNow(chapterId: Long) {
-        val existingDownload = getQueuedDownloadOrNull(chapterId)
+        val existingDownload = getQueuedDownloadImplOrNull(chapterId)
         // If not in queue try to start a new download
         val toAdd = existingDownload ?: Download.fromChapterId(chapterId) ?: return
         queueState.value.toMutableList().apply {
@@ -182,13 +189,13 @@ class DownloadManager(
      * @param sourceId the id of the source of the chapter.
      * @param skipCache whether to skip the directory cache and check in the filesystem.
      */
-    fun isChapterDownloaded(
+    override fun isChapterDownloaded(
         chapterName: String,
         chapterScanlator: String?,
         chapterUrl: String,
         mangaTitle: String,
         sourceId: Long,
-        skipCache: Boolean = false,
+        skipCache: Boolean,
     ): Boolean {
         return cache.isChapterDownloaded(chapterName, chapterScanlator, chapterUrl, mangaTitle, sourceId, skipCache)
     }
@@ -209,8 +216,25 @@ class DownloadManager(
         return cache.getDownloadCount(manga)
     }
 
+    @JvmName("cancelQueuedDownloadsImpl")
     fun cancelQueuedDownloads(downloads: List<Download>) {
         removeFromDownloadQueue(downloads.map { it.chapter })
+    }
+
+    override fun cancelQueuedDownloads(chapterIds: List<Long>) {
+        val downloads = queueState.value.filter { it.chapter.id in chapterIds }
+        cancelQueuedDownloads(downloads)
+    }
+
+    override fun readdDownloadsToStartOfQueue(chapterIds: List<Long>) {
+        val downloads = queueState.value.filter { it.chapter.id in chapterIds }
+        if (downloads.isEmpty()) return
+        queueState.value.toMutableList().apply {
+            removeAll(downloads)
+            addAll(0, downloads)
+            reorderQueue(this)
+        }
+        if (!DownloadJob.isRunning(context)) startDownloads()
     }
 
     /**
@@ -370,7 +394,7 @@ class DownloadManager(
      * @param oldChapter the existing chapter with the old name.
      * @param newChapter the target chapter with the new name.
      */
-    suspend fun renameChapter(source: Source, manga: Manga, oldChapter: Chapter, newChapter: Chapter) {
+    override suspend fun renameChapter(source: Source, manga: Manga, oldChapter: Chapter, newChapter: Chapter) {
         val oldNames = provider.getValidChapterDirNames(oldChapter.name, oldChapter.scanlator, oldChapter.url)
         val mangaDir = provider.getMangaDir(manga.title, source).getOrElse { e ->
             logcat(LogPriority.ERROR, e) { "Manga download folder doesn't exist. Skipping renaming after source sync" }
@@ -417,32 +441,44 @@ class DownloadManager(
         }
     }
 
-    fun statusFlow(): Flow<Download> = queueState
+    override fun statusFlow(): Flow<DomainDownload> = queueState
         .flatMapLatest { downloads ->
             downloads
                 .map { download ->
-                    download.statusFlow.drop(1).map { download }
+                    download.statusFlow.drop(1).map { download.toDomain() }
                 }
                 .merge()
         }
         .onStart {
             emitAll(
-                queueState.value.filter { download -> download.status == Download.State.DOWNLOADING }.asFlow(),
-            )
-        }
-
-    fun progressFlow(): Flow<Download> = queueState
-        .flatMapLatest { downloads ->
-            downloads
-                .map { download ->
-                    download.progressFlow.drop(1).map { download }
-                }
-                .merge()
-        }
-        .onStart {
-            emitAll(
-                queueState.value.filter { download -> download.status == Download.State.DOWNLOADING }
+                queueState.value.filter { download -> download.status == DownloadState.DOWNLOADING }
+                    .map { it.toDomain() }
                     .asFlow(),
             )
         }
+
+    override fun progressFlow(): Flow<DomainDownload> = queueState
+        .flatMapLatest { downloads ->
+            downloads
+                .map { download ->
+                    download.progressFlow.drop(1).map { download.toDomain() }
+                }
+                .merge()
+        }
+        .onStart {
+            emitAll(
+                queueState.value.filter { download -> download.status == DownloadState.DOWNLOADING }
+                    .map { it.toDomain() }
+                    .asFlow(),
+            )
+        }
+
+    private fun Download.toDomain(): DomainDownload {
+        return DomainDownload(
+            chapterId = chapter.id,
+            mangaId = manga.id,
+            status = status,
+            progress = progress,
+        )
+    }
 }

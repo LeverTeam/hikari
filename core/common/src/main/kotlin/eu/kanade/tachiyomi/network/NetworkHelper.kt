@@ -73,9 +73,10 @@ class NetworkHelper(
                 try {
                     cronetInterceptor.intercept(chain)
                 } catch (e: Exception) {
-                    val isCronetError = e is NullPointerException && e.message?.contains("okhttp3.Response\$Builder.body") == true ||
-                        e is java.util.concurrent.ExecutionException ||
-                        e.javaClass.name.contains("org.chromium.net")
+                    val isCronetError =
+                        e is NullPointerException && e.message?.contains("okhttp3.Response\$Builder.body") == true ||
+                            e is java.util.concurrent.ExecutionException ||
+                            e.javaClass.name.contains("org.chromium.net")
 
                     if (isCronetError) {
                         chain.proceed(chain.request())

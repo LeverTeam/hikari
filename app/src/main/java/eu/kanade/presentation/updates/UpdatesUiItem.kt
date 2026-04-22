@@ -32,20 +32,20 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import eu.kanade.presentation.components.relativeDateText
 import eu.kanade.presentation.manga.components.ChapterDownloadAction
 import eu.kanade.presentation.manga.components.ChapterDownloadIndicator
 import eu.kanade.presentation.manga.components.DotSeparatorText
 import eu.kanade.presentation.manga.components.MangaCover
 import eu.kanade.presentation.util.animateItemFastScroll
 import eu.kanade.presentation.util.relativeTimeSpanString
-import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.ui.updates.UpdatesItem
+import tachiyomi.domain.download.model.DownloadState
 import tachiyomi.domain.updates.model.UpdatesWithRelations
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.ListGroupHeader
 import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
 import tachiyomi.presentation.core.components.material.padding
+import tachiyomi.presentation.core.components.relativeDateText
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.selectedBackground
 
@@ -96,6 +96,7 @@ internal fun LazyListScope.updatesUiItems(
                     text = relativeDateText(item.date),
                 )
             }
+
             is UpdatesUiModel.Item -> {
                 val updatesItem = item.item
                 UpdatesUiItem(
@@ -141,7 +142,7 @@ private fun UpdatesUiItem(
     onClickCover: (() -> Unit)?,
     onDownloadChapter: ((ChapterDownloadAction) -> Unit)?,
     // Download Indicator
-    downloadStateProvider: () -> Download.State,
+    downloadStateProvider: () -> DownloadState,
     downloadProgressProvider: () -> Int,
     modifier: Modifier = Modifier,
 ) {

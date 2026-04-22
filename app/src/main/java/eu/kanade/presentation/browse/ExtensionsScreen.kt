@@ -45,7 +45,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.icerock.moko.resources.StringResource
 import eu.kanade.presentation.browse.components.BaseBrowseItem
 import eu.kanade.presentation.browse.components.ExtensionIcon
-import eu.kanade.presentation.components.WarningBanner
 import eu.kanade.presentation.manga.components.DotSeparatorNoSpaceText
 import eu.kanade.presentation.more.settings.screen.browse.ExtensionReposScreen
 import eu.kanade.presentation.util.animateItemFastScroll
@@ -59,6 +58,7 @@ import eu.kanade.tachiyomi.util.system.launchRequestPackageInstallsPermission
 import kotlinx.collections.immutable.persistentListOf
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
+import tachiyomi.presentation.core.components.WarningBanner
 import tachiyomi.presentation.core.components.material.PullRefresh
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.material.topSmallPaddingValues
@@ -113,6 +113,7 @@ fun ExtensionScreen(
                     ),
                 )
             }
+
             else -> {
                 ExtensionContent(
                     state = state,
@@ -192,6 +193,7 @@ private fun ExtensionContent(
                             action = action,
                         )
                     }
+
                     is ExtensionUiModel.Header.Text -> {
                         ExtensionHeader(
                             text = header.text,
@@ -243,6 +245,7 @@ private fun ExtensionContent(
                                     onOpenExtension(it)
                                 }
                             }
+
                             is Extension.Untrusted -> {
                                 trustState = it
                             }
@@ -432,6 +435,7 @@ private fun ExtensionItemActions(
                     )
                 }
             }
+
             installStep == InstallStep.Error -> {
                 IconButton(onClick = { onClickItemAction(extension) }) {
                     Icon(
@@ -440,6 +444,7 @@ private fun ExtensionItemActions(
                     )
                 }
             }
+
             installStep == InstallStep.Idle -> {
                 when (extension) {
                     is Extension.Installed -> {
@@ -459,6 +464,7 @@ private fun ExtensionItemActions(
                             }
                         }
                     }
+
                     is Extension.Untrusted -> {
                         IconButton(onClick = { onClickItemAction(extension) }) {
                             Icon(
@@ -467,6 +473,7 @@ private fun ExtensionItemActions(
                             )
                         }
                     }
+
                     is Extension.Available -> {
                         if (extension.sources.isNotEmpty()) {
                             IconButton(

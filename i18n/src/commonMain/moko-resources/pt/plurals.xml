@@ -52,8 +52,10 @@
     </plurals>
     <plurals name="missing_chapters_warning">
         <item quantity="one">Ignorando %d capítulo, ou a fonte está em falta ou foi filtrado</item>
-        <item quantity="many">Ignorando %d capítulos, ou a fonte está em falta ou foi filtrado</item>
-        <item quantity="other">Capítulos %d ignorados, ou a fonte está em falta ou foi filtrado</item>
+        <item quantity="many">Ignorando %d capítulos, ou a fonte está em falta ou foi filtrado
+        </item>
+        <item quantity="other">Capítulos %d ignorados, ou a fonte está em falta ou foi filtrado
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="one">Ontem</item>

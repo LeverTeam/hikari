@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--https://www.nordtheme.com/docs/colors-and-palettes-->
+<?xml version="1.0" encoding="utf-8"?><!--https://www.nordtheme.com/docs/colors-and-palettes-->
 <resources>
     <color name="nord_primary">#88C0D0</color>
     <color name="nord_onPrimary">#2E3440</color>

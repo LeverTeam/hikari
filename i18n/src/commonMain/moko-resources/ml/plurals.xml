@@ -9,8 +9,12 @@
         <item quantity="other">%2$s പിശകുകളോടെ %1$s-നുള്ളിൽ ചെയ്തു</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">%d അധ്യായം ഒഴിവാക്കുന്നു, ഒന്നുകിൽ ഉറവിടം അത് കാണുന്നില്ല അല്ലെങ്കിൽ അത് ഫിൽട്ടർ ചെയ്തിരിക്കുന്നു</item>
-        <item quantity="other">%d അധ്യായങ്ങൾ ഒഴിവാക്കുന്നു, ഒന്നുകിൽ ഉറവിടം കാണുന്നില്ല അല്ലെങ്കിൽ അവ ഫിൽട്ടർ ചെയ്തിരിക്കുന്നു</item>
+        <item quantity="one">%d അധ്യായം ഒഴിവാക്കുന്നു, ഒന്നുകിൽ ഉറവിടം അത് കാണുന്നില്ല അല്ലെങ്കിൽ
+            അത് ഫിൽട്ടർ ചെയ്തിരിക്കുന്നു
+        </item>
+        <item quantity="other">%d അധ്യായങ്ങൾ ഒഴിവാക്കുന്നു, ഒന്നുകിൽ ഉറവിടം കാണുന്നില്ല അല്ലെങ്കിൽ
+            അവ ഫിൽട്ടർ ചെയ്തിരിക്കുന്നു
+        </item>
     </plurals>
     <plurals name="update_check_notification_ext_updates">
         <item quantity="one">വിപുലീകരണ അപ്ഡേറ്റ് ലഭ്യമാണ്</item>

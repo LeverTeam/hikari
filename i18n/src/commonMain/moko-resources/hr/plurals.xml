@@ -53,7 +53,8 @@
     <plurals name="missing_chapters_warning">
         <item quantity="one">Preskače se %d poglavlje. Ne postoji u izvoru ili je filtrirano</item>
         <item quantity="few">Preskaču se %d poglavlja. Ne postoje u izvoru ili su filtrirana</item>
-        <item quantity="other">Preskače se %d poglavlja. Ne postoje u izvoru ili su filtrirana</item>
+        <item quantity="other">Preskače se %d poglavlja. Ne postoje u izvoru ili su filtrirana
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="one">Jučer</item>

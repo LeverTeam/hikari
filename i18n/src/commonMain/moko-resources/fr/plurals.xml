@@ -51,9 +51,15 @@
         <item quantity="other">Suivi par %d services</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">%d chapitre a été sauté, soit la source ne l\'a pas, soit il a été filtré</item>
-        <item quantity="many">%d chapitres ont été sautés, soit la source ne les a pas, soit ils ont été filtrés</item>
-        <item quantity="other">%d chapitres ont été sautés, soit la source ne les a pas, soit il ont été filtrés</item>
+        <item quantity="one">%d chapitre a été sauté, soit la source ne l\'a pas, soit il a été
+            filtré
+        </item>
+        <item quantity="many">%d chapitres ont été sautés, soit la source ne les a pas, soit ils ont
+            été filtrés
+        </item>
+        <item quantity="other">%d chapitres ont été sautés, soit la source ne les a pas, soit il ont
+            été filtrés
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="one">Hier</item>

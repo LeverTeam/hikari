@@ -7,7 +7,6 @@ import nl.adaptivity.xmlutil.core.XmlVersion
 import nl.adaptivity.xmlutil.serialization.XML
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
-import uy.kohesive.injekt.api.get
 
 val appModule = module {
     single {

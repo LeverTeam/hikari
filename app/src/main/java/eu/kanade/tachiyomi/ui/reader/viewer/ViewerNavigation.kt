@@ -4,8 +4,8 @@ import android.graphics.Color
 import android.graphics.PointF
 import android.graphics.RectF
 import dev.icerock.moko.resources.StringResource
-import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
 import eu.kanade.tachiyomi.util.lang.invert
+import tachiyomi.domain.reader.model.TappingInvertMode
 import tachiyomi.i18n.MR
 
 abstract class ViewerNavigation {
@@ -22,8 +22,8 @@ abstract class ViewerNavigation {
         val rectF: RectF,
         val type: NavigationRegion,
     ) {
-        fun invert(invertMode: ReaderPreferences.TappingInvertMode): Region {
-            if (invertMode == ReaderPreferences.TappingInvertMode.NONE) return this
+        fun invert(invertMode: TappingInvertMode): Region {
+            if (invertMode == TappingInvertMode.NONE) return this
             return this.copy(
                 rectF = this.rectF.invert(invertMode),
             )
@@ -32,7 +32,7 @@ abstract class ViewerNavigation {
 
     private var constantMenuRegion: RectF = RectF(0f, 0f, 1f, 0.05f)
 
-    var invertMode: ReaderPreferences.TappingInvertMode = ReaderPreferences.TappingInvertMode.NONE
+    var invertMode: TappingInvertMode = TappingInvertMode.NONE
 
     protected abstract var regionList: List<Region>
 

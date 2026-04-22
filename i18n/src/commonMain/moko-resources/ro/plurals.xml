@@ -51,9 +51,14 @@
         <item quantity="other">%d de servicii de urmărire</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">Omiterea %d capitol, fie că sursa lipsește, fie că a fost filtrată</item>
-        <item quantity="few">Omiterea a %d capitole, fie că sursa nu le are, fie că au fost filtrate</item>
-        <item quantity="other">Omiterea a %d capitole, fie că sursa nu le are, fie că au fost filtrate</item>
+        <item quantity="one">Omiterea %d capitol, fie că sursa lipsește, fie că a fost filtrată
+        </item>
+        <item quantity="few">Omiterea a %d capitole, fie că sursa nu le are, fie că au fost
+            filtrate
+        </item>
+        <item quantity="other">Omiterea a %d capitole, fie că sursa nu le are, fie că au fost
+            filtrate
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="one">Ieri</item>

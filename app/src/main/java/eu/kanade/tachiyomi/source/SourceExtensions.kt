@@ -1,7 +1,7 @@
 package eu.kanade.tachiyomi.source
 
-import eu.kanade.domain.source.service.SourcePreferences
 import tachiyomi.domain.source.model.StubSource
+import tachiyomi.domain.source.service.SourcePreferences
 import tachiyomi.source.local.isLocal
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get

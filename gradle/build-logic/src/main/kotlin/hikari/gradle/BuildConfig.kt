@@ -8,9 +8,10 @@ interface BuildConfig {
     val includeDependencyInfo: Boolean
 }
 
-val Project.Config: BuildConfig get() = object : BuildConfig {
-    override val enableUpdater: Boolean =
-        !project.hasProperty("enable-updater") || project.property("enable-updater").toString().toBoolean()
-    override val enableCodeShrink: Boolean = !project.hasProperty("disable-code-shrink")
-    override val includeDependencyInfo: Boolean = project.hasProperty("include-dependency-info")
-}
+val Project.Config: BuildConfig
+    get() = object : BuildConfig {
+        override val enableUpdater: Boolean =
+            !project.hasProperty("enable-updater") || project.property("enable-updater").toString().toBoolean()
+        override val enableCodeShrink: Boolean = !project.hasProperty("disable-code-shrink")
+        override val includeDependencyInfo: Boolean = project.hasProperty("include-dependency-info")
+    }

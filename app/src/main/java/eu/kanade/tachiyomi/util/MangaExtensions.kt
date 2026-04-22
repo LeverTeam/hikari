@@ -2,10 +2,10 @@ package eu.kanade.tachiyomi.util
 
 import eu.kanade.domain.manga.interactor.UpdateManga
 import eu.kanade.domain.manga.model.hasCustomCover
-import eu.kanade.domain.manga.model.toSManga
 import eu.kanade.tachiyomi.data.cache.CoverCache
 import eu.kanade.tachiyomi.source.model.SManga
 import tachiyomi.domain.manga.model.Manga
+import tachiyomi.domain.manga.model.toSManga
 import tachiyomi.source.local.image.LocalCoverManager
 import tachiyomi.source.local.isLocal
 import uy.kohesive.injekt.Injekt
@@ -29,10 +29,12 @@ fun Manga.prepUpdateCover(coverCache: CoverCache, remoteManga: SManga, refreshSa
         isLocal() -> {
             this.copy(coverLastModified = Instant.now().toEpochMilli())
         }
+
         hasCustomCover(coverCache) -> {
             coverCache.deleteFromCache(this, false)
             this
         }
+
         else -> {
             coverCache.deleteFromCache(this, false)
             this.copy(coverLastModified = Instant.now().toEpochMilli())

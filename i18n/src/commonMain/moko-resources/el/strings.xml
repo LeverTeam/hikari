@@ -74,9 +74,12 @@
     <string name="portrait">Κατακόρυφα</string>
     <string name="landscape">Οριζόντια</string>
     <string name="all">Όλα</string>
-    <string name="pref_library_update_restriction">Περιορισμοί αυτόματων ενημερώσεων συσκευής</string>
+    <string name="pref_library_update_restriction">Περιορισμοί αυτόματων ενημερώσεων συσκευής
+    </string>
     <string name="charging">Κατά τη φόρτιση</string>
-    <string name="pref_update_only_non_completed">Παράλειψη καταχωρήσεων με κατάσταση \"Ολοκληρώθηκε\"</string>
+    <string name="pref_update_only_non_completed">Παράλειψη καταχωρήσεων με κατάσταση
+        \"Ολοκληρώθηκε\"
+    </string>
     <string name="pref_auto_update_manga_sync">Ενημέρωση προόδου μετά την ανάγνωση</string>
     <string name="default_category">Προεπιλεγμένη κατηγορία</string>
     <string name="default_category_summary">Ερώτηση πάντα</string>
@@ -90,9 +93,11 @@
     <string name="ext_untrusted">Μη αξιόπιστο</string>
     <string name="ext_uninstall">Απεγκατάσταση</string>
     <string name="untrusted_extension">Μη αξιόπιστη επέκταση</string>
-    <string name="untrusted_extension_message">Οι κακόβουλες επεκτάσεις μπορούν να διαβάσουν τυχόν αποθηκευμένα διαπιστευτήρια σύνδεσης ή να εκτελέσουν αυθαίρετο κώδικα.
-\n
-\nΜε την εμπιστοσύνη αυτής της επέκτασης, αποδέχεστε αυτούς τους κινδύνους.</string>
+    <string name="untrusted_extension_message">Οι κακόβουλες επεκτάσεις μπορούν να διαβάσουν τυχόν
+        αποθηκευμένα διαπιστευτήρια σύνδεσης ή να εκτελέσουν αυθαίρετο κώδικα.
+        \n
+        \nΜε την εμπιστοσύνη αυτής της επέκτασης, αποδέχεστε αυτούς τους κινδύνους.
+    </string>
     <string name="pref_fullscreen">Πλήρης οθόνη</string>
     <string name="pref_page_transitions">Ζωντανή μετάβαση σελίδας</string>
     <string name="pref_double_tap_anim_speed">Ταχύτητα κίνησης διπλού αγγίγματος</string>
@@ -136,7 +141,8 @@
     <string name="color_filter_g_value">Πράσινο</string>
     <string name="color_filter_b_value">Μπλε</string>
     <string name="color_filter_a_value">Αλφα</string>
-    <string name="pref_remove_after_marked_as_read">Αφού επισημανθεί χειροκίνητα ως αναγνωσμένο</string>
+    <string name="pref_remove_after_marked_as_read">Αφού επισημανθεί χειροκίνητα ως αναγνωσμένο
+    </string>
     <string name="pref_remove_after_read">Αυτόματη διαγραφή μετά την ανάγνωση</string>
     <string name="disabled">Απενεργοποιημένο</string>
     <string name="last_read_chapter">Τελευταίο αναγνωσμένο κεφάλαιο</string>
@@ -147,9 +153,12 @@
     <string name="pref_download_new">Λήψη νέων κεφαλαίων</string>
     <string name="services">Ιχνηλάτες</string>
     <string name="pref_create_backup">Δημιουργία αντιγράφου ασφαλείας</string>
-    <string name="pref_create_backup_summ">Μπορεί να χρησιμοποιηθεί για επαναφορά τρέχουσας βιβλιοθήκης</string>
+    <string name="pref_create_backup_summ">Μπορεί να χρησιμοποιηθεί για επαναφορά τρέχουσας
+        βιβλιοθήκης
+    </string>
     <string name="pref_restore_backup">Επαναφορά αντιγράφου ασφαλείας</string>
-    <string name="pref_restore_backup_summ">Επαναφορά βιβλιοθήκης από αρχείο αντιγράφου ασφαλείας</string>
+    <string name="pref_restore_backup_summ">Επαναφορά βιβλιοθήκης από αρχείο αντιγράφου ασφαλείας
+    </string>
     <string name="pref_backup_interval">Συχνότητα αυτόματων αντιγράφων ασφαλείας</string>
     <string name="backup_created">Δημιουργήθηκε αντίγραφο ασφαλείας</string>
     <string name="restore_completed">Η επαναφορά ολοκληρώθηκε</string>
@@ -163,11 +172,15 @@
     <string name="pref_clear_cookies">Διαγραφή cookies</string>
     <string name="cookies_cleared">Τα cookies διαγράφηκαν</string>
     <string name="pref_clear_database">Καθαρισμός βάσης δεδομένων</string>
-    <string name="pref_clear_database_summary">Διαγραφή ιστορικού για καταχωρήσεις που δεν έχουν αποθηκευτεί στη βιβλιοθήκη σας</string>
+    <string name="pref_clear_database_summary">Διαγραφή ιστορικού για καταχωρήσεις που δεν έχουν
+        αποθηκευτεί στη βιβλιοθήκη σας
+    </string>
     <string name="clear_database_completed">Οι καταχωρίσεις διαγράφηκαν</string>
     <string name="version">Έκδοση</string>
     <string name="pref_enable_acra">Αποστολή αναφορών σφαλμάτων</string>
-    <string name="pref_acra_summary">Βοηθά στην επιδιόρθωση τυχόν σφαλμάτων. Δεν θα αποστέλλονται ευαίσθητα δεδομένα</string>
+    <string name="pref_acra_summary">Βοηθά στην επιδιόρθωση τυχόν σφαλμάτων. Δεν θα αποστέλλονται
+        ευαίσθητα δεδομένα
+    </string>
     <string name="login_title">Σύνδεση στο %1$s</string>
     <string name="username">Όνομα χρήστη</string>
     <string name="password">Κωδικός πρόσβασης</string>
@@ -189,7 +202,8 @@
     <string name="manga_removed_library">Αφαιρέθηκε από τη βιβλιοθήκη</string>
     <string name="delete_downloads_for_manga">Να διαγραφούν τα κεφάλαια που έχουν ληφθεί;</string>
     <string name="copied_to_clipboard">Αντιγράφηκε στο πρόχειρο:
-\n%1$s</string>
+        \n%1$s
+    </string>
     <string name="source_not_installed">Η πηγή δεν είναι εγκατεστημένη: %1$s</string>
     <string name="display_mode_chapter">Κεφάλαιο %1$s</string>
     <string name="chapter_downloading_progress">Λήψη (%1$d/%2$d)</string>
@@ -201,7 +215,9 @@
     <string name="sort_by_number">Ανά αριθμό κεφαλαίου</string>
     <string name="manga_download">Λήψη</string>
     <string name="download_unread">Αδιάβαστα</string>
-    <string name="confirm_delete_chapters">Είστε βέβαιοι ότι θέλετε να διαγράψετε τα επιλεγμένα κεφάλαια;</string>
+    <string name="confirm_delete_chapters">Είστε βέβαιοι ότι θέλετε να διαγράψετε τα επιλεγμένα
+        κεφάλαια;
+    </string>
     <string name="manga_tracking_tab">Παρακολούθηση</string>
     <string name="reading">Ανάγνωση</string>
     <string name="completed">Ολοκληρωμένο</string>
@@ -216,8 +232,12 @@
     <string name="track_type">Τύπος</string>
     <string name="error_category_exists">Μια κατηγορία με αυτό το όνομα υπάρχει ήδη!</string>
     <string name="snack_categories_deleted">Οι κατηγορίες διαγράφηκαν</string>
-    <string name="dialog_with_checkbox_remove_description">Αυτό θα αφαιρέσει την ημερομηνία ανάγνωσης αυτού του κεφαλαίου. Είστε σίγουροι;</string>
-    <string name="dialog_with_checkbox_reset">Επαναφορά όλων των κεφαλαίων για αυτήν την καταχώρηση</string>
+    <string name="dialog_with_checkbox_remove_description">Αυτό θα αφαιρέσει την ημερομηνία
+        ανάγνωσης αυτού του κεφαλαίου. Είστε σίγουροι;
+    </string>
+    <string name="dialog_with_checkbox_reset">Επαναφορά όλων των κεφαλαίων για αυτήν την
+        καταχώρηση
+    </string>
     <string name="snack_add_to_library">Προσθήκη στη βιβλιοθήκη;</string>
     <string name="picture_saved">Η εικόνα αποθηκεύτηκε</string>
     <string name="custom_filter">Προσαρμοσμένο φίλτρο</string>
@@ -235,29 +255,42 @@
     <string name="transition_no_previous">Δεν υπάρχει προηγούμενο κεφάλαιο</string>
     <string name="transition_pages_loading">Φόρτωση σελίδων…</string>
     <string name="transition_pages_error">Η φόρτωση σελίδων απέτυχε: %1$s</string>
-    <string name="migration_dialog_what_to_include">Επιλέξτε τα δεδομένα που θέλετε να συμπεριλάβετε</string>
+    <string name="migration_dialog_what_to_include">Επιλέξτε τα δεδομένα που θέλετε να
+        συμπεριλάβετε
+    </string>
     <string name="migrate">Μεταφορά</string>
     <string name="copy">Αντιγραφή</string>
-    <string name="download_queue_error">Δεν ήταν δυνατή η λήψη κεφαλαίων. Μπορείτε να δοκιμάσετε ξανά στο τμήμα λήψεων</string>
+    <string name="download_queue_error">Δεν ήταν δυνατή η λήψη κεφαλαίων. Μπορείτε να δοκιμάσετε
+        ξανά στο τμήμα λήψεων
+    </string>
     <string name="notification_new_chapters">Βρέθηκαν νέα κεφάλαια</string>
-    <string name="notification_cover_update_failed">Δεν ήταν δυνατή η ενημέρωση του εξώφυλλου</string>
-    <string name="notification_first_add_to_library">Παρακαλώ προσθέστε την καταχώρηση στη βιβλιοθήκη σας πριν το κάνετε αυτό</string>
+    <string name="notification_cover_update_failed">Δεν ήταν δυνατή η ενημέρωση του εξώφυλλου
+    </string>
+    <string name="notification_first_add_to_library">Παρακαλώ προσθέστε την καταχώρηση στη
+        βιβλιοθήκη σας πριν το κάνετε αυτό
+    </string>
     <string name="file_select_cover">Επιλέξτε εικόνα εξωφύλλου</string>
     <string name="file_select_backup">Επιλέξτε αρχείο αντιγράφου ασφαλείας</string>
     <string name="update_check_confirm">Λήψη</string>
     <string name="update_check_no_new_updates">Δεν υπάρχουν διαθέσιμες νέες ενημερώσεις</string>
     <string name="update_check_notification_download_in_progress">Γίνεται λήψη…</string>
-    <string name="update_check_notification_download_complete">Πατήστε για να εγκαταστήσετε την ενημέρωση</string>
+    <string name="update_check_notification_download_complete">Πατήστε για να εγκαταστήσετε την
+        ενημέρωση
+    </string>
     <string name="update_check_notification_download_error">Σφάλμα λήψης</string>
     <string name="update_check_notification_update_available">Υπάρχει διαθέσιμη ενημέρωση!</string>
     <string name="information_no_downloads">Δεν υπάρχουν λήψεις</string>
     <string name="information_no_recent">Δεν υπάρχουν πρόσφατες ενημερώσεις</string>
     <string name="information_no_recent_manga">Τίποτα δεν διαβάστηκε πρόσφατα</string>
     <string name="information_empty_library">Η βιβλιοθήκη σας είναι κενή</string>
-    <string name="information_empty_category">Δεν έχετε κατηγορίες. Πατήστε το κουμπί συν για να δημιουργήσετε μία για την οργάνωση της βιβλιοθήκης σας.</string>
+    <string name="information_empty_category">Δεν έχετε κατηγορίες. Πατήστε το κουμπί συν για να
+        δημιουργήσετε μία για την οργάνωση της βιβλιοθήκης σας.
+    </string>
     <string name="download_notifier_downloader_title">Πρόγραμμα λήψης</string>
     <string name="download_notifier_title_error">Σφάλμα</string>
-    <string name="download_notifier_unknown_error">Το κεφάλαιο δεν μπορούσε να ληφθεί λόγο μη αναμενόμενου σφάλματος</string>
+    <string name="download_notifier_unknown_error">Το κεφάλαιο δεν μπορούσε να ληφθεί λόγο μη
+        αναμενόμενου σφάλματος
+    </string>
     <string name="download_notifier_text_only_wifi">Δεν υπάρχει διαθέσιμη σύνδεση Wi-Fi</string>
     <string name="download_notifier_no_network">Δεν υπάρχει διαθέσιμη σύνδεση δικτύου</string>
     <string name="download_notifier_download_paused">Λήψεις σε παύση</string>
@@ -273,13 +306,17 @@
     <string name="filter_mode_lighten">Dodge / Φώτισε</string>
     <string name="filter_mode_darken">Burn / Σκουραίωσε</string>
     <string name="no_results_found">Δεν βρέθηκαν αποτελέσματα</string>
-    <string name="migration_selection_prompt">Επιλέξτε μια πηγή από την οποία θα μεταφερθείτε</string>
+    <string name="migration_selection_prompt">Επιλέξτε μια πηγή από την οποία θα μεταφερθείτε
+    </string>
     <string name="action_webview_back">Πίσω</string>
     <string name="action_webview_forward">Μπροστά</string>
     <string name="action_webview_refresh">Ανανέωση</string>
     <string name="pref_category_library">Βιβλιοθήκη</string>
     <string name="ext_obsolete">Απαρχαιωμένο</string>
-    <string name="obsolete_extension_message">Αυτή η επέκταση δεν είναι πλέον διαθέσιμη. Ενδέχεται να μη λειτουργεί σωστά και μπορεί να προκαλέσει προβλήματα με την εφαρμογή. Συνιστάται η απεγκατάσταση της.</string>
+    <string name="obsolete_extension_message">Αυτή η επέκταση δεν είναι πλέον διαθέσιμη. Ενδέχεται
+        να μη λειτουργεί σωστά και μπορεί να προκαλέσει προβλήματα με την εφαρμογή. Συνιστάται η
+        απεγκατάσταση της.
+    </string>
     <string name="label_more">Περισσότερα</string>
     <string name="last_used_source">Χρησιμοποιήθηκε τελευταία</string>
     <string name="add_tracking">Προσθήκη tracking</string>
@@ -288,8 +325,12 @@
     <string name="action_select_inverse">Επιλογή αντίστροφου</string>
     <string name="channel_ext_updates">Ενημερώσεις επεκτάσεων</string>
     <string name="channel_new_chapters">Ενημερώσεις κεφαλαίων</string>
-    <string name="information_webview_outdated">Παρακαλώ ενημερώστε την εφαρμογή WebView για καλύτερη συμβατότητα</string>
-    <string name="information_webview_required">Το WebView απαιτείται για τη λειτουργία της εφαρμογής</string>
+    <string name="information_webview_outdated">Παρακαλώ ενημερώστε την εφαρμογή WebView για
+        καλύτερη συμβατότητα
+    </string>
+    <string name="information_webview_required">Το WebView απαιτείται για τη λειτουργία της
+        εφαρμογής
+    </string>
     <string name="notification_chapters_single_and_more">Κεφάλαιο %1$s και %2$d ακόμη</string>
     <string name="notification_chapters_multiple">Κεφάλαια %1$s</string>
     <string name="notification_chapters_single">Κεφάλαιο %1$s</string>
@@ -309,17 +350,24 @@
     <string name="check_for_updates">Έλεγχος για ενημερώσεις</string>
     <string name="licenses">Άδειες ανοιχτού κώδικα</string>
     <string name="website">Ιστότοπος</string>
-    <string name="battery_optimization_disabled">Η βελτιστοποίηση μπαταρίας είναι ήδη απενεργοποιημένη</string>
-    <string name="pref_disable_battery_optimization_summary">Βοηθά στις ενημερώσεις βιβλιοθήκης και τα αντίγραφα ασφαλείας στο παρασκήνιο</string>
-    <string name="pref_disable_battery_optimization">Απενεργοποίηση βελτιστοποίησης μπαταρίας</string>
+    <string name="battery_optimization_disabled">Η βελτιστοποίηση μπαταρίας είναι ήδη
+        απενεργοποιημένη
+    </string>
+    <string name="pref_disable_battery_optimization_summary">Βοηθά στις ενημερώσεις βιβλιοθήκης και
+        τα αντίγραφα ασφαλείας στο παρασκήνιο
+    </string>
+    <string name="pref_disable_battery_optimization">Απενεργοποίηση βελτιστοποίησης μπαταρίας
+    </string>
     <string name="restoring_backup_canceled">Η επαναφορά ακυρώθηκε</string>
     <string name="restoring_backup_error">Η επαναφορά του αντιγράφου ασφαλείας απέτυχε</string>
     <string name="restore_in_progress">Η επαναφορά βρίσκεται ήδη σε εξέλιξη</string>
     <string name="creating_backup_error">Η δημιουργία αντιγράφων ασφαλείας απέτυχε</string>
-    <string name="backup_in_progress">Η δημιουργία αντιγράφων ασφαλείας βρίσκεται ήδη σε εξέλιξη</string>
+    <string name="backup_in_progress">Η δημιουργία αντιγράφων ασφαλείας βρίσκεται ήδη σε εξέλιξη
+    </string>
     <string name="pref_webtoon_side_padding">Πλευρικό γέμισμα</string>
     <string name="pref_category_reading">Ανάγνωση</string>
-    <string name="pref_always_show_chapter_transition">Να εμφανίζεται πάντα η μετάβαση κεφαλαίου</string>
+    <string name="pref_always_show_chapter_transition">Να εμφανίζεται πάντα η μετάβαση κεφαλαίου
+    </string>
     <string name="vertical_plus_viewer">Μακριά λωρίδα με κενά</string>
     <string name="pref_skip_filtered_chapters">Παράλειψη φιλτραρισμένων κεφαλαίων</string>
     <string name="pref_cutout_short">Εμφάνιση περιεχομένου στην περιοχή αποκοπής</string>
@@ -329,7 +377,9 @@
     <string name="update_schedule_none">Δεν έχουν επιλεγεί ώρες</string>
     <string name="pref_category_display">Προβολή</string>
     <string name="hide_notification_content">Απόκρυψη περιεχομένου ειδοποιήσεων</string>
-    <string name="secure_screen_summary">Η ασφαλής οθόνη αποκρύπτει τα περιεχόμενα εφαρμογών κατά την εναλλαγή εφαρμογών και εμποδίζει τα στιγμιότυπα οθόνης</string>
+    <string name="secure_screen_summary">Η ασφαλής οθόνη αποκρύπτει τα περιεχόμενα εφαρμογών κατά
+        την εναλλαγή εφαρμογών και εμποδίζει τα στιγμιότυπα οθόνης
+    </string>
     <string name="secure_screen">Ασφάλισε την οθόνη</string>
     <string name="lock_never">Ποτέ</string>
     <string name="lock_always">Πάντα</string>
@@ -353,19 +403,29 @@
     <string name="label_sources">Πηγές</string>
     <string name="action_oldest">Παλαιότερο</string>
     <string name="action_newest">Νεότερο</string>
-    <string name="downloaded_only_summary">Φιλτράρει όλες τις καταχωρήσεις στη βιβλιοθήκη σας</string>
+    <string name="downloaded_only_summary">Φιλτράρει όλες τις καταχωρήσεις στη βιβλιοθήκη σας
+    </string>
     <string name="gray_background">Γκρι</string>
     <string name="viewer">Λειτουργία ανάγνωσης</string>
     <string name="pref_category_for_this_series">Για αυτήν τη σειρά</string>
-    <string name="battery_optimization_setting_activity_not_found">Δεν ήταν δυνατό το άνοιγμα των ρυθμίσεων της συσκευής</string>
-    <string name="tracking_info">Μονόδρομος συγχρονισμός για ενημέρωση των υπηρεσιών εξωτερικής παρακολούθησης προόδου κεφαλαίων. Ρυθμίστε την παρακολούθηση για μεμονωμένες καταχωρήσεις από το κουμπί παρακολούθησης τους.</string>
+    <string name="battery_optimization_setting_activity_not_found">Δεν ήταν δυνατό το άνοιγμα των
+        ρυθμίσεων της συσκευής
+    </string>
+    <string name="tracking_info">Μονόδρομος συγχρονισμός για ενημέρωση των υπηρεσιών εξωτερικής
+        παρακολούθησης προόδου κεφαλαίων. Ρυθμίστε την παρακολούθηση για μεμονωμένες καταχωρήσεις
+        από το κουμπί παρακολούθησης τους.
+    </string>
     <string name="pref_refresh_library_covers">Ανανέωση εξώφυλλων βιβλιοθήκης</string>
     <string name="sort_by_upload_date">Από ημερομηνία μεταφόρτωσης</string>
     <string name="label_data">Δεδομένα</string>
     <string name="backup_restore_missing_sources">Πηγές που λείπουν:</string>
-    <string name="invalid_backup_file_missing_manga">Το αντίγραφο ασφαλείας δεν περιέχει καταχωρήσεις βιβλιοθήκης.</string>
+    <string name="invalid_backup_file_missing_manga">Το αντίγραφο ασφαλείας δεν περιέχει
+        καταχωρήσεις βιβλιοθήκης.
+    </string>
     <string name="invalid_backup_file">Μη έγκυρο αρχείο αντιγράφου ασφαλείας:</string>
-    <string name="pref_library_update_refresh_metadata_summary">Έλεγχος για νέο εξώφυλλο και λεπτομέρειες κατά την ενημέρωση της βιβλιοθήκης</string>
+    <string name="pref_library_update_refresh_metadata_summary">Έλεγχος για νέο εξώφυλλο και
+        λεπτομέρειες κατά την ενημέρωση της βιβλιοθήκης
+    </string>
     <string name="pref_library_update_refresh_metadata">Αυτόματη ανανέωση μεταδεδομένων</string>
     <string name="action_migrate">Μεταφορά</string>
     <string name="action_display_comfortable_grid">Άνετο πλέγμα</string>
@@ -374,12 +434,15 @@
     <string name="page_list_empty_error">Δεν βρέθηκαν σελίδες</string>
     <string name="action_disable_all">Απενεργοποίηση όλων</string>
     <string name="action_enable_all">Ενεργοποίηση όλων</string>
-    <string name="pref_show_reading_mode_summary">Σύντομη εμφάνιση της τρέχουσας κατάστασης λειτουργίας κατά το άνοιγμα του προγράμματος ανάγνωσης</string>
+    <string name="pref_show_reading_mode_summary">Σύντομη εμφάνιση της τρέχουσας κατάστασης
+        λειτουργίας κατά το άνοιγμα του προγράμματος ανάγνωσης
+    </string>
     <string name="pref_show_reading_mode">Εμφάνιση λειτουργίας ανάγνωσης</string>
     <string name="action_start">Έναρξη</string>
     <string name="loader_not_implemented_error">Δεν βρέθηκε πηγή</string>
     <string name="action_disable">Απενεργοποίηση</string>
-    <string name="requires_app_restart">Απαιτείται επανεκκίνηση της εφαρμογής για να τεθεί σε ισχύ</string>
+    <string name="requires_app_restart">Απαιτείται επανεκκίνηση της εφαρμογής για να τεθεί σε ισχύ
+    </string>
     <string name="label_network">Δίκτυο</string>
     <string name="tapping_inverted_both">Και τα δυο</string>
     <string name="tapping_inverted_vertical">Κάθετα</string>
@@ -390,7 +453,9 @@
     <string name="unknown_author">Άγνωστος συγγραφέας</string>
     <string name="updated_version">Ενημερώθηκε σε v%1$s</string>
     <string name="whats_new">Τι νέο υπάρχει</string>
-    <string name="download_insufficient_space">Δεν ήταν δυνατή η λήψη κεφαλαίων λόγω χαμηλού αποθηκευτικού χώρου</string>
+    <string name="download_insufficient_space">Δεν ήταν δυνατή η λήψη κεφαλαίων λόγω χαμηλού
+        αποθηκευτικού χώρου
+    </string>
     <string name="action_global_search_query">Αναζήτηση του \"%1$s\" καθολικά</string>
     <string name="pref_category_reading_mode">Λειτουργία ανάγνωσης</string>
     <string name="pref_category_theme">Θέμα</string>
@@ -401,15 +466,26 @@
     <string name="channel_errors">Σφάλματα</string>
     <string name="backup_restore_missing_trackers">Trackers που δεν έχουν συνδεθεί:</string>
     <string name="pref_category_delete_chapters">Διαγραφή κεφαλαίων</string>
-    <string name="ext_nsfw_warning">Πηγές από αυτήν την επέκταση ενδέχεται να περιέχουν περιεχόμενο NSFW (18+)</string>
+    <string name="ext_nsfw_warning">Πηγές από αυτήν την επέκταση ενδέχεται να περιέχουν περιεχόμενο
+        NSFW (18+)
+    </string>
     <string name="ext_nsfw_short">18+</string>
-    <string name="pref_remove_bookmarked_chapters">Να επιτρέπεται η διαγραφή κεφαλαίων με σελιδοδείκτη</string>
-    <string name="parental_controls_info">Αυτό δεν εμποδίζει τις ανεπίσημες ή ενδεχομένως εσφαλμένα επισημασμένες επεκτάσεις να εμφανίζουν περιεχόμενο NSFW (18+) μέσα στην εφαρμογή.</string>
+    <string name="pref_remove_bookmarked_chapters">Να επιτρέπεται η διαγραφή κεφαλαίων με
+        σελιδοδείκτη
+    </string>
+    <string name="parental_controls_info">Αυτό δεν εμποδίζει τις ανεπίσημες ή ενδεχομένως εσφαλμένα
+        επισημασμένες επεκτάσεις να εμφανίζουν περιεχόμενο NSFW (18+) μέσα στην εφαρμογή.
+    </string>
     <string name="no_chapters_error">Δεν βρέθηκαν κεφάλαια</string>
-    <string name="chapter_settings_updated">Ενημερώθηκαν οι προεπιλεγμένες ρυθμίσεις κεφαλαίου</string>
+    <string name="chapter_settings_updated">Ενημερώθηκαν οι προεπιλεγμένες ρυθμίσεις κεφαλαίου
+    </string>
     <string name="set_chapter_settings_as_default">Ορισμός ως προεπιλογής</string>
-    <string name="also_set_chapter_settings_for_library">Εφαρμογή επίσης για όλες τις καταχωρήσεις στη βιβλιοθήκη μου</string>
-    <string name="confirm_set_chapter_settings">Είστε σίγουροι ότι θέλετε να αποθηκεύσετε αυτές τις ρυθμίσεις ως προεπιλεγμένες;</string>
+    <string name="also_set_chapter_settings_for_library">Εφαρμογή επίσης για όλες τις καταχωρήσεις
+        στη βιβλιοθήκη μου
+    </string>
+    <string name="confirm_set_chapter_settings">Είστε σίγουροι ότι θέλετε να αποθηκεύσετε αυτές τις
+        ρυθμίσεις ως προεπιλεγμένες;
+    </string>
     <string name="chapter_settings">Ρυθμίσεις κεφαλαίου</string>
     <string name="share_page_info">%1$s: %2$s, σελίδα %3$d</string>
     <string name="action_search_settings">Αναζήτηση ρυθμίσεων</string>
@@ -433,7 +509,9 @@
     <string name="l_nav">Σχήματος L</string>
     <string name="track_finished_reading_date">Ημερομηνία λήξης</string>
     <string name="track_started_reading_date">Ημερομηνία έναρξης</string>
-    <string name="pref_dump_crash_logs_summary">Αποθηκεύει αρχεία καταγραφής σφαλμάτων σε ένα αρχείο για κοινή χρήση με τους προγραμματιστές</string>
+    <string name="pref_dump_crash_logs_summary">Αποθηκεύει αρχεία καταγραφής σφαλμάτων σε ένα αρχείο
+        για κοινή χρήση με τους προγραμματιστές
+    </string>
     <string name="pref_dump_crash_logs">Κοινή χρήση αρχείων καταγραφής σφαλμάτων</string>
     <string name="action_desc">Φθίνουσα</string>
     <string name="action_asc">Αύξουσα</string>
@@ -443,10 +521,17 @@
     <string name="action_display_show_number_of_items">Εμφάνιση αριθμού στοιχείων</string>
     <string name="right_and_left_nav">Δεξιά και Aριστερά</string>
     <string name="pref_dual_page_split">Διαχωρισμός πλατιών σελίδων</string>
-    <string name="pref_dual_page_invert_summary">Εάν η τοποθέτηση των διαχωρισμένων πλατιών σελίδων δεν ταιριάζει με την κατεύθυνση ανάγνωσης</string>
+    <string name="pref_dual_page_invert_summary">Εάν η τοποθέτηση των διαχωρισμένων πλατιών σελίδων
+        δεν ταιριάζει με την κατεύθυνση ανάγνωσης
+    </string>
     <string name="pref_dual_page_invert">Αντιστροφή τοποθέτησης διαχωρισμένης σελίδας</string>
-    <string name="backup_restore_content_full">Ενδέχεται να χρειαστεί να εγκαταστήσετε τυχόν επεκτάσεις που λείπουν και στη συνέχεια να συνδεθείτε στις υπηρεσίες παρακολούθησης για να τις χρησιμοποιήσετε.</string>
-    <string name="pref_show_navigation_mode_summary">Εμφάνιση εν συντομία κατά το άνοιγμα του προγράμματος ανάγνωσης</string>
+    <string name="backup_restore_content_full">Ενδέχεται να χρειαστεί να εγκαταστήσετε τυχόν
+        επεκτάσεις που λείπουν και στη συνέχεια να συνδεθείτε στις υπηρεσίες παρακολούθησης για να
+        τις χρησιμοποιήσετε.
+    </string>
+    <string name="pref_show_navigation_mode_summary">Εμφάνιση εν συντομία κατά το άνοιγμα του
+        προγράμματος ανάγνωσης
+    </string>
     <string name="pref_show_navigation_mode">Εμφάνιση επικάλυψης ζωνών πατήματος</string>
     <string name="nav_zone_right">Δεξιά</string>
     <string name="nav_zone_left">Αριστερά</string>
@@ -457,20 +542,27 @@
     <string name="include">Συμπερίληψη: %s</string>
     <string name="none">Κανένα</string>
     <string name="action_sort_chapter_fetch_date">Ημερομηνία ανάκτησης κεφαλαίου</string>
-    <string name="pref_download_new_categories_details">Οι καταχωρήσεις σε εξαιρούμενες κατηγορίες δε θα ληφθούν ακόμη και αν βρίσκονται επίσης σε κατηγορίες που περιλαμβάνονται.</string>
+    <string name="pref_download_new_categories_details">Οι καταχωρήσεις σε εξαιρούμενες κατηγορίες
+        δε θα ληφθούν ακόμη και αν βρίσκονται επίσης σε κατηγορίες που περιλαμβάνονται.
+    </string>
     <string name="pref_category_auto_download">Αυτόματη λήψη</string>
-    <string name="pref_library_update_categories_details">Οι καταχωρίσεις σε εξαιρούμενες κατηγορίες δε θα ενημερώνονται ακόμη και αν περιλαμβάνονται επίσης σε κατηγορίες που περιλαμβάνονται.</string>
+    <string name="pref_library_update_categories_details">Οι καταχωρίσεις σε εξαιρούμενες κατηγορίες
+        δε θα ενημερώνονται ακόμη και αν περιλαμβάνονται επίσης σε κατηγορίες που περιλαμβάνονται.
+    </string>
     <string name="action_show_errors">Πατήστε για να δείτε λεπτομέρειες</string>
     <string name="update_check_eol">Αυτή η έκδοση Android δεν υποστηρίζεται πλέον</string>
     <string name="clipboard_copy_error">Απέτυχε η αντιγραφή στο πρόχειρο</string>
     <string name="rotation_landscape">Οριζόντια</string>
     <string name="rotation_portrait">Κατακόρυφα</string>
-    <string name="pref_create_folder_per_manga_summary">Δημιουργεί φακέλους σύμφωνα με τον τίτλο των καταχωρήσεων</string>
+    <string name="pref_create_folder_per_manga_summary">Δημιουργεί φακέλους σύμφωνα με τον τίτλο των
+        καταχωρήσεων
+    </string>
     <string name="pref_create_folder_per_manga">Αποθήκευση σελίδων σε ξεχωριστούς φακέλους</string>
     <string name="pref_reader_actions">Ενέργειες</string>
     <string name="rotation_type">Περιστροφή</string>
     <string name="pref_grayscale">Κλίμακα του γκρι</string>
-    <string name="notification_incognito_text">Απενεργοποίηση λειτουργίας ανώνυμης περιήγησης</string>
+    <string name="notification_incognito_text">Απενεργοποίηση λειτουργίας ανώνυμης περιήγησης
+    </string>
     <string name="automatic_background">Αυτόματο</string>
     <string name="cancel_all_for_series">Ακύρωση όλων για αυτήν τη σειρά</string>
     <string name="error_no_match">Δεν βρέθηκε αντιστοιχία</string>
@@ -493,10 +585,17 @@
     <string name="information_empty_category_dialog">Δεν έχετε κατηγορίες ακόμα.</string>
     <string name="action_start_downloading_now">Έναρξη λήψης τώρα</string>
     <string name="pref_app_theme">Θέμα εφαρμογής</string>
-    <string name="about_dont_kill_my_app">Ορισμένοι κατασκευαστές έχουν πρόσθετους περιορισμούς εφαρμογών που εξουδετερώνουν τις υπηρεσίες παρασκηνίου. Αυτός ο ιστότοπος έχει περισσότερες πληροφορίες για το πώς να το διορθώσετε.</string>
-    <string name="restore_miui_warning">Η δημιουργία αντιγράφων ασφαλείας/επαναφορά ενδέχεται να μη λειτουργεί σωστά εάν είναι απενεργοποιημένη η Βελτιστοποίηση MIUI.</string>
+    <string name="about_dont_kill_my_app">Ορισμένοι κατασκευαστές έχουν πρόσθετους περιορισμούς
+        εφαρμογών που εξουδετερώνουν τις υπηρεσίες παρασκηνίου. Αυτός ο ιστότοπος έχει περισσότερες
+        πληροφορίες για το πώς να το διορθώσετε.
+    </string>
+    <string name="restore_miui_warning">Η δημιουργία αντιγράφων ασφαλείας/επαναφορά ενδέχεται να μη
+        λειτουργεί σωστά εάν είναι απενεργοποιημένη η Βελτιστοποίηση MIUI.
+    </string>
     <string name="pref_dark_theme_pure_black">Απόλυτα μαύρη σκοτεινή λειτουργία</string>
-    <string name="enhanced_tracking_info">Παρέχει βελτιωμένες δυνατότητες για συγκεκριμένες πηγές. Οι καταχωρήσεις παρακολουθούνται αυτόματα όταν προστίθενται στη βιβλιοθήκη σας.</string>
+    <string name="enhanced_tracking_info">Παρέχει βελτιωμένες δυνατότητες για συγκεκριμένες πηγές.
+        Οι καταχωρήσεις παρακολουθούνται αυτόματα όταν προστίθενται στη βιβλιοθήκη σας.
+    </string>
     <string name="enhanced_services">Ενισχυμένοι trackers</string>
     <string name="theme_monet">Δυναμικό</string>
     <string name="label_background_activity">Δραστηριότητα παρασκηνίου</string>
@@ -504,7 +603,8 @@
     <string name="pref_low">Χαμηλή</string>
     <string name="pref_highest">Ύψιστη</string>
     <string name="pref_high">Υψηλή</string>
-    <string name="pref_hide_threshold">Ευαισθησία για την απόκρυψη του μενού κατά την κύλιση</string>
+    <string name="pref_hide_threshold">Ευαισθησία για την απόκρυψη του μενού κατά την κύλιση
+    </string>
     <string name="pref_inverted_colors">Αντεστραμμένο</string>
     <string name="relative_time_today">Σήμερα</string>
     <string name="confirm_lock_change">Έλεγχος ταυτότητας για επιβεβαίωση αλλαγής</string>
@@ -518,27 +618,48 @@
     <string name="ext_app_info">Πληροφορίες εφαρμογής</string>
     <string name="ext_installer_pref">Εγκαταστάτης</string>
     <string name="ext_install_service_notif">Εγκατάσταση επέκτασης…</string>
-    <string name="ext_installer_shizuku_unavailable_dialog">Εγκαταστήστε και ξεκινήστε το Shizuku για να χρησιμοποιήσετε το Shizuku ως πρόγραμμα εγκατάστασης επεκτάσεων.</string>
+    <string name="ext_installer_shizuku_unavailable_dialog">Εγκαταστήστε και ξεκινήστε το Shizuku
+        για να χρησιμοποιήσετε το Shizuku ως πρόγραμμα εγκατάστασης επεκτάσεων.
+    </string>
     <string name="ext_installer_shizuku_stopped">Το Shizuku δεν τρέχει</string>
     <string name="ext_installer_legacy">Παλαιό</string>
     <string name="action_sort_count">Σύνολο καταχωρήσεων</string>
     <string name="pref_verbose_logging">Λεπτομερής καταγραφή</string>
-    <string name="pref_verbose_logging_summary">Εκτύπωση λεπτομερών αρχείων καταγραφής στο αρχείο καταγραφής συστήματος (μειώνει την απόδοση της εφαρμογής)</string>
+    <string name="pref_verbose_logging_summary">Εκτύπωση λεπτομερών αρχείων καταγραφής στο αρχείο
+        καταγραφής συστήματος (μειώνει την απόδοση της εφαρμογής)
+    </string>
     <string name="action_display_language_badge">Γλώσσα</string>
     <string name="label_warning">Προειδοποίηση</string>
-    <string name="backup_info">Θα πρέπει να κρατάτε αντίγραφα αντιγράφων ασφαλείας και σε άλλα μέρη. Τα αντίγραφα ασφαλείας ενδέχεται να περιέχουν ευαίσθητα δεδομένα, συμπεριλαμβανομένων τυχόν αποθηκευμένων κωδικών πρόσβασης, να είστε προσεκτικοί αν τα μοιράζεστε.</string>
-    <string name="notification_size_warning">Οι μεγάλες ενημερώσεις βλάπτουν τις πηγές και μπορεί να οδηγήσουν σε πιο αργές ενημερώσεις και σε αυξημένη χρήση της μπαταρίας. Πατήστε για να μάθετε περισσότερα.</string>
+    <string name="backup_info">Θα πρέπει να κρατάτε αντίγραφα αντιγράφων ασφαλείας και σε άλλα μέρη.
+        Τα αντίγραφα ασφαλείας ενδέχεται να περιέχουν ευαίσθητα δεδομένα, συμπεριλαμβανομένων τυχόν
+        αποθηκευμένων κωδικών πρόσβασης, να είστε προσεκτικοί αν τα μοιράζεστε.
+    </string>
+    <string name="notification_size_warning">Οι μεγάλες ενημερώσεις βλάπτουν τις πηγές και μπορεί να
+        οδηγήσουν σε πιο αργές ενημερώσεις και σε αυξημένη χρήση της μπαταρίας. Πατήστε για να
+        μάθετε περισσότερα.
+    </string>
     <string name="connected_to_wifi">Μόνο σε Wi-Fi</string>
-    <string name="download_queue_size_warning">Προειδοποίηση: οι μαζικές λήψεις ενδέχεται να οδηγήσουν σε επιβράδυνση των πηγών ή/και αποκλεισμό του %s. Πατήστε για να μάθετε περισσότερα.</string>
+    <string name="download_queue_size_warning">Προειδοποίηση: οι μαζικές λήψεις ενδέχεται να
+        οδηγήσουν σε επιβράδυνση των πηγών ή/και αποκλεισμό του %s. Πατήστε για να μάθετε
+        περισσότερα.
+    </string>
     <string name="ext_update_all">Ενημέρωση όλων</string>
     <string name="channel_app_updates">Ενημερώσεις εφαρμογής</string>
-    <string name="pref_auto_clear_chapter_cache">Εκκαθάριση της προσωρινής μνήμης κεφαλαίων κατά την εκκίνηση της εφαρμογής</string>
-    <string name="clear_database_source_item_count">%1$d καταχωρήσεις εκτός βιβλιοθήκης στη βάση δεδομένων</string>
+    <string name="pref_auto_clear_chapter_cache">Εκκαθάριση της προσωρινής μνήμης κεφαλαίων κατά την
+        εκκίνηση της εφαρμογής
+    </string>
+    <string name="clear_database_source_item_count">%1$d καταχωρήσεις εκτός βιβλιοθήκης στη βάση
+        δεδομένων
+    </string>
     <string name="database_clean">Τίποτα προς εκκαθάριση</string>
     <string name="extension_api_error">Αποτυχία ανάκτησης διαθέσιμων επεκτάσεων</string>
     <string name="privacy_policy">Πολιτική απορρήτου</string>
-    <string name="pref_update_only_completely_read">Παράλειψη καταχωρήσεων με αδιάβαστο(α) κεφάλαιο(α)</string>
-    <string name="library_errors_help">Για βοήθεια σχετικά με τον τρόπο διόρθωσης σφαλμάτων ενημέρωσης βιβλιοθήκης, ανατρέξτε στο %1$s</string>
+    <string name="pref_update_only_completely_read">Παράλειψη καταχωρήσεων με αδιάβαστο(α)
+        κεφάλαιο(α)
+    </string>
+    <string name="library_errors_help">Για βοήθεια σχετικά με τον τρόπο διόρθωσης σφαλμάτων
+        ενημέρωσης βιβλιοθήκης, ανατρέξτε στο %1$s
+    </string>
     <string name="save_chapter_as_cbz">Αποθήκευση ως αρχείο CBZ</string>
     <string name="cancelled">Ακυρώθηκε</string>
     <string name="on_hiatus">Σε αναστολή</string>
@@ -549,15 +670,20 @@
     <string name="pref_update_only_started">Παράλειψη καταχωρήσεων που δεν έχουν αρχίσει</string>
     <string name="pref_navigate_pan">Μετατόπιση πλατιών εικόνων</string>
     <string name="skipped_reason_completed">Παραλείφθηκε επειδή η σειρά ολοκληρώθηκε</string>
-    <string name="skipped_reason_not_caught_up">Παραβλέφθηκε επειδή υπάρχουν μη αναγνωσμένα κεφάλαια</string>
-    <string name="skipped_reason_not_started">Παραλείπεται επειδή δεν έχουν διαβαστεί κεφάλαια</string>
+    <string name="skipped_reason_not_caught_up">Παραβλέφθηκε επειδή υπάρχουν μη αναγνωσμένα
+        κεφάλαια
+    </string>
+    <string name="skipped_reason_not_started">Παραλείπεται επειδή δεν έχουν διαβαστεί κεφάλαια
+    </string>
     <string name="notification_update_error">%1$d ενημέρωση(ες) απέτυχε(-αν)</string>
     <string name="learn_more">Πατήστε για να μάθετε περισσότερα</string>
     <string name="rotation_reverse_portrait">Αντίστροφο πορτρέτο</string>
     <string name="action_move_to_top_all_for_series">Μετακίνηση σειράς προς τα πάνω</string>
     <string name="disabled_nav">Απενεργοποιημένο</string>
     <string name="error_saving_picture">Σφάλμα κατά την αποθήκευση της εικόνας</string>
-    <string name="empty_backup_error">Δεν υπάρχουν καταχωρήσεις βιβλιοθήκης για δημιουργία αντιγράφων ασφαλείας</string>
+    <string name="empty_backup_error">Δεν υπάρχουν καταχωρήσεις βιβλιοθήκης για δημιουργία
+        αντιγράφων ασφαλείας
+    </string>
     <string name="update_check_open">Άνοιγμα στο GitHub</string>
     <string name="webview_data_deleted">Τα δεδομένα WebView διαγράφηκαν</string>
     <string name="pref_clear_webview_data">Διαγραφή δεδομένων WebView</string>
@@ -567,12 +693,22 @@
     <string name="action_sort_last_manga_update">Τελευταίος έλεγχος ενημέρωσης</string>
     <string name="source_empty_screen">Δε βρέθηκε πηγή</string>
     <string name="split_tall_images_summary">Βελτιώνει την απόδοση του αναγνώστη</string>
-    <string name="download_notifier_split_page_not_found">Η σελίδα %d δε βρέθηκε κατά τη διάσπαση</string>
-    <string name="download_notifier_split_page_path_not_found">Δεν ήταν δυνατή η εύρεση της διαδρομής αρχείου της σελίδας %d</string>
-    <string name="pref_reset_viewer_flags_summary">Επαναφέρει τη λειτουργία ανάγνωσης και τον προσανατολισμό όλων των σειρών</string>
-    <string name="pref_reset_viewer_flags">Επαναφορά ρυθμίσεων προγράμματος ανάγνωσης ανά σειρά</string>
-    <string name="pref_reset_viewer_flags_error">Δεν ήταν δυνατή η επαναφορά των ρυθμίσεων του προγράμματος ανάγνωσης</string>
-    <string name="pref_reset_viewer_flags_success">Επαναφορά όλων των ρυθμίσεων προγράμματος ανάγνωσης</string>
+    <string name="download_notifier_split_page_not_found">Η σελίδα %d δε βρέθηκε κατά τη διάσπαση
+    </string>
+    <string name="download_notifier_split_page_path_not_found">Δεν ήταν δυνατή η εύρεση της
+        διαδρομής αρχείου της σελίδας %d
+    </string>
+    <string name="pref_reset_viewer_flags_summary">Επαναφέρει τη λειτουργία ανάγνωσης και τον
+        προσανατολισμό όλων των σειρών
+    </string>
+    <string name="pref_reset_viewer_flags">Επαναφορά ρυθμίσεων προγράμματος ανάγνωσης ανά σειρά
+    </string>
+    <string name="pref_reset_viewer_flags_error">Δεν ήταν δυνατή η επαναφορά των ρυθμίσεων του
+        προγράμματος ανάγνωσης
+    </string>
+    <string name="pref_reset_viewer_flags_success">Επαναφορά όλων των ρυθμίσεων προγράμματος
+        ανάγνωσης
+    </string>
     <string name="empty_screen">Λοιπόν, αυτό είναι άβολο</string>
     <string name="ext_info_version">Έκδοση</string>
     <string name="ext_info_language">Γλώσσα</string>
@@ -583,59 +719,90 @@
     <string name="on_hold_list">Λίστα αναμονής</string>
     <string name="reading_list">Λίστα ανάγνωσης</string>
     <string name="network_not_metered">Μόνο σε δίκτυο χωρίς μετρήσεις</string>
-    <string name="cant_open_last_read_chapter">Αδυναμία ανοίγματος του τελευταίου κεφαλαίου που διαβάστηκε</string>
+    <string name="cant_open_last_read_chapter">Αδυναμία ανοίγματος του τελευταίου κεφαλαίου που
+        διαβάστηκε
+    </string>
     <string name="custom_cover">Προσαρμοσμένο εξώφυλλο</string>
     <string name="not_installed">Δεν έχει εγκατασταθεί</string>
     <string name="pref_app_language">Γλώσσα εφαρμογής</string>
     <string name="description_placeholder">Χωρίς περιγραφή</string>
     <string name="delete_category">Διαγραφή κατηγορίας</string>
     <string name="delete_category_confirmation">Θέλετε να διαγράψετε την κατηγορία \"%s\";</string>
-    <string name="internal_error">InternalError: Ελέγξτε τα αρχεία καταγραφής σφαλμάτων για περισσότερες πληροφορίες</string>
+    <string name="internal_error">InternalError: Ελέγξτε τα αρχεία καταγραφής σφαλμάτων για
+        περισσότερες πληροφορίες
+    </string>
     <string name="pref_user_agent_string">Προεπιλεγμένη συμβολοσειρά πράκτορα χρήστη</string>
-    <string name="pref_reset_user_agent_string">Επαναφορά προεπιλεγμένης συμβολοσειράς πράκτορα χρήστη</string>
+    <string name="pref_reset_user_agent_string">Επαναφορά προεπιλεγμένης συμβολοσειράς πράκτορα
+        χρήστη
+    </string>
     <string name="action_remove_everything">Καταργήστε τα πάντα</string>
-    <string name="appwidget_updates_description">Δείτε τις πρόσφατα ενημερωμένες καταχωρήσεις της βιβλιοθήκης σας</string>
-    <string name="appwidget_unavailable_locked">Το widget δεν είναι διαθέσιμο όταν είναι ενεργοποιημένο το κλείδωμα εφαρμογών</string>
+    <string name="appwidget_updates_description">Δείτε τις πρόσφατα ενημερωμένες καταχωρήσεις της
+        βιβλιοθήκης σας
+    </string>
+    <string name="appwidget_unavailable_locked">Το widget δεν είναι διαθέσιμο όταν είναι
+        ενεργοποιημένο το κλείδωμα εφαρμογών
+    </string>
     <string name="update_already_running">Εκτελείται ήδη μια ενημέρωση</string>
-    <string name="error_user_agent_string_blank">Η συμβολοσειρά πράκτορα χρήστη δεν μπορεί να είναι κενή</string>
+    <string name="error_user_agent_string_blank">Η συμβολοσειρά πράκτορα χρήστη δεν μπορεί να είναι
+        κενή
+    </string>
     <string name="download_ahead">Λήψη εκ των προτέρων</string>
     <string name="auto_download_while_reading">Αυτόματη λήψη κατά την ανάγνωση</string>
-    <string name="download_ahead_info">Λειτουργεί μόνο εάν το τρέχον κεφάλαιο + το επόμενο έχουν ήδη ληφθεί.</string>
+    <string name="download_ahead_info">Λειτουργεί μόνο εάν το τρέχον κεφάλαιο + το επόμενο έχουν ήδη
+        ληφθεί.
+    </string>
     <string name="are_you_sure">Είστε σίγουροι;</string>
     <string name="multi_lang">Πολλαπλό</string>
     <string name="popular">Δημοφιλή</string>
     <string name="updates_last_update_info">Τελευταία ενημέρωση βιβλιοθήκης: %s</string>
     <string name="remove_manga">Πρόκειται να αφαιρέσετε το \"%s\" από τη βιβλιοθήκη σας</string>
     <string name="missing_storage_permission">Δεν έχουν χορηγηθεί δικαιώματα αποθήκευσης</string>
-    <string name="skipped_reason_not_always_update">Παραλείφθηκε επειδή η σειρά δεν απαιτεί ενημερώσεις</string>
+    <string name="skipped_reason_not_always_update">Παραλείφθηκε επειδή η σειρά δεν απαιτεί
+        ενημερώσεις
+    </string>
     <string name="action_search_hint">Αναζήτηση…</string>
     <string name="pref_browse_summary">Πηγές, επεκτάσεις, καθολική αναζήτηση</string>
     <string name="crash_screen_title">Ουπς!</string>
     <string name="pref_appearance_summary">Θέμα, μορφή ημερομηνίας και ώρας</string>
     <string name="pref_library_summary">Κατηγορίες, καθολική ενημέρωση, σύρσιμο κεφαλαίου</string>
     <string name="pref_reader_summary">Λειτουργία ανάγνωσης, οθόνη, πλοήγηση</string>
-    <string name="pref_tracking_summary">Μονόδρομος συγχρονισμός προόδου, ενισχυμένος συγχρονισμός</string>
-    <string name="pref_backup_summary">Χειροκίνητα &amp; αυτόματα αντίγραφα ασφαλείας, χώρος αποθήκευσης</string>
+    <string name="pref_tracking_summary">Μονόδρομος συγχρονισμός προόδου, ενισχυμένος συγχρονισμός
+    </string>
+    <string name="pref_backup_summary">Χειροκίνητα &amp; αυτόματα αντίγραφα ασφαλείας, χώρος
+        αποθήκευσης
+    </string>
     <string name="pref_security_summary">Κλείδωμα εφαρμογής, ασφαλής οθόνη</string>
     <string name="crash_screen_restart_application">Επανεκκίνηση της εφαρμογής</string>
     <string name="pref_downloads_summary">Αυτόματη λήψη, λήψη εκ των προτέρων</string>
-    <string name="pref_advanced_summary">Αρχεία καταγραφής σφαλμάτων, βελτιστοποιήσεις μπαταρίας</string>
-    <string name="crash_screen_description">Το %s αντιμετώπισε ένα απροσδόκητο σφάλμα. Σας προτείνουμε να μοιραστείτε τα αρχεία καταγραφής σφαλμάτων στο κανάλι υποστήριξης μας στο Discord.</string>
+    <string name="pref_advanced_summary">Αρχεία καταγραφής σφαλμάτων, βελτιστοποιήσεις μπαταρίας
+    </string>
+    <string name="crash_screen_description">Το %s αντιμετώπισε ένα απροσδόκητο σφάλμα. Σας
+        προτείνουμε να μοιραστείτε τα αρχεία καταγραφής σφαλμάτων στο κανάλι υποστήριξης μας στο
+        Discord.
+    </string>
     <string name="unknown_title">Άγνωστος τίτλος</string>
     <string name="invalid_location">Μη έγκυρη τοποθεσία: %s</string>
     <string name="error_user_agent_string_invalid">Μη έγκυρη συμβολοσειρά πράκτορα χρήστη</string>
     <string name="updates_last_update_info_just_now">Μόλις τώρα</string>
     <string name="download_notifier_cache_renewal">Έλεγχος λήψεων</string>
     <string name="fdroid_warning">Οι εκδόσεις F-Droid δεν υποστηρίζονται επίσημα.
-\nΠατήστε για να μάθετε περισσότερα.</string>
+        \nΠατήστε για να μάθετε περισσότερα.
+    </string>
     <string name="action_open_random_manga">Άνοιγμα τυχαίας καταχώρησης</string>
-    <string name="information_no_entries_found">Δε βρέθηκαν καταχωρήσεις σε αυτή την κατηγορία</string>
+    <string name="information_no_entries_found">Δε βρέθηκαν καταχωρήσεις σε αυτή την κατηγορία
+    </string>
     <string name="action_display_show_continue_reading_button">Κουμπί συνέχειας ανάγνωσης</string>
     <string name="track_remove_date_conf_title">Κατάργηση ημερομηνίας;</string>
-    <string name="track_remove_finish_date_conf_text">Αυτό θα καταργήσει την ημερομηνία λήξης που επιλέξατε προηγουμένως από το %s</string>
-    <string name="track_remove_start_date_conf_text">Αυτό θα καταργήσει την ημερομηνία έναρξης που επιλέξατε προηγουμένως από το %s</string>
+    <string name="track_remove_finish_date_conf_text">Αυτό θα καταργήσει την ημερομηνία λήξης που
+        επιλέξατε προηγουμένως από το %s
+    </string>
+    <string name="track_remove_start_date_conf_text">Αυτό θα καταργήσει την ημερομηνία έναρξης που
+        επιλέξατε προηγουμένως από το %s
+    </string>
     <string name="pref_invalidate_download_cache">Επανακαταχώριση ευρετηρίου λήψεων</string>
-    <string name="pref_invalidate_download_cache_summary">Αναγκάστε την εφαρμογή να ελέγξει ξανά τα ληφθέντα κεφάλαια</string>
+    <string name="pref_invalidate_download_cache_summary">Αναγκάστε την εφαρμογή να ελέγξει ξανά τα
+        ληφθέντα κεφάλαια
+    </string>
     <string name="label_stats">Στατιστικά</string>
     <string name="label_local">Τοπικό</string>
     <string name="label_started">Ξεκίνησε</string>
@@ -658,19 +825,26 @@
     <string name="label_titles_in_global_update">Σε καθολική ενημέρωση</string>
     <string name="action_not_now">Όχι τώρα</string>
     <string name="information_no_manga_category">Η κατηγορία είναι άδεια</string>
-    <string name="pref_library_update_show_tab_badge">Εμφάνιση του αριθμού των μη αναγνωσμένων στο εικονίδιο Ενημερώσεις</string>
+    <string name="pref_library_update_show_tab_badge">Εμφάνιση του αριθμού των μη αναγνωσμένων στο
+        εικονίδιο Ενημερώσεις
+    </string>
     <string name="copied_to_clipboard_plain">Αντιγράφηκε στο πρόχειρο</string>
     <string name="pref_skip_dupe_chapters">Παράλειψη διπλότυπων κεφαλαίων</string>
-    <string name="enhanced_services_not_installed">Διαθέσιμο αλλά η πηγή δεν έχει εγκατασταθεί: %s</string>
+    <string name="enhanced_services_not_installed">Διαθέσιμο αλλά η πηγή δεν έχει εγκατασταθεί: %s
+    </string>
     <string name="track_error">%1$s σφάλμα: %2$s</string>
     <string name="information_required_plain">*απαιτούμενο</string>
-    <string name="pref_hide_in_library_items">Απόκρυψη καταχωρήσεων που βρίσκονται ήδη στη βιβλιοθήκη</string>
+    <string name="pref_hide_in_library_items">Απόκρυψη καταχωρήσεων που βρίσκονται ήδη στη
+        βιβλιοθήκη
+    </string>
     <string name="action_copy_to_clipboard">Αντιγραφή στο πρόχειρο</string>
     <string name="action_update_category">Ενημέρωση κατηγορίας</string>
     <string name="split_tall_images">Διαχωρισμός ψηλών εικόνων</string>
     <string name="overlay_header">Επικάλυψη</string>
     <string name="pref_page_rotate">Περιστροφή πλατιών σελίδων για να χωρέσουν</string>
-    <string name="pref_page_rotate_invert">Αναστροφή του προσανατολισμού των πλατιών σελίδων που έχουν περιστραφεί</string>
+    <string name="pref_page_rotate_invert">Αναστροφή του προσανατολισμού των πλατιών σελίδων που
+        έχουν περιστραφεί
+    </string>
     <string name="pref_debug_info">Πληροφορίες εντοπισμού σφαλμάτων</string>
     <string name="pref_double_tap_zoom">Διπλό πάτημα για ζουμ</string>
     <string name="pref_chapter_swipe_start">Κεφάλαιο με σύρσιμο προς τα αριστερά</string>
@@ -680,7 +854,9 @@
     <string name="intervals_header">Διαστήματα</string>
     <string name="manga_display_interval_title">Εκτίμηση κάθε</string>
     <string name="manga_display_modified_interval_title">Ρύθμιση για ενημέρωση κάθε</string>
-    <string name="skipped_reason_not_in_release_period">Παραλείφθηκε επειδή δεν αναμενόταν κυκλοφορία σήμερα</string>
+    <string name="skipped_reason_not_in_release_period">Παραλείφθηκε επειδή δεν αναμενόταν
+        κυκλοφορία σήμερα
+    </string>
     <string name="action_ok">Εντάξει</string>
     <string name="track_delete_title">Κατάργηση παρακολούθησης %s;</string>
     <string name="track_delete_remote_text">Επίσης, αφαιρέστε από %s</string>
@@ -692,7 +868,8 @@
     <string name="information_cloudflare_help">Πατήστε εδώ για βοήθεια με το Cloudflare</string>
     <string name="download_cache_invalidated">Αναδημιουργία ευρετηρίου λήψεων</string>
     <string name="track_activity_name">Σύνδεση παρακολούθησης</string>
-    <string name="create_backup_file_error">Δεν ήταν δυνατή η δημιουργία αντιγράφου ασφαλείας</string>
+    <string name="create_backup_file_error">Δεν ήταν δυνατή η δημιουργία αντιγράφου ασφαλείας
+    </string>
     <string name="exception_unknown_host">Δεν ήταν δυνατή η πρόσβαση στο %s</string>
     <string name="exception_http">HTTP %d, ελέγξτε την ιστοσελίδα στο WebView</string>
     <string name="exception_offline">Δεν υπάρχει σύνδεση στο διαδίκτυο</string>
@@ -706,7 +883,8 @@
     <string name="file_null_uri_error">Δεν έχει επιλεγεί αρχείο</string>
     <string name="relative_time_span_never">Ποτέ</string>
     <string name="pref_flash_page_summ">Μειώνει το ghosting σε οθόνες e-ink</string>
-    <string name="last_auto_backup_info">Τελευταία αυτόματη δημιουργία αντιγράφων ασφαλείας: %s</string>
+    <string name="last_auto_backup_info">Τελευταία αυτόματη δημιουργία αντιγράφων ασφαλείας: %s
+    </string>
     <string name="pref_flash_page">Λευκό φλας κατά την αλλαγή σελίδας</string>
     <string name="pref_storage_usage">Χρήση αποθηκευτικού χώρου</string>
     <string name="action_sort_tracker_score">Σκορ tracker</string>
@@ -722,7 +900,9 @@
     <string name="not_selected">Μη επιλεγμένο</string>
     <string name="action_bar_up_description">Πλοήγηση προς τα πάνω</string>
     <string name="pref_storage_location">Τοποθεσία αποθήκευσης</string>
-    <string name="pref_storage_location_info">Χρησιμοποιείται για αυτόματα αντίγραφα ασφαλείας, λήψη κεφαλαίων και τοπική πηγή.</string>
+    <string name="pref_storage_location_info">Χρησιμοποιείται για αυτόματα αντίγραφα ασφαλείας, λήψη
+        κεφαλαίων και τοπική πηγή.
+    </string>
     <string name="onboarding_storage_action_select">Επιλέξτε ένα φάκελο</string>
     <string name="onboarding_action_finish">Ξεκινήστε</string>
     <string name="onboarding_storage_selection_required">Ένας φάκελος πρέπει να επιλεγεί</string>
@@ -730,29 +910,47 @@
     <string name="onboarding_action_skip">Παράλειψη</string>
     <string name="onboarding_action_next">Επόμενο</string>
     <string name="pref_onboarding_guide">Οδηγός εισαγωγής</string>
-    <string name="onboarding_guides_new_user">Είστε νέοι στο %s; Σας συνιστούμε να ανατρέξετε στον οδηγό έναρξης.</string>
+    <string name="onboarding_guides_new_user">Είστε νέοι στο %s; Σας συνιστούμε να ανατρέξετε στον
+        οδηγό έναρξης.
+    </string>
     <string name="onboarding_guides_returning_user">Επανεγκατάσταση %s;</string>
-    <string name="onboarding_description">Ας ρυθμίσουμε πρώτα κάποια πράγματα. Μπορείτε πάντα να τα αλλάξετε στις ρυθμίσεις αργότερα.</string>
+    <string name="onboarding_description">Ας ρυθμίσουμε πρώτα κάποια πράγματα. Μπορείτε πάντα να τα
+        αλλάξετε στις ρυθμίσεις αργότερα.
+    </string>
     <string name="no_location_set">Δεν έχει οριστεί τοποθεσία αποθήκευσης</string>
-    <string name="onboarding_storage_info">Επιλέξτε ένα φάκελο όπου το %1$s θα αποθηκεύει λήψεις κεφαλαίων, αντίγραφα ασφαλείας και άλλα.
-\n
-\nΣυνιστάται ένας αποκλειστικός φάκελος.
-\n
-\nΕπιλεγμένος φάκελος: %2$s</string>
+    <string name="onboarding_storage_info">Επιλέξτε ένα φάκελο όπου το %1$s θα αποθηκεύει λήψεις
+        κεφαλαίων, αντίγραφα ασφαλείας και άλλα.
+        \n
+        \nΣυνιστάται ένας αποκλειστικός φάκελος.
+        \n
+        \nΕπιλεγμένος φάκελος: %2$s
+    </string>
     <string name="onboarding_permission_notifications">Άδεια ειδοποιήσεων</string>
     <string name="onboarding_permission_install_apps">Άδεια εγκατάστασης εφαρμογών</string>
-    <string name="onboarding_permission_ignore_battery_opts_description">Αποφύγετε διακοπές σε μακροχρόνιες ενημερώσεις της βιβλιοθήκης, λήψεις και επαναφορές αντιγράφων ασφαλείας.</string>
+    <string name="onboarding_permission_ignore_battery_opts_description">Αποφύγετε διακοπές σε
+        μακροχρόνιες ενημερώσεις της βιβλιοθήκης, λήψεις και επαναφορές αντιγράφων ασφαλείας.
+    </string>
     <string name="onboarding_permission_ignore_battery_opts">Χρήση μπαταρίας στο παρασκήνιο</string>
-    <string name="onboarding_permission_install_apps_description">Για εγκατάσταση επεκτάσεων πηγών.</string>
-    <string name="onboarding_permission_notifications_description">Ειδοποιηθείτε για ενημερώσεις της βιβλιοθήκης και άλλων.</string>
+    <string name="onboarding_permission_install_apps_description">Για εγκατάσταση επεκτάσεων
+        πηγών.
+    </string>
+    <string name="onboarding_permission_notifications_description">Ειδοποιηθείτε για ενημερώσεις της
+        βιβλιοθήκης και άλλων.
+    </string>
     <string name="onboarding_permission_action_grant">Παραχώρηση</string>
     <string name="available_disk_space_info">Διαθέσιμο: %1$s / Σύνολο: %2$s</string>
-    <string name="ext_permission_install_apps_warning">Απαιτούνται δικαιώματα για την εγκατάσταση επεκτάσεων. Πατήστε εδώ για παραχώρηση.</string>
-    <string name="private_settings">Συμπεριλάβετε ευαίσθητες ρυθμίσεις (π.χ. διακριτικά σύνδεσης παρακολούθησης)</string>
+    <string name="ext_permission_install_apps_warning">Απαιτούνται δικαιώματα για την εγκατάσταση
+        επεκτάσεων. Πατήστε εδώ για παραχώρηση.
+    </string>
+    <string name="private_settings">Συμπεριλάβετε ευαίσθητες ρυθμίσεις (π.χ. διακριτικά σύνδεσης
+        παρακολούθησης)
+    </string>
     <string name="invalid_backup_file_error">Πλήρες σφάλμα:</string>
     <string name="action_add_repo">Προσθήκη αποθετηρίων</string>
     <string name="action_delete_repo">Διαγραφή αποθετηρίου</string>
-    <string name="onboarding_storage_help_info">Ενημερώνετε από μια παλαιότερη έκδοση και δεν είστε σίγουροι τι να επιλέξετε; Ανατρέξτε στον οδηγό αποθήκευσης για περισσότερες πληροφορίες.</string>
+    <string name="onboarding_storage_help_info">Ενημερώνετε από μια παλαιότερη έκδοση και δεν είστε
+        σίγουροι τι να επιλέξετε; Ανατρέξτε στον οδηγό αποθήκευσης για περισσότερες πληροφορίες.
+    </string>
     <string name="onboarding_storage_help_action">Οδηγός αποθήκευσης</string>
     <string name="label_extension_repos">Αποθετήρια επεκτάσεων</string>
     <string name="information_empty_repos">Δεν έχετε ορίσει αποθετήρια.</string>
@@ -760,33 +958,54 @@
     <string name="manga_interval_custom_amount">Προσαρμοσμένη συχνότητα ενημέρωσης:</string>
     <string name="pref_library_update_smart_update">Έξυπνη ενημέρωση</string>
     <string name="label_add_repo_input">URL αποθετηρίου</string>
-    <string name="action_add_repo_message">Προσθέστε επιπλέον αποθετήρια στο %s. Αυτό θα πρέπει να είναι ένα URL που τελειώνει με \"index.min.json\".</string>
+    <string name="action_add_repo_message">Προσθέστε επιπλέον αποθετήρια στο %s. Αυτό θα πρέπει να
+        είναι ένα URL που τελειώνει με \"index.min.json\".
+    </string>
     <string name="delete_repo_confirmation">Θέλετε να διαγράψετε το αποθετήριο \"%s\";</string>
     <string name="error_repo_exists">Αυτό το αποθετήριο υπάρχει ήδη!</string>
     <string name="ext_revoke_trust">Ανάκληση αξιόπιστων άγνωστων επεκτάσεων</string>
     <string name="action_open_repo">Αποθετήριο ανοικτού κώδικα</string>
     <string name="pref_webtoon_disable_zoom_out">Απενεργοποίηση σμίκρυνσης εικόνας</string>
     <string name="action_add_anyway">Προσθέστε ούτως ή άλλως</string>
-    <string name="action_replace_repo_message">Το αποθετήριο %1$s έχει το ίδιο δακτυλικό αποτύπωμα κλειδιού υπογραφής με το %2$s.
-\nΕάν αυτό είναι αναμενόμενο, το %2$s θα αντικατασταθεί, διαφορετικά επικοινωνήστε με τον συντηρητή του αποθετηρίου σας.</string>
+    <string name="action_replace_repo_message">Το αποθετήριο %1$s έχει το ίδιο δακτυλικό αποτύπωμα
+        κλειδιού υπογραφής με το %2$s.
+        \nΕάν αυτό είναι αναμενόμενο, το %2$s θα αντικατασταθεί, διαφορετικά επικοινωνήστε με τον
+        συντηρητή του αποθετηρίου σας.
+    </string>
     <string name="pref_display_profile">Προσαρμοσμένο προφίλ εμφάνισης</string>
     <string name="action_replace_repo">Αντικατάσταση</string>
-    <string name="action_replace_repo_title">Το δακτυλικό αποτύπωμα κλειδιού υπογραφής υπάρχει ήδη</string>
-    <string name="file_picker_uri_permission_unsupported">Αποτυχία απόκτησης μόνιμης πρόσβασης φακέλου. Η εφαρμογή μπορεί να συμπεριφέρεται απροσδόκητα.</string>
+    <string name="action_replace_repo_title">Το δακτυλικό αποτύπωμα κλειδιού υπογραφής υπάρχει ήδη
+    </string>
+    <string name="file_picker_uri_permission_unsupported">Αποτυχία απόκτησης μόνιμης πρόσβασης
+        φακέλου. Η εφαρμογή μπορεί να συμπεριφέρεται απροσδόκητα.
+    </string>
     <string name="non_library_settings">Όλες οι καταχωρήσεις που έχουν διαβαστεί</string>
     <string name="action_copy_link">Αντιγραφή συνδέσμου</string>
-    <string name="manga_interval_expected_update_null">Αυτό το manga είτε έχει ολοκληρωθεί, είτε δεν υπάρχει προβλεπόμενη ημερομηνία κυκλοφορίας.</string>
+    <string name="manga_interval_expected_update_null">Αυτό το manga είτε έχει ολοκληρωθεί, είτε δεν
+        υπάρχει προβλεπόμενη ημερομηνία κυκλοφορίας.
+    </string>
     <string name="action_sort_random">Τυχαίο</string>
     <string name="onboarding_permission_analytics">Να επιτρέπονται τα αναλυτικά στοιχεία</string>
     <string name="pref_firebase">Αναλύσεις και αρχεία καταγραφής ατυχημάτων</string>
     <string name="onboarding_permission_crashlytics">Αποστολή αρχείων καταγραφής σφαλμάτων</string>
-    <string name="pref_download_new_unread_chapters_only">Παράλειψη λήψης διπλότυπων αναγνωσμένων κεφαλαίων</string>
-    <string name="firebase_summary">Η αποστολή αρχείων καταγραφής σφαλμάτων και αναλυτικών στοιχείων θα μας επιτρέψει να εντοπίσουμε και να διορθώσουμε προβλήματα, να βελτιώσουμε την απόδοση και να κάνουμε τις μελλοντικές ενημερώσεις πιο σχετικές με τις ανάγκες σας</string>
+    <string name="pref_download_new_unread_chapters_only">Παράλειψη λήψης διπλότυπων αναγνωσμένων
+        κεφαλαίων
+    </string>
+    <string name="firebase_summary">Η αποστολή αρχείων καταγραφής σφαλμάτων και αναλυτικών στοιχείων
+        θα μας επιτρέψει να εντοπίσουμε και να διορθώσουμε προβλήματα, να βελτιώσουμε την απόδοση
+        και να κάνουμε τις μελλοντικές ενημερώσεις πιο σχετικές με τις ανάγκες σας
+    </string>
     <string name="add_repo_confirmation">Θέλετε να προσθέσετε το repo \"%s\"?</string>
-    <string name="remove_private_extension_message">Θέλετε πραγματικά να αφαιρέσετε την επέκταση \"%s?</string>
+    <string name="remove_private_extension_message">Θέλετε πραγματικά να αφαιρέσετε την επέκταση
+        \"%s?
+    </string>
     <string name="pref_flash_page_interval">Φλας κάθε</string>
-    <string name="onboarding_permission_crashlytics_description">Αποστολή ανώνυμων αρχείων καταγραφής σφαλμάτων στους προγραμματιστές.</string>
-    <string name="onboarding_permission_analytics_description">Αποστολή ανώνυμων δεδομένων χρήσης για τη βελτίωση των λειτουργιών της εφαρμογής.</string>
+    <string name="onboarding_permission_crashlytics_description">Αποστολή ανώνυμων αρχείων
+        καταγραφής σφαλμάτων στους προγραμματιστές.
+    </string>
+    <string name="onboarding_permission_analytics_description">Αποστολή ανώνυμων δεδομένων χρήσης
+        για τη βελτίωση των λειτουργιών της εφαρμογής.
+    </string>
     <string name="pref_security">Ασφάλεια</string>
     <string name="pref_flash_style_black">Μαύρο</string>
     <string name="pref_flash_style_white">Λευκό</string>
@@ -798,37 +1017,67 @@
     <string name="pref_flash_with">Φλας με</string>
     <string name="pref_flash_style_white_black">Λευκό και Μαύρο</string>
     <string name="confirm_tracker_update">Ενημέρωση ανιχνευτών στο κεφάλαιο %d?</string>
-    <string name="invalid_backup_file_unknown">Το αρχείο αντιγράφων ασφαλείας έχει καταστραφεί</string>
-    <string name="invalid_backup_file_json">Δεν υποστηρίζεται η δημιουργία αντιγράφων ασφαλείας JSON</string>
-    <string name="pref_auto_update_manga_on_mark_read">Ενημέρωση προόδου όταν επισημανθεί ως αναγνωσμένη</string>
+    <string name="invalid_backup_file_unknown">Το αρχείο αντιγράφων ασφαλείας έχει καταστραφεί
+    </string>
+    <string name="invalid_backup_file_json">Δεν υποστηρίζεται η δημιουργία αντιγράφων ασφαλείας
+        JSON
+    </string>
+    <string name="pref_auto_update_manga_on_mark_read">Ενημέρωση προόδου όταν επισημανθεί ως
+        αναγνωσμένη
+    </string>
     <string name="trackers_updated_summary">Οι trackers ενημερώθηκαν στο κεφάλαιο %d</string>
-    <string name="pref_incognito_mode_extension_summary">Παύση ιστορικού ανάγνωσης για επέκταση</string>
+    <string name="pref_incognito_mode_extension_summary">Παύση ιστορικού ανάγνωσης για επέκταση
+    </string>
     <string name="pref_hardware_bitmap_threshold_default">Προεπιλογή (%d)</string>
-    <string name="pref_hardware_bitmap_threshold_summary">Εάν ο αναγνώστης φορτώσει μια κενή εικόνα, μειώστε σταδιακά το όριο.\nΕπιλεγμένο: %s</string>
-    <string name="pref_always_decode_long_strip_with_ssiv_summary">Επηρεάζει την απόδοση. Ενεργοποιήστε το μόνο αν η μείωση του ορίου bitmap δε διορθώνει τα προβλήματα κενών εικόνων</string>
+    <string name="pref_hardware_bitmap_threshold_summary">Εάν ο αναγνώστης φορτώσει μια κενή εικόνα,
+        μειώστε σταδιακά το όριο.\nΕπιλεγμένο: %s
+    </string>
+    <string name="pref_always_decode_long_strip_with_ssiv_summary">Επηρεάζει την απόδοση.
+        Ενεργοποιήστε το μόνο αν η μείωση του ορίου bitmap δε διορθώνει τα προβλήματα κενών εικόνων
+    </string>
     <string name="pref_hardware_bitmap_threshold">Προσαρμοσμένο όριο bitmap υλικού</string>
     <string name="label_auto">Αυτόματο</string>
     <string name="export">Εξαγωγή</string>
     <string name="library_list">Κατάλογος Βιβλιοθήκης</string>
-    <string name="pref_always_decode_long_strip_with_ssiv_2">Χρησιμοποιήστε αποκωδικοποιητή παλαιού τύπου για ανάγνωση μακριών ταινιών</string>
-    <string name="pref_mark_duplicate_read_chapter_read">Επισήμανση διπλότυπου αναγνωσμένου κεφαλαίου ως αναγνωσμένο</string>
-    <string name="pref_mark_duplicate_read_chapter_read_new">Μετά τη λήψη του νέου κεφαλαίου</string>
+    <string name="pref_always_decode_long_strip_with_ssiv_2">Χρησιμοποιήστε αποκωδικοποιητή παλαιού
+        τύπου για ανάγνωση μακριών ταινιών
+    </string>
+    <string name="pref_mark_duplicate_read_chapter_read">Επισήμανση διπλότυπου αναγνωσμένου
+        κεφαλαίου ως αναγνωσμένο
+    </string>
+    <string name="pref_mark_duplicate_read_chapter_read_new">Μετά τη λήψη του νέου κεφαλαίου
+    </string>
     <string name="action_display_unread_badge">Μη αναγνωσμένα κεφάλαια</string>
     <string name="pref_behavior">Συμπεριφορά</string>
-    <string name="pref_mark_duplicate_read_chapter_read_existing">Μετά την ανάγνωση ενός κεφαλαίου</string>
+    <string name="pref_mark_duplicate_read_chapter_read_existing">Μετά την ανάγνωση ενός κεφαλαίου
+    </string>
     <string name="library_exported">Έγινε εξαγωγή της βιβλιοθήκης</string>
     <string name="author">Συγγραφέας</string>
     <string name="artist">Καλλιτέχνης</string>
     <string name="tracked_privately">Παρακολουθείται ιδιωτικά</string>
     <string name="action_toggle_private_off">Παρακολούθηση δημόσια</string>
     <string name="action_toggle_private_on">Παρακολούθηση ιδιωτικά</string>
-    <string name="migrationConfigScreen.removeDownloadsTitle">Διαγραφή λήψεων της τρέχουσας καταχώρησης μετά τη μεταφορά</string>
-    <string name="migrationConfigScreen.additionalSearchQueryLabel">Πρόσθετες λέξεις-κλειδιά (προαιρετικά)</string>
-    <string name="migrationConfigScreen.additionalSearchQuerySupportingText">Βοηθά στον περιορισμό των αποτελεσμάτων αναζήτησης με την προσθήκη πρόσθετων λέξεων-κλειδιών</string>
-    <string name="migrationConfigScreen.hideWithoutUpdatesSubtitle">Εμφάνιση καταχώρησης μόνο αν ο συσχετισμός έχει πρόσθετα κεφάλαια</string>
-    <string name="migrationConfigScreen.enhancedOptionsWarning">Οι επιλογές αυτές είναι αργές και επικίνδυνες και μπορεί να οδηγήσουν σε περιορισμούς από τις πηγές</string>
-    <string name="migrationConfigScreen.deepSearchModeTitle">Προηγμένη λειτουργία αναζήτησης</string>
-    <string name="migrationConfigScreen.prioritizeByChaptersSubtitle">Εάν είναι ενεργοποιημένη, επιλέγει την πιο μακρινή αντιστοιχία. Διαφορετικά, επιλέγει την πρώτη αντιστοιχία με βάση την προτεραιότητα πηγής.</string>
+    <string name="migrationConfigScreen.removeDownloadsTitle">Διαγραφή λήψεων της τρέχουσας
+        καταχώρησης μετά τη μεταφορά
+    </string>
+    <string name="migrationConfigScreen.additionalSearchQueryLabel">Πρόσθετες λέξεις-κλειδιά
+        (προαιρετικά)
+    </string>
+    <string name="migrationConfigScreen.additionalSearchQuerySupportingText">Βοηθά στον περιορισμό
+        των αποτελεσμάτων αναζήτησης με την προσθήκη πρόσθετων λέξεων-κλειδιών
+    </string>
+    <string name="migrationConfigScreen.hideWithoutUpdatesSubtitle">Εμφάνιση καταχώρησης μόνο αν ο
+        συσχετισμός έχει πρόσθετα κεφάλαια
+    </string>
+    <string name="migrationConfigScreen.enhancedOptionsWarning">Οι επιλογές αυτές είναι αργές και
+        επικίνδυνες και μπορεί να οδηγήσουν σε περιορισμούς από τις πηγές
+    </string>
+    <string name="migrationConfigScreen.deepSearchModeTitle">Προηγμένη λειτουργία αναζήτησης
+    </string>
+    <string name="migrationConfigScreen.prioritizeByChaptersSubtitle">Εάν είναι ενεργοποιημένη,
+        επιλέγει την πιο μακρινή αντιστοιχία. Διαφορετικά, επιλέγει την πρώτη αντιστοιχία με βάση
+        την προτεραιότητα πηγής.
+    </string>
     <string name="migrationListScreen.unknownLatestChapter">Άγνωστο</string>
     <string name="migrationListScreen.searchManuallyActionLabel">Αναζήτηση χειροκίνητα</string>
     <string name="migrationListScreen.skipActionLabel">Να μη γίνει μεταφορά</string>
@@ -836,10 +1085,16 @@
     <string name="migrationListScreen.copyNowActionLabel">Αντιγραφή τώρα</string>
     <string name="migrationListScreen.exitDialogTitle">Να σταματήσετε η μεταφορά;</string>
     <string name="migrationListScreen.exitDialog.stopLabel">Σταμάτημα</string>
-    <string name="possible_duplicates_summary">Έχετε καταχωρήσεις στη βιβλιοθήκη σας με παρόμοιο όνομα.\n\nΕπιλέξτε μια καταχώρηση για να τη μεταφέρετε ή να την προσθέσετε ούτως ή άλλως.</string>
+    <string name="possible_duplicates_summary">Έχετε καταχωρήσεις στη βιβλιοθήκη σας με παρόμοιο
+        όνομα.\n\nΕπιλέξτε μια καταχώρηση για να τη μεταφέρετε ή να την προσθέσετε ούτως ή άλλως.
+    </string>
     <string name="possible_duplicates_title">Πιθανά διπλότυπα</string>
-    <string name="pref_update_library_manga_titles">Ενημέρωση τίτλων manga της βιβλιοθήκης για να ταιριάζουν με την πηγή</string>
-    <string name="pref_update_library_manga_titles_summary">Προειδοποίηση: αν ένα manga μετονομαστεί, θα αφαιρεθεί από την ουρά λήψης (αν υπάρχει).</string>
+    <string name="pref_update_library_manga_titles">Ενημέρωση τίτλων manga της βιβλιοθήκης για να
+        ταιριάζουν με την πηγή
+    </string>
+    <string name="pref_update_library_manga_titles_summary">Προειδοποίηση: αν ένα manga
+        μετονομαστεί, θα αφαιρεθεί από την ουρά λήψης (αν υπάρχει).
+    </string>
     <string name="migrationConfigScreen.selectEnabledLabel">Επιλογή ενεργοποιημένων πηγών</string>
     <string name="migrationConfigScreen.selectPinnedLabel">Επιλογή καρφιτσωμένων πηγών</string>
     <string name="migrationConfigScreen.continueButtonText">Συνέχειά</string>
@@ -850,38 +1105,60 @@
     <string name="action_notes">Σημειώσεις</string>
     <string name="action_edit_notes">Επεξεργασία σημείων</string>
     <string name="notes_placeholder">Μου άρεσε το σημείο όπου…</string>
-    <string name="pref_hide_missing_chapter_indicators">Απόκρυψη δεικτών ελλείποντος κεφαλαίου</string>
+    <string name="pref_hide_missing_chapter_indicators">Απόκρυψη δεικτών ελλείποντος κεφαλαίου
+    </string>
     <string name="migrationListScreen.migrateActionLabel">Μεταφορά</string>
     <string name="migrationListScreen.noMatchFoundText">Δε βρέθηκαν εναλλακτικές</string>
     <string name="migrationListScreen.migrateDialog.cancelLabel">Ακύρωση</string>
-    <string name="migrationConfigScreen.deepSearchModeSubtitle">Αναλύει τον τίτλο σε λέξεις-κλειδιά για ευρύτερη αναζήτηση</string>
+    <string name="migrationConfigScreen.deepSearchModeSubtitle">Αναλύει τον τίτλο σε λέξεις-κλειδιά
+        για ευρύτερη αναζήτηση
+    </string>
     <string name="migrationListScreen.exitDialog.cancelLabel">Ακύρωση</string>
-    <string name="migrationConfigScreen.prioritizeByChaptersTitle">Αντιστοίχιση με βάση τον αριθμό κεφαλαίου</string>
+    <string name="migrationConfigScreen.prioritizeByChaptersTitle">Αντιστοίχιση με βάση τον αριθμό
+        κεφαλαίου
+    </string>
     <string name="migrationListScreen.copyActionLabel">Αντιγραφή</string>
     <string name="migrationListScreen.migrateDialog.migrateLabel">Μεταφορά</string>
-    <string name="migrationListScreen.matchWithoutChapterToast">Δε βρέθηκαν κεφάλαια, αυτή η καταχώρηση δεν μπορεί να χρησιμοποιηθεί για μεταφορά</string>
+    <string name="migrationListScreen.matchWithoutChapterToast">Δε βρέθηκαν κεφάλαια, αυτή η
+        καταχώρηση δεν μπορεί να χρησιμοποιηθεί για μεταφορά
+    </string>
     <string name="migrationListScreenTitleWithProgress">Μεταφορά (%1$d/%2$d)</string>
     <string name="migrationListScreen.latestChapterLabel">Τελευταία: %1$s</string>
     <string name="migrationListScreen.progressDialog.cancelLabel">Ακύρωση</string>
-    <string name="migrationConfigScreen.hideUnmatchedTitle">Απόκρυψη καταχωρήσεων χωρίς αντιστοιχία</string>
-    <string name="migrationConfigScreen.hideWithoutUpdatesTitle">Απόκρυψη καταχωρήσεων χωρίς νεότερα κεφάλαια</string>
+    <string name="migrationConfigScreen.hideUnmatchedTitle">Απόκρυψη καταχωρήσεων χωρίς
+        αντιστοιχία
+    </string>
+    <string name="migrationConfigScreen.hideWithoutUpdatesTitle">Απόκρυψη καταχωρήσεων χωρίς νεότερα
+        κεφάλαια
+    </string>
     <string name="migrationListScreen.migrateDialog.copyLabel">Αντιγραφή</string>
     <string name="migrationListScreenTitle">Μεταφορά</string>
     <string name="migrationConfigScreen.dataToMigrateHeader">Δεδομένα προς μεταφορά</string>
     <string name="logging_in">Σύνδεση…</string>
-    <string name="clear_database_text">Πρόκειται να αφαιρέσετε καταχωρήσεις από τη βάση δεδομένων</string>
-    <string name="clear_database_history_warning">Τα αναγνωσμένα κεφάλαια και η πρόοδος των καταχωρήσεων που δεν είναι στη βιβλιοθήκη θα χαθούν</string>
+    <string name="clear_database_text">Πρόκειται να αφαιρέσετε καταχωρήσεις από τη βάση δεδομένων
+    </string>
+    <string name="clear_database_history_warning">Τα αναγνωσμένα κεφάλαια και η πρόοδος των
+        καταχωρήσεων που δεν είναι στη βιβλιοθήκη θα χαθούν
+    </string>
     <string name="clear_db_exclude_read">Κρατήστε καταχωρήσεις με αναγνωσμένα κεφάλαια</string>
-    <string name="storage_failed_to_create_download_directory">Αποτυχία δημιουργίας καταλόγου λήψης</string>
+    <string name="storage_failed_to_create_download_directory">Αποτυχία δημιουργίας καταλόγου
+        λήψης
+    </string>
     <string name="storage_failed_to_create_directory">Αποτυχία δημιουργίας καταλόγου: %s</string>
     <string name="label_donate">Δωρεά</string>
     <string name="pref_display_images_description">Αναπαράσταση εικόνων σε περιγραφές manga</string>
     <string name="pref_disallow_non_ascii_filenames">Απαγόρευση μη ASCII ονομάτων αρχείων</string>
-    <string name="pref_disallow_non_ascii_filenames_details">Εξασφαλίζει συμβατότητα με ορισμένα μέσα αποθήκευσης που δεν υποστηρίζουν Unicode. Όταν αυτή η επιλογή είναι ενεργοποιημένη, θα πρέπει να μετονομάσετε χειροκίνητα τους φακέλους πηγής και manga, αντικαθιστώντας τους χαρακτήρες που δεν είναι ASCII με τις μικρές κεφαλαίες δεκαεξαδικές αναπαραστάσεις UTF-8. Τα αρχεία κεφαλαίων δε χρειάζεται να μετονομάζονται.</string>
+    <string name="pref_disallow_non_ascii_filenames_details">Εξασφαλίζει συμβατότητα με ορισμένα
+        μέσα αποθήκευσης που δεν υποστηρίζουν Unicode. Όταν αυτή η επιλογή είναι ενεργοποιημένη, θα
+        πρέπει να μετονομάσετε χειροκίνητα τους φακέλους πηγής και manga, αντικαθιστώντας τους
+        χαρακτήρες που δεν είναι ASCII με τις μικρές κεφαλαίες δεκαεξαδικές αναπαραστάσεις UTF-8. Τα
+        αρχεία κεφαλαίων δε χρειάζεται να μετονομάζονται.
+    </string>
     <string name="action_webview_close_tab">Κλείσιμο καρτέλας</string>
     <string name="pref_download_concurrent_sources">Ταυτόχρονες λήψεις πηγών</string>
     <string name="pref_download_concurrent_pages">Ταυτόχρονες λήψεις σελίδων</string>
-    <string name="pref_download_concurrent_pages_summary">Σελίδες που λήφθηκαν ταυτόχρονα ανά πηγή</string>
+    <string name="pref_download_concurrent_pages_summary">Σελίδες που λήφθηκαν ταυτόχρονα ανά πηγή
+    </string>
     <string name="download_bookmarked">Προστέθηκε στους σελιδοδείκτες</string>
     <string name="action_filter_excluded_scanlators">Φιλτράρισμα εξαιρούμενων scanlator</string>
 </resources>

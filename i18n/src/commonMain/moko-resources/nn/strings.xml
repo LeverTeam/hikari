@@ -106,10 +106,14 @@
     <string name="pref_library_columns">Element per rad</string>
     <string name="connected_to_wifi">Berre på Wi-Fi</string>
     <string name="restrictions">Avgrensingar: %s</string>
-    <string name="pref_library_update_refresh_metadata_summary">Sjå etter nye omslag og detaljar ved oppdatering av bibliotek</string>
+    <string name="pref_library_update_refresh_metadata_summary">Sjå etter nye omslag og detaljar ved
+        oppdatering av bibliotek
+    </string>
     <string name="default_category">Standard kategori</string>
     <string name="default_category_summary">Alltid spør</string>
-    <string name="pref_library_update_categories_details">Manga i utelatne kategoriar vil ikkje bli oppdatert sjølv om dei òg er i inkluderte kategoriar.</string>
+    <string name="pref_library_update_categories_details">Manga i utelatne kategoriar vil ikkje bli
+        oppdatert sjølv om dei òg er i inkluderte kategoriar.
+    </string>
     <string name="all">Alle</string>
     <string name="none">Ingen</string>
     <string name="include">Inkluder: %s</string>
@@ -178,7 +182,9 @@
     <string name="save_chapter_as_cbz">Lagra som CBZ-arkiv</string>
     <string name="services">Tenester</string>
     <string name="enhanced_services">Forbetra tenester</string>
-    <string name="enhanced_tracking_info">Tenester som tilbyr forbetra tenester for spesifikke kjelder. Manga blir spora automatisk når dei blir lagt til i biblioteket ditt.</string>
+    <string name="enhanced_tracking_info">Tenester som tilbyr forbetra tenester for spesifikke
+        kjelder. Manga blir spora automatisk når dei blir lagt til i biblioteket ditt.
+    </string>
     <string name="action_track">Spor</string>
     <string name="pref_create_backup">Lag reservekopi</string>
     <string name="pref_restore_backup">Gjenopprett reservekopi</string>
@@ -222,21 +228,29 @@
     <string name="add_to_library">Legg til i bibliotek</string>
     <string name="ongoing">Pågåande</string>
     <string name="manga_tracking_tab">Sporing</string>
-    <string name="download_notifier_unknown_error">Kunne ikkje lasta ned kapittel grunna uventa feil</string>
+    <string name="download_notifier_unknown_error">Kunne ikkje lasta ned kapittel grunna uventa
+        feil
+    </string>
     <string name="pref_category_library_update">Global oppdatering</string>
     <string name="pref_library_update_schedule">Oppdateringsplan</string>
     <string name="update_schedule_none">Ingen tid vald</string>
     <string name="landscape">Liggjande</string>
-    <string name="ext_installer_shizuku_unavailable_dialog">Installer og start Shizuku for å bruka Shizuku som utvidingsinstallatør.</string>
+    <string name="ext_installer_shizuku_unavailable_dialog">Installer og start Shizuku for å bruka
+        Shizuku som utvidingsinstallatør.
+    </string>
     <string name="obsolete_extension_message">Denne utvidinga er ikkje lengre tilgjengeleg.</string>
     <string name="ext_nsfw_warning">Kan innehalda NSFW (18+) innhald</string>
     <string name="pref_category_delete_chapters">Slett kapittel</string>
-    <string name="pref_download_new_categories_details">Manga i utelatne kategoriar vil ikkje bli nedlasta sjølv om dei òg er i inkluderte kategoriar.</string>
+    <string name="pref_download_new_categories_details">Manga i utelatne kategoriar vil ikkje bli
+        nedlasta sjølv om dei òg er i inkluderte kategoriar.
+    </string>
     <string name="pref_backup_interval">Reservekopifrekvens</string>
     <string name="restoring_backup_canceled">Avbroten gjenoppretting</string>
     <string name="backup_restore_missing_sources">Manglande kjelder:</string>
     <string name="backup_restore_missing_trackers">Sporingstenester ikkje logga inn i:</string>
-    <string name="about_dont_kill_my_app">Nokre produsentar har ytterlegare appavgrensingar som drep bakgrunnstenester. Denne nettstaden har meir info om korleis det kan fiksast.</string>
+    <string name="about_dont_kill_my_app">Nokre produsentar har ytterlegare appavgrensingar som drep
+        bakgrunnstenester. Denne nettstaden har meir info om korleis det kan fiksast.
+    </string>
     <string name="website">Nettstaden</string>
     <string name="local_filter_order_by">Sorter etter</string>
     <string name="date">Dato</string>
@@ -244,7 +258,8 @@
     <string name="manga_added_library">Lagt til i biblioteket</string>
     <string name="manga_removed_library">Fjerna frå bibliotek</string>
     <string name="copied_to_clipboard">Kopiert til utklippstavla:
-\n%1$s</string>
+        \n%1$s
+    </string>
     <string name="display_mode_chapter">Kapittel %1$s</string>
     <string name="chapter_downloading_progress">Lastar ned (%1$d/%2$d)</string>
     <string name="set_chapter_settings_as_default">Sett som standard</string>

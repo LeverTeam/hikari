@@ -8,7 +8,9 @@
     <string name="chapters">Skyriai</string>
     <string name="manga">Bibliotekos įrašai</string>
     <string name="categories">Kategorijos</string>
-    <string name="information_empty_category">Neturite jokių kategorijų. Paspauskite pliuso simbolį, kad sukurtumėte kategoriją jūsų bibliotekos organizavimui.</string>
+    <string name="information_empty_category">Neturite jokių kategorijų. Paspauskite pliuso simbolį,
+        kad sukurtumėte kategoriją jūsų bibliotekos organizavimui.
+    </string>
     <string name="information_empty_library">Jūsų biblioteka tuščia</string>
     <string name="information_no_recent_manga">Nėra neseniai skaitytų</string>
     <string name="information_no_recent">Naujinių nėra</string>
@@ -28,7 +30,9 @@
     <string name="name">Vardas</string>
     <string name="default_category_summary">Visada klausti</string>
     <string name="default_category">Numatyta kategorija</string>
-    <string name="pref_library_update_refresh_metadata_summary">Tikrinti naujus viršelius ir informaciją kai biblioteka naujinama</string>
+    <string name="pref_library_update_refresh_metadata_summary">Tikrinti naujus viršelius ir
+        informaciją kai biblioteka naujinama
+    </string>
     <string name="pref_library_update_refresh_metadata">Automatiškai naujinti metaduomenis</string>
     <string name="pref_update_only_non_completed">Kai yra \"Perskaityta\" statusas</string>
     <string name="restrictions">Ribojimai: %s</string>
@@ -42,11 +46,15 @@
     <string name="pref_library_columns">Elementai eilutėje</string>
     <string name="pref_category_display">Rodinys</string>
     <string name="relative_time_today">Šiandien</string>
-    <string name="parental_controls_info">Tai nesustabdo neoficialių ar potencialiai neteisingai pažymėtų plėtinių nuo N18+ turinio rodymo programoje.</string>
+    <string name="parental_controls_info">Tai nesustabdo neoficialių ar potencialiai neteisingai
+        pažymėtų plėtinių nuo N18+ turinio rodymo programoje.
+    </string>
     <string name="pref_show_nsfw_source">Rodyti šaltiniuose ir plėtinių sąrašuose</string>
     <string name="pref_category_nsfw_content">N18+ šaltiniai</string>
     <string name="hide_notification_content">Slėpti pranešimo turinį</string>
-    <string name="secure_screen_summary">Slėpti programos turinį, kai įjungiama kita programa ir neleisti daryti ekrano nuotraukų</string>
+    <string name="secure_screen_summary">Slėpti programos turinį, kai įjungiama kita programa ir
+        neleisti daryti ekrano nuotraukų
+    </string>
     <string name="secure_screen">Saugus užraktas</string>
     <string name="lock_never">Niekada</string>
     <string name="lock_always">Visada</string>
@@ -153,30 +161,42 @@
     <string name="action_filter_bookmarked">Žymės</string>
     <string name="confirm_lock_change">Autentifikuokitės, kad patvirtintumėte pakeitimus</string>
     <string name="label_default">Numatytas</string>
-    <string name="categorized_display_settings">Rūšiavimo ir vaizdavimo nustatymai kiekvienai kategorijai</string>
+    <string name="categorized_display_settings">Rūšiavimo ir vaizdavimo nustatymai kiekvienai
+        kategorijai
+    </string>
     <string name="pref_custom_brightness">Pasirinktinis ryškumas</string>
     <string name="off">Išjungta</string>
     <string name="on">Įjungta</string>
     <string name="pref_crop_borders">Apkarpyti kraštus</string>
-    <string name="pref_show_reading_mode_summary">Trumpai parodyti dabartinį rėžimą, kai skaitiniai yra atidaryti</string>
+    <string name="pref_show_reading_mode_summary">Trumpai parodyti dabartinį rėžimą, kai skaitiniai
+        yra atidaryti
+    </string>
     <string name="pref_show_reading_mode">Parodyti skaitymo rėžimą</string>
     <string name="pref_show_page_number">Parodyti puslapio numerį</string>
     <string name="pref_double_tap_anim_speed">Dvigubo paspaudimo animacijos greitis</string>
     <string name="pref_page_transitions">Puslapių perėjimų animacijos</string>
     <string name="pref_cutout_short">Parodyti turinį iškirptoje zonoje</string>
-    <string name="pref_dual_page_invert_summary">Jeigu perskirtų puslapių pozicijos nesutampa su skaitymo kryptimi</string>
+    <string name="pref_dual_page_invert_summary">Jeigu perskirtų puslapių pozicijos nesutampa su
+        skaitymo kryptimi
+    </string>
     <string name="pref_dual_page_invert">Apkeisti perskirtų puslapių padėtį</string>
     <string name="pref_dual_page_split">Perskirti plačius puslapius</string>
-    <string name="pref_show_navigation_mode_summary">Trumpai parodyti skaitytuvą, kai atidarytas</string>
+    <string name="pref_show_navigation_mode_summary">Trumpai parodyti skaitytuvą, kai atidarytas
+    </string>
     <string name="pref_fullscreen">Pilno ekrano rėžimas</string>
     <string name="ext_nsfw_warning">Šaltiniuose gali būti N18 turinio</string>
     <string name="ext_nsfw_short">18+</string>
-    <string name="obsolete_extension_message">Šis plėtinys nebėra prieinamas. Plėtinys gali veikti netinkamai arba sukelti problemas programėlėje. Rekomenduojama išdiegti plėtinį.</string>
-    <string name="untrusted_extension_message">Šis plėtinys buvo pasirašytas nepatikimu sertifikatu ir nebuvo aktyvuotas.
-\n
-\nPlėtinys, su negeranoriškais ketinimais, gali perskaityti prisijungimo duomenys patalpintus Mihon arba gali paleisti kenkėjišką kodą.
-\n
-\nJūs priimate šias rizikas pasitikėdami sertifikatu.</string>
+    <string name="obsolete_extension_message">Šis plėtinys nebėra prieinamas. Plėtinys gali veikti
+        netinkamai arba sukelti problemas programėlėje. Rekomenduojama išdiegti plėtinį.
+    </string>
+    <string name="untrusted_extension_message">Šis plėtinys buvo pasirašytas nepatikimu sertifikatu
+        ir nebuvo aktyvuotas.
+        \n
+        \nPlėtinys, su negeranoriškais ketinimais, gali perskaityti prisijungimo duomenys
+        patalpintus Mihon arba gali paleisti kenkėjišką kodą.
+        \n
+        \nJūs priimate šias rizikas pasitikėdami sertifikatu.
+    </string>
     <string name="untrusted_extension">Nepatikimas plėtinys</string>
     <string name="ext_app_info">Aplikacijos informacija</string>
     <string name="ext_uninstall">Šalinti</string>
@@ -193,7 +213,9 @@
     <string name="include">Įtraukti: %s</string>
     <string name="none">Nėra</string>
     <string name="all">Visi</string>
-    <string name="pref_library_update_categories_details">Įrašai, kurie yra įtraukti į neįtraukiamas kategorijas, nebus atnaujinami, net jei yra įtraukti į įtrauktąsias kategorijas.</string>
+    <string name="pref_library_update_categories_details">Įrašai, kurie yra įtraukti į neįtraukiamas
+        kategorijas, nebus atnaujinami, net jei yra įtraukti į įtrauktąsias kategorijas.
+    </string>
     <string name="update_check_notification_download_error">Atsiuntimo klaida</string>
     <string name="update_check_notification_update_available">Nauja versija pasiekiama!</string>
     <string name="scale_type_fit_height">Pagal aukštį talpinimas</string>
@@ -213,7 +235,8 @@
     <string name="pref_reader_actions">Veiksmai</string>
     <string name="pref_read_with_long_tap">Parodyti ilgiau paspaudus</string>
     <string name="pref_create_folder_per_manga">Išsaugoti puslapius atskiruose aplankuose</string>
-    <string name="pref_create_folder_per_manga_summary">Sukuria aplankus pagal įrašo pavadinimą</string>
+    <string name="pref_create_folder_per_manga_summary">Sukuria aplankus pagal įrašo pavadinimą
+    </string>
     <string name="pref_reader_theme">Fono spalva</string>
     <string name="nav_zone_prev">Ankstesnis</string>
     <string name="gray_background">Pilka</string>
@@ -276,7 +299,9 @@
     <string name="color_filter_r_value">R</string>
     <string name="action_display_language_badge">Kalba</string>
     <string name="extension_api_error">Nepavyko gauti papildinių sąrašo</string>
-    <string name="ext_installer_shizuku_unavailable_dialog">Instaliuoti ir paleisti Shizuku, kad galėtumėte naudoti Shizuku kaip papildinių instaliuotoją.</string>
+    <string name="ext_installer_shizuku_unavailable_dialog">Instaliuoti ir paleisti Shizuku, kad
+        galėtumėte naudoti Shizuku kaip papildinių instaliuotoją.
+    </string>
     <string name="pref_show_navigation_mode">Rodyti lietimui jautrias zonas</string>
     <string name="label_warning">Įspėjimas</string>
     <string name="connected_to_wifi">Kai naudojamas Wi-Fi</string>
@@ -308,23 +333,32 @@
     <string name="pref_remove_after_read">Perskaičius automatiškai naikinti</string>
     <string name="enhanced_services">Patobulintos paslaugos</string>
     <string name="pref_restore_backup_summ">Atkurti biblioteką iš atsarginės failo kopijos</string>
-    <string name="invalid_backup_file_missing_manga">Atsarginėje kopijoje nėra jokių bibliotekos įrašų.</string>
+    <string name="invalid_backup_file_missing_manga">Atsarginėje kopijoje nėra jokių bibliotekos
+        įrašų.
+    </string>
     <string name="invalid_backup_file">Netinkamas atsarginės kopijos failas</string>
     <string name="pref_highest">Aukščiausias</string>
     <string name="pref_create_backup">Kurti atsarginę kopiją</string>
     <string name="pref_restore_backup">Atkurti atsarginę kopiją</string>
     <string name="pref_remove_exclude_categories">Neįtrauktos kategorijos</string>
     <string name="last_read_chapter">Paskiausiai skaitytas skyrius</string>
-    <string name="pref_download_new_categories_details">Įrašai neįtrauktose kategorijose nebus atsisiųsti, net jei jie taip pat yra įtraukti į kategorijas.</string>
+    <string name="pref_download_new_categories_details">Įrašai neįtrauktose kategorijose nebus
+        atsisiųsti, net jei jie taip pat yra įtraukti į kategorijas.
+    </string>
     <string name="learn_more">Palieskite, kad sužinotumėte daugiau</string>
     <string name="file_select_backup">Pasirinkti atsarginės kopijos failą</string>
     <string name="transition_pages_loading">Įkeliami puslapiai…</string>
     <string name="transition_no_next">Kito skyriaus nėra</string>
-    <string name="notification_size_warning">Dideli atnaujinimai kenkia šaltiniams ir gali lemti lėtesnius atnaujinimus bei didesnį akumuliatoriaus naudojimą. Bakstelėkite , jei norite sužinoti daugiau.</string>
+    <string name="notification_size_warning">Dideli atnaujinimai kenkia šaltiniams ir gali lemti
+        lėtesnius atnaujinimus bei didesnį akumuliatoriaus naudojimą. Bakstelėkite , jei norite
+        sužinoti daugiau.
+    </string>
     <string name="viewer">Skaitymo rėžimas</string>
     <string name="recent_manga_time">Sk. %1$s - %2$s</string>
     <string name="updating_library">Atnaujinama biblioteka</string>
-    <string name="information_webview_outdated">Atnaujinkite „WebView“ programą dėl geresnio suderinamumo</string>
+    <string name="information_webview_outdated">Atnaujinkite „WebView“ programą dėl geresnio
+        suderinamumo
+    </string>
     <string name="notification_chapters_single">Skyrius %1$s</string>
     <string name="clear_history_completed">Istorija ištrinta</string>
     <string name="decode_image_error">Nepavyko pakrauti paveikslėlio</string>
@@ -335,22 +369,31 @@
     <string name="transition_finished">Baigta:</string>
     <string name="transition_current">Dabartinis:</string>
     <string name="notification_update_error">Nepavyko atnaujinti %1$d</string>
-    <string name="notification_first_add_to_library">Prieš atlikdami šį veiksmą, pridėkite įrašą į savo biblioteką</string>
+    <string name="notification_first_add_to_library">Prieš atlikdami šį veiksmą, pridėkite įrašą į
+        savo biblioteką
+    </string>
     <string name="skipped_reason_not_started">Praleista, nes nėra perskaitytų skyrių</string>
     <string name="information_cloudflare_bypass_failure">Nepavyko apeiti \"Cloudflare\"</string>
     <string name="information_webview_required">\"WebView\" reikalingas \"Mihon\"</string>
     <string name="loader_not_implemented_error">Šaltinis nerastas</string>
     <string name="migration_selection_prompt">Pasirinkite šaltinį, iš kurio norite perkelti</string>
     <string name="migrate">Perkelti</string>
-    <string name="download_insufficient_space">Nepavyko atsisiųsti skyrių dėl mažos vietos saugykloje</string>
-    <string name="library_errors_help">Jei reikia pagalbos, kaip ištaisyti bibliotekos naujinimo klaidas, žr. %1$s</string>
+    <string name="download_insufficient_space">Nepavyko atsisiųsti skyrių dėl mažos vietos
+        saugykloje
+    </string>
+    <string name="library_errors_help">Jei reikia pagalbos, kaip ištaisyti bibliotekos naujinimo
+        klaidas, žr. %1$s
+    </string>
     <string name="transition_pages_error">Nepavyko įkelti puslapių: %1$s</string>
     <string name="transition_previous">Ankstesnis:</string>
     <string name="update_check_confirm">Parsisiųsti</string>
-    <string name="update_check_notification_download_complete">Bakstelėkite, kad įdiegtumėte atnaujinimą</string>
+    <string name="update_check_notification_download_complete">Bakstelėkite, kad įdiegtumėte
+        atnaujinimą
+    </string>
     <string name="update_check_eol">Ši \"Android\" versija nebepalaikoma</string>
     <string name="update_check_no_new_updates">Naujų atnaujinimų nėra</string>
-    <string name="migration_dialog_what_to_include">Pasirinkite duomenis, kuriuos norite įtraukti</string>
+    <string name="migration_dialog_what_to_include">Pasirinkite duomenis, kuriuos norite įtraukti
+    </string>
     <string name="copy">Kopijuoti</string>
     <string name="notification_new_chapters">Atrasti nauji skyriai</string>
     <string name="skipped_reason_not_caught_up">Praleista, nes yra neperskaitytų skyrių</string>
@@ -379,7 +422,8 @@
     <string name="unknown_error">Nežinoma klaida</string>
     <string name="downloaded_chapters">Atsisiųsti skyriai</string>
     <string name="copied_to_clipboard">Nukopijuota į iškarpinę:
-\n%1$s</string>
+        \n%1$s
+    </string>
     <string name="clipboard_copy_error">Nepavyko nukopijuoti į iškarpinę</string>
     <string name="chapter_downloading_progress">Atsisiunčiama (%1$d / %2$d)</string>
     <string name="show_chapter_number">Skyriaus numeris</string>
@@ -387,18 +431,23 @@
     <string name="show_title">Šaltinio pavadinimas</string>
     <string name="manga_from_library">Iš bibliotekos</string>
     <string name="myanimelist_relogin">Prašome dar kartą prisijungti prie MAL</string>
-    <string name="dialog_with_checkbox_remove_description">Tai pašalins šio skyriaus skaitymo datą. Ar tu tuo tikras?</string>
+    <string name="dialog_with_checkbox_remove_description">Tai pašalins šio skyriaus skaitymo datą.
+        Ar tu tuo tikras?
+    </string>
     <string name="logout_title">Atsijungti nuo %1$s?</string>
     <string name="source_unsupported">Šaltinis nepalaikomas</string>
     <string name="logout">Atsijungti</string>
     <string name="delete_category">Ištrinti kategoriją</string>
     <string name="action_sort_unread_count">Neskaitytų skaičius</string>
     <string name="action_sort_last_manga_update">Paskutinis atnaujinimo patikrinimas</string>
-    <string name="delete_category_confirmation">Ar tikrai norite ištrinti kategoriją \"%s\"?</string>
+    <string name="delete_category_confirmation">Ar tikrai norite ištrinti kategoriją \"%s\"?
+    </string>
     <string name="action_close">Uždaryti</string>
     <string name="pref_app_language">Programos kalba</string>
     <string name="action_remove_everything">Ištrinti viską</string>
-    <string name="internal_error">InternalError: Patikrinkite klaidų žurnalus, kad gautumėte daugiau informacijos</string>
+    <string name="internal_error">InternalError: Patikrinkite klaidų žurnalus, kad gautumėte daugiau
+        informacijos
+    </string>
     <string name="network_not_metered">Kai duomenys neapmokestinami</string>
     <string name="action_move_to_top_all_for_series">Perkelti seriją į viršų</string>
     <string name="backup_restore_missing_trackers">Sekimo priemonės, neprijungtos prie:</string>
@@ -409,21 +458,35 @@
     <string name="action_track">Trasa</string>
     <string name="edge_nav">Kraštas</string>
     <string name="disabled_nav">Išjungtas</string>
-    <string name="enhanced_tracking_info">Paslaugos turinčios patobulintas funkcijas, kurios teikia konkretus šaltiniai. Įrašai automatiškai stebimi, kai įtraukiami į jūsų biblioteką.</string>
+    <string name="enhanced_tracking_info">Paslaugos turinčios patobulintas funkcijas, kurios teikia
+        konkretus šaltiniai. Įrašai automatiškai stebimi, kai įtraukiami į jūsų biblioteką.
+    </string>
     <string name="pref_navigate_pan">Bakstelėdami slinkti plačius vaizdus</string>
     <string name="pref_landscape_zoom">Priartinti horizontalų vaizdą</string>
     <string name="ext_info_version">Versija</string>
-    <string name="tracking_info">Vienpusė sinchronizacija, skirta skaitymo progresui stebėjimo paslaugose atnaujinti. Nustatykite atskirą įrašų sekimą iš jų sekimo mygtuko.</string>
+    <string name="tracking_info">Vienpusė sinchronizacija, skirta skaitymo progresui stebėjimo
+        paslaugose atnaujinti. Nustatykite atskirą įrašų sekimą iš jų sekimo mygtuko.
+    </string>
     <string name="pref_create_backup_summ">Galima naudoti dabartinei bibliotekai atkurti</string>
     <string name="pref_webtoon_side_padding">Šoninis spaudinėjimas</string>
-    <string name="empty_backup_error">Nėra bibliotekos įrašų, kurių atsargines kopijas būtų galima sukurti</string>
-    <string name="pref_dump_crash_logs_summary">Įrašyti strigčių žurnalus į failą, kad būtų galima juos bendrinti su kūrėjais</string>
+    <string name="empty_backup_error">Nėra bibliotekos įrašų, kurių atsargines kopijas būtų galima
+        sukurti
+    </string>
+    <string name="pref_dump_crash_logs_summary">Įrašyti strigčių žurnalus į failą, kad būtų galima
+        juos bendrinti su kūrėjais
+    </string>
     <string name="creating_backup">Atsarginės kopijos kūrimas</string>
     <string name="pref_dns_over_https">DNS per HTTPS (DoH)</string>
     <string name="download_notifier_no_network">Tinklo ryšis nepasiekiamas</string>
-    <string name="download_notifier_unknown_error">Nepavyko atsisiųsti skyriaus dėl netikėtos klaidos</string>
-    <string name="appwidget_unavailable_locked">Valdiklis nepasiekiamas, kai įjungtas programėlės užraktas</string>
-    <string name="appwidget_updates_description">Peržiūrėkite neseniai atnaujintus bibliotekos įrašus</string>
+    <string name="download_notifier_unknown_error">Nepavyko atsisiųsti skyriaus dėl netikėtos
+        klaidos
+    </string>
+    <string name="appwidget_unavailable_locked">Valdiklis nepasiekiamas, kai įjungtas programėlės
+        užraktas
+    </string>
+    <string name="appwidget_updates_description">Peržiūrėkite neseniai atnaujintus bibliotekos
+        įrašus
+    </string>
     <string name="cache_deleted">Talpykla išvalyta. %1$d failai buvo ištrinti</string>
     <string name="pref_clear_database">Išvalyti duomenų bazę</string>
     <string name="file_picker_error">Nerandama failų rinkiklio programos</string>
@@ -431,19 +494,24 @@
     <string name="channel_app_updates">Programėlių atnaujinimai</string>
     <string name="channel_ext_updates">Plėtinių atnaujinimai</string>
     <string name="spen_previous_page">Ankstesnis puslapis</string>
-    <string name="restore_miui_warning">Atsarginės kopijos kūrimas / atkūrimas gali veikti netinkamai, jei \"MIUI Optimization\" yra išjungtas.</string>
+    <string name="restore_miui_warning">Atsarginės kopijos kūrimas / atkūrimas gali veikti
+        netinkamai, jei \"MIUI Optimization\" yra išjungtas.
+    </string>
     <string name="restoring_backup_canceled">Atšauktas atkūrimas</string>
     <string name="backup_info">Atsargines kopijas turėtumėte laikyti ir kitose vietose.</string>
     <string name="cookies_cleared">Slapukai išvalyti</string>
     <string name="label_data">Duomenys</string>
-    <string name="clear_database_source_item_count">%1$d nebibliotekiniai įrašai duomenų bazėje</string>
+    <string name="clear_database_source_item_count">%1$d nebibliotekiniai įrašai duomenų bazėje
+    </string>
     <string name="restoring_backup_error">Nepavyko atkurti atsarginės kopijos</string>
     <string name="label_network">Tinklas</string>
     <string name="backup_choice">Ką norite įtraukti į atsarginę kopiją?</string>
     <string name="clear_database_completed">Ištrinti įrašai</string>
     <string name="pref_clear_chapter_cache">Išvalyti skyriaus talpyklą</string>
     <string name="used_cache">Naudota: %1$s</string>
-    <string name="battery_optimization_setting_activity_not_found">Nepavyko atidaryti įrenginio nustatymų</string>
+    <string name="battery_optimization_setting_activity_not_found">Nepavyko atidaryti įrenginio
+        nustatymų
+    </string>
     <string name="empty_screen">Na, tai nepatogu</string>
     <string name="cache_delete_error">Valymo metu įvyko klaida</string>
     <string name="action_display_cover_only_grid">Tik viršelių tinklelis</string>
@@ -452,9 +520,13 @@
     <string name="restore_in_progress">Atkūrimas jau vyksta</string>
     <string name="restoring_backup">Atkuriama atsarginė kopija</string>
     <string name="requires_app_restart">Kad įsigaliotų, reikia iš naujo paleisti programą</string>
-    <string name="pref_reset_viewer_flags">Iš naujo nustatyti kiekvienos serijos skaitytuvo nustatymus</string>
+    <string name="pref_reset_viewer_flags">Iš naujo nustatyti kiekvienos serijos skaitytuvo
+        nustatymus
+    </string>
     <string name="pref_dump_crash_logs">Išmeskite strigčių žurnalus</string>
-    <string name="download_queue_error">Nepavyko atsisiųsti skyrių. Galite pabandyti dar kartą atsisiųsti</string>
+    <string name="download_queue_error">Nepavyko atsisiųsti skyrių. Galite pabandyti dar kartą
+        atsisiųsti
+    </string>
     <string name="pref_user_agent_string">Numatytoji vartotojo agento eilutė</string>
     <string name="not_installed">Neįdiegtas</string>
     <string name="chapter_settings_updated">Atnaujinti numatytus skyrių nustatymus</string>
@@ -463,7 +535,10 @@
     <string name="download_notifier_text_only_wifi">Nėra „Wi-Fi“ ryšio</string>
     <string name="channel_progress">Progresas</string>
     <string name="backup_in_progress">Atsarginė kopija jau kuriama</string>
-    <string name="download_queue_size_warning">Įspėjimas: dėl didelių masinių atsisiuntimų šaltiniai gali tapti lėtesni ir (arba) jie blokuoti \"%s\". Bakstelėkite , jei norite sužinoti daugiau.</string>
+    <string name="download_queue_size_warning">Įspėjimas: dėl didelių masinių atsisiuntimų šaltiniai
+        gali tapti lėtesni ir (arba) jie blokuoti \"%s\". Bakstelėkite , jei norite sužinoti
+        daugiau.
+    </string>
     <string name="pref_disable_battery_optimization">Išjungti akumuliatoriaus optimizavimą</string>
     <string name="restore_completed">Atkūrimas baigtas</string>
     <string name="restore_duration">%1$02d min, %2$02d sek</string>
@@ -471,32 +546,52 @@
     <string name="webview_data_deleted">„WebView“ duomenys išvalyti</string>
     <string name="getting_started_guide">Darbo pradžios vadovas</string>
     <string name="download_notifier_split_page_not_found">Puslapis %d nerastas skaidant</string>
-    <string name="download_notifier_split_page_path_not_found">Nepavyko rasti puslapio failo kelio %d</string>
+    <string name="download_notifier_split_page_path_not_found">Nepavyko rasti puslapio failo kelio
+        %d
+    </string>
     <string name="channel_common">Bendras</string>
     <string name="channel_complete">Baigtas</string>
     <string name="download_notifier_download_paused">Atsisiuntimas pristabdytas</string>
     <string name="channel_new_chapters">Skyriaus atnaujinimai</string>
     <string name="spen_next_page">Kitas puslapis</string>
     <string name="pref_clear_cookies">Išvalyti slapukus</string>
-    <string name="pref_auto_clear_chapter_cache">Išvalyti skyriaus talpyklą uždarius programą</string>
-    <string name="pref_clear_database_summary">Ištrinkite įrašų istoriją, kurie nėra išsaugoti jūsų bibliotekoje</string>
+    <string name="pref_auto_clear_chapter_cache">Išvalyti skyriaus talpyklą uždarius programą
+    </string>
+    <string name="pref_clear_database_summary">Ištrinkite įrašų istoriją, kurie nėra išsaugoti jūsų
+        bibliotekoje
+    </string>
     <string name="backup_restore_content_full">Atsarginės failo kopijos duomenys bus atkurti.
-\n
-\nNorėdami jais naudotis, turėsite įdiegti trūkstamus plėtinius ir po to prisijungti prie stebėjimo paslaugų.</string>
-    <string name="pref_reset_user_agent_string">Iš naujo nustatyti numatytąją vartotojo agento eilutę</string>
+        \n
+        \nNorėdami jais naudotis, turėsite įdiegti trūkstamus plėtinius ir po to prisijungti prie
+        stebėjimo paslaugų.
+    </string>
+    <string name="pref_reset_user_agent_string">Iš naujo nustatyti numatytąją vartotojo agento
+        eilutę
+    </string>
     <string name="pref_clear_webview_data">Išvalyti \"WebView\" duomenis</string>
     <string name="pref_refresh_library_covers">Atnaujinti bibliotekos viršelius</string>
-    <string name="pref_reset_viewer_flags_summary">Iš naujo nustatyti visų serijų skaitymo režimą ir orientaciją</string>
-    <string name="pref_reset_viewer_flags_success">Visų skaitytuvo nustatymų nustatymas iš naujo</string>
+    <string name="pref_reset_viewer_flags_summary">Iš naujo nustatyti visų serijų skaitymo režimą ir
+        orientaciją
+    </string>
+    <string name="pref_reset_viewer_flags_success">Visų skaitytuvo nustatymų nustatymas iš naujo
+    </string>
     <string name="pref_reset_viewer_flags_error">Nepavyko atstatyti skaitytuvo nustatymų</string>
     <string name="label_background_activity">Fono veikla</string>
-    <string name="pref_disable_battery_optimization_summary">Padeda su fono bibliotekos naujinimais ir atsarginėmis kopijomis</string>
-    <string name="battery_optimization_disabled">Akumuliatoriaus optimizavimas jau išjungtas</string>
+    <string name="pref_disable_battery_optimization_summary">Padeda su fono bibliotekos naujinimais
+        ir atsarginėmis kopijomis
+    </string>
+    <string name="battery_optimization_disabled">Akumuliatoriaus optimizavimas jau išjungtas
+    </string>
     <string name="channel_errors">Klaidos</string>
-    <string name="pref_verbose_logging_summary">Spausdinti verbalinius žurnalus į sistemos žurnalą (sumažina programos našumą)</string>
+    <string name="pref_verbose_logging_summary">Spausdinti verbalinius žurnalus į sistemos žurnalą
+        (sumažina programos našumą)
+    </string>
     <string name="pref_verbose_logging">Daugiažodis registravimas</string>
     <string name="pref_tablet_ui_mode">Planšetinio kompiuterio UI</string>
-    <string name="about_dont_kill_my_app">Kai kurie gamintojai taiko papildomus programėlių apribojimus, kurie išjungia fono paslaugas. Šioje svetainėje rasite daugiau informacijos, kaip tai ištaisyti.</string>
+    <string name="about_dont_kill_my_app">Kai kurie gamintojai taiko papildomus programėlių
+        apribojimus, kurie išjungia fono paslaugas. Šioje svetainėje rasite daugiau informacijos,
+        kaip tai ištaisyti.
+    </string>
     <string name="website">Internetinis puslapis</string>
     <string name="version">Versija</string>
     <string name="whats_new">Kas naujo</string>
@@ -514,7 +609,9 @@
     <string name="in_library">Bibliotekoje</string>
     <string name="reading">Skaitoma</string>
     <string name="error_saving_cover">Išsaugant viršelį įvyko klaida</string>
-    <string name="pref_acra_summary">Padeda ištaisyti bet kokias klaidas. Skelbtini duomenys nebus siunčiami</string>
+    <string name="pref_acra_summary">Padeda ištaisyti bet kokias klaidas. Skelbtini duomenys nebus
+        siunčiami
+    </string>
     <string name="password">Slaptažodis</string>
     <string name="login">Prisijungti</string>
     <string name="sort_by_source">Pagal šaltinį</string>
@@ -558,7 +655,9 @@
     <string name="on_hiatus">Publikavimas pristabdytas</string>
     <string name="sort_by_number">Pagal skyriaus numerį</string>
     <string name="manga_info_expand">Daugiau</string>
-    <string name="also_set_chapter_settings_for_library">Taip pat taikyti visiems mano bibliotekoje esantiems įrašams</string>
+    <string name="also_set_chapter_settings_for_library">Taip pat taikyti visiems mano bibliotekoje
+        esantiems įrašams
+    </string>
     <string name="set_chapter_settings_as_default">Nustatyti kaip numatytąjį</string>
     <string name="manga_tracking_tab">Sekimas</string>
     <string name="licenses">Atvirojo kodo licencijos</string>
@@ -575,7 +674,9 @@
     <string name="custom_cover">Individualus viršelis</string>
     <string name="error_sharing_cover">Įvyko klaida bendrinant viršelį</string>
     <string name="chapter_settings">Skyriaus nustatymai</string>
-    <string name="confirm_set_chapter_settings">Ar tikrai norite išsaugoti šiuos nustatymus kaip numatytuosius?</string>
+    <string name="confirm_set_chapter_settings">Ar tikrai norite išsaugoti šiuos nustatymus kaip
+        numatytuosius?
+    </string>
     <string name="add_tracking">Pridėti stebėjimą</string>
     <string name="unread">Neskaityta</string>
     <string name="on_hold">Sulaikytas</string>
@@ -596,7 +697,8 @@
     <string name="no_next_chapter">Kitas skyrius nerastas</string>
     <string name="source_empty_screen">Šaltinis nerastas</string>
     <string name="migration_help_guide">Šaltinio perkėlimo vadovas</string>
-    <string name="cant_open_last_read_chapter">Nepavyko atidaryti paskutinio skaityto skyriaus</string>
+    <string name="cant_open_last_read_chapter">Nepavyko atidaryti paskutinio skaityto skyriaus
+    </string>
     <string name="chapter_progress">Puslapis: %1$d</string>
     <string name="transition_next">Kitas:</string>
     <string name="source_filter_empty_screen">Įdiegtų šaltinių nerasta</string>
@@ -605,41 +707,58 @@
     <string name="update_already_running">Atnaujinimas jau vykdomas</string>
     <string name="updates_last_update_info">Biblioteka paskutinį kartą atnaujinta: %s</string>
     <string name="remove_manga">Ketinate pašalinti „%s“ iš bibliotekos</string>
-    <string name="download_ahead_info">Veikia tik bibliotekoje esantiems įrašams ir tik tada, jei jau atsisiųstas dabartinis ir kitas skyrius</string>
+    <string name="download_ahead_info">Veikia tik bibliotekoje esantiems įrašams ir tik tada, jei
+        jau atsisiųstas dabartinis ir kitas skyrius
+    </string>
     <string name="download_ahead">Atsisiųsti į priekį</string>
     <string name="auto_download_while_reading">Automatinis atsisiuntimas beskaitant</string>
-    <string name="skipped_reason_not_always_update">Praleista, nes serijai nereikia atnaujinimų</string>
+    <string name="skipped_reason_not_always_update">Praleista, nes serijai nereikia atnaujinimų
+    </string>
     <string name="missing_storage_permission">Nesuteikti saugojimo leidimai</string>
     <string name="pref_downloads_summary">Automatinis atsisiuntimas, atsisiuntimas į priekį</string>
     <string name="pref_backup_summary">Rankinės ir automatinės atsarginės kopijos</string>
     <string name="pref_security_summary">Programos užraktas, saugus ekranas</string>
     <string name="pref_appearance_summary">Tema, datos ir laiko formatas</string>
     <string name="pref_reader_summary">Skaitymo režimas, rodymas, navigacija</string>
-    <string name="pref_tracking_summary">Vienpusis progreso sinchronizavimas, patobulintas sinchronizavimas</string>
+    <string name="pref_tracking_summary">Vienpusis progreso sinchronizavimas, patobulintas
+        sinchronizavimas
+    </string>
     <string name="pref_browse_summary">Šaltiniai, plėtiniai, visuotinė paieška</string>
     <string name="pref_library_summary">Kategorijos, visuotinis atnaujinimas</string>
     <string name="multi_lang">Kelių kalbų</string>
-    <string name="pref_advanced_summary">Eksportuoti gedimų žurnalus, akumuliatoriaus optimizavimą</string>
+    <string name="pref_advanced_summary">Eksportuoti gedimų žurnalus, akumuliatoriaus optimizavimą
+    </string>
     <string name="invalid_location">Netinkama vieta: %s</string>
     <string name="error_user_agent_string_invalid">Netinkama naudotojo agento eilutė</string>
     <string name="unknown_title">Nežinomas pavadinimas</string>
     <string name="updates_last_update_info_just_now">Ką tik</string>
-    <string name="crash_screen_description">%s susidūrė su netikėta klaida. Siūlome padaryti šio pranešimo ekrano nuotrauką, išsisaugoti gedimų žurnalus ir pasidalyti tuo mūsų „Discord“ palaikymo kanale.</string>
+    <string name="crash_screen_description">%s susidūrė su netikėta klaida. Siūlome padaryti šio
+        pranešimo ekrano nuotrauką, išsisaugoti gedimų žurnalus ir pasidalyti tuo mūsų „Discord“
+        palaikymo kanale.
+    </string>
     <string name="are_you_sure">Ar esate tikri?</string>
     <string name="popular">Populiaru</string>
     <string name="crash_screen_title">Ups!</string>
     <string name="crash_screen_restart_application">Iš naujo paleiskite programą</string>
     <string name="download_notifier_cache_renewal">Indeksuojami atsisiuntimai</string>
     <string name="fdroid_warning">F-Droid versijos oficialiai nepalaikomos.
-\nBakstelėkite, kad sužinotumėte daugiau.</string>
+        \nBakstelėkite, kad sužinotumėte daugiau.
+    </string>
     <string name="information_no_entries_found">Šioje kategorijoje įrašų nerasta</string>
     <string name="action_open_random_manga">Atverti atsitiktinį įrašą</string>
-    <string name="action_display_show_continue_reading_button">Rodyti mygtuką „Tęsti” skaitymą</string>
-    <string name="track_remove_finish_date_conf_text">Tai pašalins jūsų anksčiau pasirinktą pabaigos datą iš %s</string>
+    <string name="action_display_show_continue_reading_button">Rodyti mygtuką „Tęsti” skaitymą
+    </string>
+    <string name="track_remove_finish_date_conf_text">Tai pašalins jūsų anksčiau pasirinktą pabaigos
+        datą iš %s
+    </string>
     <string name="track_remove_date_conf_title">Pašalinti datą?</string>
-    <string name="track_remove_start_date_conf_text">Tai pašalins jūsų anksčiau pasirinktą pradžios datą iš %s</string>
+    <string name="track_remove_start_date_conf_text">Tai pašalins jūsų anksčiau pasirinktą pradžios
+        datą iš %s
+    </string>
     <string name="pref_invalidate_download_cache">Atsisiuntimų indekso panaikinimas</string>
-    <string name="pref_invalidate_download_cache_summary">Priversti programėlę iš naujo patikrinti atsisiųstus skyrius</string>
+    <string name="pref_invalidate_download_cache_summary">Priversti programėlę iš naujo patikrinti
+        atsisiųstus skyrius
+    </string>
     <string name="label_downloaded">Atsiųsta</string>
     <string name="label_overview_section">Apžvalga</string>
     <string name="label_total_chapters">Iš viso</string>
@@ -664,6 +783,8 @@
     <string name="information_no_manga_category">Kategorija yra tuščia</string>
     <string name="copied_to_clipboard_plain">Nukopijuota į iškarpinę</string>
     <string name="enhanced_services_not_installed">Turima, bet šaltinis nėra įdiegtas: %s</string>
-    <string name="pref_library_update_show_tab_badge">Rodyti neperskaitytų skaičių ant Naujienų piktogramos</string>
+    <string name="pref_library_update_show_tab_badge">Rodyti neperskaitytų skaičių ant Naujienų
+        piktogramos
+    </string>
     <string name="pref_skip_dupe_chapters">Praleisti pasikartojančius skyrius</string>
 </resources>

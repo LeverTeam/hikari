@@ -7,9 +7,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderSettingsScreenModel
 import eu.kanade.tachiyomi.util.system.hasDisplayCutout
+import tachiyomi.domain.reader.model.FlashColor
+import tachiyomi.domain.reader.service.ReaderPreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.CheckboxItem
 import tachiyomi.presentation.core.components.SettingsChipRow
@@ -26,9 +27,9 @@ private val themes = listOf(
 )
 
 private val flashColors = listOf(
-    MR.strings.pref_flash_style_black to ReaderPreferences.FlashColor.BLACK,
-    MR.strings.pref_flash_style_white to ReaderPreferences.FlashColor.WHITE,
-    MR.strings.pref_flash_style_white_black to ReaderPreferences.FlashColor.WHITE_BLACK,
+    MR.strings.pref_flash_style_black to FlashColor.BLACK,
+    MR.strings.pref_flash_style_white to FlashColor.WHITE,
+    MR.strings.pref_flash_style_white_black to FlashColor.WHITE_BLACK,
 )
 
 @Composable

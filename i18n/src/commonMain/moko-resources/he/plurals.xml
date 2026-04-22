@@ -52,48 +52,48 @@
         <item quantity="one">1 נשאר</item>
         <item quantity="two">2 נשארו</item>
         <item quantity="many">%1$s נשארו</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <plurals name="restore_completed_message">
         <item quantity="one">הושלם ב %1$s עם שגיאה אחת</item>
         <item quantity="two">הושלם ב %1$s עם שתי שגיאות</item>
         <item quantity="many">הושלם ב %1$s עם %2$s שגיאות</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <plurals name="missing_chapters_warning">
         <item quantity="one">דולג פרק אחד, המקור חסר או שהוא סונן החוצה</item>
         <item quantity="two">דולגו שני פרקים, המקור חסר או שהם סוננו החוצה</item>
         <item quantity="many">דולגו %d פרקים, המקור חסר או שהם סוננו החוצה</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <plurals name="download_amount">
         <item quantity="one">הפרק הבא</item>
         <item quantity="two">שני הפרקים הבאים</item>
         <item quantity="many">%d הפרקים הבאים</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <plurals name="num_trackers">
         <item quantity="one">מעקב אחד</item>
         <item quantity="two">שני מעקבים</item>
         <item quantity="many">%d מעקבים</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <plurals name="next_unread_chapters">
         <item quantity="one">הפרק הבא שלא נקרא</item>
         <item quantity="two">שני הפרקים הבאים שלא נקראו</item>
         <item quantity="many">%d הפרקים הבאים שלא נקראו</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <plurals name="day">
         <item quantity="one">יום אחד</item>
         <item quantity="two">יומיים</item>
         <item quantity="many">%d ימים</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
     <plurals name="missing_chapters">
         <item quantity="one">חסר פרק אחד</item>
         <item quantity="two">חסרים שני פרקים</item>
         <item quantity="many">חסרים %1$s פרקים</item>
-        <item quantity="other"/>
+        <item quantity="other" />
     </plurals>
 </resources>

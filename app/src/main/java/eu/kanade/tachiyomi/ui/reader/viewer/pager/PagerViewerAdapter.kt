@@ -160,7 +160,8 @@ class PagerViewerAdapter(private val viewer: PagerViewer) : ViewPagerAdapter() {
         val placeAtIndex = when (viewer) {
             is L2RPagerViewer,
             is VerticalPagerViewer,
-            -> currentIndex + 1
+                -> currentIndex + 1
+
             else -> currentIndex
         }
 

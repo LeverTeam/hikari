@@ -36,8 +36,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import eu.kanade.tachiyomi.data.download.model.Download
 import me.saket.swipe.SwipeableActionsBox
+import tachiyomi.domain.download.model.DownloadState
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
@@ -55,7 +55,7 @@ fun MangaChapterListItem(
     bookmark: Boolean,
     selected: Boolean,
     downloadIndicatorEnabled: Boolean,
-    downloadStateProvider: () -> Download.State,
+    downloadStateProvider: () -> DownloadState,
     downloadProgressProvider: () -> Int,
     chapterSwipeStartAction: LibraryPreferences.ChapterSwipeAction,
     chapterSwipeEndAction: LibraryPreferences.ChapterSwipeAction,
@@ -186,7 +186,7 @@ private fun getSwipeAction(
     action: LibraryPreferences.ChapterSwipeAction,
     read: Boolean,
     bookmark: Boolean,
-    downloadState: Download.State,
+    downloadState: DownloadState,
     background: Color,
     onSwipe: () -> Unit,
 ): me.saket.swipe.SwipeAction? {
@@ -197,21 +197,24 @@ private fun getSwipeAction(
             isUndo = read,
             onSwipe = onSwipe,
         )
+
         LibraryPreferences.ChapterSwipeAction.ToggleBookmark -> swipeAction(
             icon = if (!bookmark) Icons.Outlined.BookmarkAdd else Icons.Outlined.BookmarkRemove,
             background = background,
             isUndo = bookmark,
             onSwipe = onSwipe,
         )
+
         LibraryPreferences.ChapterSwipeAction.Download -> swipeAction(
             icon = when (downloadState) {
-                Download.State.NOT_DOWNLOADED, Download.State.ERROR -> Icons.Outlined.Download
-                Download.State.QUEUE, Download.State.DOWNLOADING -> Icons.Outlined.FileDownloadOff
-                Download.State.DOWNLOADED -> Icons.Outlined.Delete
+                DownloadState.NOT_DOWNLOADED, DownloadState.ERROR -> Icons.Outlined.Download
+                DownloadState.QUEUE, DownloadState.DOWNLOADING -> Icons.Outlined.FileDownloadOff
+                DownloadState.DOWNLOADED -> Icons.Outlined.Delete
             },
             background = background,
             onSwipe = onSwipe,
         )
+
         LibraryPreferences.ChapterSwipeAction.Disabled -> null
     }
 }

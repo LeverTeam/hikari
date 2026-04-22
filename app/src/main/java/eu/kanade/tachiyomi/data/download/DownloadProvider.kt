@@ -17,6 +17,7 @@ import tachiyomi.i18n.MR
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.io.IOException
+import tachiyomi.domain.download.service.DownloadProvider as DomainDownloadProvider
 
 /**
  * This class is used to provide the directories where the downloads should be saved.
@@ -28,7 +29,7 @@ class DownloadProvider(
     private val context: Context,
     private val storageManager: StorageManager = Injekt.get(),
     private val libraryPreferences: LibraryPreferences = Injekt.get(),
-) {
+) : DomainDownloadProvider {
 
     private val downloadsDir: UniFile?
         get() = storageManager.getDownloadsDirectory()
@@ -228,7 +229,7 @@ class DownloadProvider(
         }
     }
 
-    fun isChapterDirNameChanged(oldChapter: Chapter, newChapter: Chapter): Boolean {
+    override fun isChapterDirNameChanged(oldChapter: Chapter, newChapter: Chapter): Boolean {
         return getChapterDirName(oldChapter.name, oldChapter.scanlator, oldChapter.url) !=
             getChapterDirName(newChapter.name, newChapter.scanlator, newChapter.url)
     }

@@ -31,7 +31,9 @@
         <item quantity="other">%d penjejak</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="other">Melangkau %d bab, sama ada sumber tidak mempunyai bab tersebut, atau ia ditapis keluar</item>
+        <item quantity="other">Melangkau %d bab, sama ada sumber tidak mempunyai bab tersebut, atau
+            ia ditapis keluar
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="other">%1$d hari lalu</item>

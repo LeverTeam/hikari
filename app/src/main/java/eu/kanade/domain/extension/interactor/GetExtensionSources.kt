@@ -1,10 +1,10 @@
 package eu.kanade.domain.extension.interactor
 
-import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.tachiyomi.extension.model.Extension
 import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import tachiyomi.domain.source.service.SourcePreferences
 
 class GetExtensionSources(
     private val preferences: SourcePreferences,

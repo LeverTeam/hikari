@@ -8,13 +8,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalView
 import eu.kanade.presentation.more.settings.Preference
 import eu.kanade.presentation.more.settings.PreferenceItem
-import eu.kanade.tachiyomi.ui.reader.setting.ReaderOrientation
-import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
-import eu.kanade.tachiyomi.ui.reader.setting.ReadingMode
+import eu.kanade.tachiyomi.ui.reader.setting.stringRes
 import eu.kanade.tachiyomi.util.system.hasDisplayCutout
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toImmutableMap
+import tachiyomi.domain.reader.model.FlashColor
+import tachiyomi.domain.reader.model.ReaderHideThreshold
+import tachiyomi.domain.reader.model.ReaderOrientation
+import tachiyomi.domain.reader.model.ReadingMode
+import tachiyomi.domain.reader.model.TappingInvertMode
+import tachiyomi.domain.reader.service.ReaderPreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.i18n.pluralStringResource
@@ -66,7 +70,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = readerPreferences.doubleTapAnimSpeed,
@@ -80,7 +83,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.showReadingMode,
@@ -90,7 +92,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.showNavigationOverlayOnStart,
@@ -99,7 +100,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -138,7 +138,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = readerPreferences.readerTheme,
@@ -153,7 +152,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = fullscreenPref,
@@ -161,7 +159,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -172,7 +169,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.keepScreenOn,
@@ -180,7 +176,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -225,7 +220,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SliderPreference(
                                     value = flashMillis / ReaderPreferences.MILLI_CONVERSION,
@@ -233,11 +227,13 @@ object SettingsReaderScreen : SearchableSettings {
                                     title = stringResource(MR.strings.pref_flash_duration),
                                     valueString = stringResource(MR.strings.pref_flash_duration_summary, flashMillis),
                                     enabled = flashPageState,
-                                    onValueChanged = { flashMillisPref.set(it * ReaderPreferences.MILLI_CONVERSION) },
+                                    onValueChanged = {
+                                        flashMillisPref.set(it * ReaderPreferences.MILLI_CONVERSION)
+                                        true
+                                    },
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SliderPreference(
@@ -247,24 +243,25 @@ object SettingsReaderScreen : SearchableSettings {
                                     valueString = pluralStringResource(
                                         MR.plurals.pref_pages,
                                         flashInterval,
-                                        flashInterval,
                                     ),
                                     enabled = flashPageState,
-                                    onValueChanged = { flashIntervalPref.set(it) },
+                                    onValueChanged = {
+                                        flashIntervalPref.set(it)
+                                        true
+                                    },
                                 ),
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
-                                item = Preference.PreferenceItem.ListPreference(
+                                item = Preference.PreferenceItem.ListPreference<FlashColor>(
                                     preference = flashColorPref,
                                     entries = persistentMapOf(
-                                        ReaderPreferences.FlashColor.BLACK to
+                                        FlashColor.BLACK to
                                             stringResource(MR.strings.pref_flash_style_black),
-                                        ReaderPreferences.FlashColor.WHITE to
+                                        FlashColor.WHITE to
                                             stringResource(MR.strings.pref_flash_style_white),
-                                        ReaderPreferences.FlashColor.WHITE_BLACK
+                                        FlashColor.WHITE_BLACK
                                             to stringResource(MR.strings.pref_flash_style_white_black),
                                     ),
                                     title = stringResource(MR.strings.pref_flash_with),
@@ -297,7 +294,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.skipFiltered,
@@ -306,7 +302,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.skipDupe,
@@ -314,7 +309,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -362,15 +356,14 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
-                                item = Preference.PreferenceItem.ListPreference(
+                                item = Preference.PreferenceItem.ListPreference<TappingInvertMode>(
                                     preference = readerPreferences.pagerNavInverted,
                                     entries = persistentListOf(
-                                        ReaderPreferences.TappingInvertMode.NONE,
-                                        ReaderPreferences.TappingInvertMode.HORIZONTAL,
-                                        ReaderPreferences.TappingInvertMode.VERTICAL,
-                                        ReaderPreferences.TappingInvertMode.BOTH,
+                                        TappingInvertMode.NONE,
+                                        TappingInvertMode.HORIZONTAL,
+                                        TappingInvertMode.VERTICAL,
+                                        TappingInvertMode.BOTH,
                                     )
                                         .associateWith { stringResource(it.titleRes) }
                                         .toImmutableMap(),
@@ -379,7 +372,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -393,7 +385,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = readerPreferences.zoomStart,
@@ -406,7 +397,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.cropBorders,
@@ -415,7 +405,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.readerUpscaling,
@@ -423,7 +412,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -434,7 +422,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.navigateToPan,
@@ -443,7 +430,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -457,7 +443,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.dualPageInvertPaged,
@@ -467,7 +452,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -480,7 +464,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -531,15 +514,14 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
-                                item = Preference.PreferenceItem.ListPreference(
+                                item = Preference.PreferenceItem.ListPreference<TappingInvertMode>(
                                     preference = readerPreferences.webtoonNavInverted,
                                     entries = persistentListOf(
-                                        ReaderPreferences.TappingInvertMode.NONE,
-                                        ReaderPreferences.TappingInvertMode.HORIZONTAL,
-                                        ReaderPreferences.TappingInvertMode.VERTICAL,
-                                        ReaderPreferences.TappingInvertMode.BOTH,
+                                        TappingInvertMode.NONE,
+                                        TappingInvertMode.HORIZONTAL,
+                                        TappingInvertMode.VERTICAL,
+                                        TappingInvertMode.BOTH,
                                     )
                                         .associateWith { stringResource(it.titleRes) }
                                         .toImmutableMap(),
@@ -549,7 +531,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SliderPreference(
                                     value = webtoonSidePadding,
@@ -558,31 +539,32 @@ object SettingsReaderScreen : SearchableSettings {
                                     },
                                     title = stringResource(MR.strings.pref_webtoon_side_padding),
                                     valueString = numberFormat.format(webtoonSidePadding / 100f),
-                                    onValueChanged = { webtoonSidePaddingPref.set(it) },
+                                    onValueChanged = {
+                                        webtoonSidePaddingPref.set(it)
+                                        true
+                                    },
                                 ),
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
-                                item = Preference.PreferenceItem.ListPreference(
+                                item = Preference.PreferenceItem.ListPreference<ReaderHideThreshold>(
                                     preference = readerPreferences.readerHideThreshold,
                                     entries = persistentMapOf(
-                                        ReaderPreferences.ReaderHideThreshold.HIGHEST to
+                                        ReaderHideThreshold.HIGHEST to
                                             stringResource(MR.strings.pref_highest),
-                                        ReaderPreferences.ReaderHideThreshold.HIGH to
+                                        ReaderHideThreshold.HIGH to
                                             stringResource(MR.strings.pref_high),
-                                        ReaderPreferences.ReaderHideThreshold.LOW to stringResource(
+                                        ReaderHideThreshold.LOW to stringResource(
                                             MR.strings.pref_low,
                                         ),
-                                        ReaderPreferences.ReaderHideThreshold.LOWEST to
+                                        ReaderHideThreshold.LOWEST to
                                             stringResource(MR.strings.pref_lowest),
                                     ),
                                     title = stringResource(MR.strings.pref_hide_threshold),
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -591,7 +573,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -605,7 +586,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.dualPageInvertWebtoon,
@@ -615,7 +595,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -629,7 +608,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.dualPageRotateToFitInvertWebtoon,
@@ -639,7 +617,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.webtoonDoubleTapZoomEnabled,
@@ -647,7 +624,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -683,7 +659,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.readWithVolumeKeysInverted,
@@ -693,7 +668,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = readerPreferences.readWithLongTap,
@@ -701,7 +675,6 @@ object SettingsReaderScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(

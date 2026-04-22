@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.onEach
 import tachiyomi.domain.download.service.DownloadPreferences
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
+import eu.kanade.tachiyomi.data.download.DownloadManager as DataDownloadManager
 
 /**
  * This worker is used to manage the downloader. The system can decide to stop the worker, in
@@ -34,7 +35,7 @@ import uy.kohesive.injekt.api.get
  */
 class DownloadJob(context: Context, workerParams: WorkerParameters) : CoroutineWorker(context, workerParams) {
 
-    private val downloadManager: DownloadManager = Injekt.get()
+    private val downloadManager: DataDownloadManager = Injekt.get()
     private val downloadPreferences: DownloadPreferences = Injekt.get()
 
     override suspend fun getForegroundInfo(): ForegroundInfo {

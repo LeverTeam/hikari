@@ -8,8 +8,8 @@ import android.graphics.Point
 import android.graphics.Rect
 import com.davemorrissey.labs.subscaleview.decoder.ImageRegionDecoder
 import com.davemorrissey.labs.subscaleview.provider.InputProvider
-import eu.kanade.tachiyomi.ui.reader.setting.ReaderPreferences
 import tachiyomi.core.common.util.system.NativeImageDecoder
+import tachiyomi.domain.reader.service.ReaderPreferences
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

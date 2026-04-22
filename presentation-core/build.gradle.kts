@@ -26,6 +26,8 @@ kotlin {
 dependencies {
     api(projects.core.common)
     api(projects.i18n)
+    api(projects.domain)
+    implementation(libs.injekt)
 
     // Compose
     implementation(libs.androidx.activity.compose)

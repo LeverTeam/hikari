@@ -31,9 +31,15 @@
         <item quantity="other">Пре %1$d дана</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="one">Прескаче се %d поглавље, или не постоји у извору или је филтером издвојено</item>
-        <item quantity="few">Прескаче се %d поглавља, или не постоји у извору или је филтером издвојено</item>
-        <item quantity="other">Прескаче се %d поглавља, или не постоји у извору или је филтером издвојено</item>
+        <item quantity="one">Прескаче се %d поглавље, или не постоји у извору или је филтером
+            издвојено
+        </item>
+        <item quantity="few">Прескаче се %d поглавља, или не постоји у извору или је филтером
+            издвојено
+        </item>
+        <item quantity="other">Прескаче се %d поглавља, или не постоји у извору или је филтером
+            издвојено
+        </item>
     </plurals>
     <plurals name="restore_completed_message">
         <item quantity="one">Завршено у %1$s са %2$s грешком</item>

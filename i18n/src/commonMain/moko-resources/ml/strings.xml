@@ -79,7 +79,9 @@
     <string name="action_edit_categories">വിഭാഗങ്ങൾ എഡിറ്റ് ചെയ്യുക</string>
     <string name="action_rename_category">വിഭാഗത്തിൻ്റെ പേരുമാറ്റുക</string>
     <string name="action_move_category">വിഭാഗങ്ങൾ സജ്ജമാക്കുക</string>
-    <string name="delete_category_confirmation">\"%s\" എന്ന വിഭാഗം ഇല്ലാതാക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?</string>
+    <string name="delete_category_confirmation">\"%s\" എന്ന വിഭാഗം ഇല്ലാതാക്കാൻ നിങ്ങൾ
+        ആഗ്രഹിക്കുന്നുണ്ടോ?
+    </string>
     <string name="delete_category">വിഭാഗം ഇല്ലാതാക്കുക</string>
     <string name="on">ഓൺ</string>
     <string name="action_menu_overflow_description">കൂടുതൽ ഓപ്ഷനുകൾ</string>
@@ -144,7 +146,10 @@
     <string name="action_open_log">ലോഗ് തുറക്കുക</string>
     <string name="ext_install">ഇൻസ്റ്റാൾ</string>
     <string name="ext_trust">വിശ്വസിക്കൂ</string>
-    <string name="obsolete_extension_message">ഈ എക്സ്റ്റൻഷൻ ഇനി ലഭ്യമല്ല. ഇത് ശരിയായി പ്രവർത്തിച്ചേക്കില്ല, ആപ്പിൽ പ്രശ്നങ്ങൾ ഉണ്ടാക്കാം. ഇത് അൺഇൻസ്റ്റാൾ ചെയ്യാൻ റെകമെൻഡ് ചെയ്യുന്നു.</string>
+    <string name="obsolete_extension_message">ഈ എക്സ്റ്റൻഷൻ ഇനി ലഭ്യമല്ല. ഇത് ശരിയായി
+        പ്രവർത്തിച്ചേക്കില്ല, ആപ്പിൽ പ്രശ്നങ്ങൾ ഉണ്ടാക്കാം. ഇത് അൺഇൻസ്റ്റാൾ ചെയ്യാൻ റെകമെൻഡ്
+        ചെയ്യുന്നു.
+    </string>
     <string name="charging">ചാർജ് ചെയ്യുമ്പോൾ</string>
     <string name="action_webview_forward">മുന്നോട്ട്</string>
     <string name="action_webview_back">പുറകിലുള്ള</string>
@@ -159,18 +164,26 @@
     <string name="ext_untrusted">അവിശ്വസനീയം</string>
     <string name="ext_installing">ഇൻസ്റ്റാൾ ചെയ്യുന്നു</string>
     <string name="pref_category_general">സാധാരണ</string>
-    <string name="onboarding_permission_crashlytics_description">ഡവലപ്പർമാർക്ക് അനാമീകരിച്ച ക്രാഷ് ലോഗുകൾ അയയ്‌ക്കുക</string>
+    <string name="onboarding_permission_crashlytics_description">ഡവലപ്പർമാർക്ക് അനാമീകരിച്ച ക്രാഷ്
+        ലോഗുകൾ അയയ്‌ക്കുക
+    </string>
     <string name="pref_category_appearance">വീക്ഷണം</string>
-    <string name="onboarding_permission_analytics_description">അപ്ലിക്കേഷന്റെ ഫീച്ചറുകൾ മെച്ചപ്പെടുത്താൻ അനാമീകരിച്ച ഉപയോക്തൃ ഡാറ്റ അയയ്‌ക്കുക.</string>
+    <string name="onboarding_permission_analytics_description">അപ്ലിക്കേഷന്റെ ഫീച്ചറുകൾ
+        മെച്ചപ്പെടുത്താൻ അനാമീകരിച്ച ഉപയോക്തൃ ഡാറ്റ അയയ്‌ക്കുക.
+    </string>
     <string name="onboarding_permission_analytics">വിശകലനത്തിനുവഴി അനുവദിക്കുക</string>
     <string name="onboarding_permission_crashlytics">ക്രാഷ് ലോഗുകൾ അയയ്ക്കുക</string>
     <string name="pref_category_library">ലൈബ്രറി</string>
-    <string name="onboarding_guides_new_user">%s-ൽ പുതിയവനാവോ? ആരംഭിക്കാൻ മാർഗരേഖ കാണാൻ ഞങ്ങൾ ശുപാർശ ചെയ്യുന്നു.</string>
+    <string name="onboarding_guides_new_user">%s-ൽ പുതിയവനാവോ? ആരംഭിക്കാൻ മാർഗരേഖ കാണാൻ ഞങ്ങൾ ശുപാർശ
+        ചെയ്യുന്നു.
+    </string>
     <string name="onboarding_permission_action_grant">അനുവദിക്കുക</string>
     <string name="onboarding_guides_returning_user">%s-നെ പുനഃസ്ഥാപിക്കുകയാണോ?</string>
     <string name="action_copy_link">ലിങ്ക് പകര്‍ത്തുക</string>
     <string name="ext_install_service_notif">വിപുലീകരണം ഇൻസ്റ്റാൾ ചെയ്യുന്നു…</string>
-    <string name="ext_permission_install_apps_warning">വിപുലീകരണങ്ങൾ ഇൻസ്റ്റാൾ ചെയ്യാൻ അനുമതികൾ ആവശ്യമാണ്. അനുവദിക്കാൻ ഇവിടെ അടിക്കുക.</string>
+    <string name="ext_permission_install_apps_warning">വിപുലീകരണങ്ങൾ ഇൻസ്റ്റാൾ ചെയ്യാൻ അനുമതികൾ
+        ആവശ്യമാണ്. അനുവദിക്കാൻ ഇവിടെ അടിക്കുക.
+    </string>
     <string name="action_sort_random">യാദൃച്ഛികം</string>
     <string name="ext_info_language">ഭാഷ</string>
     <string name="automatic_background">സ്വയമേവ</string>
@@ -185,18 +198,32 @@
     <string name="pref_app_language">ആപ്പ് ഭാഷ</string>
     <string name="pref_category_security">സുരക്ഷയും സ്വകാര്യതയും</string>
     <string name="pref_show_nsfw_source">ഉറവിടങ്ങളിലും വിപുലീകരണ പട്ടികയിലും കാണിക്കുക</string>
-    <string name="parental_controls_info">ഇത് അനൗദ്യോഗികമായോ തെറ്റായി അടയാളപ്പെടുത്തിയോ ഉള്ള വിപുലീകരണങ്ങൾ ആപ്പിനുള്ളിൽ NSFW (18+) ഉള്ളടക്കം പ്രദർശിപ്പിക്കുന്നത് തടയില്ല.</string>
+    <string name="parental_controls_info">ഇത് അനൗദ്യോഗികമായോ തെറ്റായി അടയാളപ്പെടുത്തിയോ ഉള്ള
+        വിപുലീകരണങ്ങൾ ആപ്പിനുള്ളിൽ NSFW (18+) ഉള്ളടക്കം പ്രദർശിപ്പിക്കുന്നത് തടയില്ല.
+    </string>
     <string name="relative_time_today">ഇന്ന്</string>
-    <string name="onboarding_description">ആദ്യമായി ചില ക്രമീകരണങ്ങൾ സജ്ജമാക്കാം. പിന്നീട് ഇവയെല്ലാം സെറ്റിംഗ്സിൽ നിന്ന് എപ്പോൾ വേണമെങ്കിലും മാറ്റാനാകും.</string>
+    <string name="onboarding_description">ആദ്യമായി ചില ക്രമീകരണങ്ങൾ സജ്ജമാക്കാം. പിന്നീട് ഇവയെല്ലാം
+        സെറ്റിംഗ്സിൽ നിന്ന് എപ്പോൾ വേണമെങ്കിലും മാറ്റാനാകും.
+    </string>
     <string name="lock_always">എപ്പോഴും</string>
     <string name="pref_category_about">കുറിച്ച്</string>
     <string name="onboarding_action_next">അടുത്തത്</string>
     <string name="onboarding_action_finish">ആരംഭിക്കുക</string>
     <string name="onboarding_action_skip">ഒഴിവാക്കുക</string>
-    <string name="onboarding_storage_info">%1$s ചാപ്റ്റർ ഡൗൺലോഡുകൾ, ബാക്കപ്പുകൾ എന്നിവയും മറ്റും സംഭരിക്കുന്ന ഒരു ഫോൾഡർ തിരഞ്ഞെടുക്കുക.\n\nഒരു പ്രത്യേക ഫോൾഡർ ശുപാർശ ചെയ്യുന്നു.\n\nതിരഞ്ഞെടുത്ത ഫോൾഡർ: %2$s</string>
-    <string name="onboarding_storage_help_info">പഴയ പതിപ്പിൽ നിന്ന് അപ്ഡേറ്റ് ചെയ്യുകയാണ്, എന്ത് തിരഞ്ഞെടുക്കണമെന്ന് ഉറപ്പില്ലേ? കൂടുതൽ വിവരങ്ങൾക്ക് സ്റ്റോറേജ് ഗൈഡ് കാണുക.</string>
-    <string name="onboarding_permission_install_apps_description">To install source extensions.</string>
-    <string name="onboarding_permission_notifications_description">ലൈബ്രറി അപ്‌ഡേറ്റുകൾക്കും മറ്റും അറിയിപ്പ് നേടുക.</string>
+    <string name="onboarding_storage_info">%1$s ചാപ്റ്റർ ഡൗൺലോഡുകൾ, ബാക്കപ്പുകൾ എന്നിവയും മറ്റും
+        സംഭരിക്കുന്ന ഒരു ഫോൾഡർ തിരഞ്ഞെടുക്കുക.\n\nഒരു പ്രത്യേക ഫോൾഡർ ശുപാർശ
+        ചെയ്യുന്നു.\n\nതിരഞ്ഞെടുത്ത ഫോൾഡർ: %2$s
+    </string>
+    <string name="onboarding_storage_help_info">പഴയ പതിപ്പിൽ നിന്ന് അപ്ഡേറ്റ് ചെയ്യുകയാണ്, എന്ത്
+        തിരഞ്ഞെടുക്കണമെന്ന് ഉറപ്പില്ലേ? കൂടുതൽ വിവരങ്ങൾക്ക് സ്റ്റോറേജ് ഗൈഡ് കാണുക.
+    </string>
+    <string name="onboarding_permission_install_apps_description">To install source extensions.
+    </string>
+    <string name="onboarding_permission_notifications_description">ലൈബ്രറി അപ്‌ഡേറ്റുകൾക്കും മറ്റും
+        അറിയിപ്പ് നേടുക.
+    </string>
     <string name="onboarding_permission_ignore_battery_opts">പശ്ചാത്തല ബാറ്ററി ഉപയോഗം</string>
-    <string name="onboarding_permission_ignore_battery_opts_description">ദീർഘകാല ലൈബ്രറി അപ്‌ഡേറ്റുകൾ, ഡൗൺലോഡ്, ബാക്കപ്പ് പുനഃസ്ഥാപിക്കൽ എന്നിവയ്ക്കുള്ള തടസ്സങ്ങൾ ഒഴിവാക്കുക.</string>
+    <string name="onboarding_permission_ignore_battery_opts_description">ദീർഘകാല ലൈബ്രറി
+        അപ്‌ഡേറ്റുകൾ, ഡൗൺലോഡ്, ബാക്കപ്പ് പുനഃസ്ഥാപിക്കൽ എന്നിവയ്ക്കുള്ള തടസ്സങ്ങൾ ഒഴിവാക്കുക.
+    </string>
 </resources>

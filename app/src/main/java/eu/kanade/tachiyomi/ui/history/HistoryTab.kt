@@ -89,12 +89,14 @@ data object HistoryTab : Tab {
                     },
                 )
             }
+
             is HistoryScreenModel.Dialog.DeleteAll -> {
                 HistoryDeleteAllDialog(
                     onDismissRequest = onDismissRequest,
                     onDelete = screenModel::removeAllHistory,
                 )
             }
+
             is HistoryScreenModel.Dialog.DuplicateManga -> {
                 DuplicateMangaDialog(
                     duplicates = dialog.duplicates,
@@ -104,6 +106,7 @@ data object HistoryTab : Tab {
                     onMigrate = { screenModel.showMigrateDialog(dialog.manga, it) },
                 )
             }
+
             is HistoryScreenModel.Dialog.ChangeCategory -> {
                 ChangeCategoryDialog(
                     initialSelection = dialog.initialSelection,
@@ -114,6 +117,7 @@ data object HistoryTab : Tab {
                     },
                 )
             }
+
             is HistoryScreenModel.Dialog.Migrate -> {
                 MigrateMangaDialog(
                     current = dialog.current,
@@ -123,6 +127,7 @@ data object HistoryTab : Tab {
                     onDismissRequest = onDismissRequest,
                 )
             }
+
             null -> {}
         }
 
@@ -137,8 +142,10 @@ data object HistoryTab : Tab {
                 when (e) {
                     HistoryScreenModel.Event.InternalError ->
                         snackbarHostState.showSnackbar(context.stringResource(MR.strings.internal_error))
+
                     HistoryScreenModel.Event.HistoryCleared ->
                         snackbarHostState.showSnackbar(context.stringResource(MR.strings.clear_history_completed))
+
                     is HistoryScreenModel.Event.OpenChapter -> openChapter(context, e.chapter)
                 }
             }

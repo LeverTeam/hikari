@@ -29,6 +29,7 @@ interface Preference<T> {
         fun isPrivate(key: String): Boolean {
             return key.startsWith(PRIVATE_PREFIX)
         }
+
         fun privateKey(key: String): String {
             return "$PRIVATE_PREFIX$key"
         }
@@ -40,6 +41,7 @@ interface Preference<T> {
         fun isAppState(key: String): Boolean {
             return key.startsWith(APP_STATE_PREFIX)
         }
+
         fun appStateKey(key: String): String {
             return "$APP_STATE_PREFIX$key"
         }

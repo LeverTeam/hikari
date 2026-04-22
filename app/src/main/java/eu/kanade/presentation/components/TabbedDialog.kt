@@ -17,13 +17,11 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,13 +33,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.util.fastForEachIndexed
-import kotlin.math.absoluteValue
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.TabText
 import tachiyomi.presentation.core.i18n.stringResource
+import kotlin.math.absoluteValue
 
 object TabbedDialogPaddings {
     val Horizontal = 24.dp
@@ -75,13 +72,15 @@ fun TabbedDialog(
                         if (pagerState.currentPage < tabPositions.size) {
                             val fraction = pagerState.currentPageOffsetFraction
                             val currentTab = tabPositions[pagerState.currentPage]
-                            val targetTab = tabPositions.getOrNull(if (fraction > 0) pagerState.currentPage + 1 else pagerState.currentPage - 1)
-                                ?: currentTab
+                            val targetTab =
+                                tabPositions.getOrNull(if (fraction > 0) pagerState.currentPage + 1 else pagerState.currentPage - 1)
+                                    ?: currentTab
 
                             val indicatorWidth = lerp(currentTab.width, targetTab.width, fraction.absoluteValue)
                             val indicatorOffset = lerp(currentTab.left, targetTab.left, fraction.absoluteValue)
 
-                            val stretch = (targetTab.left - currentTab.left).value.absoluteValue.dp * fraction.absoluteValue * 0.4f
+                            val stretch =
+                                (targetTab.left - currentTab.left).value.absoluteValue.dp * fraction.absoluteValue * 0.4f
 
                             Box(
                                 Modifier

@@ -11,7 +11,6 @@ import androidx.compose.material.icons.outlined.SelectAll
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
-import tachiyomi.presentation.core.components.HikariSnackbarHost
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,12 +20,13 @@ import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarActions
 import eu.kanade.presentation.manga.components.ChapterDownloadAction
 import eu.kanade.presentation.manga.components.MangaBottomActionMenu
-import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.ui.updates.UpdatesItem
 import eu.kanade.tachiyomi.ui.updates.UpdatesScreenModel
 import kotlinx.collections.immutable.persistentListOf
+import tachiyomi.domain.download.model.DownloadState
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
+import tachiyomi.presentation.core.components.HikariSnackbarHost
 import tachiyomi.presentation.core.components.material.PullRefresh
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
@@ -196,11 +196,11 @@ private fun UpdatesBottomBar(
         onDownloadClicked = {
             onDownloadChapter(selected, ChapterDownloadAction.START)
         }.takeIf {
-            selected.fastAny { it.downloadStateProvider() != Download.State.DOWNLOADED }
+            selected.fastAny { it.downloadStateProvider() != DownloadState.DOWNLOADED }
         },
         onDeleteClicked = {
             onMultiDeleteClicked(selected)
-        }.takeIf { selected.fastAny { it.downloadStateProvider() == Download.State.DOWNLOADED } },
+        }.takeIf { selected.fastAny { it.downloadStateProvider() == DownloadState.DOWNLOADED } },
     )
 }
 

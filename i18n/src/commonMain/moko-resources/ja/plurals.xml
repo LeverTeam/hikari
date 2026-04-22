@@ -31,7 +31,9 @@
         <item quantity="other">%d個のトラッカー</item>
     </plurals>
     <plurals name="missing_chapters_warning">
-        <item quantity="other">%d章をスキップします。ソースに章が存在しないか、フィルタリングされています。</item>
+        <item quantity="other">
+            %d章をスキップします。ソースに章が存在しないか、フィルタリングされています。
+        </item>
     </plurals>
     <plurals name="relative_time">
         <item quantity="other">%1$d日前</item>

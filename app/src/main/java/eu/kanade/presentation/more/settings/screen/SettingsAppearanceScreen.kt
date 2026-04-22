@@ -10,9 +10,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import eu.kanade.domain.ui.UiPreferences
-import eu.kanade.domain.ui.model.TabletUiMode
-import eu.kanade.domain.ui.model.ThemeMode
 import eu.kanade.domain.ui.model.setAppCompatDelegateThemeMode
 import eu.kanade.presentation.more.settings.Preference
 import eu.kanade.presentation.more.settings.PreferenceItem
@@ -22,6 +19,9 @@ import eu.kanade.presentation.more.settings.widget.AppThemePreferenceWidget
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableMap
+import tachiyomi.domain.ui.UiPreferences
+import tachiyomi.domain.ui.model.TabletUiMode
+import tachiyomi.domain.ui.model.ThemeMode
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.i18n.stringResource
@@ -177,13 +177,13 @@ object SettingsAppearanceScreen : SearchableSettings {
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = uiPreferences.dateFormat,
                                     entries = DateFormats.associateWith {
-                                            val formattedDate = UiPreferences.dateFormat(it).format(now)
-                                            "${
-                                                it.ifEmpty {
-                                                    stringResource(MR.strings.label_default)
-                                                }
-                                            } ($formattedDate)"
-                                        }.toImmutableMap(),
+                                        val formattedDate = UiPreferences.dateFormat(it).format(now)
+                                        "${
+                                            it.ifEmpty {
+                                                stringResource(MR.strings.label_default)
+                                            }
+                                        } ($formattedDate)"
+                                    }.toImmutableMap(),
                                     title = stringResource(MR.strings.pref_date_format),
                                 ),
                                 highlightKey = null,

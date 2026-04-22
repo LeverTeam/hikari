@@ -7,11 +7,11 @@ import androidx.compose.material3.MaterialExpressiveTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import eu.kanade.domain.ui.UiPreferences
-import eu.kanade.domain.ui.model.AppTheme
 import eu.kanade.presentation.theme.colorscheme.BaseColorScheme
 import eu.kanade.presentation.theme.colorscheme.MonetColorScheme
 import eu.kanade.presentation.theme.colorscheme.TachiyomiColorScheme
+import tachiyomi.domain.ui.UiPreferences
+import tachiyomi.domain.ui.model.AppTheme
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

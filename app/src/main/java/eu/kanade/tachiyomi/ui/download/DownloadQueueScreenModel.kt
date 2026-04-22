@@ -7,22 +7,17 @@ import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.databinding.DownloadListBinding
-import eu.kanade.tachiyomi.source.model.Page
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import tachiyomi.domain.download.model.DownloadState
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
+import tachiyomi.domain.download.model.Download as DomainDownload
 
 class DownloadQueueScreenModel(
     private val downloadManager: DownloadManager = Injekt.get(),
@@ -41,7 +36,10 @@ class DownloadQueueScreenModel(
     /**
      * Map of jobs for active downloads.
      */
-    private val progressJobs = mutableMapOf<Download, Job>()
+    /*
+     * Map of jobs for active downloads.
+     */
+    // private val progressJobs = mutableMapOf<Download, Job>()
 
     val listener = object : DownloadAdapter.DownloadItemListener {
         /**
@@ -86,6 +84,7 @@ class DownloadQueueScreenModel(
                         }
                         reorder(newDownloads)
                     }
+
                     R.id.move_to_top_series, R.id.move_to_bottom_series -> {
                         val (selectedSeries, otherSeries) = adapter?.currentItems
                             ?.filterIsInstance<DownloadItem>()
@@ -98,9 +97,11 @@ class DownloadQueueScreenModel(
                             reorder(otherSeries + selectedSeries)
                         }
                     }
+
                     R.id.cancel_download -> {
                         cancel(listOf(item.download))
                     }
+
                     R.id.cancel_series -> {
                         val allDownloadsForSeries = adapter?.currentItems
                             ?.filterIsInstance<DownloadItem>()
@@ -132,10 +133,6 @@ class DownloadQueueScreenModel(
     }
 
     override fun onDispose() {
-        for (job in progressJobs.values) {
-            job.cancel()
-        }
-        progressJobs.clear()
         adapter = null
     }
 
@@ -185,19 +182,18 @@ class DownloadQueueScreenModel(
      *
      * @param download the download whose status has changed.
      */
-    fun onStatusChange(download: Download) {
+    fun onStatusChange(download: DomainDownload) {
         when (download.status) {
-            Download.State.DOWNLOADING -> {
-                launchProgressJob(download)
+            DownloadState.DOWNLOADING -> {
                 // Initial update of the downloaded pages
                 onUpdateDownloadedPages(download)
             }
-            Download.State.DOWNLOADED -> {
-                cancelProgressJob(download)
+
+            DownloadState.DOWNLOADED -> {
                 onUpdateProgress(download)
                 onUpdateDownloadedPages(download)
             }
-            Download.State.ERROR -> cancelProgressJob(download)
+
             else -> {
                 /* unused */
             }
@@ -205,47 +201,12 @@ class DownloadQueueScreenModel(
     }
 
     /**
-     * Observe the progress of a download and notify the view.
-     *
-     * @param download the download to observe its progress.
-     */
-    private fun launchProgressJob(download: Download) {
-        val job = screenModelScope.launch {
-            while (download.pages == null) {
-                delay(50)
-            }
-
-            val progressFlows = download.pages!!.map(Page::progressFlow)
-            combine(progressFlows, Array<Int>::sum)
-                .distinctUntilChanged()
-                .debounce(50)
-                .collectLatest {
-                    onUpdateProgress(download)
-                }
-        }
-
-        // Avoid leaking jobs
-        progressJobs.remove(download)?.cancel()
-
-        progressJobs[download] = job
-    }
-
-    /**
-     * Unsubscribes the given download from the progress subscriptions.
-     *
-     * @param download the download to unsubscribe.
-     */
-    private fun cancelProgressJob(download: Download) {
-        progressJobs.remove(download)?.cancel()
-    }
-
-    /**
      * Called when the progress of a download changes.
      *
      * @param download the download whose progress has changed.
      */
-    private fun onUpdateProgress(download: Download) {
-        getHolder(download)?.notifyProgress()
+    private fun onUpdateProgress(download: DomainDownload) {
+        getHolder(download.chapterId)?.notifyProgress()
     }
 
     /**
@@ -253,17 +214,17 @@ class DownloadQueueScreenModel(
      *
      * @param download the download whose page has been downloaded.
      */
-    fun onUpdateDownloadedPages(download: Download) {
-        getHolder(download)?.notifyDownloadedPages()
+    fun onUpdateDownloadedPages(download: DomainDownload) {
+        getHolder(download.chapterId)?.notifyDownloadedPages()
     }
 
     /**
      * Returns the holder for the given download.
      *
-     * @param download the download to find.
+     * @param chapterId the ID of the chapter to find.
      * @return the holder of the download or null if it's not bound.
      */
-    private fun getHolder(download: Download): DownloadHolder? {
-        return controllerBinding.root.findViewHolderForItemId(download.chapter.id) as? DownloadHolder
+    private fun getHolder(chapterId: Long): DownloadHolder? {
+        return controllerBinding.root.findViewHolderForItemId(chapterId) as? DownloadHolder
     }
 }
