@@ -54,6 +54,7 @@ import sh.calvin.reorderable.ReorderableCollectionItemScope
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.ReorderableLazyListState
 import sh.calvin.reorderable.rememberReorderableLazyListState
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.source.model.Source
 import tachiyomi.domain.source.service.SourceManager
@@ -67,8 +68,6 @@ import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.LoadingScreen
 import tachiyomi.presentation.core.util.Screen
 import tachiyomi.presentation.core.util.shouldExpandFAB
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class MigrationConfigScreen(private val mangaIds: Collection<Long>) : Screen() {
 
@@ -311,8 +310,8 @@ class MigrationConfigScreen(private val mangaIds: Collection<Long>) : Screen() {
     }
 
     internal class ScreenModel : StateScreenModel<ScreenModel.State>(State()) {
-        val sourcePreferences: SourcePreferences = Injekt.get<SourcePreferences>()
-        private val sourceManager: SourceManager = Injekt.get<SourceManager>()
+        val sourcePreferences: SourcePreferences = koinGet<SourcePreferences>()
+        private val sourceManager: SourceManager = koinGet<SourceManager>()
 
         private val sourcesComparator = { includedSources: List<Long> ->
             compareBy<MigrationSource>(

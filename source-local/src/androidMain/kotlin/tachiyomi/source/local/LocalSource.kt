@@ -20,9 +20,11 @@ import kotlinx.serialization.json.decodeFromStream
 import logcat.LogPriority
 import nl.adaptivity.xmlutil.core.AndroidXmlReader
 import nl.adaptivity.xmlutil.serialization.XML
+import org.koin.core.component.KoinComponent
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.storage.extension
 import tachiyomi.core.common.storage.nameWithoutExtension
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.ImageUtil
 import tachiyomi.core.common.util.system.logcat
@@ -40,20 +42,78 @@ import tachiyomi.source.local.io.Archive
 import tachiyomi.source.local.io.Format
 import tachiyomi.source.local.io.LocalSourceFileSystem
 import tachiyomi.source.local.metadata.fillMetadata
-import uy.kohesive.injekt.injectLazy
 import java.io.InputStream
 import java.nio.charset.StandardCharsets
+import kotlin.Boolean
+import kotlin.Exception
+import kotlin.Int
+import kotlin.Long
+import kotlin.String
+import kotlin.Suppress
+import kotlin.Throwable
+import kotlin.UnsupportedOperationException
+import kotlin.apply
+import kotlin.collections.List
+import kotlin.collections.component1
+import kotlin.collections.component2
+import kotlin.collections.distinctBy
+import kotlin.collections.filter
+import kotlin.collections.filterNot
+import kotlin.collections.find
+import kotlin.collections.firstOrNull
+import kotlin.collections.forEach
+import kotlin.collections.joinToString
+import kotlin.collections.lastOrNull
+import kotlin.collections.map
+import kotlin.collections.sortedBy
+import kotlin.collections.sortedByDescending
+import kotlin.collections.sortedWith
+import kotlin.collections.toByteArray
+import kotlin.compareTo
+import kotlin.context
+import kotlin.error
+import kotlin.getValue
+import kotlin.let
+import kotlin.map
+import kotlin.ranges.lastOrNull
+import kotlin.run
+import kotlin.sequences.distinctBy
+import kotlin.sequences.filter
+import kotlin.sequences.filterNot
+import kotlin.sequences.find
+import kotlin.sequences.lastOrNull
+import kotlin.sequences.map
+import kotlin.sequences.sortedBy
+import kotlin.sequences.sortedByDescending
+import kotlin.sequences.sortedWith
+import kotlin.text.CASE_INSENSITIVE_ORDER
+import kotlin.text.contains
+import kotlin.text.equals
+import kotlin.text.filter
+import kotlin.text.filterNot
+import kotlin.text.find
+import kotlin.text.firstOrNull
+import kotlin.text.isBlank
+import kotlin.text.isNullOrBlank
+import kotlin.text.lastOrNull
+import kotlin.text.map
+import kotlin.text.orEmpty
+import kotlin.text.split
+import kotlin.text.startsWith
+import kotlin.text.toByteArray
+import kotlin.text.toFloatOrNull
 import kotlin.time.Duration.Companion.days
+import kotlin.toString
 import tachiyomi.domain.source.model.Source as DomainSource
 
 actual class LocalSource(
     private val context: Context,
     private val fileSystem: LocalSourceFileSystem,
     private val coverManager: LocalCoverManager,
-) : CatalogueSource, UnmeteredSource {
+) : CatalogueSource, UnmeteredSource, KoinComponent {
 
-    private val json: Json by injectLazy()
-    private val xml: XML by injectLazy()
+    private val json: Json by koinInject()
+    private val xml: XML by koinInject()
 
     @Suppress("PrivatePropertyName")
     private val PopularFilters = FilterList(OrderBy.Popular(context))

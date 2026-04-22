@@ -2,10 +2,10 @@ package eu.kanade.tachiyomi.ui.base.delegate
 
 import android.app.Activity
 import eu.kanade.tachiyomi.R
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.ui.UiPreferences
 import tachiyomi.domain.ui.model.AppTheme
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 interface ThemingDelegate {
     fun applyAppTheme(activity: Activity)
@@ -20,9 +20,9 @@ interface ThemingDelegate {
     }
 }
 
-class ThemingDelegateImpl : ThemingDelegate {
+class ThemingDelegateImpl : ThemingDelegate, KoinComponent {
     override fun applyAppTheme(activity: Activity) {
-        val uiPreferences = Injekt.get<UiPreferences>()
+        val uiPreferences = koinGet<UiPreferences>()
         ThemingDelegate.getThemeResIds(uiPreferences.appTheme.get(), uiPreferences.themeDarkAmoled.get())
             .forEach(activity::setTheme)
     }

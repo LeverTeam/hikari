@@ -14,13 +14,12 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.download.model.DownloadState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import tachiyomi.domain.download.model.Download as DomainDownload
 
 class DownloadQueueScreenModel(
-    private val downloadManager: DownloadManager = Injekt.get(),
+    private val downloadManager: DownloadManager = koinGet(),
 ) : ScreenModel {
 
     private val _state = MutableStateFlow(emptyList<DownloadHeaderItem>())

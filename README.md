@@ -1,50 +1,35 @@
 # Hikari
 
+![Version](https://img.shields.io/badge/version-0.3.7-blue?style=flat-square)
+![License](https://img.shields.io/badge/license-Apache--2.0-green?style=flat-square)
+![Build](https://img.shields.io/github/actions/workflow/status/leverteam/hikari/build.yml?style=flat-square)
+
 Manga reader for Android based on Mihon with NDK image decoding and sectional UI.
 
-![License](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)
-![Version](https://img.shields.io/badge/version-0.3.7-blue?style=flat-square)
-![Repo Size](https://img.shields.io/github/repo-size/LeverTeam/hikari?style=flat-square)
-![Language](https://img.shields.io/badge/language-Kotlin-purple?style=flat-square)
+## Stack
 
-## Features
+![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)
+![Jetpack Compose](https://img.shields.io/badge/Compose-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
 
-- Extension management with automatic repository synchronization
-- Sectional dashboard for library and reader configuration
-- NDK-based image decoding using AImageDecoder
-- EASU upscaling integration in the reader pipeline
-- Global search deduplication for cross-source manga grouping
-- Material 3 user interface with Material You support
-- Biometric security with idle application locking
-- Background library organization and backup management
+## Installation ![Platform](https://img.shields.io/badge/platform-android-lightgrey?style=flat-square)
 
-## Prerequisites
-
-| Requirement | Version |
-| ----------- | ------- |
-| JDK         | 21+     |
-| Android SDK | API 34+ |
-| Gradle      | 8.7+    |
-
-## Installation
-
-Build from source:
+Clone the repository and build the debug APK using Gradle:
 
 ```bash
-git clone https://github.com/LeverTeam/hikari.git
+git clone https://github.com/leverteam/hikari.git
 cd hikari
 ./gradlew assembleDebug
 ```
 
-Official APK releases are available on the [GitHub Releases](https://github.com/LeverTeam/hikari/releases) page.
+Official APK releases are available on the [GitHub Releases](https://github.com/leverteam/hikari/releases) page.
 
 ## Usage
 
-1. Locate the built APK in `app/build/outputs/apk/debug/`
-2. Install the APK on an Android device
-3. Navigate to Browse > Extensions to initialize extension sources
-4. Configure updating and security preferences in the Settings dashboard
-
-## License
-
-Licensed under the [Apache License 2.0](LICENSE).
+1. **Install**: Locate the built APK in `app/build/outputs/apk/debug/` and install it on an Android device.
+2. **Extensions**: Navigate to **Browse > Extensions** to initialize and synchronize extension sources.
+3. **Library**: Add manga to your library from extensions to enable tracking and notifications.
+4. **Reader**: Configure the reader pipeline, including NDK decoding and upscaling options, in the sectional dashboard.
+5. **Security**: Enable biometric locking in the settings dashboard for idle application security.

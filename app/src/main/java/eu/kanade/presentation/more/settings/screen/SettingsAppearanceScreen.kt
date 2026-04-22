@@ -19,6 +19,8 @@ import eu.kanade.presentation.more.settings.widget.AppThemePreferenceWidget
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableMap
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.ui.UiPreferences
 import tachiyomi.domain.ui.model.TabletUiMode
 import tachiyomi.domain.ui.model.ThemeMode
@@ -26,11 +28,9 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.time.LocalDate
 
-object SettingsAppearanceScreen : SearchableSettings {
+object SettingsAppearanceScreen : SearchableSettings, KoinComponent {
 
     @ReadOnlyComposable
     @Composable
@@ -38,7 +38,7 @@ object SettingsAppearanceScreen : SearchableSettings {
 
     @Composable
     override fun getPreferences(): List<Preference> {
-        val uiPreferences = remember { Injekt.get<UiPreferences>() }
+        val uiPreferences = remember { koinGet<UiPreferences>() }
 
         return listOf(
             getThemeGroup(uiPreferences = uiPreferences),
@@ -130,7 +130,6 @@ object SettingsAppearanceScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = uiPreferences.tabletUiMode,
@@ -138,7 +137,7 @@ object SettingsAppearanceScreen : SearchableSettings {
                                         .toImmutableMap(),
                                     title = stringResource(MR.strings.pref_tablet_ui_mode),
                                     onValueChanged = {
-                                        Injekt.get<Activity>().toast(MR.strings.requires_app_restart)
+                                        koinGet<Activity>().toast(MR.strings.requires_app_restart)
                                         true
                                     },
                                 ),
@@ -189,7 +188,6 @@ object SettingsAppearanceScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = uiPreferences.relativeTime,
@@ -202,7 +200,6 @@ object SettingsAppearanceScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(

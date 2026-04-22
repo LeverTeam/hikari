@@ -27,7 +27,8 @@ dependencies {
     api(projects.core.common)
     api(projects.i18n)
     api(projects.domain)
-    implementation(libs.injekt)
+    implementation(libs.koin.core)
+    implementation(libs.koin.androidx.compose)
 
     // Compose
     implementation(libs.androidx.activity.compose)

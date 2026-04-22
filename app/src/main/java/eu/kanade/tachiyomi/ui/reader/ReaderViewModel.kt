@@ -50,6 +50,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.runBlocking
 import logcat.LogPriority
 import tachiyomi.core.common.preference.toggle
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.launchNonCancellable
 import tachiyomi.core.common.util.lang.withIOContext
@@ -72,8 +73,6 @@ import tachiyomi.domain.reader.model.ReadingMode
 import tachiyomi.domain.reader.service.ReaderPreferences
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.source.local.isLocal
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.time.Instant
 import java.util.Date
 import eu.kanade.tachiyomi.data.download.DownloadManager as DataDownloadManager
@@ -83,23 +82,23 @@ import eu.kanade.tachiyomi.data.download.DownloadManager as DataDownloadManager
  */
 class ReaderViewModel @JvmOverloads constructor(
     private val savedState: SavedStateHandle,
-    private val sourceManager: SourceManager = Injekt.get(),
-    private val downloadManager: DataDownloadManager = Injekt.get(),
-    private val downloadProvider: DownloadProvider = Injekt.get(),
-    private val imageSaver: ImageSaver = Injekt.get(),
-    val readerPreferences: ReaderPreferences = Injekt.get(),
-    private val basePreferences: BasePreferences = Injekt.get(),
-    private val downloadPreferences: DownloadPreferences = Injekt.get(),
-    private val trackPreferences: TrackPreferences = Injekt.get(),
-    private val trackChapter: TrackChapter = Injekt.get(),
-    private val getManga: GetManga = Injekt.get(),
-    private val getChaptersByMangaId: GetChaptersByMangaId = Injekt.get(),
-    private val getNextChapters: GetNextChapters = Injekt.get(),
-    private val upsertHistory: UpsertHistory = Injekt.get(),
-    private val updateChapter: UpdateChapter = Injekt.get(),
-    private val setMangaViewerFlags: SetMangaViewerFlags = Injekt.get(),
-    private val getIncognitoState: GetIncognitoState = Injekt.get(),
-    private val libraryPreferences: LibraryPreferences = Injekt.get(),
+    private val sourceManager: SourceManager = koinGet(),
+    private val downloadManager: DataDownloadManager = koinGet(),
+    private val downloadProvider: DownloadProvider = koinGet(),
+    private val imageSaver: ImageSaver = koinGet(),
+    val readerPreferences: ReaderPreferences = koinGet(),
+    private val basePreferences: BasePreferences = koinGet(),
+    private val downloadPreferences: DownloadPreferences = koinGet(),
+    private val trackPreferences: TrackPreferences = koinGet(),
+    private val trackChapter: TrackChapter = koinGet(),
+    private val getManga: GetManga = koinGet(),
+    private val getChaptersByMangaId: GetChaptersByMangaId = koinGet(),
+    private val getNextChapters: GetNextChapters = koinGet(),
+    private val upsertHistory: UpsertHistory = koinGet(),
+    private val updateChapter: UpdateChapter = koinGet(),
+    private val setMangaViewerFlags: SetMangaViewerFlags = koinGet(),
+    private val getIncognitoState: GetIncognitoState = koinGet(),
+    private val libraryPreferences: LibraryPreferences = koinGet(),
 ) : ViewModel() {
 
     private val mutableState = MutableStateFlow(State())
@@ -285,7 +284,7 @@ class ReaderViewModel @JvmOverloads constructor(
                     mutableState.update { it.copy(manga = manga) }
                     if (chapterId == -1L) chapterId = initialChapterId
 
-                    val context = Injekt.get<Application>()
+                    val context = koinGet<Application>()
                     val source = sourceManager.getOrStub(manga.source)
                     loader = ChapterLoader(context, downloadManager, downloadProvider, manga, source)
 
@@ -802,7 +801,7 @@ class ReaderViewModel @JvmOverloads constructor(
         if (page?.status != Page.State.Ready) return
         val manga = manga ?: return
 
-        val context = Injekt.get<Application>()
+        val context = koinGet<Application>()
         val notifier = SaveImageNotifier(context)
         notifier.onClear()
 
@@ -850,7 +849,7 @@ class ReaderViewModel @JvmOverloads constructor(
         if (page?.status != Page.State.Ready) return
         val manga = manga ?: return
 
-        val context = Injekt.get<Application>()
+        val context = koinGet<Application>()
         val destDir = context.cacheImageDir
 
         val filename = generateFilename(manga, page)
@@ -883,7 +882,7 @@ class ReaderViewModel @JvmOverloads constructor(
 
         viewModelScope.launchNonCancellable {
             val result = try {
-                manga.editCover(Injekt.get(), stream())
+                manga.editCover(koinGet(), stream())
                 if (manga.isLocal() || manga.favorite) {
                     SetAsCoverResult.Success
                 } else {
@@ -916,7 +915,7 @@ class ReaderViewModel @JvmOverloads constructor(
         if (!trackPreferences.autoUpdateTrack.get()) return
 
         val manga = manga ?: return
-        val context = Injekt.get<Application>()
+        val context = koinGet<Application>()
 
         viewModelScope.launchNonCancellable {
             trackChapter.await(context, manga.id, readerChapter.chapter.chapter_number.toDouble())

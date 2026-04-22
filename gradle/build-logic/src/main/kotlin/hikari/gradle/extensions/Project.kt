@@ -12,8 +12,8 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
 
-val Project.libs get() = the<LibrariesForLibs>()
-val Project.hikarix get() = the<LibrariesForHikarix>()
+val Project.libs get() =  the<LibrariesForLibs>()
+val Project.hikarix get() =  the<LibrariesForHikarix>()
 
 fun Project.plugins(block: PluginManager.() -> Unit) {
     pluginManager.apply(block)

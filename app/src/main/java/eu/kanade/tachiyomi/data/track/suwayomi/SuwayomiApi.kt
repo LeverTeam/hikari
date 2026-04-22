@@ -18,16 +18,16 @@ import kotlinx.serialization.json.putJsonArray
 import kotlinx.serialization.json.putJsonObject
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.toRequestBody
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.domain.source.service.SourceManager
-import uy.kohesive.injekt.injectLazy
 import java.security.MessageDigest
 
 class SuwayomiApi(private val trackId: Long) {
 
-    private val json: Json by injectLazy()
+    private val json: Json by koinInject()
 
-    private val sourceManager: SourceManager by injectLazy()
+    private val sourceManager: SourceManager by koinInject()
     private val source: HttpSource by lazy { (sourceManager.get(sourceId) as HttpSource) }
     private val configurableSource: ConfigurableSource by lazy { (sourceManager.get(sourceId) as ConfigurableSource) }
     private val client: OkHttpClient by lazy { source.client }

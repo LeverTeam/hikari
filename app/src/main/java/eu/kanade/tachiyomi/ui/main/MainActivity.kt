@@ -31,6 +31,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -83,6 +84,7 @@ import kotlinx.coroutines.launch
 import logcat.LogPriority
 import tachiyomi.core.common.Constants
 import tachiyomi.core.common.i18n.stringResource
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.library.service.LibraryPreferences
@@ -97,17 +99,16 @@ import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.util.AssistContentScreen
 import tachiyomi.presentation.core.util.DefaultNavigatorScreenTransition
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.injectLazy
 
 class MainActivity : BaseActivity() {
 
-    private val libraryPreferences: LibraryPreferences by injectLazy()
-    private val preferences: BasePreferences by injectLazy()
+    private val libraryPreferences: LibraryPreferences by koinInject()
+    private val preferences: BasePreferences by koinInject()
 
-    private val downloadCache: DownloadCache by injectLazy()
-    private val chapterCache: ChapterCache by injectLazy()
+    private val downloadCache: DownloadCache by koinInject()
+    private val chapterCache: ChapterCache by koinInject()
 
-    private val getIncognitoState: GetIncognitoState by injectLazy()
+    private val getIncognitoState: GetIncognitoState by koinInject()
 
     var ready = false
 
@@ -124,8 +125,6 @@ class MainActivity : BaseActivity() {
 
         super.onCreate(savedInstanceState)
 
-        val didMigration = Migrator.awaitAndRelease()
-
         // Do not let the launcher create a new activity http://stackoverflow.com/questions/16283079
         if (!isTaskRoot) {
             finish()
@@ -134,6 +133,9 @@ class MainActivity : BaseActivity() {
 
         setComposeContent {
             val context = LocalContext.current
+            val didMigration by produceState(initialValue = false) {
+                value = Migrator.awaitAndRelease()
+            }
 
             var incognito by remember { mutableStateOf(getIncognitoState.await(null)) }
             val downloadOnly by preferences.downloadedOnly.collectAsState()
@@ -221,7 +223,7 @@ class MainActivity : BaseActivity() {
                 ShowOnboarding()
             }
 
-            var showChangelog by remember { mutableStateOf(didMigration && !BuildConfig.DEBUG) }
+            var showChangelog by remember(didMigration) { mutableStateOf(didMigration && !BuildConfig.DEBUG) }
             if (showChangelog) {
                 AlertDialog(
                     onDismissRequest = { showChangelog = false },
@@ -423,6 +425,8 @@ class MainActivity : BaseActivity() {
                 }
                 null
             }
+
+            Intent.ACTION_MAIN -> null
 
             else -> return false
         }

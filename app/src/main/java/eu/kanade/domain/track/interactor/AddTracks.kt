@@ -8,6 +8,7 @@ import eu.kanade.tachiyomi.data.track.Tracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.source.Source
 import logcat.LogPriority
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.convertEpochMillisZone
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.lang.withNonCancellableContext
@@ -16,8 +17,6 @@ import tachiyomi.domain.chapter.interactor.GetChaptersByMangaId
 import tachiyomi.domain.history.interactor.GetHistory
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.track.interactor.InsertTrack
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.time.ZoneOffset
 
 class AddTracks(
@@ -55,7 +54,7 @@ class AddTracks(
                 }
 
                 if (track.startDate <= 0) {
-                    val firstReadChapterDate = Injekt.get<GetHistory>().await(mangaId)
+                    val firstReadChapterDate = koinGet<GetHistory>().await(mangaId)
                         .sortedBy { it.readAt }
                         .firstOrNull()
                         ?.readAt

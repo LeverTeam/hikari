@@ -11,6 +11,7 @@ import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.source.model.SManga
 import kotlinx.coroutines.flow.update
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.history.interactor.GetHistoryHeatmap
 import tachiyomi.domain.history.interactor.GetTotalReadDuration
@@ -23,17 +24,15 @@ import tachiyomi.domain.manga.interactor.GetLibraryManga
 import tachiyomi.domain.track.interactor.GetTracks
 import tachiyomi.domain.track.model.Track
 import tachiyomi.source.local.isLocal
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class StatsScreenModel(
-    private val downloadManager: DownloadManager = Injekt.get(),
-    private val getHistoryHeatmap: GetHistoryHeatmap = Injekt.get(),
-    private val getLibraryManga: GetLibraryManga = Injekt.get(),
-    private val getTotalReadDuration: GetTotalReadDuration = Injekt.get(),
-    private val getTracks: GetTracks = Injekt.get(),
-    private val preferences: LibraryPreferences = Injekt.get(),
-    private val trackerManager: TrackerManager = Injekt.get(),
+    private val downloadManager: DownloadManager = koinGet(),
+    private val getHistoryHeatmap: GetHistoryHeatmap = koinGet(),
+    private val getLibraryManga: GetLibraryManga = koinGet(),
+    private val getTotalReadDuration: GetTotalReadDuration = koinGet(),
+    private val getTracks: GetTracks = koinGet(),
+    private val preferences: LibraryPreferences = koinGet(),
+    private val trackerManager: TrackerManager = koinGet(),
 ) : StateScreenModel<StatsScreenState>(StatsScreenState.Loading) {
 
     private val loggedInTrackers by lazy { trackerManager.loggedInTrackers() }

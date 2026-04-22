@@ -21,17 +21,18 @@ import eu.kanade.tachiyomi.ui.reader.viewer.Viewer
 import eu.kanade.tachiyomi.ui.reader.viewer.ViewerNavigation.NavigationRegion
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.system.logcat
-import uy.kohesive.injekt.injectLazy
 import kotlin.math.min
 
 /**
  * Implementation of a [Viewer] to display pages with a [ViewPager].
  */
 @Suppress("LeakingThis")
-abstract class PagerViewer(val activity: ReaderActivity) : Viewer {
+abstract class PagerViewer(val activity: ReaderActivity) : Viewer, KoinComponent {
 
-    val downloadManager: DownloadManager by injectLazy()
+    val downloadManager: DownloadManager by koinInject()
 
     private val scope = MainScope()
 

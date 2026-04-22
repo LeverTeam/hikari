@@ -1,14 +1,15 @@
 package eu.kanade.tachiyomi.di
 
-import android.app.Application
 import eu.kanade.domain.base.BasePreferences
 import eu.kanade.domain.track.service.TrackPreferences
 import eu.kanade.tachiyomi.core.security.SecurityPreferences
 import eu.kanade.tachiyomi.network.NetworkPreferences
 import eu.kanade.tachiyomi.util.system.isDebugBuildType
+import org.koin.android.ext.koin.androidApplication
+import org.koin.dsl.module
 import tachiyomi.core.common.preference.AndroidPreferenceStore
 import tachiyomi.core.common.preference.PreferenceStore
-import tachiyomi.core.common.storage.AndroidStorageFolderProvider
+import tachiyomi.core.common.storage.FolderProvider
 import tachiyomi.domain.backup.service.BackupPreferences
 import tachiyomi.domain.download.service.DownloadPreferences
 import tachiyomi.domain.library.service.LibraryPreferences
@@ -17,58 +18,26 @@ import tachiyomi.domain.source.service.SourcePreferences
 import tachiyomi.domain.storage.service.StoragePreferences
 import tachiyomi.domain.ui.UiPreferences
 import tachiyomi.domain.updates.service.UpdatesPreferences
-import uy.kohesive.injekt.api.InjektModule
-import uy.kohesive.injekt.api.InjektRegistrar
-import uy.kohesive.injekt.api.addSingletonFactory
-import uy.kohesive.injekt.api.get
 
-class PreferenceModule(val app: Application) : InjektModule {
+val preferenceModule = module {
+    single<PreferenceStore> { AndroidPreferenceStore(androidApplication()) }
 
-    override fun InjektRegistrar.registerInjectables() {
-        addSingletonFactory<PreferenceStore> {
-            AndroidPreferenceStore(app)
-        }
-        addSingletonFactory {
-            NetworkPreferences(
-                preferenceStore = get(),
-                verboseLoggingDefault = isDebugBuildType,
-            )
-        }
-        addSingletonFactory {
-            SourcePreferences(get())
-        }
-        addSingletonFactory {
-            SecurityPreferences(get())
-        }
-        addSingletonFactory {
-            LibraryPreferences(get())
-        }
-        addSingletonFactory {
-            UpdatesPreferences(get())
-        }
-        addSingletonFactory {
-            ReaderPreferences(get())
-        }
-        addSingletonFactory {
-            TrackPreferences(get())
-        }
-        addSingletonFactory {
-            DownloadPreferences(get())
-        }
-        addSingletonFactory {
-            BackupPreferences(get())
-        }
-        addSingletonFactory {
-            StoragePreferences(
-                folderProvider = get<AndroidStorageFolderProvider>(),
-                preferenceStore = get(),
-            )
-        }
-        addSingletonFactory {
-            UiPreferences(get())
-        }
-        addSingletonFactory {
-            BasePreferences(app, get())
-        }
+    single {
+        NetworkPreferences(
+            preferenceStore = get<PreferenceStore>(),
+            verboseLoggingDefault = isDebugBuildType,
+        )
     }
+
+    single { SourcePreferences(get<PreferenceStore>()) }
+    single { SecurityPreferences(get<PreferenceStore>()) }
+    single { LibraryPreferences(get<PreferenceStore>()) }
+    single { UpdatesPreferences(get<PreferenceStore>()) }
+    single { ReaderPreferences(get<PreferenceStore>()) }
+    single { TrackPreferences(get<PreferenceStore>()) }
+    single { DownloadPreferences(get<PreferenceStore>()) }
+    single { BackupPreferences(get<PreferenceStore>()) }
+    single { StoragePreferences(get<FolderProvider>(), get<PreferenceStore>()) }
+    single { UiPreferences(get<PreferenceStore>()) }
+    single { BasePreferences(androidApplication(), get<PreferenceStore>()) }
 }

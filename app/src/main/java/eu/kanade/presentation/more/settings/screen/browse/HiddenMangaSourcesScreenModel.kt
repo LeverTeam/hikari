@@ -6,15 +6,14 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.manga.interactor.GetHiddenManga
 import tachiyomi.domain.source.repository.SourceRepository
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class HiddenMangaSourcesScreenModel(
-    private val getHiddenManga: GetHiddenManga = Injekt.get(),
-    private val sourceRepository: SourceRepository = Injekt.get(),
+    private val getHiddenManga: GetHiddenManga = koinGet(),
+    private val sourceRepository: SourceRepository = koinGet(),
 ) : StateScreenModel<HiddenMangaSourcesScreenModel.State>(State.Loading) {
 
     init {

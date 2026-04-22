@@ -13,13 +13,12 @@ import eu.kanade.tachiyomi.source.preferenceKey
 import eu.kanade.tachiyomi.source.sourcePreferences
 import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.PreferenceStore
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.source.service.SourceManager
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class PreferenceBackupCreator(
-    private val sourceManager: SourceManager = Injekt.get(),
-    private val preferenceStore: PreferenceStore = Injekt.get(),
+    private val sourceManager: SourceManager = koinGet(),
+    private val preferenceStore: PreferenceStore = koinGet(),
 ) {
 
     fun createApp(includePrivatePreferences: Boolean): List<BackupPreference> {

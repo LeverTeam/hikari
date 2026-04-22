@@ -25,22 +25,21 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import logcat.LogPriority
 import okhttp3.HttpUrl.Companion.toHttpUrl
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.source.interactor.ToggleIncognito
 import tachiyomi.domain.source.interactor.ToggleSource
 import tachiyomi.domain.source.service.SourcePreferences
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class ExtensionDetailsScreenModel(
     pkgName: String,
     context: Context,
-    private val network: NetworkHelper = Injekt.get(),
-    private val extensionManager: ExtensionManager = Injekt.get(),
-    private val getExtensionSources: GetExtensionSources = Injekt.get(),
-    private val toggleSource: ToggleSource = Injekt.get(),
-    private val toggleIncognito: ToggleIncognito = Injekt.get(),
-    private val preferences: SourcePreferences = Injekt.get(),
+    private val network: NetworkHelper = koinGet(),
+    private val extensionManager: ExtensionManager = koinGet(),
+    private val getExtensionSources: GetExtensionSources = koinGet(),
+    private val toggleSource: ToggleSource = koinGet(),
+    private val toggleIncognito: ToggleIncognito = koinGet(),
+    private val preferences: SourcePreferences = koinGet(),
 ) : StateScreenModel<ExtensionDetailsScreenModel.State>(State()) {
 
     private val _events: Channel<ExtensionDetailsEvent> = Channel()

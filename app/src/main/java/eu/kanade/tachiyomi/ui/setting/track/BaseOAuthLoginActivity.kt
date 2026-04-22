@@ -7,12 +7,12 @@ import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.ui.base.activity.BaseActivity
 import eu.kanade.tachiyomi.ui.main.MainActivity
 import eu.kanade.tachiyomi.util.view.setComposeContent
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.presentation.core.screens.LoadingScreen
-import uy.kohesive.injekt.injectLazy
 
 abstract class BaseOAuthLoginActivity : BaseActivity() {
 
-    internal val trackerManager: TrackerManager by injectLazy()
+    internal val trackerManager: TrackerManager by koinInject()
 
     abstract fun handleResult(uri: Uri)
 

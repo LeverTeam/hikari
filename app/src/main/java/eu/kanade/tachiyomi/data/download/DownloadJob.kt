@@ -24,9 +24,8 @@ import kotlinx.coroutines.flow.combineTransform
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.download.service.DownloadPreferences
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import eu.kanade.tachiyomi.data.download.DownloadManager as DataDownloadManager
 
 /**
@@ -35,8 +34,8 @@ import eu.kanade.tachiyomi.data.download.DownloadManager as DataDownloadManager
  */
 class DownloadJob(context: Context, workerParams: WorkerParameters) : CoroutineWorker(context, workerParams) {
 
-    private val downloadManager: DataDownloadManager = Injekt.get()
-    private val downloadPreferences: DownloadPreferences = Injekt.get()
+    private val downloadManager: DataDownloadManager = koinGet()
+    private val downloadPreferences: DownloadPreferences = koinGet()
 
     override suspend fun getForegroundInfo(): ForegroundInfo {
         val notification = applicationContext.notificationBuilder(Notifications.CHANNEL_DOWNLOADER_PROGRESS) {

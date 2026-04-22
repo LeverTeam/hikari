@@ -5,13 +5,12 @@ import eu.kanade.tachiyomi.source.CatalogueSource
 import eu.kanade.tachiyomi.source.model.FilterList
 import eu.kanade.tachiyomi.source.model.MangasPage
 import hikari.domain.manga.model.toDomainManga
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.domain.manga.interactor.NetworkToLocalManga
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.source.model.NoResultsException
 import tachiyomi.domain.source.repository.SourcePagingSource
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class SourceSearchPagingSource(
     source: CatalogueSource,
@@ -37,7 +36,7 @@ class SourceLatestPagingSource(source: CatalogueSource) : BaseSourcePagingSource
 
 abstract class BaseSourcePagingSource(
     protected val source: CatalogueSource,
-    private val networkToLocalManga: NetworkToLocalManga = Injekt.get(),
+    private val networkToLocalManga: NetworkToLocalManga = koinGet<NetworkToLocalManga>(),
 ) : SourcePagingSource() {
 
     private val seenManga = hashSetOf<String>()

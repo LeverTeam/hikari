@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 import logcat.LogPriority
 import tachiyomi.core.common.preference.CheckboxState
 import tachiyomi.core.common.preference.mapAsCheckboxState
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.toLocalDate
 import tachiyomi.core.common.util.lang.withIOContext
@@ -42,22 +43,20 @@ import tachiyomi.domain.manga.interactor.GetManga
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.MangaWithChapterCount
 import tachiyomi.domain.source.service.SourceManager
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class HistoryScreenModel(
-    private val addTracks: AddTracks = Injekt.get(),
-    private val getCategories: GetCategories = Injekt.get(),
-    private val getDuplicateLibraryManga: GetDuplicateLibraryManga = Injekt.get(),
-    private val getHistory: GetHistory = Injekt.get(),
-    private val getManga: GetManga = Injekt.get(),
-    private val getNextChapters: GetNextChapters = Injekt.get(),
-    private val libraryPreferences: LibraryPreferences = Injekt.get(),
-    private val removeHistory: RemoveHistory = Injekt.get(),
-    private val setMangaCategories: SetMangaCategories = Injekt.get(),
-    private val updateManga: UpdateManga = Injekt.get(),
+    private val addTracks: AddTracks = koinGet(),
+    private val getCategories: GetCategories = koinGet(),
+    private val getDuplicateLibraryManga: GetDuplicateLibraryManga = koinGet(),
+    private val getHistory: GetHistory = koinGet(),
+    private val getManga: GetManga = koinGet(),
+    private val getNextChapters: GetNextChapters = koinGet(),
+    private val libraryPreferences: LibraryPreferences = koinGet(),
+    private val removeHistory: RemoveHistory = koinGet(),
+    private val setMangaCategories: SetMangaCategories = koinGet(),
+    private val updateManga: UpdateManga = koinGet(),
     val snackbarHostState: SnackbarHostState = SnackbarHostState(),
-    private val sourceManager: SourceManager = Injekt.get(),
+    private val sourceManager: SourceManager = koinGet(),
 ) : StateScreenModel<HistoryScreenModel.State>(State()) {
 
     private val _events: Channel<Event> = Channel(Channel.UNLIMITED)

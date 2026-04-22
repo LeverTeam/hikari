@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.category.interactor.CreateCategoryWithName
 import tachiyomi.domain.category.interactor.DeleteCategory
 import tachiyomi.domain.category.interactor.GetCategories
@@ -18,15 +19,13 @@ import tachiyomi.domain.category.interactor.RenameCategory
 import tachiyomi.domain.category.interactor.ReorderCategory
 import tachiyomi.domain.category.model.Category
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class CategoryScreenModel(
-    private val getCategories: GetCategories = Injekt.get(),
-    private val createCategoryWithName: CreateCategoryWithName = Injekt.get(),
-    private val deleteCategory: DeleteCategory = Injekt.get(),
-    private val reorderCategory: ReorderCategory = Injekt.get(),
-    private val renameCategory: RenameCategory = Injekt.get(),
+    private val getCategories: GetCategories = koinGet(),
+    private val createCategoryWithName: CreateCategoryWithName = koinGet(),
+    private val deleteCategory: DeleteCategory = koinGet(),
+    private val reorderCategory: ReorderCategory = koinGet(),
+    private val renameCategory: RenameCategory = koinGet(),
 ) : StateScreenModel<CategoryScreenState>(CategoryScreenState.Loading) {
 
     private val _events: Channel<CategoryEvent> = Channel()

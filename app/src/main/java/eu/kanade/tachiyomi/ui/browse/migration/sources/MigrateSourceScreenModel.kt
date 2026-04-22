@@ -14,19 +14,18 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import logcat.LogPriority
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.source.interactor.GetSourcesWithFavoriteCount
 import tachiyomi.domain.source.interactor.SetMigrateSorting
 import tachiyomi.domain.source.model.Source
 import tachiyomi.domain.source.service.SourcePreferences
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class MigrateSourceScreenModel(
-    preferences: SourcePreferences = Injekt.get(),
-    private val getSourcesWithFavoriteCount: GetSourcesWithFavoriteCount = Injekt.get(),
-    private val setMigrateSorting: SetMigrateSorting = Injekt.get(),
+    preferences: SourcePreferences = koinGet(),
+    private val getSourcesWithFavoriteCount: GetSourcesWithFavoriteCount = koinGet(),
+    private val setMigrateSorting: SetMigrateSorting = koinGet(),
 ) : StateScreenModel<MigrateSourceScreenModel.State>(State()) {
 
     private val _channel = Channel<Event>(Int.MAX_VALUE)

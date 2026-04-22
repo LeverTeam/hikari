@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.stateIn
 import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.core.common.preference.getAndSet
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.category.interactor.SetDisplayMode
 import tachiyomi.domain.category.interactor.SetSortModeForCategory
@@ -16,16 +17,14 @@ import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.domain.library.model.LibrarySort
 import tachiyomi.domain.library.service.LibraryPreferences
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import kotlin.time.Duration.Companion.seconds
 
 class LibrarySettingsScreenModel(
-    val preferences: BasePreferences = Injekt.get(),
-    val libraryPreferences: LibraryPreferences = Injekt.get(),
-    private val setDisplayMode: SetDisplayMode = Injekt.get(),
-    private val setSortModeForCategory: SetSortModeForCategory = Injekt.get(),
-    trackerManager: TrackerManager = Injekt.get(),
+    val preferences: BasePreferences = koinGet(),
+    val libraryPreferences: LibraryPreferences = koinGet(),
+    private val setDisplayMode: SetDisplayMode = koinGet(),
+    private val setSortModeForCategory: SetSortModeForCategory = koinGet(),
+    trackerManager: TrackerManager = koinGet(),
 ) : ScreenModel {
 
     val trackersFlow = trackerManager.loggedInTrackersFlow()

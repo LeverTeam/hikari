@@ -24,9 +24,9 @@ import eu.kanade.tachiyomi.util.system.workManager
 import okhttp3.internal.http2.ErrorCode
 import okhttp3.internal.http2.StreamResetException
 import tachiyomi.core.common.i18n.stringResource
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.injectLazy
 import java.io.File
 import kotlin.coroutines.cancellation.CancellationException
 
@@ -34,7 +34,7 @@ class AppUpdateDownloadJob(private val context: Context, workerParams: WorkerPar
     CoroutineWorker(context, workerParams) {
 
     private val notifier = AppUpdateNotifier(context)
-    private val network: NetworkHelper by injectLazy()
+    private val network: NetworkHelper by koinInject()
 
     override suspend fun doWork(): Result {
         val url = inputData.getString(EXTRA_DOWNLOAD_URL)

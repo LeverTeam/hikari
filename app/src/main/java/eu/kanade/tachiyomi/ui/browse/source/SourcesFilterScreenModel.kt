@@ -8,20 +8,20 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.source.interactor.GetLanguagesWithSources
 import tachiyomi.domain.source.interactor.ToggleLanguage
 import tachiyomi.domain.source.interactor.ToggleSource
 import tachiyomi.domain.source.model.Source
 import tachiyomi.domain.source.service.SourcePreferences
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.util.SortedMap
 
 class SourcesFilterScreenModel(
-    private val preferences: SourcePreferences = Injekt.get(),
-    private val getLanguagesWithSources: GetLanguagesWithSources = Injekt.get(),
-    private val toggleSource: ToggleSource = Injekt.get(),
-    private val toggleLanguage: ToggleLanguage = Injekt.get(),
+    private val preferences: SourcePreferences = koinGet(),
+    private val getLanguagesWithSources: GetLanguagesWithSources = koinGet(),
+    private val toggleSource: ToggleSource = koinGet(),
+    private val toggleLanguage: ToggleLanguage = koinGet(),
 ) : StateScreenModel<SourcesFilterScreenModel.State>(State.Loading) {
 
     init {
@@ -73,7 +73,7 @@ class SourcesFilterScreenModel(
             val items: SortedMap<String, List<Source>>,
             val enabledLanguages: Set<String>,
             val disabledSources: Set<String>,
-        ) : State {
+        ) : State, KoinComponent {
 
             val isEmpty: Boolean
                 get() = items.isEmpty()

@@ -20,21 +20,21 @@ import kotlinx.serialization.json.Json
 import logcat.LogPriority
 import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.PreferenceStore
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
-import uy.kohesive.injekt.injectLazy
 import java.time.Instant
 import kotlin.time.Duration.Companion.days
 
 internal class ExtensionApi {
 
-    private val networkService: NetworkHelper by injectLazy()
-    private val preferenceStore: PreferenceStore by injectLazy()
-    private val getExtensionRepo: GetExtensionRepo by injectLazy()
-    private val createExtensionRepo: CreateExtensionRepo by injectLazy()
-    private val updateExtensionRepo: UpdateExtensionRepo by injectLazy()
-    private val extensionManager: ExtensionManager by injectLazy()
-    private val json: Json by injectLazy()
+    private val networkService: NetworkHelper by koinInject()
+    private val preferenceStore: PreferenceStore by koinInject()
+    private val getExtensionRepo: GetExtensionRepo by koinInject()
+    private val createExtensionRepo: CreateExtensionRepo by koinInject()
+    private val updateExtensionRepo: UpdateExtensionRepo by koinInject()
+    private val extensionManager: ExtensionManager by koinInject()
+    private val json: Json by koinInject()
 
     private val lastExtCheck: Preference<Long> by lazy {
         preferenceStore.getLong(Preference.appStateKey("last_ext_check"), 0)

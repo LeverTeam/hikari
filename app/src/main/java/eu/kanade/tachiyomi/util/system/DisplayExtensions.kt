@@ -5,19 +5,18 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
 import android.view.View
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.ui.UiPreferences
 import tachiyomi.domain.ui.model.TabletUiMode
 import tachiyomi.presentation.core.util.TABLET_UI_MIN_SCREEN_WIDTH_LANDSCAPE_DP
 import tachiyomi.presentation.core.util.TABLET_UI_MIN_SCREEN_WIDTH_PORTRAIT_DP
 import tachiyomi.presentation.core.util.TABLET_UI_REQUIRED_SCREEN_WIDTH_DP
 import tachiyomi.presentation.core.util.isTabletUi
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 // TODO: move the logic to `isTabletUi()` when main activity is rewritten in Compose
 fun Context.prepareTabletUiContext(): Context {
     val configuration = resources.configuration
-    val expected = when (Injekt.get<UiPreferences>().tabletUiMode.get()) {
+    val expected = when (koinGet<UiPreferences>().tabletUiMode.get()) {
         TabletUiMode.AUTOMATIC ->
             configuration.smallestScreenWidthDp >= when (configuration.orientation) {
                 Configuration.ORIENTATION_PORTRAIT -> TABLET_UI_MIN_SCREEN_WIDTH_PORTRAIT_DP

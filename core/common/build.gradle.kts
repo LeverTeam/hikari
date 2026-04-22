@@ -52,6 +52,8 @@ dependencies {
     // JavaScript engine
     implementation(libs.quickJs)
 
+    api(libs.koin.core)
+
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.junit.platform.launcher)
 }

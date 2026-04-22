@@ -36,6 +36,7 @@ import eu.kanade.tachiyomi.util.system.dpToPx
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.map
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.domain.manga.model.MangaCover
 import tachiyomi.domain.updates.interactor.GetUpdates
@@ -46,15 +47,13 @@ import tachiyomi.presentation.widget.components.LockedWidget
 import tachiyomi.presentation.widget.components.UpdatesWidget
 import tachiyomi.presentation.widget.util.appWidgetBackgroundRadius
 import tachiyomi.presentation.widget.util.calculateRowAndColumnCount
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.time.Instant
 import java.time.ZonedDateTime
 
 abstract class BaseUpdatesGridGlanceWidget(
-    private val context: Context = Injekt.get<Application>(),
-    private val getUpdates: GetUpdates = Injekt.get(),
-    private val preferences: SecurityPreferences = Injekt.get(),
+    private val context: Context = koinGet<Application>(),
+    private val getUpdates: GetUpdates = koinGet(),
+    private val preferences: SecurityPreferences = koinGet(),
 ) : GlanceAppWidget() {
 
     override val sizeMode = SizeMode.Exact

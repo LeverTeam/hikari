@@ -10,10 +10,9 @@ import androidx.compose.ui.platform.LocalContext
 import eu.kanade.presentation.theme.colorscheme.BaseColorScheme
 import eu.kanade.presentation.theme.colorscheme.MonetColorScheme
 import eu.kanade.presentation.theme.colorscheme.TachiyomiColorScheme
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.ui.UiPreferences
 import tachiyomi.domain.ui.model.AppTheme
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 @Composable
 fun TachiyomiTheme(
@@ -21,14 +20,13 @@ fun TachiyomiTheme(
     amoled: Boolean? = null,
     content: @Composable () -> Unit,
 ) {
-    val uiPreferences = Injekt.get<UiPreferences>()
+    val uiPreferences = koinGet<UiPreferences>()
     BaseTachiyomiTheme(
         appTheme = appTheme ?: uiPreferences.appTheme.get(),
         isAmoled = amoled ?: uiPreferences.themeDarkAmoled.get(),
         content = content,
     )
 }
-
 
 @Composable
 fun TachiyomiPreviewTheme(

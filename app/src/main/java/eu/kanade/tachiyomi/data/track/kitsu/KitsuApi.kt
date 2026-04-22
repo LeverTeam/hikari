@@ -26,15 +26,15 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
-import uy.kohesive.injekt.injectLazy
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import tachiyomi.domain.track.model.Track as DomainTrack
 
 class KitsuApi(private val client: OkHttpClient, interceptor: KitsuInterceptor) {
 
-    private val json: Json by injectLazy()
+    private val json: Json by koinInject()
 
     private val authClient = client.newBuilder().addInterceptor(interceptor).build()
 

@@ -61,6 +61,8 @@ import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.launch
 import logcat.LogPriority
 import okhttp3.Headers
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchNonCancellable
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.ImageUtil
@@ -71,11 +73,9 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.io.File
 
-object SettingsAdvancedScreen : SearchableSettings {
+object SettingsAdvancedScreen : SearchableSettings, KoinComponent {
 
     @ReadOnlyComposable
     @Composable
@@ -87,9 +87,9 @@ object SettingsAdvancedScreen : SearchableSettings {
         val context = LocalContext.current
         val navigator = LocalNavigator.currentOrThrow
 
-        val basePreferences = remember { Injekt.get<BasePreferences>() }
-        val networkPreferences = remember { Injekt.get<NetworkPreferences>() }
-        val libraryPreferences = remember { Injekt.get<LibraryPreferences>() }
+        val basePreferences = remember { koinGet<BasePreferences>() }
+        val networkPreferences = remember { koinGet<NetworkPreferences>() }
+        val libraryPreferences = remember { koinGet<LibraryPreferences>() }
 
         return listOf(
             getMaintenanceGroup(),
@@ -106,7 +106,7 @@ object SettingsAdvancedScreen : SearchableSettings {
     private fun getMaintenanceGroup(): Preference.PreferenceGroup {
         val context = LocalContext.current
         val navigator = LocalNavigator.currentOrThrow
-        val networkHelper = remember { Injekt.get<NetworkHelper>() }
+        val networkHelper = remember { koinGet<NetworkHelper>() }
 
         return Preference.PreferenceGroup(
             title = stringResource(MR.strings.pref_category_advanced),
@@ -121,13 +121,12 @@ object SettingsAdvancedScreen : SearchableSettings {
                                     title = stringResource(MR.strings.pref_invalidate_download_cache),
                                     subtitle = stringResource(MR.strings.pref_invalidate_download_cache_summary),
                                     onClick = {
-                                        Injekt.get<DownloadCache>().invalidateCache()
+                                        koinGet<DownloadCache>().invalidateCache()
                                         context.toast(MR.strings.download_cache_invalidated)
                                     },
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -137,7 +136,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -149,7 +147,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -211,7 +208,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = networkPreferences.verboseLogging,
@@ -225,7 +221,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
                                     title = stringResource(MR.strings.pref_debug_info),
@@ -233,7 +228,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -302,7 +296,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
                                     title = "Don't kill my app!",
@@ -326,7 +319,7 @@ object SettingsAdvancedScreen : SearchableSettings {
         networkPreferences: NetworkPreferences,
     ): Preference.PreferenceGroup {
         val context = LocalContext.current
-        val networkHelper = remember { Injekt.get<NetworkHelper>() }
+        val networkHelper = remember { koinGet<NetworkHelper>() }
 
         val userAgentPref = networkPreferences.defaultUserAgent
         val userAgent by userAgentPref.collectAsState()
@@ -366,7 +359,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.EditTextPreference(
                                     preference = userAgentPref,
@@ -385,7 +377,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -428,14 +419,13 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
                                     title = stringResource(MR.strings.pref_reset_viewer_flags),
                                     subtitle = stringResource(MR.strings.pref_reset_viewer_flags_summary),
                                     onClick = {
                                         scope.launchNonCancellable {
-                                            val success = Injekt.get<ResetViewerFlags>().await()
+                                            val success = koinGet<ResetViewerFlags>().await()
                                             withUIContext {
                                                 val message = if (success) {
                                                     MR.strings.pref_reset_viewer_flags_success
@@ -450,7 +440,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = libraryPreferences.updateMangaTitles,
@@ -459,7 +448,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -524,7 +512,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = basePreferences.alwaysDecodeLongStripWithSSIV,
@@ -535,7 +522,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
@@ -562,7 +548,7 @@ object SettingsAdvancedScreen : SearchableSettings {
         val uriHandler = LocalUriHandler.current
         val extensionInstallerPref = basePreferences.extensionInstaller
         var shizukuMissing by rememberSaveable { mutableStateOf(false) }
-        val trustExtension = remember { Injekt.get<TrustExtension>() }
+        val trustExtension = remember { koinGet<TrustExtension>() }
 
         if (shizukuMissing) {
             val dismiss = { shizukuMissing = false }
@@ -618,7 +604,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(

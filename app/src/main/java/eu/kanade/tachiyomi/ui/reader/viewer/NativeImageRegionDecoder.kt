@@ -6,26 +6,29 @@ import android.graphics.BitmapFactory
 import android.graphics.BitmapRegionDecoder
 import android.graphics.Point
 import android.graphics.Rect
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.davemorrissey.labs.subscaleview.decoder.ImageRegionDecoder
 import com.davemorrissey.labs.subscaleview.provider.InputProvider
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.system.NativeImageDecoder
 import tachiyomi.domain.reader.service.ReaderPreferences
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 /**
  * A custom ImageRegionDecoder for SubsamplingScaleImageView that uses
  * high-performance NativeImageDecoder pipeline for post-processing filters.
  */
-class NativeImageRegionDecoder : ImageRegionDecoder {
+class NativeImageRegionDecoder : ImageRegionDecoder, KoinComponent {
 
-    private val preferences: ReaderPreferences by lazy { Injekt.get() }
+    private val preferences: ReaderPreferences by koinInject()
 
     @Volatile
     private var decoder: BitmapRegionDecoder? = null
     private var imageWidth = 0
     private var imageHeight = 0
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun init(context: Context, provider: InputProvider): Point {
         provider.openStream().use { stream ->
             val inputStream = checkNotNull(stream) { "Failed to open image stream" }

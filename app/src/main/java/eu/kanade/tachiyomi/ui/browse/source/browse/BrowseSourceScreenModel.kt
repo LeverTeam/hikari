@@ -32,8 +32,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
 import tachiyomi.core.common.preference.CheckboxState
 import tachiyomi.core.common.preference.mapAsCheckboxState
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.category.interactor.SetMangaCategories
@@ -50,28 +52,26 @@ import tachiyomi.domain.source.interactor.GetRemoteManga
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.source.service.SourcePreferences
 import tachiyomi.presentation.core.util.asState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.time.Instant
 import eu.kanade.tachiyomi.source.model.Filter as SourceModelFilter
 
 class BrowseSourceScreenModel(
     private val sourceId: Long,
     listingQuery: String?,
-    sourceManager: SourceManager = Injekt.get(),
-    sourcePreferences: SourcePreferences = Injekt.get(),
-    private val libraryPreferences: LibraryPreferences = Injekt.get(),
-    private val coverCache: CoverCache = Injekt.get(),
-    private val getRemoteManga: GetRemoteManga = Injekt.get(),
-    private val getDuplicateLibraryManga: GetDuplicateLibraryManga = Injekt.get(),
-    private val getCategories: GetCategories = Injekt.get(),
-    private val setMangaCategories: SetMangaCategories = Injekt.get(),
-    private val setMangaDefaultChapterFlags: SetMangaDefaultChapterFlags = Injekt.get(),
-    private val getManga: GetManga = Injekt.get(),
-    private val updateManga: UpdateManga = Injekt.get(),
-    private val addTracks: AddTracks = Injekt.get(),
-    private val getIncognitoState: GetIncognitoState = Injekt.get(),
-    private val getFavorites: GetFavorites = Injekt.get(),
+    sourceManager: SourceManager = koinGet(),
+    sourcePreferences: SourcePreferences = koinGet(),
+    private val libraryPreferences: LibraryPreferences = koinGet(),
+    private val coverCache: CoverCache = koinGet(),
+    private val getRemoteManga: GetRemoteManga = koinGet(),
+    private val getDuplicateLibraryManga: GetDuplicateLibraryManga = koinGet(),
+    private val getCategories: GetCategories = koinGet(),
+    private val setMangaCategories: SetMangaCategories = koinGet(),
+    private val setMangaDefaultChapterFlags: SetMangaDefaultChapterFlags = koinGet(),
+    private val getManga: GetManga = koinGet(),
+    private val updateManga: UpdateManga = koinGet(),
+    private val addTracks: AddTracks = koinGet(),
+    private val getIncognitoState: GetIncognitoState = koinGet(),
+    private val getFavorites: GetFavorites = koinGet(),
 ) : StateScreenModel<BrowseSourceScreenModel.State>(State(Listing.valueOf(listingQuery))) {
 
     var displayMode by sourcePreferences.sourceDisplayMode.asState(screenModelScope)
@@ -352,7 +352,7 @@ class BrowseSourceScreenModel(
             override val filters: FilterList,
         ) : Listing(query = query, filters = filters)
 
-        companion object {
+        companion object : KoinComponent {
             fun valueOf(query: String?): Listing {
                 return when (query) {
                     GetRemoteManga.QUERY_POPULAR -> Popular

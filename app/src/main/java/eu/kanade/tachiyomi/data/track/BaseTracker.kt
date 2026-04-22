@@ -12,13 +12,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import logcat.LogPriority
 import okhttp3.OkHttpClient
+import tachiyomi.core.common.util.koinGet
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.track.interactor.InsertTrack
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
-import uy.kohesive.injekt.injectLazy
 import tachiyomi.domain.track.model.Track as DomainTrack
 
 abstract class BaseTracker(
@@ -26,10 +25,10 @@ abstract class BaseTracker(
     override val name: String,
 ) : Tracker {
 
-    val trackPreferences: TrackPreferences by injectLazy()
-    val networkService: NetworkHelper by injectLazy()
-    private val addTracks: AddTracks by injectLazy()
-    private val insertTrack: InsertTrack by injectLazy()
+    val trackPreferences: TrackPreferences by koinInject()
+    val networkService: NetworkHelper by koinInject()
+    private val addTracks: AddTracks by koinInject()
+    private val insertTrack: InsertTrack by koinInject()
 
     override val client: OkHttpClient
         get() = networkService.client
@@ -79,7 +78,7 @@ abstract class BaseTracker(
         try {
             addTracks.bind(this, item, mangaId)
         } catch (e: Throwable) {
-            withUIContext { Injekt.get<Application>().toast(e.message) }
+            withUIContext { koinGet<Application>().toast(e.message) }
         }
     }
 
@@ -135,7 +134,7 @@ abstract class BaseTracker(
             }
         } catch (e: Exception) {
             logcat(LogPriority.ERROR, e) { "Failed to update remote track data id=$id" }
-            withUIContext { Injekt.get<Application>().toast(e.message) }
+            withUIContext { koinGet<Application>().toast(e.message) }
         }
     }
 }

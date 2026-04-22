@@ -51,6 +51,7 @@ import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.preference.CheckboxState
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.core.common.preference.mapAsCheckboxState
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.launchNonCancellable
 import tachiyomi.core.common.util.lang.withIOContext
@@ -87,8 +88,6 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.util.asState
 import tachiyomi.presentation.core.util.formattedMessage
 import tachiyomi.source.local.isLocal
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import kotlin.math.floor
 import tachiyomi.domain.download.model.Download as DomainDownload
 
@@ -97,30 +96,30 @@ class MangaScreenModel(
     private val lifecycle: Lifecycle,
     private val mangaId: Long,
     private val isFromSource: Boolean,
-    private val libraryPreferences: LibraryPreferences = Injekt.get(),
-    private val trackPreferences: TrackPreferences = Injekt.get(),
-    readerPreferences: ReaderPreferences = Injekt.get(),
-    private val trackerManager: TrackerManager = Injekt.get(),
-    private val trackChapter: TrackChapter = Injekt.get(),
-    private val downloadManager: DownloadManager = Injekt.get(),
-    private val downloadCache: DownloadCache = Injekt.get(),
-    private val getMangaAndChapters: GetMangaWithChapters = Injekt.get(),
-    private val getDuplicateLibraryManga: GetDuplicateLibraryManga = Injekt.get(),
-    private val getAvailableScanlators: GetAvailableScanlators = Injekt.get(),
-    private val getExcludedScanlators: GetExcludedScanlators = Injekt.get(),
-    private val setExcludedScanlators: SetExcludedScanlators = Injekt.get(),
-    private val setMangaChapterFlags: SetMangaChapterFlags = Injekt.get(),
-    private val setMangaDefaultChapterFlags: SetMangaDefaultChapterFlags = Injekt.get(),
-    private val setReadStatus: SetReadStatus = Injekt.get(),
-    private val updateChapter: UpdateChapter = Injekt.get(),
-    private val updateManga: UpdateManga = Injekt.get(),
-    private val syncChaptersWithSource: SyncChaptersWithSource = Injekt.get(),
-    private val getCategories: GetCategories = Injekt.get(),
-    private val getTracks: GetTracks = Injekt.get(),
-    private val addTracks: AddTracks = Injekt.get(),
-    private val setMangaCategories: SetMangaCategories = Injekt.get(),
-    private val mangaRepository: MangaRepository = Injekt.get(),
-    private val filterChaptersForDownload: FilterChaptersForDownload = Injekt.get(),
+    private val libraryPreferences: LibraryPreferences = koinGet(),
+    private val trackPreferences: TrackPreferences = koinGet(),
+    readerPreferences: ReaderPreferences = koinGet(),
+    private val trackerManager: TrackerManager = koinGet(),
+    private val trackChapter: TrackChapter = koinGet(),
+    private val downloadManager: DownloadManager = koinGet(),
+    private val downloadCache: DownloadCache = koinGet(),
+    private val getMangaAndChapters: GetMangaWithChapters = koinGet(),
+    private val getDuplicateLibraryManga: GetDuplicateLibraryManga = koinGet(),
+    private val getAvailableScanlators: GetAvailableScanlators = koinGet(),
+    private val getExcludedScanlators: GetExcludedScanlators = koinGet(),
+    private val setExcludedScanlators: SetExcludedScanlators = koinGet(),
+    private val setMangaChapterFlags: SetMangaChapterFlags = koinGet(),
+    private val setMangaDefaultChapterFlags: SetMangaDefaultChapterFlags = koinGet(),
+    private val setReadStatus: SetReadStatus = koinGet(),
+    private val updateChapter: UpdateChapter = koinGet(),
+    private val updateManga: UpdateManga = koinGet(),
+    private val syncChaptersWithSource: SyncChaptersWithSource = koinGet(),
+    private val getCategories: GetCategories = koinGet(),
+    private val getTracks: GetTracks = koinGet(),
+    private val addTracks: AddTracks = koinGet(),
+    private val setMangaCategories: SetMangaCategories = koinGet(),
+    private val mangaRepository: MangaRepository = koinGet(),
+    private val filterChaptersForDownload: FilterChaptersForDownload = koinGet(),
     val snackbarHostState: SnackbarHostState = SnackbarHostState(),
 ) : StateScreenModel<MangaScreenModel.State>(State.Loading) {
 
@@ -221,7 +220,7 @@ class MangaScreenModel(
             mutableState.update {
                 State.Success(
                     manga = manga,
-                    source = Injekt.get<SourceManager>().getOrStub(manga.source),
+                    source = koinGet<SourceManager>().getOrStub(manga.source),
                     isFromSource = isFromSource,
                     chapters = chapters,
                     availableScanlators = getAvailableScanlators.await(mangaId),
@@ -796,7 +795,7 @@ class MangaScreenModel(
     }
 
     private suspend fun refreshTrackers(
-        refreshTracks: RefreshTracks = Injekt.get(),
+        refreshTracks: RefreshTracks = koinGet(),
     ) {
         refreshTracks.await(mangaId)
             .filter { it.first != null }

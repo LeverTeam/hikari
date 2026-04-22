@@ -24,9 +24,9 @@ import coil3.request.allowRgb565
 import coil3.request.crossfade
 import coil3.util.DebugLogger
 import dev.mihon.injekt.patchInjekt
-import eu.kanade.domain.DomainModule
 import eu.kanade.domain.base.BasePreferences
 import eu.kanade.domain.ui.model.setAppCompatDelegateThemeMode
+import eu.kanade.tachiyomi.core.security.SecurityPreferences
 import eu.kanade.tachiyomi.crash.CrashActivity
 import eu.kanade.tachiyomi.crash.GlobalExceptionHandler
 import eu.kanade.tachiyomi.data.coil.BufferedSourceFetcher
@@ -38,8 +38,6 @@ import eu.kanade.tachiyomi.data.coil.TachiyomiImageDecoder
 import eu.kanade.tachiyomi.data.coil.WebtoonImageDecoder
 import eu.kanade.tachiyomi.data.library.LibraryUpdateJob
 import eu.kanade.tachiyomi.data.notification.Notifications
-import eu.kanade.tachiyomi.di.AppModule
-import eu.kanade.tachiyomi.di.PreferenceModule
 import eu.kanade.tachiyomi.di.koinModules
 import eu.kanade.tachiyomi.extension.util.ExtensionUpdateJob
 import eu.kanade.tachiyomi.network.NetworkHelper
@@ -56,33 +54,42 @@ import hikari.core.migration.migrations.migrations
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.protobuf.ProtoBuf
 import logcat.AndroidLogcatLogger
 import logcat.LogPriority
 import logcat.LogcatLogger
+import nl.adaptivity.xmlutil.serialization.XML
+import okhttp3.OkHttpClient
 import org.conscrypt.Conscrypt
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.core.component.KoinComponent
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.PreferenceStore
+import tachiyomi.core.common.util.koinGet
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.system.ImageUtil
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.source.service.SourcePreferences
 import tachiyomi.domain.ui.UiPreferences
+import tachiyomi.domain.updates.interactor.GetUpdates
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.widget.WidgetManager
 import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
-import uy.kohesive.injekt.injectLazy
+import uy.kohesive.injekt.api.addSingleton
+import uy.kohesive.injekt.api.addSingletonFactory
 import java.security.Security
 
-class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factory, Configuration.Provider {
+class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factory, Configuration.Provider,
+    KoinComponent {
 
-    private val basePreferences: BasePreferences by injectLazy()
-    private val networkPreferences: NetworkPreferences by injectLazy()
+    private val basePreferences: BasePreferences by koinInject()
+    private val networkPreferences: NetworkPreferences by koinInject()
 
     private val disableIncognitoReceiver = DisableIncognitoReceiver()
 
@@ -97,6 +104,16 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
         }
 
         patchInjekt()
+        Injekt.addSingleton<Application>(this)
+        Injekt.addSingleton<Context>(this)
+        Injekt.addSingletonFactory<PreferenceStore> { koinGet() }
+        Injekt.addSingletonFactory<SourcePreferences> { koinGet() }
+        Injekt.addSingletonFactory<LibraryPreferences> { koinGet() }
+        Injekt.addSingletonFactory<Json> { koinGet() }
+        Injekt.addSingletonFactory<XML> { koinGet() }
+        Injekt.addSingletonFactory<ProtoBuf> { koinGet() }
+        Injekt.addSingletonFactory<NetworkHelper> { koinGet() }
+        Injekt.addSingletonFactory<OkHttpClient> { koinGet<NetworkHelper>().client }
 
         GlobalExceptionHandler.initialize(applicationContext, CrashActivity::class.java)
 
@@ -110,10 +127,6 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
             val process = getProcessName()
             if (packageName != process) WebView.setDataDirectorySuffix(process)
         }
-
-        Injekt.importModule(PreferenceModule(this))
-        Injekt.importModule(AppModule(this))
-        Injekt.importModule(DomainModule())
 
         setupNotificationChannels()
 
@@ -158,10 +171,10 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
             .onEach { ImageUtil.hardwareBitmapThreshold = it }
             .launchIn(scope)
 
-        setAppCompatDelegateThemeMode(Injekt.get<UiPreferences>().themeMode.get())
+        setAppCompatDelegateThemeMode(koinGet<UiPreferences>().themeMode.get())
 
         // Updates widget update
-        WidgetManager(Injekt.get(), Injekt.get()).apply { init(scope) }
+        WidgetManager(koinGet<GetUpdates>(), koinGet<SecurityPreferences>()).apply { init(scope) }
 
         if (!LogcatLogger.isInstalled) {
             val minLogPriority = when {
@@ -178,11 +191,11 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
         LibraryUpdateJob.setupTask(this)
         ExtensionUpdateJob.setupTask(this)
 
-        Injekt.get<LibraryPreferences>().autoUpdateSchedule.changes()
+        koinGet<LibraryPreferences>().autoUpdateSchedule.changes()
             .onEach { LibraryUpdateJob.setupTask(this@App) }
             .launchIn(scope)
 
-        Injekt.get<SourcePreferences>().autoUpdateExtensions.changes()
+        koinGet<SourcePreferences>().autoUpdateExtensions.changes()
             .onEach { ExtensionUpdateJob.setupTask(this@App) }
             .launchIn(scope)
     }
@@ -193,7 +206,7 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
             .build()
 
     private fun initializeMigrator() {
-        val preferenceStore = Injekt.get<PreferenceStore>()
+        val preferenceStore = koinGet<PreferenceStore>()
         val preference = preferenceStore.getInt(Preference.appStateKey("last_version_code"), 0)
         logcat { "Migration from ${preference.get()} to ${BuildConfig.VERSION_CODE}" }
         Migrator.initialize(
@@ -209,7 +222,7 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
 
     override fun newImageLoader(context: Context): ImageLoader {
         return ImageLoader.Builder(this).apply {
-            val callFactoryLazy = lazy { Injekt.get<NetworkHelper>().client }
+            val callFactoryLazy = lazy { koinGet<NetworkHelper>().client }
             components {
                 // NetworkFetcher.Factory
                 add(OkHttpNetworkFetcherFactory(callFactoryLazy::value))

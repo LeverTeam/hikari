@@ -9,14 +9,13 @@ import okio.buffer
 import okio.gzip
 import okio.source
 import tachiyomi.core.common.i18n.stringResource
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.io.IOException
 
 class BackupDecoder(
     private val context: Context,
-    private val parser: ProtoBuf = Injekt.get(),
+    private val parser: ProtoBuf = koinGet(),
 ) {
     /**
      * Decode a potentially-gzipped backup.

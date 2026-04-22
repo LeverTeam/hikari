@@ -6,21 +6,20 @@ import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.chapter.interactor.GetChapter
 import tachiyomi.domain.manga.interactor.GetManga
 import tachiyomi.domain.source.service.SourceManager
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 /**
  * This class is used to persist active downloads across application restarts.
  */
 class DownloadStore(
     context: Context,
-    private val sourceManager: SourceManager = Injekt.get(),
-    private val json: Json = Injekt.get(),
-    private val getManga: GetManga = Injekt.get(),
-    private val getChapter: GetChapter = Injekt.get(),
+    private val sourceManager: SourceManager = koinGet(),
+    private val json: Json = koinGet(),
+    private val getManga: GetManga = koinGet(),
+    private val getChapter: GetChapter = koinGet(),
 ) {
 
     /**

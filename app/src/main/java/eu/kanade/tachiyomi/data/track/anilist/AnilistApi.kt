@@ -22,10 +22,9 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import kotlinx.serialization.json.putJsonObject
 import okhttp3.RequestBody.Companion.toRequestBody
+import tachiyomi.core.common.util.koinGet
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
-import uy.kohesive.injekt.injectLazy
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -34,9 +33,9 @@ import tachiyomi.domain.track.model.Track as DomainTrack
 
 class AnilistApi(interceptor: AnilistInterceptor) {
 
-    private val json: Json by injectLazy()
+    private val json: Json by koinInject()
 
-    private val networkHelper = Injekt.get<NetworkHelper>()
+    private val networkHelper = koinGet<NetworkHelper>()
 
     private val client = networkHelper.baseClientBuilder(authenticated = false).apply {
         networkHelper.addCronetInterceptor(this)

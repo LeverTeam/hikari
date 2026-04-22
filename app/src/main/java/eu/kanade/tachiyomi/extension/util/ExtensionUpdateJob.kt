@@ -14,18 +14,17 @@ import eu.kanade.tachiyomi.util.system.workManager
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onEach
 import logcat.LogPriority
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.source.service.SourcePreferences
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.util.concurrent.TimeUnit
 
 class ExtensionUpdateJob(private val context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
 
-    private val extensionManager: ExtensionManager = Injekt.get()
-    private val sourcePreferences: SourcePreferences = Injekt.get()
+    private val extensionManager: ExtensionManager = koinGet()
+    private val sourcePreferences: SourcePreferences = koinGet()
 
     override suspend fun doWork(): Result = withIOContext {
         if (!sourcePreferences.autoUpdateExtensions.get()) {
@@ -63,7 +62,7 @@ class ExtensionUpdateJob(private val context: Context, workerParams: WorkerParam
         private const val TAG = "ExtensionUpdate"
 
         fun setupTask(context: Context, force: Boolean = false) {
-            val sourcePreferences: SourcePreferences = Injekt.get()
+            val sourcePreferences: SourcePreferences = koinGet()
             val enabled = sourcePreferences.autoUpdateExtensions.get()
 
             if (enabled || force) {

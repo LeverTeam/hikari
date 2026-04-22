@@ -15,14 +15,14 @@ import eu.kanade.tachiyomi.util.system.notify
 import tachiyomi.core.common.i18n.pluralStringResource
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.storage.displayablePath
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.injectLazy
 import java.io.File
 import java.util.concurrent.TimeUnit
 
 class BackupNotifier(private val context: Context) {
 
-    private val preferences: SecurityPreferences by injectLazy()
+    private val preferences: SecurityPreferences by koinInject()
 
     private val progressNotificationBuilder = context.notificationBuilder(
         Notifications.CHANNEL_BACKUP_RESTORE_PROGRESS,

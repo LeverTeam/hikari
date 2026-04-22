@@ -19,9 +19,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
 import logcat.LogPriority
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.source.service.SourcePreferences
-import uy.kohesive.injekt.injectLazy
 import java.io.File
 
 /**
@@ -40,8 +40,8 @@ import java.io.File
  */
 internal object ExtensionLoader {
 
-    private val preferences: SourcePreferences by injectLazy()
-    private val trustExtension: TrustExtension by injectLazy()
+    private val preferences: SourcePreferences by koinInject()
+    private val trustExtension: TrustExtension by koinInject()
     private val loadNsfwSource by lazy {
         preferences.showNsfwSource.get()
     }

@@ -9,13 +9,12 @@ import eu.kanade.tachiyomi.data.notification.Notifications
 import eu.kanade.tachiyomi.util.system.cancelNotification
 import eu.kanade.tachiyomi.util.system.notify
 import tachiyomi.core.common.i18n.pluralStringResource
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class ExtensionUpdateNotifier(
     private val context: Context,
-    private val securityPreferences: SecurityPreferences = Injekt.get(),
+    private val securityPreferences: SecurityPreferences = koinGet(),
 ) {
     fun promptUpdates(names: List<String>) {
         context.notify(

@@ -27,6 +27,7 @@ import eu.kanade.tachiyomi.data.download.DownloadManager
 import hikari.domain.migration.usecases.MigrateMangaUseCase
 import hikari.feature.common.utils.getLabel
 import kotlinx.coroutines.flow.update
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.domain.manga.model.Manga
@@ -37,8 +38,6 @@ import tachiyomi.presentation.core.components.LabeledCheckbox
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.LoadingScreen
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 @Composable
 internal fun Screen.MigrateMangaDialog(
@@ -124,10 +123,10 @@ internal fun Screen.MigrateMangaDialog(
 }
 
 internal class MigrateDialogScreenModel : StateScreenModel<MigrateDialogScreenModel.State>(State()) {
-    private val sourcePreference: SourcePreferences = Injekt.get<SourcePreferences>()
-    private val coverCache: CoverCache = Injekt.get<CoverCache>()
-    private val downloadManager: DownloadManager = Injekt.get<DownloadManager>()
-    private val migrateManga: MigrateMangaUseCase = Injekt.get<MigrateMangaUseCase>()
+    private val sourcePreference: SourcePreferences = koinGet<SourcePreferences>()
+    private val coverCache: CoverCache = koinGet<CoverCache>()
+    private val downloadManager: DownloadManager = koinGet<DownloadManager>()
+    private val migrateManga: MigrateMangaUseCase = koinGet<MigrateMangaUseCase>()
 
     fun init(current: Manga, target: Manga) {
         val applicableFlags = buildList {

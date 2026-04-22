@@ -15,13 +15,14 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import tachiyomi.core.common.util.koinGet
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.domain.source.model.StubSource
 import tachiyomi.domain.source.repository.StubSourceRepository
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.source.local.LocalSource
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
-import uy.kohesive.injekt.injectLazy
+import tachiyomi.source.local.image.LocalCoverManager
+import tachiyomi.source.local.io.LocalSourceFileSystem
 import java.util.concurrent.ConcurrentHashMap
 
 class AndroidSourceManager(
@@ -33,7 +34,7 @@ class AndroidSourceManager(
     private val _isInitialized = MutableStateFlow(false)
     override val isInitialized: StateFlow<Boolean> = _isInitialized.asStateFlow()
 
-    private val downloadManager: DownloadManager by injectLazy()
+    private val downloadManager: DownloadManager by koinInject()
 
     private val scope = CoroutineScope(Job() + Dispatchers.IO)
 
@@ -53,8 +54,8 @@ class AndroidSourceManager(
                         mapOf(
                             LocalSource.ID to LocalSource(
                                 context,
-                                Injekt.get(),
-                                Injekt.get(),
+                                koinGet<LocalSourceFileSystem>(),
+                                koinGet<LocalCoverManager>(),
                             ),
                         ),
                     )

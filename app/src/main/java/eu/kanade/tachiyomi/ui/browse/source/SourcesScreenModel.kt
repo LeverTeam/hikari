@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import logcat.LogPriority
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.source.interactor.GetEnabledSources
@@ -20,14 +21,12 @@ import tachiyomi.domain.source.interactor.ToggleSource
 import tachiyomi.domain.source.interactor.ToggleSourcePin
 import tachiyomi.domain.source.model.Pin
 import tachiyomi.domain.source.model.Source
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.util.TreeMap
 
 class SourcesScreenModel(
-    private val getEnabledSources: GetEnabledSources = Injekt.get(),
-    private val toggleSource: ToggleSource = Injekt.get(),
-    private val toggleSourcePin: ToggleSourcePin = Injekt.get(),
+    private val getEnabledSources: GetEnabledSources = koinGet(),
+    private val toggleSource: ToggleSource = koinGet(),
+    private val toggleSourcePin: ToggleSourcePin = koinGet(),
 ) : StateScreenModel<SourcesScreenModel.State>(State()) {
 
     private val _events = Channel<Event>(Int.MAX_VALUE)

@@ -25,8 +25,8 @@ import okhttp3.Headers.Companion.headersOf
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
-import uy.kohesive.injekt.injectLazy
 
 class BangumiApi(
     private val trackId: Long,
@@ -34,7 +34,7 @@ class BangumiApi(
     interceptor: BangumiInterceptor,
 ) {
 
-    private val json: Json by injectLazy()
+    private val json: Json by koinInject()
 
     private val authClient = client.newBuilder().addInterceptor(interceptor).build()
 

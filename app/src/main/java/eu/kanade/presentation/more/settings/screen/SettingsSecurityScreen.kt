@@ -14,16 +14,16 @@ import eu.kanade.tachiyomi.util.system.AuthenticatorUtil.authenticate
 import eu.kanade.tachiyomi.util.system.AuthenticatorUtil.isAuthenticationSupported
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableMap
+import org.koin.core.component.KoinComponent
 import tachiyomi.core.common.i18n.stringResource
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
-object SettingsSecurityScreen : SearchableSettings {
+object SettingsSecurityScreen : SearchableSettings, KoinComponent {
 
     @ReadOnlyComposable
     @Composable
@@ -31,7 +31,7 @@ object SettingsSecurityScreen : SearchableSettings {
 
     @Composable
     override fun getPreferences(): List<Preference> {
-        val securityPreferences = remember { Injekt.get<SecurityPreferences>() }
+        val securityPreferences = remember { koinGet<SecurityPreferences>() }
         return buildList(1) {
             add(getSecurityGroup(securityPreferences))
         }
@@ -68,7 +68,6 @@ object SettingsSecurityScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = securityPreferences.lockAppAfter,
@@ -92,7 +91,6 @@ object SettingsSecurityScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = securityPreferences.hideNotificationContent,
@@ -100,7 +98,6 @@ object SettingsSecurityScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(

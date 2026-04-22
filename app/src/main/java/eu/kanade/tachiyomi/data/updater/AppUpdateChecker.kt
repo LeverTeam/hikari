@@ -2,13 +2,13 @@ package eu.kanade.tachiyomi.data.updater
 
 import android.content.Context
 import eu.kanade.tachiyomi.BuildConfig
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.domain.release.interactor.GetApplicationRelease
-import uy.kohesive.injekt.injectLazy
 
 class AppUpdateChecker {
 
-    private val getApplicationRelease: GetApplicationRelease by injectLazy()
+    private val getApplicationRelease: GetApplicationRelease by koinInject()
 
     suspend fun checkForUpdate(context: Context, forceCheck: Boolean = false): GetApplicationRelease.Result {
         // Disable app update checks for older Android versions that we're going to drop support for

@@ -17,16 +17,16 @@ import eu.kanade.presentation.more.settings.screen.browse.HiddenMangaSourcesScre
 import eu.kanade.tachiyomi.util.system.AuthenticatorUtil.authenticate
 import hikari.domain.extensionrepo.interactor.GetExtensionRepoCount
 import kotlinx.collections.immutable.persistentListOf
+import org.koin.core.component.KoinComponent
 import tachiyomi.core.common.i18n.stringResource
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.source.service.SourcePreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
-object SettingsBrowseScreen : SearchableSettings {
+object SettingsBrowseScreen : SearchableSettings, KoinComponent {
 
     @ReadOnlyComposable
     @Composable
@@ -37,8 +37,8 @@ object SettingsBrowseScreen : SearchableSettings {
         val context = LocalContext.current
         val navigator = LocalNavigator.currentOrThrow
 
-        val sourcePreferences = remember { Injekt.get<SourcePreferences>() }
-        val getExtensionRepoCount = remember { Injekt.get<GetExtensionRepoCount>() }
+        val sourcePreferences = remember { koinGet<SourcePreferences>() }
+        val getExtensionRepoCount = remember { koinGet<GetExtensionRepoCount>() }
 
         val reposCount by getExtensionRepoCount.subscribe().collectAsState(0)
 
@@ -70,7 +70,6 @@ object SettingsBrowseScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
                                     title = stringResource(MR.strings.label_extension_repos),
@@ -82,7 +81,6 @@ object SettingsBrowseScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
                                     title = stringResource(MR.strings.label_hidden_manga),
@@ -92,7 +90,6 @@ object SettingsBrowseScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(

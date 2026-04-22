@@ -17,7 +17,25 @@
 -keep,allowoptimization class org.jsoup.** { public protected *; }
 -keep,allowoptimization class rx.** { public protected *; }
 -keep,allowoptimization class app.cash.quickjs.** { public protected *; }
+
+# Injekt
 -keep class uy.kohesive.injekt.** { *; }
+-keep interface uy.kohesive.injekt.** { *; }
+
+# Koin - preserve all type metadata required for the DI registry at runtime
+-keep class org.koin.** { *; }
+-keepnames class org.koin.** { *; }
+-keepattributes Signature, RuntimeVisibleAnnotations, AnnotationDefault
+-keep class kotlin.reflect.** { *; }
+
+# Preserve generic signatures in all Koin module definition lambdas
+-keepclassmembers,allowoptimization class eu.kanade.tachiyomi.di.** { *; }
+-keepclassmembers,allowoptimization class eu.kanade.domain.** { *; }
+-keepclassmembers,allowoptimization class tachiyomi.di.** { *; }
+
+# Keep all synthetic lambda classes generated from Koin module DSL blocks
+-keep class **ModuleKt$* { *; }
+-keep class **Module$* { *; }
 
 # From extensions-lib
 -keep,allowoptimization class eu.kanade.tachiyomi.network.interceptor.RateLimitInterceptorKt { public protected *; }
@@ -78,10 +96,6 @@
 
 # XmlUtil
 -keep public enum nl.adaptivity.xmlutil.EventType { *; }
-
-# Firebase
--keep class com.google.firebase.installations.** { *; }
--keep interface com.google.firebase.installations.** { *; }
 
 # Android Window Extensions (provided by the system at runtime)
 -dontwarn androidx.window.**

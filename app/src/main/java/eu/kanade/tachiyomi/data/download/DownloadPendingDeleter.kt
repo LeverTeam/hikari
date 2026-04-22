@@ -4,10 +4,9 @@ import android.content.Context
 import androidx.core.content.edit
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.manga.model.Manga
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 /**
  * Class used to keep a list of chapters for future deletion.
@@ -16,7 +15,7 @@ import uy.kohesive.injekt.api.get
  */
 class DownloadPendingDeleter(
     context: Context,
-    private val json: Json = Injekt.get(),
+    private val json: Json = koinGet(),
 ) {
 
     /**

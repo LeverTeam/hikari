@@ -34,6 +34,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import logcat.LogPriority
 import tachiyomi.core.common.preference.TriState
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.launchNonCancellable
 import tachiyomi.core.common.util.lang.toLocalDate
@@ -51,22 +52,20 @@ import tachiyomi.domain.updates.interactor.GetUpdates
 import tachiyomi.domain.updates.model.UpdatesWithRelations
 import tachiyomi.domain.updates.service.UpdatesPreferences
 import tachiyomi.presentation.core.util.asState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.time.ZonedDateTime
 import tachiyomi.domain.download.model.Download as DomainDownload
 
 class UpdatesScreenModel(
-    private val sourceManager: SourceManager = Injekt.get(),
-    private val downloadManager: DownloadManager = Injekt.get(),
-    private val downloadCache: DownloadCache = Injekt.get(),
-    private val updateChapter: UpdateChapter = Injekt.get(),
-    private val setReadStatus: SetReadStatus = Injekt.get(),
-    private val getUpdates: GetUpdates = Injekt.get(),
-    private val getManga: GetManga = Injekt.get(),
-    private val getChapter: GetChapter = Injekt.get(),
-    private val libraryPreferences: LibraryPreferences = Injekt.get(),
-    private val updatesPreferences: UpdatesPreferences = Injekt.get(),
+    private val sourceManager: SourceManager = koinGet(),
+    private val downloadManager: DownloadManager = koinGet(),
+    private val downloadCache: DownloadCache = koinGet(),
+    private val updateChapter: UpdateChapter = koinGet(),
+    private val setReadStatus: SetReadStatus = koinGet(),
+    private val getUpdates: GetUpdates = koinGet(),
+    private val getManga: GetManga = koinGet(),
+    private val getChapter: GetChapter = koinGet(),
+    private val libraryPreferences: LibraryPreferences = koinGet(),
+    private val updatesPreferences: UpdatesPreferences = koinGet(),
     val snackbarHostState: SnackbarHostState = SnackbarHostState(),
 ) : StateScreenModel<UpdatesScreenModel.State>(State()) {
 
@@ -143,7 +142,7 @@ class UpdatesScreenModel(
             }
             .launchIn(screenModelScope)
 
-        LibraryUpdateJob.isRunningFlow(Injekt.get<Application>())
+        LibraryUpdateJob.isRunningFlow(koinGet<Application>())
             .onEach { isUpdating ->
                 mutableState.update { it.copy(isLibraryUpdating = isUpdating) }
             }
@@ -192,7 +191,7 @@ class UpdatesScreenModel(
     }
 
     fun updateLibrary(): Boolean {
-        val started = LibraryUpdateJob.startNow(Injekt.get<Application>())
+        val started = LibraryUpdateJob.startNow(koinGet<Application>())
         screenModelScope.launch {
             _events.send(Event.LibraryUpdateTriggered(started))
         }

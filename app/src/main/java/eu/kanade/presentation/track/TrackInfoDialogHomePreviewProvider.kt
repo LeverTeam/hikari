@@ -3,7 +3,7 @@ package eu.kanade.presentation.track
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import eu.kanade.tachiyomi.ui.manga.track.TrackItem
-import eu.kanade.test.DummyTracker
+import eu.kanade.tachiyomi.util.debug.DummyTracker
 import tachiyomi.domain.track.model.Track
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle

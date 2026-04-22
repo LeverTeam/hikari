@@ -10,12 +10,13 @@ import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.serialization.json.Json
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.injectLazy
 import java.text.DecimalFormat
 import tachiyomi.domain.track.model.Track as DomainTrack
 
-class Kitsu(id: Long) : BaseTracker(id, "Kitsu"), DeletableTracker {
+class Kitsu(id: Long) : BaseTracker(id, "Kitsu"), DeletableTracker, KoinComponent {
 
     companion object {
         const val READING = 1L
@@ -29,7 +30,7 @@ class Kitsu(id: Long) : BaseTracker(id, "Kitsu"), DeletableTracker {
 
     override val supportsPrivateTracking: Boolean = true
 
-    private val json: Json by injectLazy()
+    private val json: Json by koinInject()
 
     private val interceptor by lazy { KitsuInterceptor(this) }
 

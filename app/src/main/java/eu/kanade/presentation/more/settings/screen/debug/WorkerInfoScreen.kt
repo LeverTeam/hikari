@@ -32,6 +32,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.toDateTimestampString
 import tachiyomi.domain.ui.UiPreferences
 import tachiyomi.i18n.MR
@@ -40,8 +41,6 @@ import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.Screen
 import tachiyomi.presentation.core.util.ioCoroutineScope
 import tachiyomi.presentation.core.util.plus
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -156,7 +155,7 @@ class WorkerInfoScreen : Screen() {
                         )
                             .toDateTimestampString(
                                 UiPreferences.dateFormat(
-                                    Injekt.get<UiPreferences>().dateFormat.get(),
+                                    koinGet<UiPreferences>().dateFormat.get(),
                                 ),
                             )
                         appendLine("Next scheduled run: $timestamp")

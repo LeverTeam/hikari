@@ -4,12 +4,11 @@ import eu.kanade.domain.manga.interactor.UpdateManga
 import eu.kanade.domain.manga.model.hasCustomCover
 import eu.kanade.tachiyomi.data.cache.CoverCache
 import eu.kanade.tachiyomi.source.model.SManga
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.toSManga
 import tachiyomi.source.local.image.LocalCoverManager
 import tachiyomi.source.local.isLocal
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.io.InputStream
 import java.time.Instant
 
@@ -42,7 +41,7 @@ fun Manga.prepUpdateCover(coverCache: CoverCache, remoteManga: SManga, refreshSa
     }
 }
 
-fun Manga.removeCovers(coverCache: CoverCache = Injekt.get()): Manga {
+fun Manga.removeCovers(coverCache: CoverCache = koinGet()): Manga {
     if (isLocal()) return this
     return if (coverCache.deleteFromCache(this, true) > 0) {
         return copy(coverLastModified = Instant.now().toEpochMilli())
@@ -54,8 +53,8 @@ fun Manga.removeCovers(coverCache: CoverCache = Injekt.get()): Manga {
 suspend fun Manga.editCover(
     coverManager: LocalCoverManager,
     stream: InputStream,
-    updateManga: UpdateManga = Injekt.get(),
-    coverCache: CoverCache = Injekt.get(),
+    updateManga: UpdateManga = koinGet(),
+    coverCache: CoverCache = koinGet(),
 ) {
     if (isLocal()) {
         coverManager.update(toSManga(), stream)

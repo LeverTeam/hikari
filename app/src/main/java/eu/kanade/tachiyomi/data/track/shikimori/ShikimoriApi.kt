@@ -22,8 +22,8 @@ import kotlinx.serialization.json.putJsonObject
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.toRequestBody
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
-import uy.kohesive.injekt.injectLazy
 import tachiyomi.domain.track.model.Track as DomainTrack
 
 class ShikimoriApi(
@@ -32,7 +32,7 @@ class ShikimoriApi(
     interceptor: ShikimoriInterceptor,
 ) {
 
-    private val json: Json by injectLazy()
+    private val json: Json by koinInject()
 
     private val authClient = client.newBuilder().addInterceptor(interceptor).build()
 

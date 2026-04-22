@@ -20,7 +20,7 @@ kotlin {
     @Suppress("UnstableApiUsage")
     dependencies {
         api(libs.kotlinx.serialization.json)
-        api(libs.injekt)
+        api(libs.koin.core)
         api(libs.rxJava)
         api(libs.jsoup)
 

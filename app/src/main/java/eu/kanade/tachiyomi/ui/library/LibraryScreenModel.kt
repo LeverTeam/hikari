@@ -39,6 +39,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
 import tachiyomi.core.common.preference.CheckboxState
 import tachiyomi.core.common.preference.TriState
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.compareToWithCollator
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.launchNonCancellable
@@ -65,27 +66,25 @@ import tachiyomi.domain.track.model.Track
 import tachiyomi.presentation.core.util.PreferenceMutableState
 import tachiyomi.presentation.core.util.asState
 import tachiyomi.source.local.isLocal
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import kotlin.random.Random
 
 class LibraryScreenModel(
-    private val getLibraryManga: GetLibraryManga = Injekt.get(),
-    private val getCategories: GetCategories = Injekt.get(),
-    private val getTracksPerManga: GetTracksPerManga = Injekt.get(),
-    private val getNextChapters: GetNextChapters = Injekt.get(),
-    private val getChaptersByMangaId: GetChaptersByMangaId = Injekt.get(),
-    private val getBookmarkedChaptersByMangaId: GetBookmarkedChaptersByMangaId = Injekt.get(),
-    private val setReadStatus: SetReadStatus = Injekt.get(),
-    private val updateManga: UpdateManga = Injekt.get(),
-    private val setMangaCategories: SetMangaCategories = Injekt.get(),
-    private val preferences: BasePreferences = Injekt.get(),
-    private val libraryPreferences: LibraryPreferences = Injekt.get(),
-    private val coverCache: CoverCache = Injekt.get(),
-    private val sourceManager: SourceManager = Injekt.get(),
-    private val downloadManager: DownloadManager = Injekt.get(),
-    private val downloadCache: DownloadCache = Injekt.get(),
-    private val trackerManager: TrackerManager = Injekt.get(),
+    private val getLibraryManga: GetLibraryManga = koinGet(),
+    private val getCategories: GetCategories = koinGet(),
+    private val getTracksPerManga: GetTracksPerManga = koinGet(),
+    private val getNextChapters: GetNextChapters = koinGet(),
+    private val getChaptersByMangaId: GetChaptersByMangaId = koinGet(),
+    private val getBookmarkedChaptersByMangaId: GetBookmarkedChaptersByMangaId = koinGet(),
+    private val setReadStatus: SetReadStatus = koinGet(),
+    private val updateManga: UpdateManga = koinGet(),
+    private val setMangaCategories: SetMangaCategories = koinGet(),
+    private val preferences: BasePreferences = koinGet(),
+    private val libraryPreferences: LibraryPreferences = koinGet(),
+    private val coverCache: CoverCache = koinGet(),
+    private val sourceManager: SourceManager = koinGet(),
+    private val downloadManager: DownloadManager = koinGet(),
+    private val downloadCache: DownloadCache = koinGet(),
+    private val trackerManager: TrackerManager = koinGet(),
 ) : StateScreenModel<LibraryScreenModel.State>(LibraryScreenModel.State()) {
 
     init {
@@ -180,7 +179,7 @@ class LibraryScreenModel(
             }
             .launchIn(screenModelScope)
 
-        LibraryUpdateJob.isRunningFlow(Injekt.get<android.app.Application>())
+        LibraryUpdateJob.isRunningFlow(koinGet<android.app.Application>())
             .onEach { isUpdating ->
                 mutableState.update { it.copy(isLibraryUpdating = it.isLibraryUpdating || isUpdating) }
             }

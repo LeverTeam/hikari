@@ -9,6 +9,7 @@ import eu.kanade.tachiyomi.source.online.ResolvableSource
 import eu.kanade.tachiyomi.source.online.UriType
 import hikari.domain.manga.model.toDomainManga
 import kotlinx.coroutines.flow.update
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.chapter.interactor.GetChapterByUrlAndMangaId
 import tachiyomi.domain.chapter.interactor.SyncChaptersWithSource
@@ -17,15 +18,13 @@ import tachiyomi.domain.manga.interactor.NetworkToLocalManga
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.toSManga
 import tachiyomi.domain.source.service.SourceManager
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class DeepLinkScreenModel(
     query: String = "",
-    private val sourceManager: SourceManager = Injekt.get(),
-    private val networkToLocalManga: NetworkToLocalManga = Injekt.get(),
-    private val getChapterByUrlAndMangaId: GetChapterByUrlAndMangaId = Injekt.get(),
-    private val syncChaptersWithSource: SyncChaptersWithSource = Injekt.get(),
+    private val sourceManager: SourceManager = koinGet(),
+    private val networkToLocalManga: NetworkToLocalManga = koinGet(),
+    private val getChapterByUrlAndMangaId: GetChapterByUrlAndMangaId = koinGet(),
+    private val syncChaptersWithSource: SyncChaptersWithSource = koinGet(),
 ) : StateScreenModel<DeepLinkScreenModel.State>(State.Loading) {
 
     init {

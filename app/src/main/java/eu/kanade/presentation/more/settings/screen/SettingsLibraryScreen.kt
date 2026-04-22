@@ -26,6 +26,8 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.category.interactor.ResetCategoryFlags
 import tachiyomi.domain.category.model.Category
@@ -43,10 +45,8 @@ import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
-object SettingsLibraryScreen : SearchableSettings {
+object SettingsLibraryScreen : SearchableSettings, KoinComponent {
 
     @Composable
     @ReadOnlyComposable
@@ -54,8 +54,8 @@ object SettingsLibraryScreen : SearchableSettings {
 
     @Composable
     override fun getPreferences(): List<Preference> {
-        val getCategories = remember { Injekt.get<GetCategories>() }
-        val libraryPreferences = remember { Injekt.get<LibraryPreferences>() }
+        val getCategories = remember { koinGet<GetCategories>() }
+        val libraryPreferences = remember { koinGet<LibraryPreferences>() }
         val allCategories by getCategories.subscribe().collectAsState(initial = emptyList())
 
         return listOf(
@@ -100,7 +100,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = libraryPreferences.defaultCategory,
@@ -110,7 +109,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = libraryPreferences.categorizedDisplaySettings,
@@ -118,7 +116,7 @@ object SettingsLibraryScreen : SearchableSettings {
                                     onValueChanged = {
                                         if (!it) {
                                             scope.launch {
-                                                Injekt.get<ResetCategoryFlags>().await()
+                                                koinGet<ResetCategoryFlags>().await()
                                             }
                                         }
                                         true
@@ -211,7 +209,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.MultiSelectListPreference(
                                     preference = libraryPreferences.autoUpdateDeviceRestrictions,
@@ -232,7 +229,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(
                                     title = stringResource(MR.strings.categories),
@@ -246,7 +242,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = libraryPreferences.autoUpdateMetadata,
@@ -255,7 +250,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.MultiSelectListPreference(
@@ -271,7 +265,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
@@ -290,7 +283,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -336,7 +328,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = libraryPreferences.swipeToEndAction,
@@ -355,7 +346,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.MultiSelectListPreference(
                                     preference = libraryPreferences.markDuplicateReadChapterAsRead,
@@ -369,7 +359,6 @@ object SettingsLibraryScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(

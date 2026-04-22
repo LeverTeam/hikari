@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import tachiyomi.core.common.preference.toggle
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.manga.interactor.GetManga
 import tachiyomi.domain.manga.interactor.NetworkToLocalManga
@@ -24,17 +25,15 @@ import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.source.service.SourcePreferences
 import tachiyomi.presentation.core.util.ioCoroutineScope
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 abstract class SearchScreenModel(
     initialState: State = State(),
-    sourcePreferences: SourcePreferences = Injekt.get(),
-    private val sourceManager: SourceManager = Injekt.get(),
-    private val extensionManager: ExtensionManager = Injekt.get(),
-    private val networkToLocalManga: NetworkToLocalManga = Injekt.get(),
-    private val getManga: GetManga = Injekt.get(),
-    private val preferences: SourcePreferences = Injekt.get(),
+    sourcePreferences: SourcePreferences = koinGet(),
+    private val sourceManager: SourceManager = koinGet(),
+    private val extensionManager: ExtensionManager = koinGet(),
+    private val networkToLocalManga: NetworkToLocalManga = koinGet(),
+    private val getManga: GetManga = koinGet(),
+    private val preferences: SourcePreferences = koinGet(),
 ) : StateScreenModel<SearchScreenModel.State>(initialState) {
 
     private var searchJob: Job? = null

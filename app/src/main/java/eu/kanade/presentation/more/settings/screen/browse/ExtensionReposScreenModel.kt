@@ -17,18 +17,17 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class ExtensionReposScreenModel(
-    private val getExtensionRepo: GetExtensionRepo = Injekt.get(),
-    private val createExtensionRepo: CreateExtensionRepo = Injekt.get(),
-    private val deleteExtensionRepo: DeleteExtensionRepo = Injekt.get(),
-    private val replaceExtensionRepo: ReplaceExtensionRepo = Injekt.get(),
-    private val updateExtensionRepo: UpdateExtensionRepo = Injekt.get(),
-    private val extensionManager: ExtensionManager = Injekt.get(),
+    private val getExtensionRepo: GetExtensionRepo = koinGet(),
+    private val createExtensionRepo: CreateExtensionRepo = koinGet(),
+    private val deleteExtensionRepo: DeleteExtensionRepo = koinGet(),
+    private val replaceExtensionRepo: ReplaceExtensionRepo = koinGet(),
+    private val updateExtensionRepo: UpdateExtensionRepo = koinGet(),
+    private val extensionManager: ExtensionManager = koinGet(),
 ) : StateScreenModel<RepoScreenState>(RepoScreenState.Loading) {
 
     private val _events: Channel<RepoEvent> = Channel(Int.MAX_VALUE)

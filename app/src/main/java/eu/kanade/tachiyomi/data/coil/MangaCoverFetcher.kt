@@ -27,11 +27,11 @@ import okio.Source
 import okio.buffer
 import okio.sink
 import okio.source
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.MangaCover
 import tachiyomi.domain.source.service.SourceManager
-import uy.kohesive.injekt.injectLazy
 import java.io.File
 import java.io.IOException
 
@@ -302,8 +302,8 @@ class MangaCoverFetcher(
         private val callFactoryLazy: Lazy<Call.Factory>,
     ) : Fetcher.Factory<Manga> {
 
-        private val coverCache: CoverCache by injectLazy()
-        private val sourceManager: SourceManager by injectLazy()
+        private val coverCache: CoverCache by koinInject()
+        private val sourceManager: SourceManager by koinInject()
 
         override fun create(data: Manga, options: Options, imageLoader: ImageLoader): Fetcher {
             return MangaCoverFetcher(
@@ -324,8 +324,8 @@ class MangaCoverFetcher(
         private val callFactoryLazy: Lazy<Call.Factory>,
     ) : Fetcher.Factory<MangaCover> {
 
-        private val coverCache: CoverCache by injectLazy()
-        private val sourceManager: SourceManager by injectLazy()
+        private val coverCache: CoverCache by koinInject()
+        private val sourceManager: SourceManager by koinInject()
 
         override fun create(data: MangaCover, options: Options, imageLoader: ImageLoader): Fetcher {
             return MangaCoverFetcher(

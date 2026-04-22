@@ -31,6 +31,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import tachiyomi.core.common.Constants
 import tachiyomi.core.common.i18n.pluralStringResource
 import tachiyomi.core.common.i18n.stringResource
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.formatChapterNumber
 import tachiyomi.core.common.util.lang.launchUI
 import tachiyomi.domain.chapter.model.Chapter
@@ -38,16 +39,14 @@ import tachiyomi.domain.library.model.LibraryManga
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.math.RoundingMode
 import java.text.NumberFormat
 
 class LibraryUpdateNotifier(
     private val context: Context,
 
-    private val securityPreferences: SecurityPreferences = Injekt.get(),
-    private val sourceManager: SourceManager = Injekt.get(),
+    private val securityPreferences: SecurityPreferences = koinGet(),
+    private val sourceManager: SourceManager = koinGet(),
 ) {
 
     private val percentFormatter = NumberFormat.getPercentInstance().apply {

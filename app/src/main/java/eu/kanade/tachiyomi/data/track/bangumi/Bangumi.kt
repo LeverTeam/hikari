@@ -9,13 +9,13 @@ import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.serialization.json.Json
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.injectLazy
 import tachiyomi.domain.track.model.Track as DomainTrack
 
 class Bangumi(id: Long) : BaseTracker(id, "Bangumi") {
 
-    private val json: Json by injectLazy()
+    private val json: Json by koinInject()
 
     private val interceptor by lazy { BangumiInterceptor(this) }
 

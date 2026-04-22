@@ -24,20 +24,20 @@ import eu.kanade.tachiyomi.ui.reader.viewer.Viewer
 import eu.kanade.tachiyomi.ui.reader.viewer.ViewerNavigation.NavigationRegion
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.reader.service.ReaderPreferences
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
-import uy.kohesive.injekt.injectLazy
 import kotlin.math.max
 import kotlin.math.min
 
 /**
  * Implementation of a [Viewer] to display pages with a [RecyclerView].
  */
-class WebtoonViewer(val activity: ReaderActivity, val isContinuous: Boolean = true) : Viewer {
+class WebtoonViewer(val activity: ReaderActivity, val isContinuous: Boolean = true) : Viewer, KoinComponent {
 
-    val downloadManager: DownloadManager by injectLazy()
+    val downloadManager: DownloadManager by koinInject()
 
     private val scope = MainScope()
 
@@ -136,7 +136,7 @@ class WebtoonViewer(val activity: ReaderActivity, val isContinuous: Boolean = tr
     private var currentPage: Any? = null
 
     private val threshold: Int =
-        Injekt.get<ReaderPreferences>()
+        koinGet<ReaderPreferences>()
             .readerHideThreshold
             .get()
             .threshold

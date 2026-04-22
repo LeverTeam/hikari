@@ -13,6 +13,8 @@ import eu.kanade.tachiyomi.util.system.hasDisplayCutout
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toImmutableMap
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.reader.model.FlashColor
 import tachiyomi.domain.reader.model.ReaderHideThreshold
 import tachiyomi.domain.reader.model.ReaderOrientation
@@ -24,11 +26,9 @@ import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.text.NumberFormat
 
-object SettingsReaderScreen : SearchableSettings {
+object SettingsReaderScreen : SearchableSettings, KoinComponent {
 
     @ReadOnlyComposable
     @Composable
@@ -36,7 +36,7 @@ object SettingsReaderScreen : SearchableSettings {
 
     @Composable
     override fun getPreferences(): List<Preference> {
-        val readerPref = remember { Injekt.get<ReaderPreferences>() }
+        val readerPref = remember { koinGet<ReaderPreferences>() }
 
         return listOf(
             getCoreViewerGroup(readerPreferences = readerPref),

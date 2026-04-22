@@ -2,7 +2,7 @@ package eu.kanade.presentation.track.components
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import eu.kanade.tachiyomi.data.track.Tracker
-import eu.kanade.test.DummyTracker
+import eu.kanade.tachiyomi.util.debug.DummyTracker
 
 internal class TrackLogoIconPreviewProvider : PreviewParameterProvider<Tracker> {
 

@@ -28,11 +28,10 @@ import kotlinx.collections.immutable.mutate
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.util.Screen
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class DebugInfoScreen : Screen() {
 
@@ -64,7 +63,7 @@ class DebugInfoScreen : Screen() {
         val context = LocalContext.current
         val scope = rememberCoroutineScope()
 
-        val installationIdPref = remember { Injekt.get<BasePreferences>().installationId }
+        val installationIdPref = remember { koinGet<BasePreferences>().installationId }
         val installationId by installationIdPref.collectAsState()
 
         return Preference.PreferenceGroup(

@@ -96,6 +96,7 @@ import kotlinx.coroutines.launch
 import logcat.LogPriority
 import tachiyomi.core.common.Constants
 import tachiyomi.core.common.i18n.stringResource
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.launchNonCancellable
 import tachiyomi.core.common.util.lang.withUIContext
@@ -105,8 +106,6 @@ import tachiyomi.domain.reader.model.ReadingMode
 import tachiyomi.domain.reader.service.ReaderPreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.io.ByteArrayOutputStream
 
 class ReaderActivity : BaseActivity() {
@@ -121,8 +120,8 @@ class ReaderActivity : BaseActivity() {
         }
     }
 
-    private val readerPreferences = Injekt.get<ReaderPreferences>()
-    private val preferences = Injekt.get<BasePreferences>()
+    private val readerPreferences = koinGet<ReaderPreferences>()
+    private val preferences = koinGet<BasePreferences>()
 
     lateinit var binding: ReaderActivityBinding
 

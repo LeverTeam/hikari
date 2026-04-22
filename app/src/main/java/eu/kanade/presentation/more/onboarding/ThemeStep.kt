@@ -10,18 +10,18 @@ import androidx.compose.ui.Modifier
 import eu.kanade.domain.ui.model.setAppCompatDelegateThemeMode
 import eu.kanade.presentation.more.settings.widget.AppThemeModePreferenceWidget
 import eu.kanade.presentation.more.settings.widget.AppThemePreferenceWidget
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.ui.UiPreferences
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
-internal class ThemeStep : OnboardingStep {
+internal class ThemeStep : OnboardingStep, KoinComponent {
 
     override val isComplete: Boolean = true
 
-    private val uiPreferences: UiPreferences = Injekt.get()
+    private val uiPreferences: UiPreferences = koinGet()
 
     @Composable
     override fun Content() {

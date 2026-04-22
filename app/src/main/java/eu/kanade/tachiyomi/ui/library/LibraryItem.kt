@@ -1,11 +1,10 @@
 package eu.kanade.tachiyomi.ui.library
 
 import eu.kanade.tachiyomi.source.getNameForMangaInfo
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.library.model.LibraryManga
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.source.local.LocalSource
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 private const val LOCAL_SOURCE_ID_ALIAS = "local"
 
@@ -15,7 +14,7 @@ data class LibraryItem(
     val unreadCount: Long = -1,
     val isLocal: Boolean = false,
     val sourceLanguage: String = "",
-    private val sourceManager: SourceManager = Injekt.get(),
+    private val sourceManager: SourceManager = koinGet(),
 ) {
     val id: Long = libraryManga.id
 

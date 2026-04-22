@@ -1,10 +1,10 @@
 package hikari.core.migration
 
-import uy.kohesive.injekt.Injekt
+import org.koin.core.component.KoinComponent
 
-class MigrationContext(val dryrun: Boolean) {
+class MigrationContext(val dryrun: Boolean) : KoinComponent {
 
-    inline fun <reified T> get(): T? {
-        return Injekt.getInstanceOrNull(T::class.java)
+    inline fun <reified T : Any> get(): T? {
+        return getKoin().getOrNull<T>()
     }
 }

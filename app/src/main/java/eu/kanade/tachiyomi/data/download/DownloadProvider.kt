@@ -8,14 +8,13 @@ import eu.kanade.tachiyomi.util.storage.DiskUtil
 import logcat.LogPriority
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.storage.displayablePath
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.storage.service.StorageManager
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.io.IOException
 import tachiyomi.domain.download.service.DownloadProvider as DomainDownloadProvider
 
@@ -27,8 +26,8 @@ import tachiyomi.domain.download.service.DownloadProvider as DomainDownloadProvi
  */
 class DownloadProvider(
     private val context: Context,
-    private val storageManager: StorageManager = Injekt.get(),
-    private val libraryPreferences: LibraryPreferences = Injekt.get(),
+    private val storageManager: StorageManager = koinGet(),
+    private val libraryPreferences: LibraryPreferences = koinGet(),
 ) : DomainDownloadProvider {
 
     private val downloadsDir: UniFile?

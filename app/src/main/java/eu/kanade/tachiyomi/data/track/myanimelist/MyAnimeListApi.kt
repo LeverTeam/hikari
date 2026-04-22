@@ -24,8 +24,8 @@ import okhttp3.Headers
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
-import uy.kohesive.injekt.injectLazy
 import java.text.SimpleDateFormat
 import java.util.Locale
 import tachiyomi.domain.track.model.Track as DomainTrack
@@ -36,7 +36,7 @@ class MyAnimeListApi(
     interceptor: MyAnimeListInterceptor,
 ) {
 
-    private val json: Json by injectLazy()
+    private val json: Json by koinInject()
 
     private val authClient = client.newBuilder().addInterceptor(interceptor).build()
 

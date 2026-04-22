@@ -4,14 +4,14 @@ import eu.kanade.domain.manga.model.hasCustomCover
 import eu.kanade.tachiyomi.data.cache.CoverCache
 import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.source.model.SManga
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.manga.interactor.FetchInterval
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.MangaUpdate
 import tachiyomi.domain.manga.repository.MangaRepository
 import tachiyomi.source.local.isLocal
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.time.Instant
 import java.time.ZonedDateTime
 import tachiyomi.domain.manga.interactor.UpdateManga as DomainUpdateManga
@@ -19,7 +19,7 @@ import tachiyomi.domain.manga.interactor.UpdateManga as DomainUpdateManga
 class UpdateManga(
     private val mangaRepository: MangaRepository,
     private val fetchInterval: FetchInterval,
-) : DomainUpdateManga {
+) : DomainUpdateManga, KoinComponent {
 
     suspend fun await(mangaUpdate: MangaUpdate): Boolean {
         return mangaRepository.update(mangaUpdate)
@@ -33,9 +33,9 @@ class UpdateManga(
         localManga: Manga,
         remoteManga: SManga,
         manualFetch: Boolean,
-        coverCache: CoverCache = Injekt.get(),
-        libraryPreferences: LibraryPreferences = Injekt.get(),
-        downloadManager: DownloadManager = Injekt.get(),
+        coverCache: CoverCache = koinGet(),
+        libraryPreferences: LibraryPreferences = koinGet(),
+        downloadManager: DownloadManager = koinGet(),
     ): Boolean {
         val remoteTitle = try {
             remoteManga.title

@@ -1,4 +1,4 @@
-package eu.kanade.test
+package eu.kanade.tachiyomi.util.debug
 
 import dev.icerock.moko.resources.StringResource
 import eu.kanade.tachiyomi.R

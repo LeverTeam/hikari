@@ -38,6 +38,7 @@ import eu.kanade.tachiyomi.ui.more.NewUpdateScreen
 import kotlinx.coroutines.launch
 import logcat.LogPriority
 import tachiyomi.core.common.i18n.stringResource
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.toDateTimestampString
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.lang.withUIContext
@@ -60,8 +61,6 @@ import tachiyomi.presentation.core.icons.Reddit
 import tachiyomi.presentation.core.icons.X
 import tachiyomi.presentation.core.util.LocalBackPress
 import tachiyomi.presentation.core.util.Screen
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -331,7 +330,7 @@ object AboutScreen : Screen() {
             )
                 .toDateTimestampString(
                     UiPreferences.dateFormat(
-                        Injekt.get<UiPreferences>().dateFormat.get(),
+                        koinGet<UiPreferences>().dateFormat.get(),
                     ),
                 )
         } catch (_: Exception) {

@@ -13,9 +13,9 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
-import uy.kohesive.injekt.injectLazy
 
 private const val READLIST_API = "/api/v1/readlists"
 
@@ -30,7 +30,7 @@ class KomgaApi(
             .build()
     }
 
-    private val json: Json by injectLazy()
+    private val json: Json by koinInject()
 
     suspend fun getTrackSearch(url: String): TrackSearch =
         withIOContext {

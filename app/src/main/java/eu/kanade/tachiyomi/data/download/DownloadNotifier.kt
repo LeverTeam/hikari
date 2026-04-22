@@ -15,8 +15,8 @@ import eu.kanade.tachiyomi.util.system.cancelNotification
 import eu.kanade.tachiyomi.util.system.notificationBuilder
 import eu.kanade.tachiyomi.util.system.notify
 import tachiyomi.core.common.i18n.stringResource
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.injectLazy
 import java.util.regex.Pattern
 
 /**
@@ -26,7 +26,7 @@ import java.util.regex.Pattern
  */
 internal class DownloadNotifier(private val context: Context) {
 
-    private val preferences: SecurityPreferences by injectLazy()
+    private val preferences: SecurityPreferences by koinInject()
 
     private val progressNotificationBuilder by lazy {
         context.notificationBuilder(Notifications.CHANNEL_DOWNLOADER_PROGRESS) {

@@ -10,14 +10,13 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.chapter.interactor.GetChapter
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.download.model.DownloadState
 import tachiyomi.domain.manga.interactor.GetManga
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.source.service.SourceManager
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 data class Download(
     val source: HttpSource,
@@ -67,9 +66,9 @@ data class Download(
     companion object {
         suspend fun fromChapterId(
             chapterId: Long,
-            getChapter: GetChapter = Injekt.get(),
-            getManga: GetManga = Injekt.get(),
-            sourceManager: SourceManager = Injekt.get(),
+            getChapter: GetChapter = koinGet(),
+            getManga: GetManga = koinGet(),
+            sourceManager: SourceManager = koinGet(),
         ): Download? {
             val chapter = getChapter.await(chapterId) ?: return null
             val manga = getManga.await(chapter.mangaId) ?: return null

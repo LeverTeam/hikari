@@ -22,14 +22,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import logcat.LogPriority
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.source.model.StubSource
 import tachiyomi.domain.source.service.SourcePreferences
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.util.Locale
 
 /**
@@ -41,8 +42,8 @@ import java.util.Locale
  */
 class ExtensionManager(
     private val context: Context,
-    private val preferences: SourcePreferences = Injekt.get(),
-    private val trustExtension: TrustExtension = Injekt.get(),
+    private val preferences: SourcePreferences = koinGet(),
+    private val trustExtension: TrustExtension = koinGet(),
 ) {
 
     val scope = CoroutineScope(SupervisorJob())
@@ -75,7 +76,9 @@ class ExtensionManager(
     val untrustedExtensionsFlow = untrustedExtensionMapFlow.mapExtensions(scope)
 
     init {
-        initExtensions()
+        scope.launch {
+            initExtensions()
+        }
         ExtensionInstallReceiver(InstallationListener()).register(context)
     }
 
@@ -328,7 +331,7 @@ class ExtensionManager(
     /**
      * Listener which receives events of the extensions being installed, updated or removed.
      */
-    private inner class InstallationListener : ExtensionInstallReceiver.Listener {
+    private inner class InstallationListener : ExtensionInstallReceiver.Listener, KoinComponent {
 
         override fun onExtensionInstalled(extension: Extension.Installed) {
             registerNewExtension(extension.withUpdateCheck())

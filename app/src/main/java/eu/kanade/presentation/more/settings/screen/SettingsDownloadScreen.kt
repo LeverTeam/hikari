@@ -17,6 +17,8 @@ import eu.kanade.presentation.more.settings.widget.TriStateListDialog
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toImmutableMap
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.download.service.DownloadPreferences
@@ -25,10 +27,8 @@ import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
-object SettingsDownloadScreen : SearchableSettings {
+object SettingsDownloadScreen : SearchableSettings, KoinComponent {
 
     @ReadOnlyComposable
     @Composable
@@ -36,10 +36,10 @@ object SettingsDownloadScreen : SearchableSettings {
 
     @Composable
     override fun getPreferences(): List<Preference> {
-        val getCategories = remember { Injekt.get<GetCategories>() }
+        val getCategories = remember { koinGet<GetCategories>() }
         val allCategories by getCategories.subscribe().collectAsState(initial = emptyList())
 
-        val downloadPreferences = remember { Injekt.get<DownloadPreferences>() }
+        val downloadPreferences = remember { koinGet<DownloadPreferences>() }
         val parallelSourceLimit by downloadPreferences.parallelSourceLimit.collectAsState()
         val parallelPageLimit by downloadPreferences.parallelPageLimit.collectAsState()
         return listOf(
@@ -75,7 +75,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = downloadPreferences.saveChaptersAsCBZ,
@@ -83,7 +82,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
@@ -124,7 +122,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SliderPreference(
                                     value = parallelPageLimit,
@@ -163,7 +160,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.ListPreference(
                                     preference = downloadPreferences.removeAfterReadSlots,
@@ -180,7 +176,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = downloadPreferences.removeBookmarkedChapters,
@@ -188,7 +183,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = getExcludedCategoriesPreference(
@@ -266,7 +260,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 highlightKey = null,
                             )
 
-
                             PreferenceItem(
                                 item = Preference.PreferenceItem.SwitchPreference(
                                     preference = downloadNewUnreadChaptersOnlyPref,
@@ -275,7 +268,6 @@ object SettingsDownloadScreen : SearchableSettings {
                                 ),
                                 highlightKey = null,
                             )
-
 
                             PreferenceItem(
                                 item = Preference.PreferenceItem.TextPreference(

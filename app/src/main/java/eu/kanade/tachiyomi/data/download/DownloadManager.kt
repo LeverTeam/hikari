@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.onStart
 import logcat.LogPriority
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.storage.extension
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.system.ImageUtil
 import tachiyomi.core.common.util.system.logcat
@@ -26,8 +27,6 @@ import tachiyomi.domain.download.service.DownloadPreferences
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import tachiyomi.domain.download.model.Download as DomainDownload
 import tachiyomi.domain.download.service.DownloadManager as DomainDownloadManager
 
@@ -38,11 +37,11 @@ import tachiyomi.domain.download.service.DownloadManager as DomainDownloadManage
  */
 class DownloadManager(
     private val context: Context,
-    private val provider: DownloadProvider = Injekt.get(),
-    private val cache: DownloadCache = Injekt.get(),
-    private val getCategories: GetCategories = Injekt.get(),
-    private val sourceManager: SourceManager = Injekt.get(),
-    private val downloadPreferences: DownloadPreferences = Injekt.get(),
+    private val provider: DownloadProvider = koinGet(),
+    private val cache: DownloadCache = koinGet(),
+    private val getCategories: GetCategories = koinGet(),
+    private val sourceManager: SourceManager = koinGet(),
+    private val downloadPreferences: DownloadPreferences = koinGet(),
 ) : DomainDownloadManager {
 
     /**

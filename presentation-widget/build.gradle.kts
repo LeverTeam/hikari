@@ -22,5 +22,6 @@ dependencies {
 
     implementation(libs.coil.core)
 
-    api(libs.injekt)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
 }

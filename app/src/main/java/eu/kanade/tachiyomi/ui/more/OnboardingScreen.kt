@@ -11,11 +11,10 @@ import eu.kanade.presentation.more.onboarding.OnboardingScreen
 import eu.kanade.presentation.more.settings.screen.SearchableSettings
 import eu.kanade.presentation.more.settings.screen.SettingsDataScreen
 import eu.kanade.tachiyomi.ui.setting.SettingsScreen
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.Screen
 import tachiyomi.presentation.core.util.collectAsState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class OnboardingScreen : Screen() {
 
@@ -23,7 +22,7 @@ class OnboardingScreen : Screen() {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
 
-        val basePreferences = remember { Injekt.get<BasePreferences>() }
+        val basePreferences = remember { koinGet<BasePreferences>() }
         val shownOnboardingFlow by basePreferences.shownOnboardingFlow.collectAsState()
 
         val finishOnboarding: () -> Unit = {

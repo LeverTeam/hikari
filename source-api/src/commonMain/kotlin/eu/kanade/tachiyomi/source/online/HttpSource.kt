@@ -11,13 +11,14 @@ import eu.kanade.tachiyomi.source.model.MangasPage
 import eu.kanade.tachiyomi.source.model.Page
 import eu.kanade.tachiyomi.source.model.SChapter
 import eu.kanade.tachiyomi.source.model.SManga
+import eu.kanade.tachiyomi.util.awaitSingle
 import okhttp3.Headers
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import org.koin.core.component.KoinComponent
 import rx.Observable
-import tachiyomi.core.common.util.lang.awaitSingle
-import uy.kohesive.injekt.injectLazy
+import tachiyomi.core.common.util.koinInject
 import java.net.URI
 import java.net.URISyntaxException
 import java.security.MessageDigest
@@ -26,12 +27,12 @@ import java.security.MessageDigest
  * A simple implementation for sources from a website.
  */
 @Suppress("unused")
-abstract class HttpSource : CatalogueSource {
+abstract class HttpSource : CatalogueSource, KoinComponent {
 
     /**
      * Network service.
      */
-    protected val network: NetworkHelper by injectLazy()
+    protected val network: NetworkHelper by koinInject()
 
     /**
      * Base url of the website without the trailing slash, like: http://mysite.com

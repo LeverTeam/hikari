@@ -25,6 +25,7 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import logcat.LogPriority
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.library.model.LibraryManga
@@ -34,8 +35,6 @@ import tachiyomi.domain.manga.model.copyFrom
 import tachiyomi.domain.manga.model.toMangaUpdate
 import tachiyomi.domain.manga.model.toSManga
 import tachiyomi.domain.source.service.SourceManager
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.util.concurrent.CopyOnWriteArrayList
 import kotlin.concurrent.atomics.AtomicInt
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
@@ -45,10 +44,10 @@ import kotlin.concurrent.atomics.fetchAndIncrement
 class MetadataUpdateJob(private val context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
 
-    private val sourceManager: SourceManager = Injekt.get()
-    private val coverCache: CoverCache = Injekt.get()
-    private val getLibraryManga: GetLibraryManga = Injekt.get()
-    private val updateManga: UpdateManga = Injekt.get()
+    private val sourceManager: SourceManager = koinGet()
+    private val coverCache: CoverCache = koinGet()
+    private val getLibraryManga: GetLibraryManga = koinGet()
+    private val updateManga: UpdateManga = koinGet()
 
     private val notifier = LibraryUpdateNotifier(context)
 

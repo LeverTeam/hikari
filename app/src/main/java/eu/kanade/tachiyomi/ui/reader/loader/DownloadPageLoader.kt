@@ -11,8 +11,8 @@ import eu.kanade.tachiyomi.source.model.Page
 import eu.kanade.tachiyomi.ui.reader.model.ReaderChapter
 import eu.kanade.tachiyomi.ui.reader.model.ReaderPage
 import hikari.core.archive.archiveReader
+import tachiyomi.core.common.util.koinInject
 import tachiyomi.domain.manga.model.Manga
-import uy.kohesive.injekt.injectLazy
 
 /**
  * Loader used to load a chapter from the downloaded chapters.
@@ -25,7 +25,7 @@ internal class DownloadPageLoader(
     private val downloadProvider: DownloadProvider,
 ) : PageLoader() {
 
-    private val context: Application by injectLazy()
+    private val context: Application by koinInject()
 
     private var archivePageLoader: ArchivePageLoader? = null
 

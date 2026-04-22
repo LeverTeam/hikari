@@ -37,18 +37,17 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import tachiyomi.core.common.preference.Preference
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.screens.LoadingScreen
 import tachiyomi.presentation.core.util.Screen
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class SourcePreferencesScreen(val sourceId: Long) : Screen() {
 
     @Composable
     override fun Content() {
-        val source = remember { Injekt.get<SourceManager>().getOrStub(sourceId) }
+        val source = remember { koinGet<SourceManager>().getOrStub(sourceId) }
         if (!ifSourcesLoaded() || source !is ConfigurableSource) {
             LoadingScreen()
             return
@@ -106,7 +105,7 @@ class SourcePreferencesScreen(val sourceId: Long) : Screen() {
     private fun PreferenceItem(pref: androidx.preference.Preference) {
         val dataStore = (pref.preferenceManager?.preferenceDataStore as? SharedPreferencesDataStore)
             ?: SharedPreferencesDataStore(
-                Injekt.get<SourceManager>().getOrStub(sourceId).let { (it as ConfigurableSource).sourcePreferences() },
+                koinGet<SourceManager>().getOrStub(sourceId).let { (it as ConfigurableSource).sourcePreferences() },
             )
 
         val title = pref.title?.toString() ?: ""

@@ -45,6 +45,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import soup.compose.material.motion.animation.materialFadeThroughIn
 import soup.compose.material.motion.animation.materialFadeThroughOut
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.source.service.SourcePreferences
 import tachiyomi.i18n.MR
@@ -56,8 +57,6 @@ import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.util.Screen
 import tachiyomi.presentation.core.util.Tab
 import tachiyomi.presentation.core.util.isTabletUi
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 object HomeScreen : Screen() {
 
@@ -241,7 +240,7 @@ object HomeScreen : Screen() {
                 when {
                     tab is UpdatesTab -> {
                         val count by produceState(initialValue = 0) {
-                            val pref = Injekt.get<LibraryPreferences>()
+                            val pref = koinGet<LibraryPreferences>()
                             combine(
                                 pref.newShowUpdatesCount.changes(),
                                 pref.newUpdatesCount.changes(),
@@ -265,7 +264,7 @@ object HomeScreen : Screen() {
 
                     BrowseTab::class.isInstance(tab) -> {
                         val count by produceState(initialValue = 0) {
-                            Injekt.get<SourcePreferences>().extensionUpdatesCount.changes()
+                            koinGet<SourcePreferences>().extensionUpdatesCount.changes()
                                 .collectLatest { value = it }
                         }
                         if (count > 0) {

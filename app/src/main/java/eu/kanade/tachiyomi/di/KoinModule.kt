@@ -1,5 +1,6 @@
 package eu.kanade.tachiyomi.di
 
+import eu.kanade.domain.domainModule
 import eu.kanade.tachiyomi.network.NetworkHelper
 import kotlinx.serialization.json.Json
 import nl.adaptivity.xmlutil.XmlDeclMode
@@ -13,6 +14,7 @@ val appModule = module {
         Json {
             ignoreUnknownKeys = true
             explicitNulls = false
+            isLenient = true
         }
     }
 
@@ -28,9 +30,15 @@ val appModule = module {
         }
     }
 
+    single { kotlinx.serialization.protobuf.ProtoBuf }
+
     single { NetworkHelper(androidApplication(), get()) }
 }
 
 val koinModules = listOf(
     appModule,
+    dataModule,
+    domainModule,
+    preferenceModule,
+    screenModelModule,
 )

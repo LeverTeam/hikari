@@ -2,13 +2,12 @@ package eu.kanade.tachiyomi.data.backup.restore.restorers
 
 import eu.kanade.tachiyomi.data.backup.models.BackupExtensionRepos
 import hikari.domain.extensionrepo.interactor.GetExtensionRepo
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.data.DatabaseHandler
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
 class ExtensionRepoRestorer(
-    private val handler: DatabaseHandler = Injekt.get(),
-    private val getExtensionRepos: GetExtensionRepo = Injekt.get(),
+    private val handler: DatabaseHandler = koinGet(),
+    private val getExtensionRepos: GetExtensionRepo = koinGet(),
 ) {
 
     suspend operator fun invoke(

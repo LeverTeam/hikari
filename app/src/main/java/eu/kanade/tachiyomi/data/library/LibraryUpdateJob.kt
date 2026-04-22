@@ -46,6 +46,7 @@ import kotlinx.coroutines.sync.withPermit
 import logcat.LogPriority
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.preference.getAndSet
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.category.model.Category
@@ -68,8 +69,6 @@ import tachiyomi.domain.manga.model.toSManga
 import tachiyomi.domain.source.model.SourceNotInstalledException
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.i18n.MR
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.io.File
 import java.time.Instant
 import java.time.ZonedDateTime
@@ -84,16 +83,16 @@ import kotlin.concurrent.atomics.incrementAndFetch
 class LibraryUpdateJob(private val context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
 
-    private val sourceManager: SourceManager = Injekt.get()
-    private val libraryPreferences: LibraryPreferences = Injekt.get()
-    private val downloadManager: DownloadManager = Injekt.get()
-    private val coverCache: CoverCache = Injekt.get()
-    private val getLibraryManga: GetLibraryManga = Injekt.get()
-    private val getManga: GetManga = Injekt.get()
-    private val updateManga: UpdateManga = Injekt.get()
-    private val syncChaptersWithSource: SyncChaptersWithSource = Injekt.get()
-    private val fetchInterval: FetchInterval = Injekt.get()
-    private val filterChaptersForDownload: FilterChaptersForDownload = Injekt.get()
+    private val sourceManager: SourceManager = koinGet()
+    private val libraryPreferences: LibraryPreferences = koinGet()
+    private val downloadManager: DownloadManager = koinGet()
+    private val coverCache: CoverCache = koinGet()
+    private val getLibraryManga: GetLibraryManga = koinGet()
+    private val getManga: GetManga = koinGet()
+    private val updateManga: UpdateManga = koinGet()
+    private val syncChaptersWithSource: SyncChaptersWithSource = koinGet()
+    private val fetchInterval: FetchInterval = koinGet()
+    private val filterChaptersForDownload: FilterChaptersForDownload = koinGet()
 
     private val notifier = LibraryUpdateNotifier(context)
 
@@ -102,7 +101,7 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
     override suspend fun doWork(): Result {
         if (tags.contains(WORK_NAME_AUTO)) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
-                val preferences = Injekt.get<LibraryPreferences>()
+                val preferences = koinGet<LibraryPreferences>()
                 val restrictions = preferences.autoUpdateDeviceRestrictions.get()
                 if (DEVICE_ONLY_ON_WIFI in restrictions && !context.isConnectedToWifi()) {
                     return Result.retry()
@@ -423,7 +422,7 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
         }
 
         fun setupTask(context: Context) {
-            val preferences = Injekt.get<LibraryPreferences>()
+            val preferences = koinGet<LibraryPreferences>()
             val interval = preferences.autoUpdateSchedule.get()
 
             // Cancel any old-style interval work

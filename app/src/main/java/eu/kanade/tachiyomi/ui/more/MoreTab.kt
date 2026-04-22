@@ -29,15 +29,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.Tab
 import tachiyomi.presentation.core.util.asState
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 
-data object MoreTab : Tab {
+data object MoreTab : Tab, KoinComponent {
 
     override val options: TabOptions
         @Composable
@@ -78,8 +78,8 @@ data object MoreTab : Tab {
 }
 
 private class MoreScreenModel(
-    private val downloadManager: DownloadManager = Injekt.get(),
-    preferences: BasePreferences = Injekt.get(),
+    private val downloadManager: DownloadManager = koinGet(),
+    preferences: BasePreferences = koinGet(),
 ) : ScreenModel {
 
     var downloadedOnly by preferences.downloadedOnly.asState(screenModelScope)

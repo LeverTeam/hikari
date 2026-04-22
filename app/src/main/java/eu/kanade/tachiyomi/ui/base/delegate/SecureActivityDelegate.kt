@@ -16,9 +16,9 @@ import eu.kanade.tachiyomi.util.view.setSecureScreen
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
-import uy.kohesive.injekt.injectLazy
+import org.koin.core.component.KoinComponent
+import tachiyomi.core.common.util.koinGet
+import tachiyomi.core.common.util.koinInject
 
 interface SecureActivityDelegate {
     fun registerSecureActivity(activity: AppCompatActivity)
@@ -32,7 +32,7 @@ interface SecureActivityDelegate {
         var requireUnlock = true
 
         fun onApplicationStopped() {
-            val preferences = Injekt.get<SecurityPreferences>()
+            val preferences = koinGet<SecurityPreferences>()
             if (!preferences.useAuthenticator.get()) return
 
             if (!AuthenticatorUtil.isAuthenticating) {
@@ -49,7 +49,7 @@ interface SecureActivityDelegate {
          * Checks if unlock is needed when app comes foreground.
          */
         fun onApplicationStart() {
-            val preferences = Injekt.get<SecurityPreferences>()
+            val preferences = koinGet<SecurityPreferences>()
             if (!preferences.useAuthenticator.get()) return
 
             val lastClosedPref = preferences.lastAppClosed
@@ -72,12 +72,12 @@ interface SecureActivityDelegate {
     }
 }
 
-class SecureActivityDelegateImpl : SecureActivityDelegate, DefaultLifecycleObserver {
+class SecureActivityDelegateImpl : SecureActivityDelegate, DefaultLifecycleObserver, KoinComponent {
 
     private lateinit var activity: AppCompatActivity
 
-    private val preferences: BasePreferences by injectLazy()
-    private val securityPreferences: SecurityPreferences by injectLazy()
+    private val preferences: BasePreferences by koinInject()
+    private val securityPreferences: SecurityPreferences by koinInject()
 
     override fun registerSecureActivity(activity: AppCompatActivity) {
         this.activity = activity

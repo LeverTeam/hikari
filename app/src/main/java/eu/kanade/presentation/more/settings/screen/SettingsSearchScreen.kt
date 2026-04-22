@@ -263,10 +263,10 @@ private fun SearchResult(
 @Composable
 @NonRestartableComposable
 private fun getIndex() = settingScreens
-    .map { screen ->
+    .map { screen: SearchableSettings ->
         SettingsData(
             title = stringResource(screen.getTitleRes()),
-            route = screen,
+            route = screen as VoyagerScreen,
             contents = screen.getPreferences(),
         )
     }
@@ -285,7 +285,7 @@ private fun getLocalizedBreadcrumb(path: String, node: String?, isLtr: Boolean):
     }
 }
 
-private val settingScreens = listOf(
+private val settingScreens: List<SearchableSettings> = listOf(
     SettingsAppearanceScreen,
     SettingsLibraryScreen,
     SettingsReaderScreen,
