@@ -17,11 +17,11 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.google.android.material.textview.MaterialTextView
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarActions
-import eu.kanade.presentation.util.Screen
 import kotlinx.collections.immutable.persistentListOf
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
+import tachiyomi.presentation.core.util.Screen
 
 class OpenSourceLibraryLicenseScreen(
     private val name: String,

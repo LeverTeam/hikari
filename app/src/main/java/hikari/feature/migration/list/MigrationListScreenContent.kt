@@ -51,13 +51,11 @@ import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarActions
 import eu.kanade.presentation.manga.components.MangaCover
-import eu.kanade.presentation.util.animateItemFastScroll
-import eu.kanade.presentation.util.formatChapterNumber
-import eu.kanade.presentation.util.rememberResourceBitmapPainter
 import eu.kanade.tachiyomi.R
 import hikari.feature.migration.list.models.MigratingManga
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import tachiyomi.core.common.util.lang.formatChapterNumber
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.Badge
@@ -67,7 +65,9 @@ import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.material.topSmallPaddingValues
 import tachiyomi.presentation.core.i18n.stringResource
+import tachiyomi.presentation.core.util.animateItemFastScroll
 import tachiyomi.presentation.core.util.plus
+import tachiyomi.presentation.core.util.rememberResourceBitmapPainter
 
 @Composable
 fun MigrationListScreenContent(

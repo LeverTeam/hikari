@@ -36,8 +36,6 @@ import eu.kanade.presentation.manga.components.ChapterDownloadAction
 import eu.kanade.presentation.manga.components.ChapterDownloadIndicator
 import eu.kanade.presentation.manga.components.DotSeparatorText
 import eu.kanade.presentation.manga.components.MangaCover
-import eu.kanade.presentation.util.animateItemFastScroll
-import eu.kanade.presentation.util.relativeTimeSpanString
 import eu.kanade.tachiyomi.ui.updates.UpdatesItem
 import tachiyomi.domain.download.model.DownloadState
 import tachiyomi.domain.updates.model.UpdatesWithRelations
@@ -47,6 +45,8 @@ import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.relativeDateText
 import tachiyomi.presentation.core.i18n.stringResource
+import tachiyomi.presentation.core.util.animateItemFastScroll
+import tachiyomi.presentation.core.util.relativeTimeSpanString
 import tachiyomi.presentation.core.util.selectedBackground
 
 internal fun LazyListScope.updatesLastUpdatedItem(

@@ -1,4 +1,4 @@
-package eu.kanade.presentation.util
+package tachiyomi.presentation.core.util
 
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols

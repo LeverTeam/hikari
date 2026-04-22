@@ -33,3 +33,5 @@ class StubSource(
 }
 
 class SourceNotInstalledException : Exception()
+
+class NoResultsException : Exception()

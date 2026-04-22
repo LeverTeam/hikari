@@ -1,4 +1,4 @@
-package eu.kanade.presentation.util
+package tachiyomi.presentation.core.util
 
 import android.content.res.Resources
 import androidx.annotation.DrawableRes

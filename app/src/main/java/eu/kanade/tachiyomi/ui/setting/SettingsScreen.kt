@@ -17,11 +17,11 @@ import eu.kanade.presentation.more.settings.screen.SettingsDataScreen
 import eu.kanade.presentation.more.settings.screen.SettingsMainScreen
 import eu.kanade.presentation.more.settings.screen.SettingsTrackingScreen
 import eu.kanade.presentation.more.settings.screen.about.AboutScreen
-import eu.kanade.presentation.util.DefaultNavigatorScreenTransition
-import eu.kanade.presentation.util.LocalBackPress
-import eu.kanade.presentation.util.Screen
-import eu.kanade.presentation.util.isTabletUi
 import tachiyomi.presentation.core.components.TwoPanelBox
+import tachiyomi.presentation.core.util.DefaultNavigatorScreenTransition
+import tachiyomi.presentation.core.util.LocalBackPress
+import tachiyomi.presentation.core.util.Screen
+import tachiyomi.presentation.core.util.isTabletUi
 
 class SettingsScreen(
     private val destination: Int? = null,

@@ -22,7 +22,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.core.util.ifSourcesLoaded
 import eu.kanade.presentation.browse.BrowseSourceContent
 import eu.kanade.presentation.components.SearchToolbar
-import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseSourceScreenModel
 import eu.kanade.tachiyomi.ui.browse.source.browse.SourceFilterDialog
@@ -40,6 +39,7 @@ import tachiyomi.presentation.core.components.HikariSnackbarHost
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.LoadingScreen
+import tachiyomi.presentation.core.util.Screen
 import tachiyomi.source.local.LocalSource
 
 data class MigrateSourceSearchScreen(
@@ -147,7 +147,7 @@ data class MigrateSourceSearchScreen(
                     onComplete = {
                         scope.launch {
                             navigator.popUntilRoot()
-                            HomeScreen.openTab(HomeScreen.Tab.Browse())
+                            HomeScreen.openTab(HomeScreen.Event.Browse())
                             navigator.push(MangaScreen(dialog.target.id))
                         }
                     },

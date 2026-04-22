@@ -43,9 +43,6 @@ import eu.kanade.presentation.manga.components.DeleteChaptersDialog
 import eu.kanade.presentation.manga.components.MangaCoverDialog
 import eu.kanade.presentation.manga.components.ScanlatorFilterDialog
 import eu.kanade.presentation.manga.components.SetIntervalDialog
-import eu.kanade.presentation.util.AssistContentScreen
-import eu.kanade.presentation.util.Screen
-import eu.kanade.presentation.util.isTabletUi
 import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.isLocalOrStub
 import eu.kanade.tachiyomi.source.online.HttpSource
@@ -68,6 +65,9 @@ import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.toSManga
 import tachiyomi.presentation.core.screens.LoadingScreen
+import tachiyomi.presentation.core.util.AssistContentScreen
+import tachiyomi.presentation.core.util.Screen
+import tachiyomi.presentation.core.util.isTabletUi
 
 class MangaScreen(
     private val mangaId: Long,

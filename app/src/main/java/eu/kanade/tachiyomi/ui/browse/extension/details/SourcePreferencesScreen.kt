@@ -29,7 +29,6 @@ import eu.kanade.presentation.more.settings.widget.MultiSelectListPreferenceWidg
 import eu.kanade.presentation.more.settings.widget.PreferenceGroupHeader
 import eu.kanade.presentation.more.settings.widget.SwitchPreferenceWidget
 import eu.kanade.presentation.more.settings.widget.TextPreferenceWidget
-import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.data.preference.SharedPreferencesDataStore
 import eu.kanade.tachiyomi.source.ConfigurableSource
 import eu.kanade.tachiyomi.source.sourcePreferences
@@ -41,6 +40,7 @@ import tachiyomi.core.common.preference.Preference
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.screens.LoadingScreen
+import tachiyomi.presentation.core.util.Screen
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

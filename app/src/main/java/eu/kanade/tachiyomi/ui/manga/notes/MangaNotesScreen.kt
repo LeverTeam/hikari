@@ -10,11 +10,11 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.presentation.manga.MangaNotesScreen
-import eu.kanade.presentation.util.Screen
 import kotlinx.coroutines.flow.update
 import tachiyomi.core.common.util.lang.launchNonCancellable
 import tachiyomi.domain.manga.interactor.UpdateMangaNotes
 import tachiyomi.domain.manga.model.Manga
+import tachiyomi.presentation.core.util.Screen
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

@@ -13,11 +13,11 @@ import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.Role
 import coil3.compose.AsyncImage
-import eu.kanade.presentation.util.LocalNavAnimatedVisibilityScope
-import eu.kanade.presentation.util.LocalSharedTransitionScope
-import eu.kanade.presentation.util.mangaSharedElement
-import eu.kanade.presentation.util.rememberResourceBitmapPainter
 import eu.kanade.tachiyomi.R
+import tachiyomi.presentation.core.util.LocalNavAnimatedVisibilityScope
+import tachiyomi.presentation.core.util.LocalSharedTransitionScope
+import tachiyomi.presentation.core.util.mangaSharedElement
+import tachiyomi.presentation.core.util.rememberResourceBitmapPainter
 import tachiyomi.domain.manga.model.MangaCover as MangaCoverModel
 
 enum class MangaCover(val ratio: Float) {

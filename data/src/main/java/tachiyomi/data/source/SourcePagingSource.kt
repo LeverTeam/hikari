@@ -8,6 +8,7 @@ import hikari.domain.manga.model.toDomainManga
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.domain.manga.interactor.NetworkToLocalManga
 import tachiyomi.domain.manga.model.Manga
+import tachiyomi.domain.source.model.NoResultsException
 import tachiyomi.domain.source.repository.SourcePagingSource
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -75,5 +76,3 @@ abstract class BaseSourcePagingSource(
         }
     }
 }
-
-class NoResultsException : Exception()

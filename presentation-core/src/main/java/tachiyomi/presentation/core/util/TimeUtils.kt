@@ -1,4 +1,4 @@
-package eu.kanade.presentation.util
+package tachiyomi.presentation.core.util
 
 import android.content.Context
 import android.text.format.DateUtils

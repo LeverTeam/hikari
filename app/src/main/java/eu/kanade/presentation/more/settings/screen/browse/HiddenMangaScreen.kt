@@ -29,13 +29,13 @@ import eu.kanade.presentation.components.SearchToolbar
 import eu.kanade.presentation.library.components.CommonMangaItemDefaults
 import eu.kanade.presentation.library.components.MangaCompactGridItem
 import eu.kanade.presentation.manga.components.MangaBottomActionMenu
-import eu.kanade.presentation.util.Screen
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.MangaCover
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
+import tachiyomi.presentation.core.util.Screen
 import tachiyomi.presentation.core.util.plus
 
 class HiddenMangaScreen(

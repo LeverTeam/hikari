@@ -13,12 +13,12 @@ import eu.kanade.presentation.more.settings.screen.browse.components.ExtensionRe
 import eu.kanade.presentation.more.settings.screen.browse.components.ExtensionRepoCreateDialog
 import eu.kanade.presentation.more.settings.screen.browse.components.ExtensionRepoDeleteDialog
 import eu.kanade.presentation.more.settings.screen.browse.components.ExtensionReposScreen
-import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.util.system.openInBrowser
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.coroutines.flow.collectLatest
 import tachiyomi.presentation.core.screens.LoadingScreen
+import tachiyomi.presentation.core.util.Screen
 
 class ExtensionReposScreen(
     private val url: String? = null,

@@ -2,7 +2,6 @@ package eu.kanade.tachiyomi.ui.reader.setting
 
 
 import cafe.adriel.voyager.core.model.ScreenModel
-import eu.kanade.presentation.util.ioCoroutineScope
 import eu.kanade.tachiyomi.ui.reader.ReaderViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -12,6 +11,7 @@ import kotlinx.coroutines.flow.stateIn
 import tachiyomi.domain.reader.model.ReaderOrientation
 import tachiyomi.domain.reader.model.ReadingMode
 import tachiyomi.domain.reader.service.ReaderPreferences
+import tachiyomi.presentation.core.util.ioCoroutineScope
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

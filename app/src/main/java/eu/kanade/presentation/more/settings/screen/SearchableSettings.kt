@@ -7,7 +7,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import dev.icerock.moko.resources.StringResource
 import eu.kanade.presentation.more.settings.Preference
 import eu.kanade.presentation.more.settings.PreferenceScaffold
-import eu.kanade.presentation.util.LocalBackPress
+import tachiyomi.presentation.core.util.LocalBackPress
 
 interface SearchableSettings : Screen {
 

@@ -45,4 +45,7 @@ dependencies {
     implementation(libs.androidx.paging.compose)
     implementation(libs.androidx.palette)
     implementation(libs.kotlinx.collections.immutable)
+
+    implementation(libs.bundles.voyager)
+    implementation(libs.composeMaterialMotion)
 }

@@ -1,10 +1,10 @@
-package eu.kanade.presentation.util
+package tachiyomi.presentation.core.util
 
 import android.content.Context
 import eu.kanade.tachiyomi.network.HttpException
-import eu.kanade.tachiyomi.util.system.isOnline
 import tachiyomi.core.common.i18n.stringResource
-import tachiyomi.data.source.NoResultsException
+import tachiyomi.core.common.util.system.isOnline
+import tachiyomi.domain.source.model.NoResultsException
 import tachiyomi.domain.source.model.SourceNotInstalledException
 import tachiyomi.i18n.MR
 import java.net.UnknownHostException

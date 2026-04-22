@@ -10,7 +10,6 @@ import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.ui.browse.migration.search.MigrateSearchScreen
 import eu.kanade.tachiyomi.ui.manga.MangaScreen
 import eu.kanade.tachiyomi.util.system.toast
@@ -18,6 +17,7 @@ import hikari.feature.migration.list.components.MigrationExitDialog
 import hikari.feature.migration.list.components.MigrationMangaDialog
 import hikari.feature.migration.list.components.MigrationProgressDialog
 import tachiyomi.i18n.MR
+import tachiyomi.presentation.core.util.Screen
 
 class MigrationListScreen(private val mangaIds: Collection<Long>, private val extraSearchQuery: String?) : Screen() {
 

@@ -55,12 +55,12 @@ import eu.kanade.presentation.manga.components.MangaInfoBox
 import eu.kanade.presentation.manga.components.MangaToolbar
 import eu.kanade.presentation.manga.components.MergedChapterListItem
 import eu.kanade.presentation.manga.components.MissingChapterCountListItem
-import eu.kanade.presentation.util.formatChapterNumber
 import eu.kanade.tachiyomi.source.getNameForMangaInfo
 import eu.kanade.tachiyomi.ui.manga.ChapterList
 import eu.kanade.tachiyomi.ui.manga.MangaScreenModel
 import eu.kanade.tachiyomi.util.lang.stripDeduplicationIds
 import eu.kanade.tachiyomi.util.system.copyToClipboard
+import tachiyomi.core.common.util.lang.formatChapterNumber
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.chapter.service.missingChaptersCount
 import tachiyomi.domain.download.model.DownloadState

@@ -1,9 +1,15 @@
 package tachiyomi.presentation.core.util
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.isImeVisible
+import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -13,17 +19,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalHapticFeedback
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import tachiyomi.presentation.core.components.material.SECONDARY_ALPHA
 
 @Composable
@@ -119,4 +132,65 @@ fun Modifier.clearFocusOnSoftKeyboardHide(
             isFocused = it.isFocused
         }
     }
+}
+
+fun Modifier.bounceClick(
+    enabled: Boolean = true,
+) = if (enabled) {
+    composed {
+        val haptic = LocalHapticFeedback.current
+        val scale = remember { Animatable(1f) }
+
+        Modifier
+            .graphicsLayer {
+                scaleX = scale.value
+                scaleY = scale.value
+            }
+            .pointerInput(Unit) {
+                coroutineScope {
+                    while (true) {
+                        val pointerId = awaitPointerEventScope {
+                            awaitFirstDown(requireUnconsumed = false).id
+                        }
+
+                        launch {
+                            scale.animateTo(
+                                0.95f,
+                                spring(
+                                    dampingRatio = Spring.DampingRatioLowBouncy,
+                                    stiffness = Spring.StiffnessLow,
+                                ),
+                            )
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                        }
+
+                        val up = awaitPointerEventScope {
+                            waitForUpOrCancellation()
+                        }
+
+                        if (up != null) {
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        }
+
+                        launch {
+                            scale.animateTo(
+                                1f,
+                                spring(
+                                    dampingRatio = Spring.DampingRatioLowBouncy,
+                                    stiffness = Spring.StiffnessLow,
+                                ),
+                            )
+                        }
+                    }
+                }
+            }
+    }
+} else {
+    this
+}
+
+// https://issuetracker.google.com/352584409
+context(itemScope: LazyItemScope)
+fun Modifier.animateItemFastScroll() = with(itemScope) {
+    this@animateItemFastScroll.animateItem(fadeInSpec = null, fadeOutSpec = null)
 }

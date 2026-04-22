@@ -31,9 +31,6 @@ import androidx.compose.ui.util.fastForEach
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
-import cafe.adriel.voyager.navigator.tab.TabNavigator
-import eu.kanade.presentation.util.Screen
-import eu.kanade.presentation.util.isTabletUi
 import eu.kanade.tachiyomi.ui.browse.BrowseTab
 import eu.kanade.tachiyomi.ui.download.DownloadQueueScreen
 import eu.kanade.tachiyomi.ui.history.HistoryTab
@@ -56,13 +53,16 @@ import tachiyomi.presentation.core.components.material.NavigationBar
 import tachiyomi.presentation.core.components.material.NavigationRail
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.pluralStringResource
+import tachiyomi.presentation.core.util.Screen
+import tachiyomi.presentation.core.util.Tab
+import tachiyomi.presentation.core.util.isTabletUi
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 object HomeScreen : Screen() {
 
     private val librarySearchEvent = Channel<String>()
-    private val openTabEvent = Channel<Tab>()
+    private val openTabEvent = Channel<Event>()
     private val showBottomNavEvent = Channel<Boolean>()
 
     @Suppress("ConstPropertyName")
@@ -82,7 +82,7 @@ object HomeScreen : Screen() {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        TabNavigator(
+        cafe.adriel.voyager.navigator.tab.TabNavigator(
             tab = LibraryTab,
             key = TabNavigatorKey,
         ) { tabNavigator ->
@@ -153,23 +153,23 @@ object HomeScreen : Screen() {
                 launch {
                     openTabEvent.receiveAsFlow().collectLatest {
                         tabNavigator.current = when (it) {
-                            is Tab.Library -> LibraryTab
-                            Tab.Updates -> UpdatesTab
-                            Tab.History -> HistoryTab
-                            is Tab.Browse -> {
+                            is Event.Library -> LibraryTab
+                            Event.Updates -> UpdatesTab
+                            Event.History -> HistoryTab
+                            is Event.Browse -> {
                                 if (it.toExtensions) {
                                     BrowseTab.showExtension()
                                 }
                                 BrowseTab
                             }
 
-                            is Tab.More -> MoreTab
+                            is Event.More -> MoreTab
                         }
 
-                        if (it is Tab.Library && it.mangaIdToOpen != null) {
+                        if (it is Event.Library && it.mangaIdToOpen != null) {
                             navigator.push(MangaScreen(it.mangaIdToOpen))
                         }
-                        if (it is Tab.More && it.toDownloads) {
+                        if (it is Event.More && it.toDownloads) {
                             navigator.push(DownloadQueueScreen)
                         }
                     }
@@ -179,7 +179,7 @@ object HomeScreen : Screen() {
     }
 
     @Composable
-    private fun RowScope.NavigationBarItem(tab: eu.kanade.presentation.util.Tab) {
+    private fun RowScope.NavigationBarItem(tab: Tab) {
         val tabNavigator = LocalTabNavigator.current
         val navigator = LocalNavigator.currentOrThrow
         val scope = rememberCoroutineScope()
@@ -207,7 +207,7 @@ object HomeScreen : Screen() {
     }
 
     @Composable
-    fun NavigationRailItem(tab: eu.kanade.presentation.util.Tab) {
+    fun NavigationRailItem(tab: Tab) {
         val tabNavigator = LocalTabNavigator.current
         val navigator = LocalNavigator.currentOrThrow
         val scope = rememberCoroutineScope()
@@ -235,7 +235,7 @@ object HomeScreen : Screen() {
     }
 
     @Composable
-    private fun NavigationIconItem(tab: eu.kanade.presentation.util.Tab) {
+    private fun NavigationIconItem(tab: Tab) {
         BadgedBox(
             badge = {
                 when {
@@ -296,19 +296,19 @@ object HomeScreen : Screen() {
         librarySearchEvent.send(query)
     }
 
-    suspend fun openTab(tab: Tab) {
-        openTabEvent.send(tab)
+    suspend fun openTab(event: Event) {
+        openTabEvent.send(event)
     }
 
     suspend fun showBottomNav(show: Boolean) {
         showBottomNavEvent.send(show)
     }
 
-    sealed interface Tab {
-        data class Library(val mangaIdToOpen: Long? = null) : Tab
-        data object Updates : Tab
-        data object History : Tab
-        data class Browse(val toExtensions: Boolean = false) : Tab
-        data class More(val toDownloads: Boolean) : Tab
+    sealed interface Event {
+        data class Library(val mangaIdToOpen: Long? = null) : Event
+        data object Updates : Event
+        data object History : Event
+        data class Browse(val toExtensions: Boolean = false) : Event
+        data class More(val toDownloads: Boolean) : Event
     }
 }

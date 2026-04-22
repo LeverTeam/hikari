@@ -7,20 +7,12 @@ import android.os.Build
 import android.view.View
 import tachiyomi.domain.ui.UiPreferences
 import tachiyomi.domain.ui.model.TabletUiMode
+import tachiyomi.presentation.core.util.TABLET_UI_MIN_SCREEN_WIDTH_LANDSCAPE_DP
+import tachiyomi.presentation.core.util.TABLET_UI_MIN_SCREEN_WIDTH_PORTRAIT_DP
+import tachiyomi.presentation.core.util.TABLET_UI_REQUIRED_SCREEN_WIDTH_DP
+import tachiyomi.presentation.core.util.isTabletUi
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
-
-private const val TABLET_UI_REQUIRED_SCREEN_WIDTH_DP = 720
-
-// some tablets have screen width like 711dp = 1600px / 2.25
-private const val TABLET_UI_MIN_SCREEN_WIDTH_PORTRAIT_DP = 700
-
-// make sure icons on the nav rail fit
-private const val TABLET_UI_MIN_SCREEN_WIDTH_LANDSCAPE_DP = 600
-
-fun Configuration.isTabletUi(): Boolean {
-    return smallestScreenWidthDp >= TABLET_UI_REQUIRED_SCREEN_WIDTH_DP
-}
 
 // TODO: move the logic to `isTabletUi()` when main activity is rewritten in Compose
 fun Context.prepareTabletUiContext(): Context {

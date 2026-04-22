@@ -7,11 +7,11 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.presentation.browse.MigrateSearchScreen
-import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.ui.browse.source.globalsearch.SearchScreenModel
 import eu.kanade.tachiyomi.ui.manga.MangaScreen
 import hikari.feature.migration.dialog.MigrateMangaDialog
 import hikari.feature.migration.list.MigrationListScreen
+import tachiyomi.presentation.core.util.Screen
 
 class MigrateSearchScreen(private val mangaId: Long) : Screen() {
 
