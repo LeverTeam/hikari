@@ -261,11 +261,6 @@ class WebtoonPageHolder(
     private fun onImageDecoded() {
         progressContainer.isVisible = false
         removeErrorLayout()
-        val h = frame.scaledImageHeight
-        if (h > 0) {
-            frame.layoutParams = frame.layoutParams.also { it.height = h }
-            frame.post { frame.requestLayout() }
-        }
     }
 
     /**

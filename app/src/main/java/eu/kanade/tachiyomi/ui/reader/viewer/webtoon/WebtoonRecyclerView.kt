@@ -61,11 +61,14 @@ class WebtoonRecyclerView @JvmOverloads constructor(
     private var tapDuringManualScroll = false
 
     override fun onMeasure(widthSpec: Int, heightSpec: Int) {
-        halfWidth = MeasureSpec.getSize(widthSpec) / 2
-        halfHeight = MeasureSpec.getSize(heightSpec) / 2
-        if (!heightSet) {
-            originalHeight = MeasureSpec.getSize(heightSpec)
-            heightSet = true
+        val h = MeasureSpec.getSize(heightSpec)
+        if (h > 0) {
+            halfWidth = MeasureSpec.getSize(widthSpec) / 2
+            halfHeight = h / 2
+            if (!heightSet) {
+                originalHeight = h
+                heightSet = true
+            }
         }
         super.onMeasure(widthSpec, heightSpec)
     }
@@ -198,12 +201,14 @@ class WebtoonRecyclerView @JvmOverloads constructor(
 
         setScaleRate(currentScale)
 
+        /*
         layoutParams.height = if (currentScale < 1) {
             (originalHeight / currentScale).toInt()
         } else {
             originalHeight
         }
         halfHeight = layoutParams.height / 2
+        */
 
         if (currentScale != DEFAULT_RATE) {
             x = getPositionX(x)
