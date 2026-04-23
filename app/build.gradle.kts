@@ -36,8 +36,8 @@ android {
     defaultConfig {
         applicationId = "app.hikari"
 
-        versionCode = 7
-        versionName = "0.3.7"
+        versionCode = 8
+        versionName = "0.4.1"
 
         buildConfigField("String", "COMMIT_COUNT", "\"${getLatestCommitCount()}\"")
         buildConfigField("String", "COMMIT_SHA", "\"${getLatestCommitSha()}\"")

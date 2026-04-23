@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased] - 2026-04-22
+## [0.4.1] - 2026-04-23
 
 ### Added
 
@@ -20,6 +20,8 @@
 - Restored standard Material 3 components for pull-to-refresh and reader navigation
 - Migrated default extension repository to LeverTeam/hikari-extensions
 - Updated project documentation for technical accuracy
+- Updated internationalization strings across all supported locales in the i18n module
+- Implemented a static BufferPool in the native image pipeline to reduce memory churn during upscaling
 
 ### Fixed
 

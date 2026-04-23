@@ -1,6 +1,6 @@
 # Hikari
 
-![Version](https://img.shields.io/badge/version-0.3.7-blue?style=flat-square)
+![Version](https://img.shields.io/badge/version-0.4.1-blue?style=flat-square)
 ![License](https://img.shields.io/badge/license-Apache--2.0-green?style=flat-square)
 ![Build](https://img.shields.io/github/actions/workflow/status/leverteam/hikari/build.yml?style=flat-square)
 
