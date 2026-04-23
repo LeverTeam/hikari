@@ -25,6 +25,8 @@
 
 - Corrected aspect ratio calculation in image decoder to prevent stretched cover images
 - Resolved auto-update issues in the application updater
+- Webtoon image clipping in ReaderPageImageView by implementing Coil-based decoding with ViewSizeResolver
+- Measurement logic in WebtoonRecyclerView to prevent image truncation during layout and zoom passes
 
 ### Removed
 
