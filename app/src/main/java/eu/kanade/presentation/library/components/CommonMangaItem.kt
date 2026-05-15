@@ -81,6 +81,8 @@ fun MangaCompactGridItem(
     coverAlpha: Float = 1f,
     coverBadgeStart: @Composable (RowScope.() -> Unit)? = null,
     coverBadgeEnd: @Composable (RowScope.() -> Unit)? = null,
+    isSharedElementEnabled: Boolean = true,
+    sharedElementTag: String = "cover",
 ) {
     GridItemSelectable(
         isSelected = isSelected,
@@ -94,7 +96,8 @@ fun MangaCompactGridItem(
                         .fillMaxWidth()
                         .alpha(if (isSelected) GRID_SELECTED_COVER_ALPHA else coverAlpha),
                     data = coverData,
-                    mangaId = coverData.mangaId,
+                    mangaId = if (isSharedElementEnabled) coverData.mangaId else null,
+                    tag = sharedElementTag,
                 )
             },
             badgesStart = coverBadgeStart,
@@ -103,8 +106,10 @@ fun MangaCompactGridItem(
                 if (title != null) {
                     CoverTextOverlay(
                         title = title,
-                        mangaId = coverData.mangaId,
+                        coverData = coverData,
                         onClickContinueReading = onClickContinueReading,
+                        isSharedElementEnabled = isSharedElementEnabled,
+                        sharedElementTag = sharedElementTag,
                     )
                 } else if (onClickContinueReading != null) {
                     ContinueReadingButton(
@@ -127,8 +132,10 @@ fun MangaCompactGridItem(
 @Composable
 private fun BoxScope.CoverTextOverlay(
     title: String,
-    mangaId: Long,
+    coverData: MangaCoverModel,
     onClickContinueReading: (() -> Unit)? = null,
+    isSharedElementEnabled: Boolean = true,
+    sharedElementTag: String = "cover",
 ) {
     Box(
         modifier = Modifier
@@ -150,7 +157,7 @@ private fun BoxScope.CoverTextOverlay(
         GridItemTitle(
             modifier = Modifier
                 .weight(1f)
-                .mangaSharedElement("title", mangaId)
+                .mangaSharedElement("title-$sharedElementTag", if (isSharedElementEnabled) coverData.mangaId else null)
                 .padding(8.dp),
             title = title,
             style = MaterialTheme.typography.titleSmall.copy(
@@ -191,6 +198,8 @@ fun MangaComfortableGridItem(
     coverBadgeStart: (@Composable RowScope.() -> Unit)? = null,
     coverBadgeEnd: (@Composable RowScope.() -> Unit)? = null,
     onClickContinueReading: (() -> Unit)? = null,
+    isSharedElementEnabled: Boolean = true,
+    sharedElementTag: String = "cover",
 ) {
     GridItemSelectable(
         isSelected = isSelected,
@@ -205,7 +214,8 @@ fun MangaComfortableGridItem(
                             .fillMaxWidth()
                             .alpha(if (isSelected) GRID_SELECTED_COVER_ALPHA else coverAlpha),
                         data = coverData,
-                        mangaId = coverData.mangaId,
+                        mangaId = if (isSharedElementEnabled) coverData.mangaId else null,
+                        tag = sharedElementTag,
                     )
                 },
                 badgesStart = coverBadgeStart,
@@ -225,7 +235,10 @@ fun MangaComfortableGridItem(
             )
             GridItemTitle(
                 modifier = Modifier
-                    .mangaSharedElement("title", coverData.mangaId)
+                    .mangaSharedElement(
+                        "title-$sharedElementTag",
+                        if (isSharedElementEnabled) coverData.mangaId else null,
+                    )
                     .padding(4.dp),
                 title = title,
                 style = MaterialTheme.typography.titleSmall,

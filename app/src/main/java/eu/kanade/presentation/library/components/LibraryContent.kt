@@ -5,50 +5,44 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import eu.kanade.core.preference.PreferenceMutableState
 import eu.kanade.tachiyomi.ui.library.LibraryItem
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import tachiyomi.domain.category.model.Category
-import tachiyomi.domain.library.model.LibraryDisplayMode
+import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.domain.library.model.LibraryManga
 import tachiyomi.presentation.core.components.material.PullRefresh
-import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun LibraryContent(
     categories: List<Category>,
-    searchQuery: String?,
     selection: Set<Long>,
     contentPadding: PaddingValues,
     currentPage: Int,
     isRefreshing: Boolean,
-    hasActiveFilters: Boolean,
     showPageTabs: Boolean,
     onChangeCurrentPage: (Int) -> Unit,
-    onClickManga: (Long) -> Unit,
+    onClickManga: (Long, String) -> Unit,
     onContinueReadingClicked: ((LibraryManga) -> Unit)?,
     onToggleSelection: (Category, LibraryManga) -> Unit,
     onToggleRangeSelection: (Category, LibraryManga) -> Unit,
     onRefresh: () -> Unit,
-    onGlobalSearchClicked: () -> Unit,
     getItemCountForCategory: (Category) -> Int?,
-    getDisplayMode: (Int) -> PreferenceMutableState<LibraryDisplayMode>,
     getColumnsForOrientation: (Boolean) -> PreferenceMutableState<Int>,
     getItemsForCategory: (Category) -> List<LibraryItem>,
+    continueReadingManga: HistoryWithRelations? = null,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier.padding(
+        modifier = modifier.padding(
             top = contentPadding.calculateTopPadding(),
             start = contentPadding.calculateStartPadding(LocalLayoutDirection.current),
             end = contentPadding.calculateEndPadding(LocalLayoutDirection.current),
@@ -76,32 +70,46 @@ fun LibraryContent(
             )
         }
 
-        PullRefresh(
-            refreshing = isRefreshing,
-            enabled = selection.isEmpty(),
-            onRefresh = onRefresh,
-        ) {
-            LibraryPager(
-                state = pagerState,
-                contentPadding = PaddingValues(bottom = contentPadding.calculateBottomPadding()),
-                hasActiveFilters = hasActiveFilters,
-                selection = selection,
-                searchQuery = searchQuery,
-                onGlobalSearchClicked = onGlobalSearchClicked,
-                getCategoryForPage = { page -> categories[page] },
-                getDisplayMode = getDisplayMode,
-                getColumnsForOrientation = getColumnsForOrientation,
-                getItemsForCategory = getItemsForCategory,
-                onClickManga = { category, manga ->
-                    if (selection.isNotEmpty()) {
-                        onToggleSelection(category, manga)
-                    } else {
-                        onClickManga(manga.manga.id)
-                    }
-                },
-                onLongClickManga = onToggleRangeSelection,
-                onClickContinueReading = onContinueReadingClicked,
-            )
+        LaunchedEffect(currentPage) {
+            if (!pagerState.isScrollInProgress && pagerState.currentPage != currentPage && currentPage < categories.size) {
+                pagerState.scrollToPage(currentPage)
+            }
+        }
+
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.weight(1f),
+            beyondViewportPageCount = 1,
+        ) { page ->
+            PullRefresh(
+                refreshing = isRefreshing,
+                enabled = selection.isEmpty(),
+                onRefresh = onRefresh,
+            ) {
+                val category = categories.getOrNull(page)
+                val items = if (category != null) getItemsForCategory(category) else emptyList()
+                val columns by getColumnsForOrientation(false)
+
+                LibraryDashboard(
+                    items = items,
+                    columns = columns,
+                    contentPadding = PaddingValues(bottom = contentPadding.calculateBottomPadding()),
+                    onMangaClick = { item, tag ->
+                        if (selection.isNotEmpty()) {
+                            onToggleSelection(category!!, item.libraryManga)
+                        } else {
+                            onClickManga(item.libraryManga.manga.id, tag)
+                        }
+                    },
+                    onMangaLongClick = { item ->
+                        onToggleRangeSelection(category!!, item.libraryManga)
+                    },
+                    onContinueClick = { item ->
+                        onContinueReadingClicked?.invoke(item.libraryManga)
+                    },
+                    continueReadingManga = continueReadingManga,
+                )
+            }
         }
 
         LaunchedEffect(pagerState.currentPage) {

@@ -37,7 +37,6 @@ import eu.kanade.presentation.more.onboarding.GETTING_STARTED_URL
 import eu.kanade.presentation.util.Tab
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.data.library.LibraryUpdateJob
-import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalSearchScreen
 import eu.kanade.tachiyomi.ui.category.CategoryScreen
 import eu.kanade.tachiyomi.ui.home.HomeScreen
 import eu.kanade.tachiyomi.ui.main.MainActivity
@@ -65,8 +64,7 @@ import tachiyomi.source.local.isLocal
 data object LibraryTab : Tab {
 
     override val options: TabOptions
-        @Composable
-        get() {
+        @Composable get() {
             val isSelected = LocalTabNavigator.current.current.key == key
             val image = AnimatedImageVector.animatedVectorResource(R.drawable.anim_library_enter)
             return TabOptions(
@@ -147,8 +145,7 @@ data object LibraryTab : Tab {
                     onChangeCategoryClicked = screenModel::openChangeCategoryDialog,
                     onMarkAsReadClicked = { screenModel.markReadSelection(true) },
                     onMarkAsUnreadClicked = { screenModel.markReadSelection(false) },
-                    onDownloadClicked = screenModel::performDownloadAction
-                        .takeIf { state.selectedManga.fastAll { !it.isLocal() } },
+                    onDownloadClicked = screenModel::performDownloadAction.takeIf { state.selectedManga.fastAll { !it.isLocal() } },
                     onDeleteClicked = screenModel::openDeleteMangaDialog,
                     onMigrateClicked = {
                         val selection = state.selection
@@ -163,6 +160,7 @@ data object LibraryTab : Tab {
                 state.isLoading -> {
                     LoadingScreen(Modifier.padding(contentPadding))
                 }
+
                 state.searchQuery.isNullOrEmpty() && !state.hasActiveFilters && state.isLibraryEmpty -> {
                     val handler = LocalUriHandler.current
                     EmptyScreen(
@@ -177,18 +175,17 @@ data object LibraryTab : Tab {
                         ),
                     )
                 }
+
                 else -> {
                     LibraryContent(
                         categories = state.displayedCategories,
-                        searchQuery = state.searchQuery,
                         selection = state.selection,
                         contentPadding = contentPadding,
                         currentPage = state.coercedActiveCategoryIndex,
                         isRefreshing = state.isLibraryUpdating,
-                        hasActiveFilters = state.hasActiveFilters,
                         showPageTabs = state.showCategoryTabs || !state.searchQuery.isNullOrEmpty(),
                         onChangeCurrentPage = screenModel::updateActiveCategoryIndex,
-                        onClickManga = { navigator.push(MangaScreen(it)) },
+                        onClickManga = { mangaId, tag -> navigator.push(MangaScreen(mangaId, sharedElementTag = tag)) },
                         onContinueReadingClicked = { it: LibraryManga ->
                             scope.launchIO {
                                 val chapter = screenModel.getNextUnreadChapter(it.manga)
@@ -201,20 +198,17 @@ data object LibraryTab : Tab {
                                 }
                             }
                             Unit
-                        }.takeIf { state.showMangaContinueButton },
+                        },
                         onToggleSelection = screenModel::toggleSelection,
                         onToggleRangeSelection = { category, manga ->
                             screenModel.toggleRangeSelection(category, manga)
                             haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                         },
                         onRefresh = { onClickRefresh(state.activeCategory) },
-                        onGlobalSearchClicked = {
-                            navigator.push(GlobalSearchScreen(screenModel.state.value.searchQuery ?: ""))
-                        },
                         getItemCountForCategory = { state.getItemCountForCategory(it) },
-                        getDisplayMode = { screenModel.getDisplayMode() },
                         getColumnsForOrientation = { screenModel.getColumnsForOrientation(it) },
                         getItemsForCategory = { state.getItemsForCategory(it) },
+                        continueReadingManga = state.continueReadingManga,
                     )
                 }
             }
@@ -229,6 +223,7 @@ data object LibraryTab : Tab {
                     category = state.activeCategory,
                 )
             }
+
             is LibraryScreenModel.Dialog.ChangeCategory -> {
                 ChangeCategoryDialog(
                     initialSelection = dialog.initialSelection,
@@ -243,6 +238,7 @@ data object LibraryTab : Tab {
                     },
                 )
             }
+
             is LibraryScreenModel.Dialog.DeleteManga -> {
                 DeleteLibraryMangaDialog(
                     containsLocalManga = dialog.manga.any(Manga::isLocal),
@@ -253,6 +249,7 @@ data object LibraryTab : Tab {
                     },
                 )
             }
+
             null -> {}
         }
 

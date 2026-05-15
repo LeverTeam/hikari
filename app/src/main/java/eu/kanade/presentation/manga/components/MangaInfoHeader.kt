@@ -11,7 +11,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -119,6 +118,7 @@ fun MangaInfoBox(
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    sharedElementTag: String = "cover",
 ) {
     Box(modifier = modifier) {
         val backdropGradientColors = listOf(
@@ -153,6 +153,7 @@ fun MangaInfoBox(
                     isStubSource = isStubSource,
                     onCoverClick = onCoverClick,
                     doSearch = doSearch,
+                    sharedElementTag = sharedElementTag,
                 )
             } else {
                 MangaAndSourceTitlesLarge(
@@ -162,6 +163,7 @@ fun MangaInfoBox(
                     isStubSource = isStubSource,
                     onCoverClick = onCoverClick,
                     doSearch = doSearch,
+                    sharedElementTag = sharedElementTag,
                 )
             }
         }
@@ -288,7 +290,6 @@ fun ExpandableMangaDescription(
                     ) {
                         tags.forEach {
                             TagsChip(
-                                modifier = DefaultTagChipModifier,
                                 text = it,
                                 onClick = {
                                     tagSelected = it
@@ -304,7 +305,6 @@ fun ExpandableMangaDescription(
                     ) {
                         items(items = tags) {
                             TagsChip(
-                                modifier = DefaultTagChipModifier,
                                 text = it,
                                 onClick = {
                                     tagSelected = it
@@ -327,6 +327,7 @@ private fun MangaAndSourceTitlesLarge(
     isStubSource: Boolean,
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
+    sharedElementTag: String,
 ) {
     Column(
         modifier = Modifier
@@ -343,6 +344,7 @@ private fun MangaAndSourceTitlesLarge(
             mangaId = manga.id,
             contentDescription = stringResource(MR.strings.manga_cover),
             onClick = onCoverClick,
+            tag = sharedElementTag,
         )
         Spacer(modifier = Modifier.height(16.dp))
         MangaContentInfo(
@@ -355,6 +357,7 @@ private fun MangaAndSourceTitlesLarge(
             isStubSource = isStubSource,
             doSearch = doSearch,
             textAlign = TextAlign.Center,
+            sharedElementTag = sharedElementTag,
         )
     }
 }
@@ -367,6 +370,7 @@ private fun MangaAndSourceTitlesSmall(
     isStubSource: Boolean,
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
+    sharedElementTag: String,
 ) {
     Row(
         modifier = Modifier
@@ -386,6 +390,7 @@ private fun MangaAndSourceTitlesSmall(
             mangaId = manga.id,
             contentDescription = stringResource(MR.strings.manga_cover),
             onClick = onCoverClick,
+            tag = sharedElementTag,
         )
         Column(
             verticalArrangement = Arrangement.spacedBy(2.dp),
@@ -399,13 +404,14 @@ private fun MangaAndSourceTitlesSmall(
                 sourceName = sourceName,
                 isStubSource = isStubSource,
                 doSearch = doSearch,
+                sharedElementTag = sharedElementTag,
             )
         }
     }
 }
 
 @Composable
-private fun ColumnScope.MangaContentInfo(
+private fun MangaContentInfo(
     title: String,
     mangaId: Long,
     author: String?,
@@ -415,6 +421,7 @@ private fun ColumnScope.MangaContentInfo(
     isStubSource: Boolean,
     doSearch: (query: String, global: Boolean) -> Unit,
     textAlign: TextAlign? = LocalTextStyle.current.textAlign,
+    sharedElementTag: String = "cover",
 ) {
     val context = LocalContext.current
     androidx.compose.animation.AnimatedVisibility(
@@ -425,7 +432,7 @@ private fun ColumnScope.MangaContentInfo(
             text = title.ifBlank { stringResource(MR.strings.unknown_title) },
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier
-                .mangaSharedElement("title", mangaId)
+                .mangaSharedElement("${sharedElementTag}-title", mangaId)
                 .clickableNoIndication(
                     onLongClick = {
                         if (title.isNotBlank()) {
@@ -713,7 +720,7 @@ private fun TagsChip(
 ) {
     CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 0.dp) {
         SuggestionChip(
-            modifier = modifier,
+            modifier = modifier.then(DefaultTagChipModifier),
             onClick = onClick,
             label = { Text(text = text, style = MaterialTheme.typography.bodySmall) },
         )

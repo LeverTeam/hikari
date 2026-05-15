@@ -99,33 +99,24 @@ fun MangaScreen(
     onFilterButtonClicked: () -> Unit,
     onRefresh: () -> Unit,
     onContinueReading: () -> Unit,
-    onSearch: (query: String, global: Boolean) -> Unit,
-
-    // For cover dialog
+    onSearch: (String, Boolean) -> Unit,
     onCoverClicked: () -> Unit,
-
-    // For top action menu
     onShareClicked: (() -> Unit)?,
     onDownloadActionClicked: ((DownloadAction) -> Unit)?,
     onEditCategoryClicked: (() -> Unit)?,
     onEditFetchIntervalClicked: (() -> Unit)?,
     onMigrateClicked: (() -> Unit)?,
     onEditNotesClicked: () -> Unit,
-
-    // For bottom action menu
-    onMultiBookmarkClicked: (List<Chapter>, bookmarked: Boolean) -> Unit,
-    onMultiMarkAsReadClicked: (List<Chapter>, markAsRead: Boolean) -> Unit,
+    onMultiBookmarkClicked: (List<Chapter>, Boolean) -> Unit,
+    onMultiMarkAsReadClicked: (List<Chapter>, Boolean) -> Unit,
     onMarkPreviousAsReadClicked: (Chapter) -> Unit,
     onMultiDeleteClicked: (List<Chapter>) -> Unit,
-
-    // For chapter swipe
     onChapterSwipe: (ChapterList.Item, LibraryPreferences.ChapterSwipeAction) -> Unit,
-
-    // Chapter selection
     onChapterSelected: (ChapterList.Item, Boolean, Boolean) -> Unit,
     onAllChapterSelected: (Boolean) -> Unit,
     onInvertSelection: () -> Unit,
     onGroupClicked: (ChapterList.Group) -> Unit,
+    sharedElementTag: String = "cover",
 ) {
     val context = LocalContext.current
     val onCopyTagToClipboard: (tag: String) -> Unit = {
@@ -169,6 +160,7 @@ fun MangaScreen(
             onAllChapterSelected = onAllChapterSelected,
             onInvertSelection = onInvertSelection,
             onGroupClicked = onGroupClicked,
+            sharedElementTag = sharedElementTag,
         )
     } else {
         MangaScreenLargeImpl(
@@ -205,6 +197,7 @@ fun MangaScreen(
             onAllChapterSelected = onAllChapterSelected,
             onInvertSelection = onInvertSelection,
             onGroupClicked = onGroupClicked,
+            sharedElementTag = sharedElementTag,
         )
     }
 }
@@ -257,6 +250,7 @@ private fun MangaScreenSmallImpl(
     onAllChapterSelected: (Boolean) -> Unit,
     onInvertSelection: () -> Unit,
     onGroupClicked: (ChapterList.Group) -> Unit,
+    sharedElementTag: String,
 ) {
     val chapterListState = rememberLazyListState()
 
@@ -383,6 +377,7 @@ private fun MangaScreenSmallImpl(
                             isStubSource = remember { state.source is StubSource },
                             onCoverClick = onCoverClicked,
                             doSearch = onSearch,
+                            sharedElementTag = sharedElementTag,
                         )
                     }
 
@@ -499,6 +494,7 @@ private fun MangaScreenLargeImpl(
     onAllChapterSelected: (Boolean) -> Unit,
     onInvertSelection: () -> Unit,
     onGroupClicked: (ChapterList.Group) -> Unit,
+    sharedElementTag: String,
 ) {
     val layoutDirection = LocalLayoutDirection.current
     val density = LocalDensity.current
@@ -619,6 +615,7 @@ private fun MangaScreenLargeImpl(
                             isStubSource = remember { state.source is StubSource },
                             onCoverClick = onCoverClicked,
                             doSearch = onSearch,
+                            sharedElementTag = sharedElementTag,
                         )
                         MangaActionRow(
                             favorite = state.manga.favorite,

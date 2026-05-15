@@ -72,6 +72,7 @@ import tachiyomi.presentation.core.screens.LoadingScreen
 class MangaScreen(
     private val mangaId: Long,
     val fromSource: Boolean = false,
+    val sharedElementTag: String = "cover",
 ) : Screen(), AssistContentScreen {
 
     private var assistUrl: String? = null

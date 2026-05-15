@@ -1,6 +1,7 @@
 package eu.kanade.presentation.library.components
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FilterList
@@ -47,6 +48,7 @@ fun LibraryToolbar(
         onClickSelectAll = onClickSelectAll,
         onClickInvertSelection = onClickInvertSelection,
     )
+
     else -> LibraryRegularToolbar(
         title = title,
         hasFilters = hasActiveFilters,
@@ -75,19 +77,22 @@ private fun LibraryRegularToolbar(
     val pillAlpha = if (isSystemInDarkTheme()) 0.12f else 0.08f
     SearchToolbar(
         titleContent = {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = title.text,
-                    maxLines = 1,
-                    modifier = Modifier.weight(1f, false),
-                    overflow = TextOverflow.Ellipsis,
-                )
-                if (title.numberOfManga != null) {
-                    Pill(
-                        text = "${title.numberOfManga}",
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = pillAlpha),
-                        fontSize = 14.sp,
+            Column {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = title.text,
+                        maxLines = 1,
+                        modifier = Modifier.weight(1f, false),
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.titleLarge,
                     )
+                    if (title.numberOfManga != null) {
+                        Pill(
+                            text = "${title.numberOfManga}",
+                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = pillAlpha),
+                            fontSize = 14.sp,
+                        )
+                    }
                 }
             }
         },

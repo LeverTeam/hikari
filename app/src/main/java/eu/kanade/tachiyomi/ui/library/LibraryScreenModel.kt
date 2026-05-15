@@ -16,6 +16,7 @@ import eu.kanade.presentation.components.SEARCH_DEBOUNCE_MILLIS
 import eu.kanade.presentation.library.components.LibraryToolbarTitle
 import eu.kanade.presentation.manga.DownloadAction
 import eu.kanade.tachiyomi.data.cache.CoverCache
+import tachiyomi.domain.track.model.Track
 import eu.kanade.tachiyomi.data.download.DownloadCache
 import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.data.library.LibraryUpdateJob
@@ -52,7 +53,6 @@ import tachiyomi.domain.chapter.interactor.GetBookmarkedChaptersByMangaId
 import tachiyomi.domain.chapter.interactor.GetChaptersByMangaId
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.history.interactor.GetNextChapters
-import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.domain.library.model.LibraryManga
 import tachiyomi.domain.library.model.LibrarySort
 import tachiyomi.domain.library.model.sort
@@ -63,7 +63,8 @@ import tachiyomi.domain.manga.model.MangaUpdate
 import tachiyomi.domain.manga.model.applyFilter
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.track.interactor.GetTracksPerManga
-import tachiyomi.domain.track.model.Track
+import tachiyomi.domain.history.interactor.GetHistory
+import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.source.local.isLocal
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -86,7 +87,8 @@ class LibraryScreenModel(
     private val downloadManager: DownloadManager = Injekt.get(),
     private val downloadCache: DownloadCache = Injekt.get(),
     private val trackerManager: TrackerManager = Injekt.get(),
-) : StateScreenModel<LibraryScreenModel.State>(LibraryScreenModel.State()) {
+    private val getHistory: GetHistory = Injekt.get(),
+) : StateScreenModel<LibraryScreenModel.State>(State()) {
 
     init {
         mutableState.update { state ->
@@ -99,7 +101,8 @@ class LibraryScreenModel(
                 getFavoritesFlow(),
                 combine(getTracksPerManga.subscribe(), getTrackingFiltersFlow(), ::Pair),
                 getLibraryItemPreferencesFlow(),
-            ) { searchQuery, categories, favorites, (tracksMap, trackingFilters), itemPreferences ->
+            ) { searchQuery: String?, categories: List<Category>, favorites: List<LibraryItem>, trackData: Pair<Map<Long, List<Track>>, Map<Long, TriState>>, itemPreferences: ItemPreferences ->
+                val (tracksMap, trackingFilters) = trackData
                 val showSystemCategory = favorites.any { it.libraryManga.categories.contains(0) }
                 val filteredFavorites = favorites
                     .applyFilters(tracksMap, trackingFilters, itemPreferences)
@@ -189,6 +192,15 @@ class LibraryScreenModel(
                 mutableState.update { it.copy(isLibraryUpdating = isUpdating) }
             }
             .launchIn(screenModelScope)
+
+        screenModelScope.launchIO {
+            getHistory.subscribe("")
+                .map { it.firstOrNull() }
+                .distinctUntilChanged()
+                .collectLatest { history ->
+                    mutableState.update { it.copy(continueReadingManga = history) }
+                }
+        }
     }
 
     private fun List<LibraryItem>.applyFilters(
@@ -592,9 +604,6 @@ class LibraryScreenModel(
         }
     }
 
-    fun getDisplayMode(): PreferenceMutableState<LibraryDisplayMode> {
-        return libraryPreferences.displayMode.asState(screenModelScope)
-    }
 
     fun getColumnsForOrientation(isLandscape: Boolean): PreferenceMutableState<Int> {
         return (if (isLandscape) libraryPreferences.landscapeColumns else libraryPreferences.portraitColumns)
@@ -673,7 +682,7 @@ class LibraryScreenModel(
             val newSelection = state.selection.mutate { list ->
                 val itemIds = state.getItemsForCategoryId(state.activeCategory?.id).fastMap { it.id }
                 val (toRemove, toAdd) = itemIds.partition { it in list }
-                list.removeAll(toRemove)
+                list.removeAll(toRemove.toSet())
                 list.addAll(toAdd)
             }
             state.copy(selection = newSelection)
@@ -778,6 +787,7 @@ class LibraryScreenModel(
         val isLibraryUpdating: Boolean = false,
         val activeCategoryIndex: Int = 0,
         val groupedFavorites: Map<Category, List</* LibraryItem */ Long>> = emptyMap(),
+        val continueReadingManga: HistoryWithRelations? = null,
     ) {
         val displayedCategories: List<Category> = groupedFavorites.keys.toList()
 

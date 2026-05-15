@@ -13,8 +13,6 @@ import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.Role
 import coil3.compose.AsyncImage
-import eu.kanade.presentation.util.LocalNavAnimatedVisibilityScope
-import eu.kanade.presentation.util.LocalSharedTransitionScope
 import eu.kanade.presentation.util.mangaSharedElement
 import eu.kanade.presentation.util.rememberResourceBitmapPainter
 import eu.kanade.tachiyomi.R
@@ -34,16 +32,15 @@ enum class MangaCover(val ratio: Float) {
         shape: Shape = MaterialTheme.shapes.extraSmall,
         onClick: (() -> Unit)? = null,
         mangaId: Long? = null,
+        tag: String = "cover",
     ) {
-        val sharedTransitionScope = LocalSharedTransitionScope.current
-        val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
 
         val id = mangaId ?: when (data) {
             is MangaCoverModel -> data.mangaId
             else -> null
         }
 
-        val sharedElementModifier = Modifier.mangaSharedElement("cover", id)
+        val sharedElementModifier = Modifier.mangaSharedElement(tag, id)
 
         AsyncImage(
             model = data,
