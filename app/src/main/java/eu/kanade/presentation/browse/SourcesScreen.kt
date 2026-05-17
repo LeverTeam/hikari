@@ -1,11 +1,13 @@
 package eu.kanade.presentation.browse
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PushPin
 import androidx.compose.material.icons.outlined.PushPin
@@ -17,10 +19,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.browse.components.BaseSourceItem
+import eu.kanade.presentation.history.components.ItemPosition
 import eu.kanade.tachiyomi.ui.browse.source.SourcesScreenModel
 import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseSourceScreenModel.Listing
 import eu.kanade.tachiyomi.util.system.LocaleHelper
@@ -53,38 +58,75 @@ fun SourcesScreen(
             modifier = Modifier.padding(contentPadding),
         )
         else -> {
+            val counts = remember(state.items) {
+                val map = mutableMapOf<String, Int>()
+                var currentHeader: String? = null
+                var currentCount = 0
+                for (item in state.items) {
+                    when (item) {
+                        is SourceUiModel.Header -> {
+                            if (currentHeader != null) {
+                                map[currentHeader] = currentCount
+                            }
+                            currentHeader = item.language
+                            currentCount = 0
+                        }
+                        is SourceUiModel.Item -> {
+                            currentCount++
+                        }
+                    }
+                }
+                if (currentHeader != null) {
+                    map[currentHeader] = currentCount
+                }
+                map
+            }
+
             ScrollbarLazyColumn(
                 contentPadding = contentPadding + topSmallPaddingValues,
             ) {
-                items(
+                itemsIndexed(
                     items = state.items,
-                    contentType = {
+                    contentType = { _, it ->
                         when (it) {
                             is SourceUiModel.Header -> "header"
                             is SourceUiModel.Item -> "item"
                         }
                     },
-                    key = {
+                    key = { _, it ->
                         when (it) {
                             is SourceUiModel.Header -> it.hashCode()
                             is SourceUiModel.Item -> "source-${it.source.key()}"
                         }
                     },
-                ) { model ->
+                ) { index, model ->
                     when (model) {
                         is SourceUiModel.Header -> {
+                            val count = counts[model.language] ?: 0
                             SourceHeader(
                                 modifier = Modifier.animateItem(),
                                 language = model.language,
+                                count = count,
                             )
                         }
-                        is SourceUiModel.Item -> SourceItem(
-                            modifier = Modifier.animateItem(),
-                            source = model.source,
-                            onClickItem = onClickItem,
-                            onLongClickItem = onLongClickItem,
-                            onClickPin = onClickPin,
-                        )
+                        is SourceUiModel.Item -> {
+                            val prevIsHeaderOrNull = index == 0 || state.items[index - 1] is SourceUiModel.Header
+                            val nextIsHeaderOrNull = index == state.items.lastIndex || state.items[index + 1] is SourceUiModel.Header
+                            val position = when {
+                                prevIsHeaderOrNull && nextIsHeaderOrNull -> ItemPosition.Single
+                                prevIsHeaderOrNull -> ItemPosition.First
+                                nextIsHeaderOrNull -> ItemPosition.Last
+                                else -> ItemPosition.Middle
+                            }
+                            SourceItem(
+                                modifier = Modifier.animateItem(),
+                                source = model.source,
+                                position = position,
+                                onClickItem = onClickItem,
+                                onLongClickItem = onLongClickItem,
+                                onClickPin = onClickPin,
+                            )
+                        }
                     }
                 }
             }
@@ -95,20 +137,28 @@ fun SourcesScreen(
 @Composable
 private fun SourceHeader(
     language: String,
+    count: Int,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    Text(
-        text = LocaleHelper.getSourceDisplayName(language, context),
+    Row(
         modifier = modifier
+            .fillMaxWidth()
             .padding(horizontal = MaterialTheme.padding.medium, vertical = MaterialTheme.padding.small),
-        style = MaterialTheme.typography.header,
-    )
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Text(
+            text = LocaleHelper.getSourceDisplayName(language, context),
+            style = MaterialTheme.typography.header,
+        )
+    }
 }
 
 @Composable
 private fun SourceItem(
     source: Source,
+    position: ItemPosition,
     onClickItem: (Source, Listing) -> Unit,
     onLongClickItem: (Source) -> Unit,
     onClickPin: (Source) -> Unit,
@@ -117,6 +167,7 @@ private fun SourceItem(
     BaseSourceItem(
         modifier = modifier,
         source = source,
+        position = position,
         onClickItem = { onClickItem(source, Listing.Popular) },
         onLongClickItem = { onLongClickItem(source) },
         action = {

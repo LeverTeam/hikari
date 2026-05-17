@@ -751,7 +751,7 @@
     <string name="action_sort_tracker_score">Skor penjejak</string>
     <string name="ext_revoke_trust">Batalkan sambungan dipercayakan yang tidak diketahui</string>
     <string name="information_empty_repos">Anda tidak menetapkan repositori.</string>
-    <string name="action_add_repo_message">Tambah repositori tambahan pada Mihon %s. Ini mestilah URL yang berakhir dengan \"index.min.json\".</string>
+    <string name="action_add_repo_message">Tambah repositori tambahan pada Hikari %s. Ini mestilah URL yang berakhir dengan \"index.min.json\".</string>
     <string name="action_open_repo">Buka sumber repositori</string>
     <string name="scanlator">Pemindai</string>
     <string name="exclude_scanlators">Kecualikan scanlators</string>

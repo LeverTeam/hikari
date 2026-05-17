@@ -1,6 +1,5 @@
 package eu.kanade.presentation.webview
 
-import android.content.pm.ApplicationInfo
 import android.graphics.Bitmap
 import android.os.Message
 import android.webkit.JsPromptResult
@@ -8,7 +7,6 @@ import android.webkit.JsResult
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,8 +17,6 @@ import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -31,11 +27,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.stack.mutableStateStackOf
 import com.kevinnzou.web.AccompanistWebChromeClient
 import com.kevinnzou.web.AccompanistWebViewClient
@@ -46,13 +39,9 @@ import com.kevinnzou.web.WebViewNavigator
 import com.kevinnzou.web.WebViewState
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarActions
-import eu.kanade.presentation.components.WarningBanner
-import eu.kanade.tachiyomi.BuildConfig
 import eu.kanade.tachiyomi.R
-import eu.kanade.tachiyomi.util.system.getHtml
 import eu.kanade.tachiyomi.util.system.setDefaultSettings
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.coroutines.launch
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
@@ -93,11 +82,7 @@ fun WebViewScreenContent(
     val currentWindow = windowStack.lastItemOrNull!!
     val navigator = currentWindow.navigator
 
-    val uriHandler = LocalUriHandler.current
-    val scope = rememberCoroutineScope()
-
     var currentUrl by remember { mutableStateOf(url) }
-    var showCloudflareHelp by remember { mutableStateOf(false) }
     var isActive by remember { mutableStateOf(true) }
 
     DisposableEffect(Unit) {
@@ -116,10 +101,6 @@ fun WebViewScreenContent(
 
             override fun onPageFinished(view: WebView, url: String?) {
                 super.onPageFinished(view, url)
-                scope.launch {
-                    val html = view.getHtml()
-                    showCloudflareHelp = "window._cf_chl_opt" in html || "Ray ID is" in html
-                }
             }
 
             override fun doUpdateVisitedHistory(
@@ -286,23 +267,6 @@ fun WebViewScreenContent(
                             )
                         },
                     )
-
-                    if (showCloudflareHelp) {
-                        Surface(
-                            modifier = Modifier.padding(8.dp),
-                        ) {
-                            WarningBanner(
-                                textRes = MR.strings.information_cloudflare_help,
-                                modifier = Modifier
-                                    .clip(MaterialTheme.shapes.small)
-                                    .clickable {
-                                        uriHandler.openUri(
-                                            "https://mihon.app/docs/guides/troubleshooting/#cloudflare",
-                                        )
-                                    },
-                            )
-                        }
-                    }
                 }
                 when (val loadingState = currentWindow.state.loadingState) {
                     is LoadingState.Initializing -> LinearProgressIndicator(
@@ -333,13 +297,6 @@ fun WebViewScreenContent(
                 navigator = navigator,
                 onCreated = { webView ->
                     webView.setDefaultSettings()
-
-                    // Debug mode (chrome://inspect/#devices)
-                    if (BuildConfig.DEBUG &&
-                        0 != webView.context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
-                    ) {
-                        WebView.setWebContentsDebuggingEnabled(true)
-                    }
 
                     headers["user-agent"]?.let {
                         webView.settings.userAgentString = it

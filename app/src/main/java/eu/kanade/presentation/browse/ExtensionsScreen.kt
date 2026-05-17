@@ -2,7 +2,6 @@ package eu.kanade.presentation.browse
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.GetApp
@@ -22,6 +21,7 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.VerifiedUser
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import eu.kanade.presentation.history.components.ItemPosition
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -169,6 +169,7 @@ private fun ExtensionContent(
                 contentType = "header",
                 key = "extensionHeader-${header.hashCode()}",
             ) {
+                val count = items.size
                 when (header) {
                     is ExtensionUiModel.Header.Resource -> {
                         val action: @Composable RowScope.() -> Unit =
@@ -188,6 +189,7 @@ private fun ExtensionContent(
                             }
                         ExtensionHeader(
                             textRes = header.textRes,
+                            count = count,
                             modifier = Modifier.animateItemFastScroll(),
                             action = action,
                         )
@@ -195,26 +197,34 @@ private fun ExtensionContent(
                     is ExtensionUiModel.Header.Text -> {
                         ExtensionHeader(
                             text = header.text,
+                            count = count,
                             modifier = Modifier.animateItemFastScroll(),
                         )
                     }
                 }
             }
 
-            items(
+            itemsIndexed(
                 items = items,
-                contentType = { "item" },
-                key = { item ->
+                contentType = { _, _ -> "item" },
+                key = { _, item ->
                     when (item.extension) {
                         is Extension.Untrusted -> "extension-untrusted-${item.hashCode()}"
                         is Extension.Installed -> "extension-installed-${item.hashCode()}"
                         is Extension.Available -> "extension-available-${item.hashCode()}"
                     }
                 },
-            ) { item ->
+            ) { itemIndex, item ->
+                val position = when {
+                    items.size == 1 -> ItemPosition.Single
+                    itemIndex == 0 -> ItemPosition.First
+                    itemIndex == items.size - 1 -> ItemPosition.Last
+                    else -> ItemPosition.Middle
+                }
                 ExtensionItem(
                     modifier = Modifier.animateItemFastScroll(),
                     item = item,
+                    position = position,
                     onClickItem = {
                         when (it) {
                             is Extension.Available -> onInstallExtension(it)
@@ -272,6 +282,7 @@ private fun ExtensionContent(
 @Composable
 private fun ExtensionItem(
     item: ExtensionUiModel.Item,
+    position: ItemPosition,
     onClickItem: (Extension) -> Unit,
     onLongClickItem: (Extension) -> Unit,
     onClickItemCancel: (Extension) -> Unit,
@@ -281,11 +292,8 @@ private fun ExtensionItem(
 ) {
     val (extension, installStep) = item
     BaseBrowseItem(
-        modifier = modifier
-            .combinedClickable(
-                onClick = { onClickItem(extension) },
-                onLongClick = { onLongClickItem(extension) },
-            ),
+        modifier = modifier,
+        position = position,
         onClickItem = { onClickItem(extension) },
         onLongClickItem = { onLongClickItem(extension) },
         icon = {
@@ -347,7 +355,6 @@ private fun ExtensionItemContent(
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.bodyMedium,
         )
-        // Won't look good but it's not like we can ellipsize overflowing content
         FlowRow(
             modifier = Modifier.secondaryItemAlpha(),
             horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
@@ -495,11 +502,13 @@ private fun ExtensionItemActions(
 @Composable
 private fun ExtensionHeader(
     textRes: StringResource,
+    count: Int,
     modifier: Modifier = Modifier,
     action: @Composable RowScope.() -> Unit = {},
 ) {
     ExtensionHeader(
         text = stringResource(textRes),
+        count = count,
         modifier = modifier,
         action = action,
     )
@@ -508,6 +517,7 @@ private fun ExtensionHeader(
 @Composable
 private fun ExtensionHeader(
     text: String,
+    count: Int,
     modifier: Modifier = Modifier,
     action: @Composable RowScope.() -> Unit = {},
 ) {
@@ -522,6 +532,7 @@ private fun ExtensionHeader(
                 .weight(1f),
             style = MaterialTheme.typography.header,
         )
+
         action()
     }
 }

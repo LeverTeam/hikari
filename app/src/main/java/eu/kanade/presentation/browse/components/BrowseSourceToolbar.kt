@@ -33,12 +33,10 @@ fun BrowseSourceToolbar(
     onDisplayModeChange: (LibraryDisplayMode) -> Unit,
     navigateUp: () -> Unit,
     onWebViewClick: () -> Unit,
-    onHelpClick: () -> Unit,
     onSettingsClick: () -> Unit,
     onSearch: (String) -> Unit,
     scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
-    // Avoid capturing unstable source in actions lambda
     val title = source?.name
     val isLocalSource = source is LocalSource
     val isConfigurableSource = source is ConfigurableSource
@@ -67,14 +65,7 @@ fun BrowseSourceToolbar(
                                 onClick = { selectingDisplayMode = true },
                             ),
                         )
-                        if (isLocalSource) {
-                            add(
-                                AppBar.OverflowAction(
-                                    title = stringResource(MR.strings.label_help),
-                                    onClick = onHelpClick,
-                                ),
-                            )
-                        } else {
+                        if (!isLocalSource) {
                             add(
                                 AppBar.OverflowAction(
                                     title = stringResource(MR.strings.action_open_in_web_view),

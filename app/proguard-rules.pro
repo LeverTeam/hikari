@@ -3,7 +3,7 @@
 
 -keep class eu.kanade.** { *; }
 -keep class tachiyomi.** { *; }
--keep class mihon.** { *; }
+-keep class Hikari.** { *; }
 -keep class hikari.** { *; }
 
 # Keep common dependencies used in extensions

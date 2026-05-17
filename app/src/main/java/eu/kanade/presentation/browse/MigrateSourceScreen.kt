@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowDownward
 import androidx.compose.material.icons.outlined.ArrowUpward
@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import eu.kanade.domain.source.interactor.SetMigrateSorting
 import eu.kanade.presentation.browse.components.BaseSourceItem
 import eu.kanade.presentation.browse.components.SourceIcon
+import eu.kanade.presentation.history.components.ItemPosition
 import eu.kanade.tachiyomi.ui.browse.migration.sources.MigrateSourceScreenModel
 import eu.kanade.tachiyomi.util.system.copyToClipboard
 import kotlinx.collections.immutable.ImmutableList
@@ -92,7 +93,7 @@ private fun MigrateSourceList(
             Row(
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.background)
-                    .padding(start = MaterialTheme.padding.medium),
+                    .padding(start = MaterialTheme.padding.medium, end = MaterialTheme.padding.medium),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
@@ -128,14 +129,21 @@ private fun MigrateSourceList(
             }
         }
 
-        items(
+        itemsIndexed(
             items = list,
-            key = { (source, _) -> "migrate-${source.id}" },
-        ) { (source, count) ->
+            key = { _, (source, _) -> "migrate-${source.id}" },
+        ) { index, (source, count) ->
+            val position = when {
+                list.size == 1 -> ItemPosition.Single
+                index == 0 -> ItemPosition.First
+                index == list.lastIndex -> ItemPosition.Last
+                else -> ItemPosition.Middle
+            }
             MigrateSourceItem(
                 modifier = Modifier.animateItem(),
                 source = source,
                 count = count,
+                position = position,
                 onClickItem = { onClickItem(source) },
                 onLongClickItem = { onLongClickItem(source) },
             )
@@ -147,6 +155,7 @@ private fun MigrateSourceList(
 private fun MigrateSourceItem(
     source: Source,
     count: Long,
+    position: ItemPosition,
     onClickItem: () -> Unit,
     onLongClickItem: () -> Unit,
     modifier: Modifier = Modifier,
@@ -154,6 +163,7 @@ private fun MigrateSourceItem(
     BaseSourceItem(
         modifier = modifier,
         source = source,
+        position = position,
         showLanguageInContent = source.lang != "",
         onClickItem = onClickItem,
         onLongClickItem = onLongClickItem,

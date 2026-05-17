@@ -166,8 +166,8 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
             val excludedCategories = libraryPreferences.updateCategoriesExclude.get().map { it.toLong() }
 
             libraryManga.filter {
-                val included = includedCategories.isEmpty() || it.categories.intersect(includedCategories).isNotEmpty()
-                val excluded = it.categories.intersect(excludedCategories).isNotEmpty()
+                val included = includedCategories.isEmpty() || it.categories.intersect(includedCategories.toSet()).isNotEmpty()
+                val excluded = it.categories.intersect(excludedCategories.toSet()).isNotEmpty()
                 included && !excluded
             }
         }
@@ -376,9 +376,9 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
     private fun writeErrorFile(errors: List<Pair<Manga, String?>>): File {
         try {
             if (errors.isNotEmpty()) {
-                val file = context.createFileInCacheDir("mihon_update_errors.txt")
+                val file = context.createFileInCacheDir("hikari_update_errors.txt")
                 file.bufferedWriter().use { out ->
-                    out.write(context.stringResource(MR.strings.library_errors_help, ERROR_LOG_HELP_URL) + "\n\n")
+                    out.write("Library Update Errors\n\n")
                     // Error file format:
                     // ! Error
                     //   # Source
@@ -405,10 +405,6 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
         const val TAG = "LibraryUpdate"
         private const val WORK_NAME_AUTO = "LibraryUpdate-auto"
         private const val WORK_NAME_MANUAL = "LibraryUpdate-manual"
-
-        private const val ERROR_LOG_HELP_URL = "https://mihon.app/docs/guides/troubleshooting/"
-
-        private const val MANGA_PER_SOURCE_QUEUE_WARNING_THRESHOLD = 60
 
         /**
          * Key for category to update.

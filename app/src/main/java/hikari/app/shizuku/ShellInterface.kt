@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Mihon Open Source Project
+ * Copyright 2024 Hikari Open Source Project
  * Copyright 2015-2024 Javier Tomás
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

@@ -6,8 +6,6 @@ import eu.kanade.domain.chapter.model.toSChapter
 import eu.kanade.domain.manga.model.getComicInfo
 import eu.kanade.tachiyomi.data.cache.ChapterCache
 import eu.kanade.tachiyomi.data.download.model.Download
-import eu.kanade.tachiyomi.data.library.LibraryUpdateNotifier
-import eu.kanade.tachiyomi.data.notification.NotificationHandler
 import eu.kanade.tachiyomi.source.UnmeteredSource
 import eu.kanade.tachiyomi.source.model.Page
 import eu.kanade.tachiyomi.source.online.HttpSource
@@ -289,12 +287,11 @@ class Downloader(
                     maxDownloadsFromSource > CHAPTERS_PER_SOURCE_QUEUE_WARNING_THRESHOLD
                 ) {
                     notifier.onWarning(
-                        context.stringResource(
+                        reason = context.stringResource(
                             MR.strings.download_queue_size_warning,
                             context.stringResource(MR.strings.app_name),
                         ),
-                        WARNING_NOTIF_TIMEOUT_MS,
-                        NotificationHandler.openUrl(context, LibraryUpdateNotifier.HELP_WARNING_URL),
+                        timeout = WARNING_NOTIF_TIMEOUT_MS,
                     )
                 }
                 DownloadJob.start(context)
@@ -661,7 +658,7 @@ class Downloader(
                     download.status = Download.State.NOT_DOWNLOADED
                 }
             }
-            queue - downloads
+            queue - downloads.toSet()
         }
     }
 

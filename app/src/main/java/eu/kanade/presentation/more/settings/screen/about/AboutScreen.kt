@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Gavel
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.Policy
-import androidx.compose.material.icons.outlined.Public
 import androidx.compose.material.icons.outlined.SystemUpdate
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -27,7 +25,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -54,12 +51,6 @@ import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
-import tachiyomi.presentation.core.icons.CustomIcons
-import tachiyomi.presentation.core.icons.Discord
-import tachiyomi.presentation.core.icons.Facebook
-import tachiyomi.presentation.core.icons.Github
-import tachiyomi.presentation.core.icons.Reddit
-import tachiyomi.presentation.core.icons.X
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.time.Instant
@@ -72,7 +63,6 @@ object AboutScreen : Screen() {
     override fun Content() {
         val scope = rememberCoroutineScope()
         val context = LocalContext.current
-        val uriHandler = LocalUriHandler.current
         val handleBack = LocalBackPress.current
         val navigator = LocalNavigator.currentOrThrow
         val snackbarHostState = remember { SnackbarHostState() }
@@ -171,91 +161,14 @@ object AboutScreen : Screen() {
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
                             ) {
-                                if (!BuildConfig.DEBUG) {
-                                    CommunityTile(
-                                        label = stringResource(MR.strings.whats_new),
-                                        icon = Icons.Outlined.Info,
-                                        horizontal = true,
-                                        modifier = Modifier.weight(1f),
-                                        url = RELEASE_URL,
-                                    )
-                                }
                                 CommunityTile(
-                                    label = stringResource(MR.strings.privacy_policy),
-                                    icon = Icons.Outlined.Policy,
+                                    label = stringResource(MR.strings.whats_new),
+                                    icon = Icons.Outlined.Info,
                                     horizontal = true,
                                     modifier = Modifier.weight(1f),
-                                    url = "https://mihon.app/privacy/",
+                                    url = RELEASE_URL,
                                 )
-                            }
-                        }
-                    }
-                }
-
-                item {
-                    SectionCard(
-                        titleRes = MR.strings.label_more,
-                        highEmphasis = true,
-                        showAccent = false,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = MaterialTheme.padding.medium)
-                                .padding(vertical = MaterialTheme.padding.small),
-                            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
-                            ) {
-                                CommunityTile(
-                                    label = stringResource(MR.strings.website),
-                                    icon = Icons.Outlined.Public,
-                                    url = "https://mihon.app",
-                                    modifier = Modifier.weight(1f),
-                                )
-                                CommunityTile(
-                                    label = "Discord",
-                                    icon = CustomIcons.Discord,
-                                    url = "https://discord.gg/mihon",
-                                    modifier = Modifier.weight(1f),
-                                )
-                            }
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
-                            ) {
-                                CommunityTile(
-                                    label = "X",
-                                    icon = CustomIcons.X,
-                                    url = "https://x.com/mihonapp",
-                                    modifier = Modifier.weight(1f),
-                                )
-                                CommunityTile(
-                                    label = "Facebook",
-                                    icon = CustomIcons.Facebook,
-                                    url = "https://facebook.com/mihonapp",
-                                    modifier = Modifier.weight(1f),
-                                )
-                            }
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
-                            ) {
-                                CommunityTile(
-                                    label = "Reddit",
-                                    icon = CustomIcons.Reddit,
-                                    url = "https://www.reddit.com/r/mihonapp",
-                                    modifier = Modifier.weight(1f),
-                                )
-                                CommunityTile(
-                                    label = "GitHub",
-                                    icon = CustomIcons.Github,
-                                    url = "https://github.com/mihonapp",
-                                    modifier = Modifier.weight(1f),
-                                )
+                                androidx.compose.foundation.layout.Spacer(modifier = Modifier.weight(1f))
                             }
                         }
                     }
@@ -300,24 +213,12 @@ object AboutScreen : Screen() {
     }
 
     fun getVersionName(withBuildDate: Boolean): String {
-        return when {
-            BuildConfig.DEBUG -> {
-                "Debug ${BuildConfig.COMMIT_SHA}".let {
-                    if (withBuildDate) {
-                        "$it (${getFormattedBuildTime()})"
-                    } else {
-                        it
-                    }
-                }
-            }
-
-            else -> {
-                "Stable ${BuildConfig.VERSION_NAME}".let {
-                    if (withBuildDate) {
-                        "$it (${getFormattedBuildTime()})"
-                    } else {
-                        it
-                    }
+        return run {
+            "Stable ${BuildConfig.VERSION_NAME}".let {
+                if (withBuildDate) {
+                    "$it (${getFormattedBuildTime()})"
+                } else {
+                    it
                 }
             }
         }

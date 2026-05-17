@@ -204,7 +204,11 @@ private fun UpdatesUiItem(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = MaterialTheme.padding.medium)
+            .padding(
+                start = MaterialTheme.padding.medium,
+                end = MaterialTheme.padding.medium,
+                bottom = if (position == ItemPosition.Last || position == ItemPosition.Single) MaterialTheme.padding.small else 0.dp,
+            )
             .clip(shape)
             .background(MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp))
             .selectedBackground(selected)

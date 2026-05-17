@@ -1,22 +1,33 @@
 package eu.kanade.presentation.history
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DeleteSweep
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
-import tachiyomi.presentation.core.components.HikariSnackbarHost
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarActions
 import eu.kanade.presentation.components.AppBarTitle
 import eu.kanade.presentation.components.SearchToolbar
 import eu.kanade.presentation.components.relativeDateText
 import eu.kanade.presentation.history.components.HistoryItem
+import eu.kanade.presentation.history.components.ItemPosition
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
 import eu.kanade.presentation.util.animateItemFastScroll
 import eu.kanade.tachiyomi.ui.history.HistoryScreenModel
@@ -24,8 +35,9 @@ import kotlinx.collections.immutable.persistentListOf
 import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
-import tachiyomi.presentation.core.components.ListGroupHeader
+import tachiyomi.presentation.core.components.HikariSnackbarHost
 import tachiyomi.presentation.core.components.material.Scaffold
+import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
 import tachiyomi.presentation.core.screens.LoadingScreen
@@ -44,7 +56,16 @@ fun HistoryScreen(
     Scaffold(
         topBar = { scrollBehavior ->
             SearchToolbar(
-                titleContent = { AppBarTitle(stringResource(MR.strings.history)) },
+                titleContent = {
+                    Column {
+                        AppBarTitle(stringResource(MR.strings.history))
+                        Text(
+                            text = "Your recently read chapters",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                },
                 searchQuery = state.searchQuery,
                 onChangeSearchQuery = onSearchQueryChange,
                 actions = {
@@ -93,6 +114,46 @@ fun HistoryScreen(
 }
 
 @Composable
+private fun HistoryGroupHeader(
+    text: String,
+    count: Int,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = MaterialTheme.padding.medium,
+                vertical = MaterialTheme.padding.small,
+            ),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Text(
+            text = text,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            fontWeight = FontWeight.SemiBold,
+            style = MaterialTheme.typography.bodyMedium,
+        )
+
+        if (count > 0) {
+            Text(
+                text = if (count == 1) "$count entry" else "$count entries",
+                modifier = Modifier
+                    .background(
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        shape = MaterialTheme.shapes.extraSmall,
+                    )
+                    .padding(horizontal = 6.dp, vertical = 2.dp),
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                style = MaterialTheme.typography.labelSmall,
+                fontWeight = FontWeight.Bold,
+            )
+        }
+    }
+}
+
+@Composable
 private fun HistoryScreenContent(
     history: List<HistoryUiModel>,
     contentPadding: PaddingValues,
@@ -104,28 +165,49 @@ private fun HistoryScreenContent(
     FastScrollLazyColumn(
         contentPadding = contentPadding,
     ) {
-        items(
+        itemsIndexed(
             items = history,
-            key = { "history-${it.hashCode()}" },
-            contentType = {
+            key = { _, it -> "history-${it.hashCode()}" },
+            contentType = { _, it ->
                 when (it) {
                     is HistoryUiModel.Header -> "header"
                     is HistoryUiModel.Item -> "item"
                 }
             },
-        ) { item ->
+        ) { index, item ->
             when (item) {
                 is HistoryUiModel.Header -> {
-                    ListGroupHeader(
+                    val count = remember(history, index) {
+                        var c = 0
+                        for (i in index + 1 until history.size) {
+                            if (history[i] is HistoryUiModel.Item) c++ else break
+                        }
+                        c
+                    }
+                    HistoryGroupHeader(
                         modifier = Modifier.animateItemFastScroll(),
                         text = relativeDateText(item.date),
+                        count = count,
                     )
                 }
                 is HistoryUiModel.Item -> {
                     val value = item.item
+                    val position = remember(history, index) {
+                        val prev = history.getOrNull(index - 1)
+                        val next = history.getOrNull(index + 1)
+                        val isFirst = prev == null || prev is HistoryUiModel.Header
+                        val isLast = next == null || next is HistoryUiModel.Header
+                        when {
+                            isFirst && isLast -> ItemPosition.Single
+                            isFirst -> ItemPosition.First
+                            isLast -> ItemPosition.Last
+                            else -> ItemPosition.Middle
+                        }
+                    }
                     HistoryItem(
                         modifier = Modifier.animateItemFastScroll(),
                         history = value,
+                        position = position,
                         onClickCover = { onClickCover(value) },
                         onClickResume = { onClickResume(value) },
                         onClickDelete = { onClickDelete(value) },

@@ -4,11 +4,9 @@ import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.icons.outlined.Close
@@ -32,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.contentType
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
@@ -57,7 +54,6 @@ import eu.kanade.tachiyomi.data.track.shikimori.ShikimoriApi
 import eu.kanade.tachiyomi.util.system.openInBrowser
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentMap
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.withUIContext
@@ -76,23 +72,11 @@ object SettingsTrackingScreen : SearchableSettings {
     override fun getTitleRes() = MR.strings.pref_category_tracking
 
     @Composable
-    override fun RowScope.AppBarAction() {
-        val uriHandler = LocalUriHandler.current
-        IconButton(onClick = { uriHandler.openUri("https://mihon.app/docs/guides/tracking") }) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Outlined.HelpOutline,
-                contentDescription = stringResource(MR.strings.tracking_guide),
-            )
-        }
-    }
-
-    @Composable
     override fun getPreferences(): List<Preference> {
         val context = LocalContext.current
         val trackPreferences = remember { Injekt.get<TrackPreferences>() }
         val trackerManager = remember { Injekt.get<TrackerManager>() }
         val sourceManager = remember { Injekt.get<SourceManager>() }
-        val autoTrackStatePref = trackPreferences.autoUpdateTrackOnMarkRead
 
         var dialog by remember { mutableStateOf<Any?>(null) }
         dialog?.run {
@@ -130,7 +114,7 @@ object SettingsTrackingScreen : SearchableSettings {
 
         return listOf(
             getAutomationGroup(trackPreferences),
-            getServicesGroup(context, trackerManager, { dialog = it }),
+            getServicesGroup(context, trackerManager) { dialog = it },
             getEnhancedGroup(enhancedTrackers.first, enhancedTrackerInfo),
         )
     }
@@ -173,7 +157,7 @@ object SettingsTrackingScreen : SearchableSettings {
 
     @Composable
     private fun getServicesGroup(
-        context: android.content.Context,
+        context: Context,
         trackerManager: TrackerManager,
         setDialog: (Any?) -> Unit,
     ): Preference.PreferenceGroup {
@@ -202,7 +186,7 @@ object SettingsTrackingScreen : SearchableSettings {
                                 )
                             }
 
-                            trackers.forEachIndexed { index, (tracker, login) ->
+                            trackers.forEach { (tracker, login) ->
                                 PreferenceItem(
                                     item = Preference.PreferenceItem.TrackerPreference(
                                         tracker = tracker,
@@ -211,8 +195,6 @@ object SettingsTrackingScreen : SearchableSettings {
                                     ),
                                     highlightKey = null,
                                 )
-                                if (index < trackers.size - 1) {
-                                        }
                             }
                         }
                     }
@@ -235,7 +217,7 @@ object SettingsTrackingScreen : SearchableSettings {
                 ) {
                     SectionCard {
                         Column {
-                            enhancedTrackers.forEachIndexed { index, service ->
+                            enhancedTrackers.forEach { service ->
                                 PreferenceItem(
                                     item = Preference.PreferenceItem.TrackerPreference(
                                         tracker = service,
@@ -244,8 +226,6 @@ object SettingsTrackingScreen : SearchableSettings {
                                     ),
                                     highlightKey = null,
                                 )
-                                if (index < enhancedTrackers.size - 1) {
-                                        }
                             }
                         }
                     }

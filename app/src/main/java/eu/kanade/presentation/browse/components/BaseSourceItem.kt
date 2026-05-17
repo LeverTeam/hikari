@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
+import eu.kanade.presentation.history.components.ItemPosition
 import eu.kanade.tachiyomi.util.system.LocaleHelper
 import tachiyomi.domain.source.model.Source
 import tachiyomi.presentation.core.components.material.padding
@@ -18,6 +19,7 @@ import tachiyomi.presentation.core.util.secondaryItemAlpha
 fun BaseSourceItem(
     source: Source,
     modifier: Modifier = Modifier,
+    position: ItemPosition? = null,
     showLanguageInContent: Boolean = true,
     onClickItem: () -> Unit = {},
     onLongClickItem: () -> Unit = {},
@@ -30,6 +32,7 @@ fun BaseSourceItem(
     }
     BaseBrowseItem(
         modifier = modifier,
+        position = position,
         onClickItem = onClickItem,
         onLongClickItem = onLongClickItem,
         icon = { icon.invoke(this, source) },
