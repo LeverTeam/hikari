@@ -1,12 +1,18 @@
 package eu.kanade.presentation.library.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.outlined.FilterList
 import androidx.compose.material.icons.outlined.FlipToBack
 import androidx.compose.material.icons.outlined.SelectAll
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -16,6 +22,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarActions
@@ -29,8 +36,10 @@ import tachiyomi.presentation.core.theme.active
 @Composable
 fun LibraryToolbar(
     hasActiveFilters: Boolean,
+    canSelectCategory: Boolean,
     selectedCount: Int,
     title: LibraryToolbarTitle,
+    onClickTitle: () -> Unit,
     onClickUnselectAll: () -> Unit,
     onClickSelectAll: () -> Unit,
     onClickInvertSelection: () -> Unit,
@@ -52,7 +61,9 @@ fun LibraryToolbar(
     else -> LibraryRegularToolbar(
         title = title,
         hasFilters = hasActiveFilters,
+        canSelectCategory = canSelectCategory,
         searchQuery = searchQuery,
+        onClickTitle = onClickTitle,
         onSearchQueryChange = onSearchQueryChange,
         onClickFilter = onClickFilter,
         onClickRefresh = onClickRefresh,
@@ -66,7 +77,9 @@ fun LibraryToolbar(
 private fun LibraryRegularToolbar(
     title: LibraryToolbarTitle,
     hasFilters: Boolean,
+    canSelectCategory: Boolean,
     searchQuery: String?,
+    onClickTitle: () -> Unit,
     onSearchQueryChange: (String?) -> Unit,
     onClickFilter: () -> Unit,
     onClickRefresh: () -> Unit,
@@ -78,7 +91,14 @@ private fun LibraryRegularToolbar(
     SearchToolbar(
         titleContent = {
             Column {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = if (canSelectCategory) {
+                        Modifier.clickable(onClick = onClickTitle)
+                    } else {
+                        Modifier
+                    },
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
                     Text(
                         text = title.text,
                         maxLines = 1,
@@ -86,7 +106,15 @@ private fun LibraryRegularToolbar(
                         overflow = TextOverflow.Ellipsis,
                         style = MaterialTheme.typography.titleLarge,
                     )
+                    if (canSelectCategory) {
+                        Icon(
+                            imageVector = Icons.Filled.ExpandMore,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
                     if (title.numberOfManga != null) {
+                        Spacer(modifier = Modifier.width(8.dp))
                         Pill(
                             text = "${title.numberOfManga}",
                             color = MaterialTheme.colorScheme.onBackground.copy(alpha = pillAlpha),

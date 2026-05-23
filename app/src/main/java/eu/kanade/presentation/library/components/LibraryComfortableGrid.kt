@@ -36,6 +36,9 @@ internal fun LibraryComfortableGrid(
             MangaComfortableGridItem(
                 isSelected = manga.id in selection,
                 title = manga.title,
+                progress = libraryItem.libraryManga.totalChapters
+                    .takeIf { it > 0 && libraryItem.libraryManga.readCount > 0 }
+                    ?.let { libraryItem.libraryManga.readCount.toFloat() / it },
                 coverData = MangaCover(
                     mangaId = manga.id,
                     sourceId = manga.source,

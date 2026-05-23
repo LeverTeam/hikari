@@ -18,6 +18,7 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.Badge
 import tachiyomi.presentation.core.components.BadgeGroup
 import tachiyomi.presentation.core.components.material.padding
+import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
 
 @Composable
@@ -60,8 +61,16 @@ fun LibraryDashboard(
                         mangaId = libraryItem.libraryManga.manga.id,
                         coverData = libraryItem.libraryManga.manga.asMangaCover(),
                         title = libraryItem.libraryManga.manga.title,
-                        subtitle = "",
-                        footer = "",
+                        subtitle = if (libraryItem.libraryManga.unreadCount > 0) {
+                            stringResource(MR.strings.library_unread_count, libraryItem.libraryManga.unreadCount)
+                        } else {
+                            stringResource(MR.strings.library_up_to_date)
+                        },
+                        footer = stringResource(
+                            MR.strings.library_read_progress,
+                            libraryItem.libraryManga.readCount,
+                            libraryItem.libraryManga.totalChapters.coerceAtLeast(1),
+                        ),
                         progress =
                         libraryItem.libraryManga.readCount.toFloat() /
                             libraryItem.libraryManga.totalChapters.coerceAtLeast(
@@ -81,6 +90,9 @@ fun LibraryDashboard(
             MangaComfortableGridItem(
                 coverData = item.libraryManga.manga.asMangaCover(),
                 title = item.libraryManga.manga.title,
+                progress = item.libraryManga.totalChapters
+                    .takeIf { it > 0 && item.libraryManga.readCount > 0 }
+                    ?.let { item.libraryManga.readCount.toFloat() / it },
                 onClick = { onMangaClick(item, "cover") },
                 onLongClick = { onMangaLongClick(item) },
                 isSharedElementEnabled = item.libraryManga.manga.id != continueReadingManga?.mangaId,

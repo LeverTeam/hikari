@@ -10,8 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
@@ -26,6 +28,7 @@ import cafe.adriel.voyager.navigator.tab.TabOptions
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
 import eu.kanade.presentation.library.DeleteLibraryMangaDialog
 import eu.kanade.presentation.library.LibrarySettingsDialog
+import eu.kanade.presentation.library.components.LibraryCategorySelectorSheet
 import eu.kanade.presentation.library.components.LibraryContent
 import eu.kanade.presentation.library.components.LibraryToolbar
 import eu.kanade.presentation.manga.components.LibraryBottomActionMenu
@@ -82,6 +85,14 @@ data object LibraryTab : Tab {
         val screenModel = rememberScreenModel { LibraryScreenModel() }
         val settingsScreenModel = rememberScreenModel { LibrarySettingsScreenModel() }
         val state by screenModel.state.collectAsState()
+        var showCategorySelector by remember { mutableStateOf(false) }
+        val visibleCategories = remember(state.displayedCategories, state.searchQuery, state.activeCategory) {
+            if (!state.searchQuery.isNullOrEmpty()) {
+                state.activeCategory?.let(::listOf).orEmpty()
+            } else {
+                state.displayedCategories
+            }
+        }
 
         val snackbarHostState = remember { SnackbarHostState() }
 
@@ -107,8 +118,10 @@ data object LibraryTab : Tab {
                 )
                 LibraryToolbar(
                     hasActiveFilters = state.hasActiveFilters,
+                    canSelectCategory = state.displayedCategories.size > 1,
                     selectedCount = state.selection.size,
                     title = title,
+                    onClickTitle = { showCategorySelector = true },
                     onClickUnselectAll = screenModel::clearSelection,
                     onClickSelectAll = screenModel::selectAll,
                     onClickInvertSelection = screenModel::invertSelection,
@@ -166,13 +179,17 @@ data object LibraryTab : Tab {
 
                 else -> {
                     LibraryContent(
-                        categories = state.displayedCategories,
+                        categories = visibleCategories,
                         selection = state.selection,
                         contentPadding = contentPadding,
-                        currentPage = state.coercedActiveCategoryIndex,
+                        currentPage = if (!state.searchQuery.isNullOrEmpty()) 0 else state.coercedActiveCategoryIndex,
                         isRefreshing = state.isLibraryUpdating,
-                        showPageTabs = state.showCategoryTabs || !state.searchQuery.isNullOrEmpty(),
-                        onChangeCurrentPage = screenModel::updateActiveCategoryIndex,
+                        showPageTabs = false,
+                        onChangeCurrentPage = if (!state.searchQuery.isNullOrEmpty()) {
+                            {}
+                        } else {
+                            screenModel::updateActiveCategoryIndex
+                        },
                         onClickManga = { mangaId, tag -> navigator.push(MangaScreen(mangaId, sharedElementTag = tag)) },
                         onContinueReadingClicked = { it: LibraryManga ->
                             scope.launchIO {
@@ -202,6 +219,16 @@ data object LibraryTab : Tab {
         }
 
         val onDismissRequest = screenModel::closeDialog
+        if (showCategorySelector && state.displayedCategories.isNotEmpty()) {
+            LibraryCategorySelectorSheet(
+                categories = state.displayedCategories,
+                currentIndex = state.coercedActiveCategoryIndex,
+                getItemCountForCategory = { state.getItemsForCategory(it).size },
+                onDismissRequest = { showCategorySelector = false },
+                onSelectCategory = screenModel::updateActiveCategoryIndex,
+            )
+        }
+
         when (val dialog = state.dialog) {
             is LibraryScreenModel.Dialog.SettingsSheet -> run {
                 LibrarySettingsDialog(

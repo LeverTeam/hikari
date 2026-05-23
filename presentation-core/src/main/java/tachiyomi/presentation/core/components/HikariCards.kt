@@ -46,9 +46,11 @@ object HikariCardDefaults {
     @Composable
     fun borderStroke(
         selected: Boolean = false,
+        selectedWidth: Dp = 2.dp,
+        unselectedWidth: Dp = 1.dp,
     ): BorderStroke {
         return BorderStroke(
-            width = if (selected) 2.dp else 1.dp,
+            width = if (selected) selectedWidth else unselectedWidth,
             color = if (selected) {
                 MaterialTheme.colorScheme.primary
             } else {
@@ -83,6 +85,7 @@ fun HikariCard(
     modifier: Modifier = Modifier,
     shape: Shape = HikariCardDefaults.groupShape(),
     selected: Boolean = false,
+    selectedBorderWidth: Dp = 2.dp,
     showBorder: Boolean = true,
     containerColor: Color = HikariCardDefaults.containerColor(),
     content: @Composable ColumnScope.() -> Unit,
@@ -92,7 +95,10 @@ fun HikariCard(
             .then(
                 if (showBorder || selected) {
                     Modifier.border(
-                        border = HikariCardDefaults.borderStroke(selected),
+                        border = HikariCardDefaults.borderStroke(
+                            selected = selected,
+                            selectedWidth = selectedBorderWidth,
+                        ),
                         shape = shape,
                     )
                 } else {
@@ -131,6 +137,7 @@ fun HikariGroupedListItem(
     position: HikariListItemPosition,
     modifier: Modifier = Modifier,
     selected: Boolean = false,
+    selectedBorderWidth: Dp = 2.dp,
     enabled: Boolean = true,
     height: Dp? = null,
     horizontalPadding: Dp = MaterialTheme.padding.medium,
@@ -157,6 +164,7 @@ fun HikariGroupedListItem(
             ),
         shape = shape,
         selected = selected,
+        selectedBorderWidth = selectedBorderWidth,
         showBorder = false,
         containerColor = containerColor,
     ) {

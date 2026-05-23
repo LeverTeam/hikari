@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -194,6 +195,7 @@ fun MangaComfortableGridItem(
     onLongClick: () -> Unit,
     isSelected: Boolean = false,
     titleMaxLines: Int = 2,
+    progress: Float? = null,
     coverAlpha: Float = 1f,
     coverBadgeStart: (@Composable RowScope.() -> Unit)? = null,
     coverBadgeEnd: (@Composable RowScope.() -> Unit)? = null,
@@ -233,13 +235,23 @@ fun MangaComfortableGridItem(
                     }
                 },
             )
+            if (progress != null) {
+                LinearProgressIndicator(
+                    progress = { progress.coerceIn(0f, 1f) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 4.dp, vertical = 4.dp)
+                        .height(4.dp)
+                        .clip(MaterialTheme.shapes.small),
+                )
+            }
             GridItemTitle(
                 modifier = Modifier
                     .mangaSharedElement(
                         "title-$sharedElementTag",
                         if (isSharedElementEnabled) coverData.mangaId else null,
                     )
-                    .padding(4.dp),
+                    .padding(horizontal = 4.dp, vertical = 2.dp),
                 title = title,
                 style = MaterialTheme.typography.titleSmall,
                 minLines = 2,

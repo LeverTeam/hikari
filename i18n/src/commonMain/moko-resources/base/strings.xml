@@ -27,6 +27,9 @@
     <string name="label_download_queue">Download queue</string>
     <string name="label_library">Library</string>
     <string name="library_continue_reading_subtitle">Continue your adventure</string>
+    <string name="library_unread_count">%1$d unread</string>
+    <string name="library_up_to_date">Up to date</string>
+    <string name="library_read_progress">%1$d/%2$d chapters read</string>
     <string name="label_recent_updates">Updates</string>
     <string name="updates_screen_subtitle">Stay up to date with your series</string>
     <string name="label_recent_manga">History</string>
