@@ -444,9 +444,6 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
             val preferences = Injekt.get<LibraryPreferences>()
             val interval = preferences.autoUpdateSchedule.get()
 
-            // Cancel any old-style interval work
-            context.workManager.cancelUniqueWork(WORK_NAME_AUTO)
-
             // Cancel any hours no longer in schedule
             val workQuery = WorkQuery.Builder.fromTags(listOf(TAG))
                 .addStates(listOf(WorkInfo.State.ENQUEUED, WorkInfo.State.RUNNING, WorkInfo.State.BLOCKED))
@@ -511,9 +508,6 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
         fun setupTaskOnAppStart(context: Context) {
             val preferences = Injekt.get<LibraryPreferences>()
             val interval = preferences.autoUpdateSchedule.get()
-
-            // Cancel any old-style interval work
-            context.workManager.cancelUniqueWork(WORK_NAME_AUTO)
 
             if (interval <= 0) return
 

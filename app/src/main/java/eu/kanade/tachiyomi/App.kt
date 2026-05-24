@@ -56,6 +56,7 @@ import eu.kanade.tachiyomi.util.system.notify
 import hikari.core.migration.Migrator
 import hikari.core.migration.migrations.migrations
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import logcat.AndroidLogcatLogger
@@ -179,6 +180,7 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
         ExtensionUpdateJob.setupTask(this)
 
         Injekt.get<LibraryPreferences>().autoUpdateSchedule.changes()
+            .drop(1)
             .onEach { LibraryUpdateJob.setupTask(this@App) }
             .launchIn(scope)
 
