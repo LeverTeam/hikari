@@ -5,6 +5,7 @@ import android.content.pm.ServiceInfo
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
+import androidx.core.content.ContextCompat
 import androidx.work.BackoffPolicy
 import androidx.work.Constraints
 import androidx.work.CoroutineWorker
@@ -71,10 +72,13 @@ import tachiyomi.i18n.MR
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.io.File
+import java.io.IOException
 import java.time.Instant
 import java.time.ZonedDateTime
 import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.TimeUnit
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import kotlin.concurrent.atomics.AtomicBoolean
 import kotlin.concurrent.atomics.AtomicInt
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
@@ -116,18 +120,22 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
 
         setForegroundSafely()
 
-        libraryPreferences.lastUpdatedTimestamp.set(Instant.now().toEpochMilli())
-
-        val categoryId = inputData.getLong(KEY_CATEGORY, -1L)
-        addMangaToQueue(categoryId)
-
         return withIOContext {
             try {
+                val categoryId = inputData.getLong(KEY_CATEGORY, -1L)
+                addMangaToQueue(categoryId)
+
+                if (mangaToUpdate.isNotEmpty()) {
+                    libraryPreferences.lastUpdatedTimestamp.set(Instant.now().toEpochMilli())
+                }
                 updateChapterList()
                 Result.success()
             } catch (e: Exception) {
                 if (e is CancellationException) {
                     Result.success()
+                } else if (e.isRetryable()) {
+                    logcat(LogPriority.WARN, e)
+                    Result.retry()
                 } else {
                     logcat(LogPriority.ERROR, e)
                     Result.failure()
@@ -209,8 +217,9 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
 
         notifier.showQueueSizeWarningNotificationIfNeeded(mangaToUpdate)
 
+        notifier.showSkippedUpdatesNotificationIfNeeded(skippedUpdates)
+
         if (skippedUpdates.isNotEmpty()) {
-            // TODO: surface skipped reasons to user?
             logcat {
                 skippedUpdates
                     .groupBy { it.second }
@@ -306,10 +315,11 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
 
         if (failedUpdates.isNotEmpty()) {
             val errorFile = writeErrorFile(failedUpdates)
-            notifier.showUpdateErrorNotification(
-                failedUpdates.size,
-                errorFile.getUriCompat(context),
-            )
+            val errorUri = errorFile
+                ?.takeIf { it.exists() && it.length() > 0L }
+                ?.getUriCompat(context)
+
+            notifier.showUpdateErrorNotification(failedUpdates.size, errorUri)
         }
     }
 
@@ -374,7 +384,7 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
     /**
      * Writes basic file of update errors to cache dir.
      */
-    private fun writeErrorFile(errors: List<Pair<Manga, String?>>): File {
+    private fun writeErrorFile(errors: List<Pair<Manga, String?>>): File? {
         try {
             if (errors.isNotEmpty()) {
                 val file = context.createFileInCacheDir("hikari_update_errors.txt")
@@ -399,7 +409,18 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
             }
         } catch (_: Exception) {
         }
-        return File("")
+        return null
+    }
+
+    private fun Throwable.isRetryable(): Boolean {
+        return when (this) {
+            is IOException,
+            is SocketTimeoutException,
+            is UnknownHostException,
+            -> true
+
+            else -> this.cause?.isRetryable() == true
+        }
     }
 
     companion object {
@@ -430,12 +451,20 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
             val workQuery = WorkQuery.Builder.fromTags(listOf(TAG))
                 .addStates(listOf(WorkInfo.State.ENQUEUED, WorkInfo.State.RUNNING, WorkInfo.State.BLOCKED))
                 .build()
-            val currentWorks = context.workManager.getWorkInfos(workQuery).get()
-            currentWorks.forEach { workInfo ->
-                if (workInfo.tags.any { it.startsWith(WORK_NAME_AUTO) }) {
-                    context.workManager.cancelWorkById(workInfo.id)
-                }
-            }
+            val wm = context.workManager
+            val currentWorksFuture = wm.getWorkInfos(workQuery)
+            currentWorksFuture.addListener(
+                {
+                    runCatching { currentWorksFuture.get() }
+                        .getOrNull()
+                        ?.forEach { workInfo ->
+                            if (workInfo.tags.any { it.startsWith(WORK_NAME_AUTO) }) {
+                                wm.cancelWorkById(workInfo.id)
+                            }
+                        }
+                },
+                ContextCompat.getMainExecutor(context),
+            )
 
             if (interval > 0) {
                 val restrictions = preferences.autoUpdateDeviceRestrictions.get()
@@ -468,7 +497,7 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
                     .addTag(WORK_NAME_AUTO)
                     .setConstraints(constraints)
                     .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.MINUTES)
-                    .setInitialDelay(interval.toLong(), TimeUnit.HOURS)
+                    .setInitialDelay(15, TimeUnit.MINUTES)
                     .build()
 
                 context.workManager.enqueueUniquePeriodicWork(
@@ -477,6 +506,55 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
                     request,
                 )
             }
+        }
+
+        fun setupTaskOnAppStart(context: Context) {
+            val preferences = Injekt.get<LibraryPreferences>()
+            val interval = preferences.autoUpdateSchedule.get()
+
+            // Cancel any old-style interval work
+            context.workManager.cancelUniqueWork(WORK_NAME_AUTO)
+
+            if (interval <= 0) return
+
+            val restrictions = preferences.autoUpdateDeviceRestrictions.get()
+            val networkType = when {
+                DEVICE_ONLY_ON_WIFI in restrictions -> NetworkType.UNMETERED
+                DEVICE_NETWORK_NOT_METERED in restrictions -> NetworkType.UNMETERED
+                else -> NetworkType.CONNECTED
+            }
+
+            val constraints = Constraints.Builder()
+                .setRequiredNetworkType(networkType)
+                .setRequiresCharging(DEVICE_CHARGING in restrictions)
+                .setRequiresBatteryNotLow(true)
+                .apply {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && DEVICE_ONLY_ON_WIFI in restrictions) {
+                        val networkRequest = NetworkRequest.Builder()
+                            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                            .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                            .build()
+                        setRequiredNetworkRequest(networkRequest, NetworkType.UNMETERED)
+                    }
+                }
+                .build()
+
+            val request = PeriodicWorkRequestBuilder<LibraryUpdateJob>(
+                interval.toLong(),
+                TimeUnit.HOURS,
+            )
+                .addTag(TAG)
+                .addTag(WORK_NAME_AUTO)
+                .setConstraints(constraints)
+                .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.MINUTES)
+                .setInitialDelay(15, TimeUnit.MINUTES)
+                .build()
+
+            context.workManager.enqueueUniquePeriodicWork(
+                WORK_NAME_AUTO,
+                ExistingPeriodicWorkPolicy.KEEP,
+                request,
+            )
         }
 
         fun startNow(
@@ -508,16 +586,24 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
             val workQuery = WorkQuery.Builder.fromTags(listOf(TAG))
                 .addStates(listOf(WorkInfo.State.RUNNING))
                 .build()
-            wm.getWorkInfos(workQuery).get()
-                // Should only return one work but just in case
-                .forEach {
-                    wm.cancelWorkById(it.id)
 
-                    // Re-enqueue cancelled scheduled work
-                    if (it.tags.contains(WORK_NAME_AUTO)) {
-                        setupTask(context)
-                    }
-                }
+            val runningFuture = wm.getWorkInfos(workQuery)
+            runningFuture.addListener(
+                {
+                    runCatching { runningFuture.get() }
+                        .getOrNull()
+                        // Should only return one work but just in case
+                        ?.forEach {
+                            wm.cancelWorkById(it.id)
+
+                            // Re-enqueue cancelled scheduled work
+                            if (it.tags.contains(WORK_NAME_AUTO)) {
+                                setupTask(context)
+                            }
+                        }
+                },
+                ContextCompat.getMainExecutor(context),
+            )
         }
     }
 }

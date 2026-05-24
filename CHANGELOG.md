@@ -1,5 +1,18 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- Refined the Library dashboard and manga details UI with richer progress and category navigation
+- Redesigned the Updates screen
+- Redesigned the Browse and History screens
+- Redesigned the More, About, and Extension Info screens with elevated card layouts
+- Unified elevated card styling across app surfaces
+- Rebuilt the Download Queue screen in Compose and removed the legacy download list layouts
+- Redesigned bottom sheets and selection dialogs across reader, migration, source filtering, updates, and tracking
+- Redesigned the Library screen with a category selector sheet, category-scoped search, and richer reading progress details
+
 ## [0.4.1] - 2026-04-19
 
 ### Added

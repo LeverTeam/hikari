@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import android.os.SystemClock
 import coil3.asDrawable
 import coil3.imageLoader
 import coil3.request.ImageRequest
@@ -48,6 +49,10 @@ class LibraryUpdateNotifier(
     private val securityPreferences: SecurityPreferences = Injekt.get(),
     private val sourceManager: SourceManager = Injekt.get(),
 ) {
+
+    private var lastProgressNotifyAtMs: Long = 0L
+    private var lastProgressCurrent: Int = -1
+    private var lastProgressTotal: Int = -1
 
     private val percentFormatter = NumberFormat.getPercentInstance().apply {
         roundingMode = RoundingMode.DOWN
@@ -90,6 +95,15 @@ class LibraryUpdateNotifier(
      * @param total the total progress.
      */
     fun showProgressNotification(manga: List<Manga>, current: Int, total: Int) {
+        val now = SystemClock.elapsedRealtime()
+        val isSameProgress = current == lastProgressCurrent && total == lastProgressTotal
+        if (isSameProgress && (now - lastProgressNotifyAtMs) < 750L) {
+            return
+        }
+        lastProgressNotifyAtMs = now
+        lastProgressCurrent = current
+        lastProgressTotal = total
+
         progressNotificationBuilder
             .setContentTitle(
                 context.stringResource(
@@ -138,13 +152,38 @@ class LibraryUpdateNotifier(
         }
     }
 
+    fun showSkippedUpdatesNotificationIfNeeded(skipped: List<Pair<Manga, String?>>) {
+        if (skipped.isEmpty()) return
+
+        val failed = skipped.size
+        context.notify(
+            Notifications.ID_LIBRARY_UPDATE_SKIPPED,
+            Notifications.CHANNEL_LIBRARY_PROGRESS,
+        ) {
+            setContentTitle(context.stringResource(MR.strings.library_update_skipped, failed))
+            setSmallIcon(R.drawable.ic_warning_white_24dp)
+            setTimeoutAfter(10_000L)
+
+            if (!securityPreferences.hideNotificationContent.get()) {
+                val body = skipped
+                    .groupBy({ it.second }, { it.first })
+                    .entries
+                    .joinToString("\n") { (reason, entries) ->
+                        val label = reason ?: context.stringResource(MR.strings.unknown_error)
+                        "$label: ${entries.size}"
+                    }
+                setStyle(NotificationCompat.BigTextStyle().bigText(body))
+            }
+        }
+    }
+
     /**
      * Shows notification containing update entries that failed with action to open full log.
      *
      * @param failed Number of entries that failed to update.
      * @param uri Uri for error log file containing all titles that failed.
      */
-    fun showUpdateErrorNotification(failed: Int, uri: Uri) {
+    fun showUpdateErrorNotification(failed: Int, uri: Uri? = null) {
         if (failed == 0) {
             return
         }
@@ -154,10 +193,14 @@ class LibraryUpdateNotifier(
             Notifications.CHANNEL_LIBRARY_ERROR,
         ) {
             setContentTitle(context.pluralStringResource(MR.plurals.notification_update_error, failed, failed))
-            setContentText(context.stringResource(MR.strings.action_show_errors))
+            if (uri != null) {
+                setContentText(context.stringResource(MR.strings.action_show_errors))
+            }
             setSmallIcon(R.drawable.ic_hikari)
 
-            setContentIntent(NotificationReceiver.openErrorLogPendingActivity(context, uri))
+            if (uri != null) {
+                setContentIntent(NotificationReceiver.openErrorLogPendingActivity(context, uri))
+            }
         }
     }
 

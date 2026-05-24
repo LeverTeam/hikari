@@ -1070,6 +1070,7 @@
     <string name="skipped_reason_not_in_release_period">Skipped because no release was expected
         today
     </string>
+    <string name="library_update_skipped">Skipped %1$d entries</string>
 
     <!-- File Picker Titles -->
     <string name="file_select_cover">Select cover image</string>

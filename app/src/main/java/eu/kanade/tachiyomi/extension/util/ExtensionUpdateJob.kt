@@ -14,7 +14,6 @@ import eu.kanade.tachiyomi.extension.ExtensionManager
 import eu.kanade.tachiyomi.extension.model.Extension
 import eu.kanade.tachiyomi.util.system.setForegroundSafely
 import eu.kanade.tachiyomi.util.system.workManager
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onEach
 import logcat.LogPriority
@@ -51,7 +50,7 @@ class ExtensionUpdateJob(private val context: Context, workerParams: WorkerParam
                 extensionsToUpdate.forEach { extension ->
                     extensionManager.updateExtension(extension)
                         .onEach { /* Optional: track progress */ }
-                        .collect {}
+                        .first { it.isCompleted() }
                 }
             }
 

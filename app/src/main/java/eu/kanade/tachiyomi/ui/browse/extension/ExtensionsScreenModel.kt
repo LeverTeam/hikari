@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onCompletion
@@ -149,11 +150,14 @@ class ExtensionsScreenModel(
 
     fun updateAllExtensions() {
         screenModelScope.launchIO {
+            extensionManager.findAvailableExtensions()
             state.value.items.values.flatten()
                 .map { it.extension }
                 .filterIsInstance<Extension.Installed>()
                 .filter { it.hasUpdate }
-                .forEach(::updateExtension)
+                .forEach { extension ->
+                    extensionManager.updateExtension(extension).collectToInstallUpdate(extension)
+                }
         }
     }
 
@@ -165,6 +169,7 @@ class ExtensionsScreenModel(
 
     fun updateExtension(extension: Extension.Installed) {
         screenModelScope.launchIO {
+            extensionManager.findAvailableExtensions()
             extensionManager.updateExtension(extension).collectToInstallUpdate(extension)
         }
     }
@@ -182,12 +187,14 @@ class ExtensionsScreenModel(
         currentDownloads.update { it - extension.pkgName }
     }
 
-    private suspend fun Flow<InstallStep>.collectToInstallUpdate(extension: Extension) =
-        this
-            .onEach { installStep -> addDownloadState(extension, installStep) }
-            .takeWhile { installStep -> installStep != InstallStep.Installed }
-            .onCompletion { removeDownloadState(extension) }
-            .collect()
+    private suspend fun Flow<InstallStep>.collectToInstallUpdate(extension: Extension) {
+        try {
+            onEach { installStep -> addDownloadState(extension, installStep) }
+                .first { it.isCompleted() }
+        } finally {
+            removeDownloadState(extension)
+        }
+    }
 
     fun uninstallExtension(extension: Extension) {
         extensionManager.uninstallExtension(extension)

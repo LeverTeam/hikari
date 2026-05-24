@@ -175,7 +175,7 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
 
         initializeMigrator()
 
-        LibraryUpdateJob.setupTask(this)
+        LibraryUpdateJob.setupTaskOnAppStart(this)
         ExtensionUpdateJob.setupTask(this)
 
         Injekt.get<LibraryPreferences>().autoUpdateSchedule.changes()
