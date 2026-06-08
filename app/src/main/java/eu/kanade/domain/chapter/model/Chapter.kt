@@ -5,7 +5,7 @@ import eu.kanade.tachiyomi.source.model.SChapter
 import tachiyomi.domain.chapter.model.Chapter
 import eu.kanade.tachiyomi.data.database.models.Chapter as DbChapter
 
-// TODO: Remove when all deps are migrated
+// Bridging helper for the external extension API
 fun Chapter.toSChapter(): SChapter {
     return SChapter.create().also {
         it.url = url

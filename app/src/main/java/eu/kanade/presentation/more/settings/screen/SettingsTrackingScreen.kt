@@ -46,7 +46,6 @@ import eu.kanade.domain.track.model.AutoTrackState
 import eu.kanade.domain.track.service.TrackPreferences
 import eu.kanade.presentation.more.settings.Preference
 import eu.kanade.presentation.more.settings.PreferenceItem
-import eu.kanade.tachiyomi.data.track.EnhancedTracker
 import eu.kanade.tachiyomi.data.track.Tracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.data.track.anilist.AnilistApi
@@ -101,25 +100,9 @@ object SettingsTrackingScreen : SearchableSettings {
             }
         }
 
-        val enhancedTrackers = trackerManager.trackers
-            .filter { it is EnhancedTracker }
-            .partition { service ->
-                val acceptedSources = (service as EnhancedTracker).getAcceptedSources()
-                sourceManager.getCatalogueSources().any { it::class.qualifiedName in acceptedSources }
-            }
-        var enhancedTrackerInfo = stringResource(MR.strings.enhanced_tracking_info)
-        if (enhancedTrackers.second.isNotEmpty()) {
-            val missingSourcesInfo = stringResource(
-                MR.strings.enhanced_services_not_installed,
-                enhancedTrackers.second.joinToString { it.name },
-            )
-            enhancedTrackerInfo += "\n\n$missingSourcesInfo"
-        }
-
         return listOf(
             getAutomationGroup(trackPreferences),
             getServicesGroup(context, trackerManager) { dialog = it },
-            getEnhancedGroup(enhancedTrackers.first, enhancedTrackerInfo),
         )
     }
 
@@ -209,43 +192,6 @@ object SettingsTrackingScreen : SearchableSettings {
                     }
                 },
                 Preference.PreferenceItem.InfoPreference(stringResource(MR.strings.tracking_info)),
-            ),
-        )
-    }
-
-    @Composable
-    private fun getEnhancedGroup(
-        enhancedTrackers: List<Tracker>,
-        info: String,
-    ): Preference.PreferenceGroup {
-        return Preference.PreferenceGroup(
-            title = stringResource(MR.strings.enhanced_services),
-            preferenceItems = persistentListOf(
-                Preference.PreferenceItem.CustomPreference(
-                    title = stringResource(MR.strings.enhanced_services),
-                ) {
-                    SectionCard {
-                        Column {
-                            enhancedTrackers.forEachIndexed { index, service ->
-                                PreferenceItem(
-                                    item = Preference.PreferenceItem.TrackerPreference(
-                                        tracker = service,
-                                        login = { (service as EnhancedTracker).loginNoop() },
-                                        logout = service::logout,
-                                    ),
-                                    highlightKey = null,
-                                )
-                                if (index < enhancedTrackers.lastIndex) {
-                                    HorizontalDivider(
-                                        modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
-                                        color = HikariCardDefaults.dividerColor(),
-                                    )
-                                }
-                            }
-                        }
-                    }
-                },
-                Preference.PreferenceItem.InfoPreference(info),
             ),
         )
     }

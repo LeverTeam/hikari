@@ -175,6 +175,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="Hikari" />
+                <data android:scheme="hikari" />
+                <data android:scheme="tachiyomi" />
 
                 <data android:host="anilist-auth" />
                 <data android:host="bangumi-auth" />

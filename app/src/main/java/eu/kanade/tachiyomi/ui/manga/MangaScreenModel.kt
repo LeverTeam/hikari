@@ -34,7 +34,6 @@ import eu.kanade.presentation.util.formattedMessage
 import eu.kanade.tachiyomi.data.download.DownloadCache
 import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.data.download.model.Download
-import eu.kanade.tachiyomi.data.track.EnhancedTracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.network.HttpException
 import eu.kanade.tachiyomi.source.Source
@@ -356,9 +355,6 @@ class MangaScreenModel(
                     // Choose a category
                     else -> showChangeCategoryDialog()
                 }
-
-                // Finally match with enhanced tracking when available
-                addTracks.bindEnhancedTrackers(manga, state.source)
             }
         }
     }
@@ -1063,11 +1059,9 @@ class MangaScreenModel(
                 getTracks.subscribe(manga.id).catch { logcat(LogPriority.ERROR, it) },
                 trackerManager.loggedInTrackersFlow(),
             ) { mangaTracks, loggedInTrackers ->
-                // Show only if the service supports this manga's source
-                val supportedTrackers = loggedInTrackers.filter { (it as? EnhancedTracker)?.accept(source!!) ?: true }
-                val supportedTrackerIds = supportedTrackers.map { it.id }.toHashSet()
+                val supportedTrackerIds = loggedInTrackers.map { it.id }.toHashSet()
                 val supportedTrackerTracks = mangaTracks.filter { it.trackerId in supportedTrackerIds }
-                supportedTrackerTracks.size to supportedTrackers.isNotEmpty()
+                supportedTrackerTracks.size to loggedInTrackers.isNotEmpty()
             }
                 .flowWithLifecycle(lifecycle)
                 .distinctUntilChanged()

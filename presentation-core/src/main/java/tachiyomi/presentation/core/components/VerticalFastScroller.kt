@@ -425,18 +425,16 @@ fun VerticalGridFastScroller(
     }
 }
 
-// TODO: not sure why abs corrections are in the following functions; these can probably be removed
-
 private fun computeGridScrollOffset(state: LazyGridState, columnCount: Int): Int {
     if (state.layoutInfo.totalItemsCount == 0) return 0
     val visibleItems = state.layoutInfo.visibleItemsInfo
     val startChild = visibleItems.first()
     val endChild = visibleItems.last()
     val laidOutArea = (endChild.offset.y + endChild.size.height) - startChild.offset.y
-    val laidOutRows = 1 + abs(endChild.index - startChild.index) / columnCount
+    val laidOutRows = 1 + (endChild.index - startChild.index) / columnCount
     val avgSizePerRow = laidOutArea.toFloat() / laidOutRows
 
-    val rowsBefore = min(startChild.index, endChild.index).coerceAtLeast(0) / columnCount
+    val rowsBefore = startChild.index.coerceAtLeast(0) / columnCount
     return (rowsBefore * avgSizePerRow - startChild.offset.y).roundToInt()
 }
 
@@ -446,7 +444,7 @@ private fun computeGridScrollRange(state: LazyGridState, columnCount: Int): Int 
     val startChild = visibleItems.first()
     val endChild = visibleItems.last()
     val laidOutArea = (endChild.offset.y + endChild.size.height) - startChild.offset.y
-    val laidOutRows = 1 + abs(endChild.index - startChild.index) / columnCount
+    val laidOutRows = 1 + (endChild.index - startChild.index) / columnCount
     val avgSizePerRow = laidOutArea.toFloat() / laidOutRows
 
     val totalRows = 1 + (state.layoutInfo.totalItemsCount - 1) / columnCount

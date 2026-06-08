@@ -182,6 +182,18 @@ internal class HttpPageLoader(
             }
             val imageUrl = page.imageUrl!!
 
+            if (imageUrl.startsWith("data:", true)) {
+                val data = imageUrl.substringAfter(",")
+                val bytes = if (imageUrl.contains(";base64", true)) {
+                    android.util.Base64.decode(data, android.util.Base64.DEFAULT)
+                } else {
+                    java.net.URLDecoder.decode(data, "UTF-8").toByteArray(java.nio.charset.StandardCharsets.ISO_8859_1)
+                }
+                page.stream = { java.io.ByteArrayInputStream(bytes) }
+                page.status = Page.State.Ready
+                return
+            }
+
             if (force || !chapterCache.isImageInCache(imageUrl)) {
                 page.status = Page.State.DownloadImage
                 val imageResponse = source.getImage(page)

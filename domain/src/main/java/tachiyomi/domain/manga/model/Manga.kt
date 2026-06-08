@@ -63,6 +63,12 @@ data class Manga(
             else -> TriState.DISABLED
         }
 
+    val readingMode: Long
+        get() = viewerFlags and READING_MODE_MASK
+
+    val readerOrientation: Long
+        get() = viewerFlags and READER_ORIENTATION_MASK
+
     fun sortDescending(): Boolean {
         return chapterFlags and CHAPTER_SORT_DIR_MASK == CHAPTER_SORT_DESC
     }
@@ -96,6 +102,9 @@ data class Manga(
         const val CHAPTER_DISPLAY_NAME = 0x00000000L
         const val CHAPTER_DISPLAY_NUMBER = 0x00100000L
         const val CHAPTER_DISPLAY_MASK = 0x00100000L
+
+        const val READING_MODE_MASK = 0x00000007L
+        const val READER_ORIENTATION_MASK = 0x00000038L
 
         fun create() = Manga(
             id = -1L,

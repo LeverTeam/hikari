@@ -7,7 +7,6 @@ import eu.kanade.domain.manga.model.toSManga
 import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.tachiyomi.data.cache.CoverCache
 import eu.kanade.tachiyomi.data.download.DownloadManager
-import eu.kanade.tachiyomi.data.track.EnhancedTracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import hikari.domain.migration.models.MigrationFlag
 import kotlinx.coroutines.CancellationException
@@ -38,8 +37,6 @@ class MigrateMangaUseCase(
     private val insertTrack: InsertTrack,
     private val coverCache: CoverCache,
 ) {
-    private val enhancedServices by lazy { trackerManager.trackers.filterIsInstance<EnhancedTracker>() }
-
     suspend operator fun invoke(current: Manga, target: Manga, replace: Boolean) {
         val targetSource = sourceManager.get(target.source) ?: return
         val currentSource = sourceManager.get(current.source)
@@ -95,17 +92,8 @@ class MigrateMangaUseCase(
             }
 
             // Update track
-            getTracks.await(current.id).mapNotNull { track ->
-                val updatedTrack = track.copy(mangaId = target.id)
-
-                val service = enhancedServices
-                    .firstOrNull { it.isTrackFrom(updatedTrack, current, currentSource) }
-
-                if (service != null) {
-                    service.migrateTrack(updatedTrack, target, targetSource)
-                } else {
-                    updatedTrack
-                }
+            getTracks.await(current.id).map { track ->
+                track.copy(mangaId = target.id)
             }
                 .takeIf { it.isNotEmpty() }
                 ?.let { insertTrack.awaitAll(it) }

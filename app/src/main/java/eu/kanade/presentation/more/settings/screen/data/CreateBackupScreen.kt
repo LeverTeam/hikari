@@ -9,7 +9,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -34,7 +38,6 @@ import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.update
 import tachiyomi.i18n.MR
-import tachiyomi.presentation.core.components.LabeledCheckbox
 import tachiyomi.presentation.core.components.LazyColumnWithAction
 import tachiyomi.presentation.core.components.SectionCard
 import tachiyomi.presentation.core.components.material.Scaffold
@@ -135,15 +138,44 @@ class CreateBackupScreen : Screen() {
         state: CreateBackupScreenModel.State,
         model: CreateBackupScreenModel,
     ) {
-        options.forEach { option ->
-            LabeledCheckbox(
-                label = stringResource(option.label),
-                subtitle = getSubtitleForOption(option.label),
-                checked = option.getter(state.options),
-                onCheckedChange = {
-                    model.toggle(option.setter, it)
+        options.forEachIndexed { index, option ->
+            if (index > 0) {
+                HorizontalDivider(
+                    modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.12f),
+                )
+            }
+            val label = stringResource(option.label)
+            val checked = option.getter(state.options)
+            val enabled = option.enabled(state.options)
+            ListItem(
+                headlineContent = {
+                    Text(
+                        text = label,
+                        style = MaterialTheme.typography.titleMedium,
+                    )
                 },
-                enabled = option.enabled(state.options),
+                supportingContent = getSubtitleForOption(option.label)?.let {
+                    {
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.secondaryItemAlpha(),
+                        )
+                    }
+                },
+                trailingContent = {
+                    Switch(
+                        checked = checked,
+                        onCheckedChange = {
+                            model.toggle(option.setter, it)
+                        },
+                        enabled = enabled,
+                    )
+                },
+                colors = ListItemDefaults.colors(
+                    containerColor = androidx.compose.ui.graphics.Color.Transparent,
+                ),
             )
         }
     }
@@ -152,10 +184,16 @@ class CreateBackupScreen : Screen() {
     @ReadOnlyComposable
     private fun getSubtitleForOption(label: StringResource): String? {
         return when (label) {
-            MR.strings.manga -> stringResource(MR.strings.pref_hide_in_library_items).substringBeforeLast(" ")
-            MR.strings.app_settings -> stringResource(MR.strings.app_settings)
-            MR.strings.private_settings -> stringResource(MR.strings.private_settings)
-            MR.strings.non_library_settings -> stringResource(MR.strings.non_library_settings)
+            MR.strings.manga -> "Includes library entries, custom titles, and details."
+            MR.strings.chapters -> "Includes read/unread flags and metadata."
+            MR.strings.track -> "Includes remote tracking references and sync progress."
+            MR.strings.history -> "Includes reading history logs and duration statistics."
+            MR.strings.categories -> "Includes custom categories and sorting arrangements."
+            MR.strings.non_library_settings -> "Includes history and read progress for entries not in the library."
+            MR.strings.app_settings -> "Includes system preferences, appearance configurations, and reader settings."
+            MR.strings.extensionRepo_settings -> "Includes configured external extension repository URLs."
+            MR.strings.source_settings -> "Includes source-specific settings and preferences."
+            MR.strings.private_settings -> "Includes private settings, passwords, and access tokens."
             else -> null
         }
     }

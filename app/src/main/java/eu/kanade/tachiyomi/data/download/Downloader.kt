@@ -431,9 +431,29 @@ class Downloader(
         }
 
         try {
-            // If the image is already downloaded, do nothing. Otherwise download from network
+            // If the image is already downloaded, do nothing. Otherwise download from network / decode data URI
             val file = when {
                 imageFile != null -> imageFile
+                page.imageUrl!!.startsWith("data:", true) -> {
+                    val file = tmpDir.createFile("$filename.tmp")!!
+                    try {
+                        val base64Data = page.imageUrl!!.substringAfter(",")
+                        val bytes = if (page.imageUrl!!.contains(";base64", true)) {
+                            android.util.Base64.decode(base64Data, android.util.Base64.DEFAULT)
+                        } else {
+                            java.net.URLDecoder.decode(base64Data, "UTF-8").toByteArray(java.nio.charset.StandardCharsets.ISO_8859_1)
+                        }
+                        file.openOutputStream().use { output ->
+                            output.write(bytes)
+                        }
+                        val extension = ImageUtil.findImageType(file.openInputStream())?.extension ?: "jpg"
+                        file.renameTo("$filename.$extension")
+                        file
+                    } catch (e: Exception) {
+                        file.delete()
+                        throw e
+                    }
+                }
                 chapterCache.isImageInCache(
                     page.imageUrl!!,
                 ) -> copyImageFromCache(chapterCache.getImageFile(page.imageUrl!!), tmpDir, filename)

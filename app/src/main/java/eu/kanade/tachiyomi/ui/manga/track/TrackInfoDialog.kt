@@ -49,7 +49,6 @@ import eu.kanade.presentation.track.TrackStatusSelector
 import eu.kanade.presentation.track.TrackerSearch
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.data.track.DeletableTracker
-import eu.kanade.tachiyomi.data.track.EnhancedTracker
 import eu.kanade.tachiyomi.data.track.Tracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.data.track.model.TrackSearch
@@ -148,18 +147,14 @@ data class TrackInfoDialogHomeScreen(
                 )
             },
             onNewSearch = {
-                if (it.tracker is EnhancedTracker) {
-                    screenModel.registerEnhancedTracking(it)
-                } else {
-                    navigator.push(
-                        TrackerSearchScreen(
-                            mangaId = mangaId,
-                            initialQuery = it.track?.title ?: mangaTitle,
-                            currentUrl = it.track?.remoteUrl,
-                            serviceId = it.tracker.id,
-                        ),
-                    )
-                }
+                navigator.push(
+                    TrackerSearchScreen(
+                        mangaId = mangaId,
+                        initialQuery = it.track?.title ?: mangaTitle,
+                        currentUrl = it.track?.remoteUrl,
+                        serviceId = it.tracker.id,
+                    ),
+                )
             },
             onOpenInBrowser = { openTrackerInBrowser(context, it) },
             onRemoved = {
@@ -213,19 +208,6 @@ data class TrackInfoDialogHomeScreen(
             }
         }
 
-        fun registerEnhancedTracking(item: TrackItem) {
-            item.tracker as EnhancedTracker
-            screenModelScope.launchNonCancellable {
-                val manga = Injekt.get<GetManga>().await(mangaId) ?: return@launchNonCancellable
-                try {
-                    val matchResult = item.tracker.match(manga) ?: throw Exception()
-                    item.tracker.register(matchResult, mangaId)
-                } catch (_: Exception) {
-                    withUIContext { Injekt.get<Application>().toast(MR.strings.error_no_match) }
-                }
-            }
-        }
-
         private suspend fun refreshTrackers() {
             val refreshTracks = Injekt.get<RefreshTracks>()
             val context = Injekt.get<Application>()
@@ -256,12 +238,9 @@ data class TrackInfoDialogHomeScreen(
 
         private fun List<Track>.mapToTrackItem(): List<TrackItem> {
             val loggedInTrackers = Injekt.get<TrackerManager>().loggedInTrackers()
-            val source = Injekt.get<SourceManager>().getOrStub(sourceId)
             return loggedInTrackers
                 // Map to TrackItem
                 .map { service -> TrackItem(find { it.trackerId == service.id }, service) }
-                // Show only if the service supports this manga's source
-                .filter { (it.tracker as? EnhancedTracker)?.accept(source) ?: true }
         }
 
         @Immutable
