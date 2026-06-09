@@ -1,6 +1,6 @@
 # Hikari
 
-Manga reader for Android based on Hikari with NDK image decoding and sectional UI.
+Manga reader for Android based on Mihon with NDK image decoding and sectional UI.
 
 ![License](https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square)
 ![Version](https://img.shields.io/badge/version-0.5.0-blue?style=flat-square)

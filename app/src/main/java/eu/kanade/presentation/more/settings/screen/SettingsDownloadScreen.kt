@@ -24,6 +24,7 @@ import kotlinx.collections.immutable.toImmutableMap
 import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.download.service.DownloadPreferences
+import tachiyomi.domain.download.service.DownloadQueueSortingMode
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.HikariCardDefaults
 import tachiyomi.presentation.core.components.SectionCard
@@ -104,6 +105,26 @@ object SettingsDownloadScreen : SearchableSettings {
                                     preference = downloadPreferences.splitTallImages,
                                     title = stringResource(MR.strings.split_tall_images),
                                     subtitle = stringResource(MR.strings.split_tall_images_summary),
+                                ),
+                                highlightKey = null,
+                            )
+
+                            HorizontalDivider(
+                                modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
+                                color = HikariCardDefaults.dividerColor(),
+                            )
+
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.ListPreference(
+                                    preference = downloadPreferences.downloadQueueSortingMode,
+                                    entries = persistentMapOf(
+                                        DownloadQueueSortingMode.FIFO to stringResource(MR.strings.download_queue_sorting_fifo),
+                                        DownloadQueueSortingMode.LIFO to stringResource(MR.strings.download_queue_sorting_lifo),
+                                        DownloadQueueSortingMode.CHAPTER_ASC to stringResource(MR.strings.download_queue_sorting_chapter_asc),
+                                        DownloadQueueSortingMode.CHAPTER_DESC to stringResource(MR.strings.download_queue_sorting_chapter_desc),
+                                    ),
+                                    title = stringResource(MR.strings.pref_download_queue_sorting),
+                                    subtitle = stringResource(MR.strings.pref_download_queue_sorting_summary),
                                 ),
                                 highlightKey = null,
                             )

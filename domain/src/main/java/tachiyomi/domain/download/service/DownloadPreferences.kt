@@ -2,6 +2,7 @@ package tachiyomi.domain.download.service
 
 import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.PreferenceStore
+import tachiyomi.core.common.preference.getEnum
 
 class DownloadPreferences(
     preferenceStore: PreferenceStore,
@@ -53,6 +54,11 @@ class DownloadPreferences(
 
     val parallelPageLimit: Preference<Int> = preferenceStore.getInt("download_parallel_page_limit", 15)
 
+    val downloadQueueSortingMode: Preference<DownloadQueueSortingMode> = preferenceStore.getEnum(
+        "download_queue_sorting_mode",
+        DownloadQueueSortingMode.FIFO,
+    )
+
     companion object {
         private const val REMOVE_EXCLUDE_CATEGORIES_PREF_KEY = "remove_exclude_categories"
         private const val DOWNLOAD_NEW_CATEGORIES_PREF_KEY = "download_new_categories"
@@ -63,4 +69,11 @@ class DownloadPreferences(
             DOWNLOAD_NEW_CATEGORIES_EXCLUDE_PREF_KEY,
         )
     }
+}
+
+enum class DownloadQueueSortingMode {
+    FIFO,
+    LIFO,
+    CHAPTER_ASC,
+    CHAPTER_DESC,
 }

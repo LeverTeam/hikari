@@ -340,6 +340,10 @@
         same time. Higher values can speed up updates but might cause performance issues or bans
         from some sources.
     </string>
+    <string name="pref_library_update_manga_delay">Delay between manga updates</string>
+    <string name="pref_library_update_manga_delay_summary">Individual delay between updating manga from the same source to prevent rate limits and bans.</string>
+    <string name="pref_library_update_retry_count">Update retry count</string>
+    <string name="pref_library_update_retry_count_summary">Maximum number of retries for transient network errors.</string>
 
     <string name="default_category">Default category</string>
     <string name="default_category_summary">Always ask</string>
@@ -607,6 +611,13 @@
     <string name="save_chapter_as_cbz">Save as CBZ archive</string>
     <string name="split_tall_images">Split tall images</string>
     <string name="split_tall_images_summary">Improves reader performance</string>
+    <string name="pref_download_queue_sorting">Queue sorting mode</string>
+    <string name="pref_download_queue_sorting_summary">How queued downloads are prioritized and sorted when new downloads are added.</string>
+    <string name="download_queue_sorting_fifo">FIFO (Manual/First in, first out)</string>
+    <string name="download_queue_sorting_lifo">LIFO (Last in, first out)</string>
+    <string name="download_queue_sorting_chapter_asc">Chapter number ascending (Oldest first)</string>
+    <string name="download_queue_sorting_chapter_desc">Chapter number descending (Newest first)</string>
+
     <string name="pref_download_concurrent_sources">Concurrent source downloads</string>
     <string name="pref_download_concurrent_pages">Concurrent page downloads</string>
     <string name="pref_download_concurrent_pages_summary">Pages downloaded simultaneously per

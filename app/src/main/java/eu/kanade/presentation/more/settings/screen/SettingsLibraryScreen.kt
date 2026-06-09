@@ -157,6 +157,12 @@ object SettingsLibraryScreen : SearchableSettings {
         val autoUpdateSchedulePref = libraryPreferences.autoUpdateSchedule
         val autoUpdateSchedule by autoUpdateSchedulePref.collectAsState()
 
+        val libraryUpdateMangaDelayPref = libraryPreferences.libraryUpdateMangaDelay
+        val libraryUpdateMangaDelay by libraryUpdateMangaDelayPref.collectAsState()
+
+        val libraryUpdateRetryCountPref = libraryPreferences.libraryUpdateRetryCount
+        val libraryUpdateRetryCount by libraryUpdateRetryCountPref.collectAsState()
+
         val autoUpdateCategoriesPref = libraryPreferences.updateCategories
         val autoUpdateCategoriesExcludePref = libraryPreferences.updateCategoriesExclude
 
@@ -323,6 +329,48 @@ object SettingsLibraryScreen : SearchableSettings {
                                     ),
                                     title = stringResource(MR.strings.pref_library_update_parallel_sources),
                                     subtitle = stringResource(MR.strings.pref_library_update_parallel_sources_summary),
+                                ),
+                                highlightKey = null,
+                            )
+
+                            HorizontalDivider(
+                                modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
+                                color = HikariCardDefaults.dividerColor(),
+                            )
+
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.SliderPreference(
+                                    value = libraryUpdateMangaDelay / 500,
+                                    valueRange = 0..10,
+                                    title = stringResource(MR.strings.pref_library_update_manga_delay),
+                                    subtitle = stringResource(MR.strings.pref_library_update_manga_delay_summary),
+                                    valueString = if (libraryUpdateMangaDelay == 0) {
+                                        stringResource(MR.strings.disabled)
+                                    } else {
+                                        "${libraryUpdateMangaDelay / 1000f}s"
+                                    },
+                                    onValueChanged = { libraryUpdateMangaDelayPref.set(it * 500) },
+                                ),
+                                highlightKey = null,
+                            )
+
+                            HorizontalDivider(
+                                modifier = Modifier.padding(horizontal = MaterialTheme.padding.medium),
+                                color = HikariCardDefaults.dividerColor(),
+                            )
+
+                            PreferenceItem(
+                                item = Preference.PreferenceItem.SliderPreference(
+                                    value = libraryUpdateRetryCount,
+                                    valueRange = 0..5,
+                                    title = stringResource(MR.strings.pref_library_update_retry_count),
+                                    subtitle = stringResource(MR.strings.pref_library_update_retry_count_summary),
+                                    valueString = if (libraryUpdateRetryCount == 0) {
+                                        stringResource(MR.strings.disabled)
+                                    } else {
+                                        libraryUpdateRetryCount.toString()
+                                    },
+                                    onValueChanged = { libraryUpdateRetryCountPref.set(it) },
                                 ),
                                 highlightKey = null,
                             )

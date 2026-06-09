@@ -38,6 +38,8 @@ typedef int (*pfn_AImageDecoder_decodeImage)(AImageDecoder *, void *, size_t,
 
 typedef void (*pfn_AImageDecoder_delete)(AImageDecoder *);
 
+typedef int (*pfn_AImageDecoder_setAndroidBitmapFormat)(AImageDecoder *, int32_t);
+
 struct ImageDecoderFunctions {
   pfn_AImageDecoder_createFromBuffer createFromBuffer;
   pfn_AImageDecoder_getHeaderInfo getHeaderInfo;
@@ -47,6 +49,7 @@ struct ImageDecoderFunctions {
   pfn_AImageDecoder_setTargetRect setTargetRect;
   pfn_AImageDecoder_decodeImage decodeImage;
   pfn_AImageDecoder_delete deleteDecoder;
+  pfn_AImageDecoder_setAndroidBitmapFormat setAndroidBitmapFormat;
 
   bool available = false;
 
@@ -71,8 +74,10 @@ struct ImageDecoderFunctions {
         (pfn_AImageDecoder_decodeImage)dlsym(lib, "AImageDecoder_decodeImage");
     deleteDecoder =
         (pfn_AImageDecoder_delete)dlsym(lib, "AImageDecoder_delete");
+    setAndroidBitmapFormat =
+        (pfn_AImageDecoder_setAndroidBitmapFormat)dlsym(lib, "AImageDecoder_setAndroidBitmapFormat");
 
-    available = createFromBuffer && decodeImage && deleteDecoder;
+    available = createFromBuffer && decodeImage && deleteDecoder && setAndroidBitmapFormat;
   }
 };
 
@@ -193,6 +198,17 @@ Java_tachiyomi_core_common_util_system_NativeImageDecoder_nativeDecode(
   if (bitmap == nullptr || jData == nullptr || !gDecoder.available)
     return JNI_FALSE;
 
+  AndroidBitmapInfo info;
+  AndroidBitmap_getInfo(env, bitmap, &info);
+
+  if (info.format != ANDROID_BITMAP_FORMAT_RGBA_8888 && info.format != ANDROID_BITMAP_FORMAT_RGB_565) {
+    return JNI_FALSE;
+  }
+
+  if (info.format == ANDROID_BITMAP_FORMAT_RGB_565 && filters != 0) {
+    return JNI_FALSE;
+  }
+
   jbyte *data = env->GetByteArrayElements(jData, nullptr);
   AImageDecoder *decoder = nullptr;
   int ret = gDecoder.createFromBuffer(data, length, &decoder);
@@ -201,8 +217,11 @@ Java_tachiyomi_core_common_util_system_NativeImageDecoder_nativeDecode(
     return JNI_FALSE;
   }
 
-  AndroidBitmapInfo info;
-  AndroidBitmap_getInfo(env, bitmap, &info);
+  if (info.format == ANDROID_BITMAP_FORMAT_RGB_565) {
+    gDecoder.setAndroidBitmapFormat(decoder, ANDROID_BITMAP_FORMAT_RGB_565);
+  } else {
+    gDecoder.setAndroidBitmapFormat(decoder, ANDROID_BITMAP_FORMAT_RGBA_8888);
+  }
 
   void *pixels;
   AndroidBitmap_lockPixels(env, bitmap, &pixels);
@@ -246,6 +265,17 @@ Java_tachiyomi_core_common_util_system_NativeImageDecoder_nativeDecodeRegion(
   if (bitmap == nullptr || jData == nullptr || !gDecoder.available)
     return JNI_FALSE;
 
+  AndroidBitmapInfo info;
+  AndroidBitmap_getInfo(env, bitmap, &info);
+
+  if (info.format != ANDROID_BITMAP_FORMAT_RGBA_8888 && info.format != ANDROID_BITMAP_FORMAT_RGB_565) {
+    return JNI_FALSE;
+  }
+
+  if (info.format == ANDROID_BITMAP_FORMAT_RGB_565 && filters != 0) {
+    return JNI_FALSE;
+  }
+
   jbyte *data = env->GetByteArrayElements(jData, nullptr);
   AImageDecoder *decoder = nullptr;
   int ret = gDecoder.createFromBuffer(data, length, &decoder);
@@ -254,8 +284,11 @@ Java_tachiyomi_core_common_util_system_NativeImageDecoder_nativeDecodeRegion(
     return JNI_FALSE;
   }
 
-  AndroidBitmapInfo info;
-  AndroidBitmap_getInfo(env, bitmap, &info);
+  if (info.format == ANDROID_BITMAP_FORMAT_RGB_565) {
+    gDecoder.setAndroidBitmapFormat(decoder, ANDROID_BITMAP_FORMAT_RGB_565);
+  } else {
+    gDecoder.setAndroidBitmapFormat(decoder, ANDROID_BITMAP_FORMAT_RGBA_8888);
+  }
 
   void *pixels;
   AndroidBitmap_lockPixels(env, bitmap, &pixels);

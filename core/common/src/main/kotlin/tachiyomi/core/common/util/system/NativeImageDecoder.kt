@@ -36,7 +36,10 @@ object NativeImageDecoder {
      * @return True if decoding was successful.
      */
     fun decode(bitmap: Bitmap, data: ByteArray, filters: Int = 0): Boolean {
-        if (bitmap.config != Bitmap.Config.ARGB_8888) {
+        if (bitmap.config != Bitmap.Config.ARGB_8888 && bitmap.config != Bitmap.Config.RGB_565) {
+            return false
+        }
+        if (bitmap.config == Bitmap.Config.RGB_565 && filters != 0) {
             return false
         }
         return nativeDecode(bitmap, data, data.size, filters)
@@ -63,6 +66,12 @@ object NativeImageDecoder {
         sampleSize: Int,
         filters: Int = 0,
     ): Boolean {
+        if (bitmap.config != Bitmap.Config.ARGB_8888 && bitmap.config != Bitmap.Config.RGB_565) {
+            return false
+        }
+        if (bitmap.config == Bitmap.Config.RGB_565 && filters != 0) {
+            return false
+        }
         return nativeDecodeRegion(bitmap, data, data.size, left, top, right, bottom, sampleSize, filters)
     }
 

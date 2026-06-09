@@ -228,19 +228,24 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
                 add(MangaKeyer())
             }
 
+            val isLowRam = DeviceUtil.isLowRamDevice(this@App)
             memoryCache(
                 MemoryCache.Builder()
-                    .maxSizePercent(context)
+                    .maxSizePercent(context, percent = if (isLowRam) 0.10 else 0.20)
                     .build(),
             )
 
             crossfade((300 * this@App.animatorDurationScale).toInt())
-            allowRgb565(DeviceUtil.isLowRamDevice(this@App))
+            allowRgb565(isLowRam)
             if (networkPreferences.verboseLogging.get()) logger(DebugLogger())
 
+            val processors = Runtime.getRuntime().availableProcessors()
+            val fetcherParallelism = if (isLowRam) (processors / 2).coerceIn(2, 4) else 8
+            val decoderParallelism = if (isLowRam) 2 else 3
+
             // Coil spawns a new thread for every image load by default
-            fetcherCoroutineContext(Dispatchers.IO.limitedParallelism(8))
-            decoderCoroutineContext(Dispatchers.IO.limitedParallelism(3))
+            fetcherCoroutineContext(Dispatchers.IO.limitedParallelism(fetcherParallelism))
+            decoderCoroutineContext(Dispatchers.IO.limitedParallelism(decoderParallelism))
         }
             .build()
     }

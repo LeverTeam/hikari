@@ -9,6 +9,7 @@ import coil3.decode.Decoder
 import coil3.decode.ImageSource
 import coil3.fetch.SourceFetchResult
 import coil3.request.Options
+import coil3.request.allowRgb565
 import coil3.request.bitmapConfig
 import okio.BufferedSource
 import tachiyomi.core.common.util.system.ImageUtil
@@ -45,11 +46,17 @@ class TachiyomiImageDecoder(private val resources: ImageSource, private val opti
 
         check(bitmap != null) { "Failed to decode image" }
 
-        if (options.bitmapConfig == Bitmap.Config.HARDWARE && ImageUtil.canUseHardwareBitmap(bitmap)) {
-            val hwBitmap = bitmap.copy(Bitmap.Config.HARDWARE, false)
-            if (hwBitmap != null) {
+        val targetConfig = when {
+            options.bitmapConfig == Bitmap.Config.HARDWARE && ImageUtil.canUseHardwareBitmap(bitmap) -> Bitmap.Config.HARDWARE
+            options.allowRgb565 -> Bitmap.Config.RGB_565
+            else -> null
+        }
+
+        if (targetConfig != null && targetConfig != bitmap.config) {
+            val newBitmap = bitmap.copy(targetConfig, false)
+            if (newBitmap != null) {
                 bitmap.recycle()
-                bitmap = hwBitmap
+                bitmap = newBitmap
             }
         }
 

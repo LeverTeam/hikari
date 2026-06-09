@@ -24,6 +24,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
@@ -51,6 +54,7 @@ import tachiyomi.core.metadata.comicinfo.ComicInfo
 import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.download.service.DownloadPreferences
+import tachiyomi.domain.download.service.DownloadQueueSortingMode
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.track.interactor.GetTracks
@@ -113,6 +117,28 @@ class Downloader(
         launchNow {
             addAllToQueue(store.restore())
         }
+
+        downloadPreferences.downloadQueueSortingMode.changes()
+            .drop(1)
+            .onEach { mode ->
+                _queueState.update { currentQueue ->
+                    val downloading = currentQueue.filter { it.status == Download.State.DOWNLOADING }
+                    val pending = currentQueue.filter { it.status != Download.State.DOWNLOADING }
+                    val sortedPending = when (mode) {
+                        DownloadQueueSortingMode.FIFO, DownloadQueueSortingMode.LIFO -> pending
+                        DownloadQueueSortingMode.CHAPTER_ASC -> pending.sortedWith(
+                            compareBy<Download> { it.manga.title }
+                                .thenBy { it.chapter.chapterNumber }
+                        )
+                        DownloadQueueSortingMode.CHAPTER_DESC -> pending.sortedWith(
+                            compareBy<Download> { it.manga.title }
+                                .thenByDescending { it.chapter.chapterNumber }
+                        )
+                    }
+                    downloading + sortedPending
+                }
+            }
+            .launchIn(scope)
     }
 
     /**
@@ -650,12 +676,38 @@ class Downloader(
     }
 
     private fun addAllToQueue(downloads: List<Download>) {
-        _queueState.update {
+        _queueState.update { currentQueue ->
             downloads.forEach { download ->
                 download.status = Download.State.QUEUE
             }
             store.addAll(downloads)
-            it + downloads
+            
+            when (downloadPreferences.downloadQueueSortingMode.get()) {
+                DownloadQueueSortingMode.FIFO -> currentQueue + downloads
+                DownloadQueueSortingMode.LIFO -> {
+                    val downloading = currentQueue.filter { it.status == Download.State.DOWNLOADING }
+                    val pending = currentQueue.filter { it.status != Download.State.DOWNLOADING }
+                    downloading + downloads + pending
+                }
+                DownloadQueueSortingMode.CHAPTER_ASC -> {
+                    val combined = currentQueue + downloads
+                    val downloading = combined.filter { it.status == Download.State.DOWNLOADING }
+                    val pending = combined.filter { it.status != Download.State.DOWNLOADING }
+                    downloading + pending.sortedWith(
+                        compareBy<Download> { it.manga.title }
+                            .thenBy { it.chapter.chapterNumber }
+                    )
+                }
+                DownloadQueueSortingMode.CHAPTER_DESC -> {
+                    val combined = currentQueue + downloads
+                    val downloading = combined.filter { it.status == Download.State.DOWNLOADING }
+                    val pending = combined.filter { it.status != Download.State.DOWNLOADING }
+                    downloading + pending.sortedWith(
+                        compareBy<Download> { it.manga.title }
+                            .thenByDescending { it.chapter.chapterNumber }
+                    )
+                }
+            }
         }
     }
 
@@ -711,6 +763,8 @@ class Downloader(
             stop()
             return
         }
+
+        downloadPreferences.downloadQueueSortingMode.set(DownloadQueueSortingMode.FIFO)
 
         pause()
         internalClearQueue()

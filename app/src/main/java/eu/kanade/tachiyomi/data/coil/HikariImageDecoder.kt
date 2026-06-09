@@ -77,10 +77,11 @@ class HikariImageDecoder(
             filters = filters or NativeImageDecoder.FILTER_DENOISE
         }
 
+        val useRgb565 = options.allowRgb565 && filters == 0
         val bitmap = Bitmap.createBitmap(
             dstWidth,
             dstHeight,
-            if (options.allowRgb565) Bitmap.Config.RGB_565 else Bitmap.Config.ARGB_8888,
+            if (useRgb565) Bitmap.Config.RGB_565 else Bitmap.Config.ARGB_8888,
         )
 
         val success = NativeImageDecoder.decode(bitmap, bytes, filters)

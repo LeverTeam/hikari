@@ -59,6 +59,12 @@ class LibraryPreferences(
     val libraryUpdateParallelSourceUpdates: Preference<Int> =
         preferenceStore.getInt("library_update_parallel_source_updates", 5)
 
+    val libraryUpdateMangaDelay: Preference<Int> =
+        preferenceStore.getInt("library_update_manga_delay", 1500)
+
+    val libraryUpdateRetryCount: Preference<Int> =
+        preferenceStore.getInt("library_update_retry_count", 3)
+
     val showContinueReadingButton: Preference<Boolean> = preferenceStore.getBoolean(
         "display_continue_reading_button",
         false,

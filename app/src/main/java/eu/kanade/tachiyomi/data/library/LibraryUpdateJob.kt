@@ -39,6 +39,7 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.debounce
@@ -251,13 +252,26 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
                 .map { mangaInSource ->
                     async {
                         semaphore.withPermit {
-                            mangaInSource.forEach { libraryManga ->
+                            mangaInSource.forEachIndexed { index, libraryManga ->
                                 val manga = libraryManga.manga
                                 ensureActive()
 
                                 // Don't continue to update if manga is not in library
                                 if (getManga.await(manga.id)?.favorite != true) {
-                                    return@forEach
+                                    return@forEachIndexed
+                                }
+
+                                if (index > 0) {
+                                    val baseDelay = libraryPreferences.libraryUpdateMangaDelay.get().toLong()
+                                    if (baseDelay > 0) {
+                                        val jitter = (baseDelay * 0.2).toLong()
+                                        val randomJitter = if (jitter > 0) {
+                                            kotlin.random.Random.nextLong(-jitter, jitter + 1)
+                                        } else {
+                                            0L
+                                        }
+                                        delay(baseDelay + randomJitter)
+                                    }
                                 }
 
                                 withUpdateNotification(
@@ -266,21 +280,49 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
                                     manga,
                                 ) {
                                     try {
-                                        val newChapters = updateManga(manga, fetchWindow)
-                                            .sortedByDescending { it.sourceOrder }
+                                        val retryCount = libraryPreferences.libraryUpdateRetryCount.get()
+                                        var attempt = 0
+                                        var newChapters: List<Chapter>? = null
 
-                                        if (newChapters.isNotEmpty()) {
-                                            val chaptersToDownload = filterChaptersForDownload.await(manga, newChapters)
+                                        while (newChapters == null) {
+                                            try {
+                                                newChapters = updateManga(manga, fetchWindow)
+                                            } catch (e: Throwable) {
+                                                if (e is CancellationException) throw e
+                                                attempt++
+                                                if (attempt <= retryCount && e.isRetryable()) {
+                                                    val backoffBase = (2000L * (1 shl (attempt - 1)))
+                                                    val backoffJitter = (backoffBase * 0.2).toLong()
+                                                    val backoffJitterRandom = if (backoffJitter > 0) {
+                                                        kotlin.random.Random.nextLong(-backoffJitter, backoffJitter + 1)
+                                                    } else {
+                                                        0L
+                                                    }
+                                                    val delayTime = backoffBase + backoffJitterRandom
+                                                    logcat(LogPriority.WARN) {
+                                                        "Failed to update manga ${manga.title}, retrying in ${delayTime}ms (attempt $attempt/$retryCount): ${e.message}"
+                                                    }
+                                                    delay(delayTime)
+                                                } else {
+                                                    throw e
+                                                }
+                                            }
+                                        }
+
+                                        val sortedChapters = newChapters.sortedByDescending { it.sourceOrder }
+
+                                        if (sortedChapters.isNotEmpty()) {
+                                            val chaptersToDownload = filterChaptersForDownload.await(manga, sortedChapters)
 
                                             if (chaptersToDownload.isNotEmpty()) {
                                                 downloadChapters(manga, chaptersToDownload)
                                                 hasDownloads.store(true)
                                             }
 
-                                            libraryPreferences.newUpdatesCount.getAndSet { it + newChapters.size }
+                                            libraryPreferences.newUpdatesCount.getAndSet { it + sortedChapters.size }
 
                                             // Convert to the manga that contains new chapters
-                                            newUpdates.add(manga to newChapters.toTypedArray())
+                                            newUpdates.add(manga to sortedChapters.toTypedArray())
                                         }
                                     } catch (e: Throwable) {
                                         val errorMessage = when (e) {
