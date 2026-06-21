@@ -396,124 +396,112 @@ private fun MangaContentInfo(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        HikariCard(
+        FlowRow(
             modifier = Modifier.fillMaxWidth(),
-            containerColor = HikariCardDefaults.containerColor(),
+            horizontalArrangement = Arrangement.spacedBy(
+                space = MaterialTheme.padding.extraSmall,
+                alignment = if (textAlign == TextAlign.Center) Alignment.CenterHorizontally else Alignment.Start,
+            ),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(12.dp),
-                horizontalAlignment = alignment,
-                verticalArrangement = Arrangement.spacedBy(6.dp),
-            ) {
-                val delimiters = Regex("[,;/]")
-                val authorList = author?.split(delimiters)?.map { it.trim() }?.filter { it.isNotBlank() } ?: emptyList()
-                val artistList = artist?.split(delimiters)?.map { it.trim() }?.filter { it.isNotBlank() } ?: emptyList()
+            val delimiters = Regex("[,;/]")
+            val authorList = author?.split(delimiters)?.map { it.trim() }?.filter { it.isNotBlank() } ?: emptyList()
+            val artistList = artist?.split(delimiters)?.map { it.trim() }?.filter { it.isNotBlank() } ?: emptyList()
 
-                if (authorList.isNotEmpty()) {
-                    MetadataRow(
+            if (authorList.isNotEmpty()) {
+                authorList.forEach { value ->
+                    MetadataChip(
                         icon = Icons.Filled.PersonOutline,
-                        values = authorList,
-                        textAlign = textAlign,
-                        onClick = { doSearch(it, true) }
-                    )
-                } else {
-                    MetadataRow(
-                        icon = Icons.Filled.PersonOutline,
-                        values = listOf(stringResource(MR.strings.unknown_author)),
-                        textAlign = textAlign,
-                        onClick = null
+                        text = value,
+                        onClick = { doSearch(value, true) }
                     )
                 }
-
-                val uniqueArtistList = artistList.filter { it !in authorList }
-                if (uniqueArtistList.isNotEmpty()) {
-                    MetadataRow(
-                        icon = Icons.Filled.Brush,
-                        values = uniqueArtistList,
-                        textAlign = textAlign,
-                        onClick = { doSearch(it, true) }
-                    )
-                }
-
-                val statusText = when (status) {
-                    SManga.ONGOING.toLong() -> stringResource(MR.strings.ongoing)
-                    SManga.COMPLETED.toLong() -> stringResource(MR.strings.completed)
-                    SManga.LICENSED.toLong() -> stringResource(MR.strings.licensed)
-                    SManga.PUBLISHING_FINISHED.toLong() -> stringResource(MR.strings.publishing_finished)
-                    SManga.CANCELLED.toLong() -> stringResource(MR.strings.cancelled)
-                    SManga.ON_HIATUS.toLong() -> stringResource(MR.strings.on_hiatus)
-                    else -> stringResource(MR.strings.unknown)
-                }
-                val statusIcon = when (status) {
-                    SManga.ONGOING.toLong() -> Icons.Outlined.Schedule
-                    SManga.COMPLETED.toLong() -> Icons.Outlined.DoneAll
-                    SManga.LICENSED.toLong() -> Icons.Outlined.AttachMoney
-                    SManga.PUBLISHING_FINISHED.toLong() -> Icons.Outlined.Done
-                    SManga.CANCELLED.toLong() -> Icons.Outlined.Close
-                    SManga.ON_HIATUS.toLong() -> Icons.Outlined.Pause
-                    else -> Icons.Outlined.Block
-                }
-                MetadataRow(
-                    icon = statusIcon,
-                    values = listOf(statusText),
-                    textAlign = textAlign,
+            } else {
+                MetadataChip(
+                    icon = Icons.Filled.PersonOutline,
+                    text = stringResource(MR.strings.unknown_author),
                     onClick = null
                 )
+            }
 
-                val sourceIcon = if (isStubSource) Icons.Filled.Warning else Icons.Outlined.Public
-                val sourceIconTint = if (isStubSource) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                MetadataRow(
-                    icon = sourceIcon,
-                    values = listOf(sourceName),
-                    textAlign = textAlign,
-                    iconTint = sourceIconTint,
-                    onClick = { doSearch(sourceName, false) }
+            val uniqueArtistList = artistList.filter { it !in authorList }
+            uniqueArtistList.forEach { value ->
+                MetadataChip(
+                    icon = Icons.Filled.Brush,
+                    text = value,
+                    onClick = { doSearch(value, true) }
                 )
             }
+
+            val statusText = when (status) {
+                SManga.ONGOING.toLong() -> stringResource(MR.strings.ongoing)
+                SManga.COMPLETED.toLong() -> stringResource(MR.strings.completed)
+                SManga.LICENSED.toLong() -> stringResource(MR.strings.licensed)
+                SManga.PUBLISHING_FINISHED.toLong() -> stringResource(MR.strings.publishing_finished)
+                SManga.CANCELLED.toLong() -> stringResource(MR.strings.cancelled)
+                SManga.ON_HIATUS.toLong() -> stringResource(MR.strings.on_hiatus)
+                else -> stringResource(MR.strings.unknown)
+            }
+            val statusIcon = when (status) {
+                SManga.ONGOING.toLong() -> Icons.Outlined.Schedule
+                SManga.COMPLETED.toLong() -> Icons.Outlined.DoneAll
+                SManga.LICENSED.toLong() -> Icons.Outlined.AttachMoney
+                SManga.PUBLISHING_FINISHED.toLong() -> Icons.Outlined.Done
+                SManga.CANCELLED.toLong() -> Icons.Outlined.Close
+                SManga.ON_HIATUS.toLong() -> Icons.Outlined.Pause
+                else -> Icons.Outlined.Block
+            }
+            MetadataChip(
+                icon = statusIcon,
+                text = statusText,
+                onClick = null
+            )
+
+            val sourceIcon = if (isStubSource) Icons.Filled.Warning else Icons.Outlined.Public
+            val sourceIconTint = if (isStubSource) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+            MetadataChip(
+                icon = sourceIcon,
+                text = sourceName,
+                iconTint = sourceIconTint,
+                onClick = { doSearch(sourceName, false) }
+            )
         }
     }
 }
 
 @Composable
-private fun MetadataRow(
+private fun MetadataChip(
     icon: ImageVector,
-    values: List<String>,
-    textAlign: TextAlign?,
+    text: String,
+    onClick: (() -> Unit)?,
     iconTint: Color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-    onClick: ((String) -> Unit)? = null,
 ) {
-    FlowRow(
-        horizontalArrangement = if (textAlign == TextAlign.Center) Arrangement.Center else Arrangement.Start,
-        verticalArrangement = Arrangement.Center,
+    Surface(
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+        modifier = if (onClick != null) {
+            Modifier.clickableNoIndication(onClick = onClick)
+        } else {
+            Modifier
+        }
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint = iconTint,
-            modifier = Modifier.size(18.dp),
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        values.forEachIndexed { index, value ->
+        Row(
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = iconTint,
+                modifier = Modifier.size(16.dp),
+            )
             Text(
-                text = value,
-                color = if (onClick != null) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                text = text,
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = if (onClick != null) FontWeight.Medium else FontWeight.Normal,
-                modifier = if (onClick != null) {
-                    Modifier.clickableNoIndication { onClick(value) }
-                } else {
-                    Modifier
-                },
+                color = if (onClick != null) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
             )
-            if (index < values.size - 1) {
-                Text(
-                    text = ", ",
-                    color = MaterialTheme.colorScheme.onSurface,
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-            }
         }
     }
 }
