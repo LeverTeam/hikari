@@ -9,17 +9,13 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Circle
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.outlined.BookmarkAdd
 import androidx.compose.material.icons.outlined.BookmarkRemove
-import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Done
 import androidx.compose.material.icons.outlined.Download
-import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material.icons.outlined.FileDownloadOff
 import androidx.compose.material.icons.outlined.RemoveDone
-import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -88,8 +84,6 @@ fun MangaChapterListItem(
         background = MaterialTheme.colorScheme.primaryContainer,
         onSwipe = { onChapterSwipe(chapterSwipeEndAction) },
     )
-    val statusPresentation = downloadState.toStatusPresentation(downloadProgress)
-
     SwipeableActionsBox(
         modifier = modifier.clipToBounds(),
         startActions = listOfNotNull(start),
@@ -108,7 +102,7 @@ fun MangaChapterListItem(
             ) {
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(2.dp),
@@ -177,27 +171,6 @@ fun MangaChapterListItem(
                             }
                         }
                     }
-
-                    statusPresentation?.let { status ->
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(6.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Icon(
-                                imageVector = status.icon,
-                                contentDescription = null,
-                                tint = status.tint,
-                                modifier = Modifier.height(14.dp),
-                            )
-                            Text(
-                                text = status.label,
-                                style = MaterialTheme.typography.labelSmall,
-                                color = status.tint,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                            )
-                        }
-                    }
                 }
 
                 ChapterDownloadIndicator(
@@ -209,40 +182,6 @@ fun MangaChapterListItem(
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun Download.State.toStatusPresentation(progress: Int): ChapterDownloadStatusPresentation? {
-    return when (this) {
-        Download.State.NOT_DOWNLOADED -> null
-        Download.State.QUEUE -> ChapterDownloadStatusPresentation(
-            label = stringResource(MR.strings.download_status_queued),
-            icon = Icons.Outlined.Schedule,
-            tint = MaterialTheme.colorScheme.outline,
-        )
-        Download.State.DOWNLOADING -> ChapterDownloadStatusPresentation(
-            label = buildString {
-                append(stringResource(MR.strings.download_status_downloading))
-                if (progress > 0) {
-                    append(" ")
-                    append(progress)
-                    append("%")
-                }
-            },
-            icon = Icons.Filled.PlayArrow,
-            tint = MaterialTheme.colorScheme.primary,
-        )
-        Download.State.DOWNLOADED -> ChapterDownloadStatusPresentation(
-            label = stringResource(MR.strings.completed),
-            icon = Icons.Outlined.CheckCircle,
-            tint = MaterialTheme.colorScheme.tertiary,
-        )
-        Download.State.ERROR -> ChapterDownloadStatusPresentation(
-            label = stringResource(MR.strings.chapter_error),
-            icon = Icons.Outlined.ErrorOutline,
-            tint = MaterialTheme.colorScheme.error,
-        )
     }
 }
 
@@ -300,11 +239,5 @@ private fun swipeAction(
         isUndo = isUndo,
     )
 }
-
-private data class ChapterDownloadStatusPresentation(
-    val label: String,
-    val icon: ImageVector,
-    val tint: Color,
-)
 
 private val swipeActionThreshold = 56.dp

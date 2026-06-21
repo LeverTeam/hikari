@@ -244,87 +244,26 @@ fun ExpandableMangaDescription(
     onEditNotes: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
-        val (expanded, onExpanded) = rememberSaveable {
-            mutableStateOf(defaultExpandState)
-        }
-        val desc =
-            description.takeIf { !it.isNullOrBlank() } ?: stringResource(MR.strings.description_placeholder)
-
-        MangaSummary(
-            description = desc,
-            expanded = expanded,
-            notes = notes,
-            onEditNotesClicked = onEditNotes,
-            modifier = Modifier
-                .padding(top = 16.dp)
-                .padding(horizontal = 16.dp)
-                .clickableNoIndication { onExpanded(!expanded) },
-        )
-        val tags = tagsProvider()
-        if (!tags.isNullOrEmpty()) {
-            Box(
-                modifier = Modifier
-                    .padding(top = 8.dp)
-                    .padding(vertical = 12.dp)
-                    .animateContentSize(animationSpec = spring())
-                    .fillMaxWidth(),
-            ) {
-                var showMenu by remember { mutableStateOf(false) }
-                var tagSelected by remember { mutableStateOf("") }
-                DropdownMenu(
-                    expanded = showMenu,
-                    onDismissRequest = { showMenu = false },
-                ) {
-                    DropdownMenuItem(
-                        text = { Text(text = stringResource(MR.strings.action_search)) },
-                        onClick = {
-                            onTagSearch(tagSelected)
-                            showMenu = false
-                        },
-                    )
-                    DropdownMenuItem(
-                        text = { Text(text = stringResource(MR.strings.action_copy_to_clipboard)) },
-                        onClick = {
-                            onCopyTagToClipboard(tagSelected)
-                            showMenu = false
-                        },
-                    )
-                }
-                if (expanded) {
-                    FlowRow(
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
-                    ) {
-                        tags.forEach {
-                            TagsChip(
-                                text = it,
-                                onClick = {
-                                    tagSelected = it
-                                    showMenu = true
-                                },
-                            )
-                        }
-                    }
-                } else {
-                    LazyRow(
-                        contentPadding = PaddingValues(horizontal = MaterialTheme.padding.medium),
-                        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
-                    ) {
-                        items(items = tags) {
-                            TagsChip(
-                                text = it,
-                                onClick = {
-                                    tagSelected = it
-                                    showMenu = true
-                                },
-                            )
-                        }
-                    }
-                }
-            }
-        }
+    val (expanded, onExpanded) = rememberSaveable {
+        mutableStateOf(defaultExpandState)
     }
+    val desc =
+        description.takeIf { !it.isNullOrBlank() } ?: stringResource(MR.strings.description_placeholder)
+    val tags = tagsProvider()
+
+    MangaSummary(
+        description = desc,
+        tags = tags,
+        expanded = expanded,
+        notes = notes,
+        onEditNotesClicked = onEditNotes,
+        onTagSearch = onTagSearch,
+        onCopyTagToClipboard = onCopyTagToClipboard,
+        modifier = modifier
+            .padding(top = 16.dp, bottom = 16.dp)
+            .padding(horizontal = 16.dp)
+            .clickableNoIndication { onExpanded(!expanded) },
+    )
 }
 
 @Composable
@@ -625,8 +564,11 @@ private fun descriptionAnnotator(loadImages: Boolean, linkStyle: SpanStyle) = re
 private fun MangaSummary(
     description: String,
     notes: String,
+    tags: List<String>?,
     expanded: Boolean,
     onEditNotesClicked: () -> Unit,
+    onTagSearch: (String) -> Unit,
+    onCopyTagToClipboard: (tag: String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val preferences = remember { Injekt.get<UiPreferences>() }
@@ -675,6 +617,61 @@ private fun MangaSummary(
                                 ),
                                 loadImages = loadImages,
                             )
+                        }
+
+                        if (!tags.isNullOrEmpty()) {
+                            Spacer(modifier = Modifier.height(12.dp))
+                            var showMenu by remember { mutableStateOf(false) }
+                            var tagSelected by remember { mutableStateOf("") }
+                            DropdownMenu(
+                                expanded = showMenu,
+                                onDismissRequest = { showMenu = false },
+                            ) {
+                                DropdownMenuItem(
+                                    text = { Text(text = stringResource(MR.strings.action_search)) },
+                                    onClick = {
+                                        onTagSearch(tagSelected)
+                                        showMenu = false
+                                    },
+                                )
+                                DropdownMenuItem(
+                                    text = { Text(text = stringResource(MR.strings.action_copy_to_clipboard)) },
+                                    onClick = {
+                                        onCopyTagToClipboard(tagSelected)
+                                        showMenu = false
+                                    },
+                                )
+                            }
+                            if (expanded) {
+                                FlowRow(
+                                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+                                    verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+                                ) {
+                                    tags.forEach {
+                                        TagsChip(
+                                            text = it,
+                                            onClick = {
+                                                tagSelected = it
+                                                showMenu = true
+                                            },
+                                        )
+                                    }
+                                }
+                            } else {
+                                LazyRow(
+                                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+                                ) {
+                                    items(items = tags) {
+                                        TagsChip(
+                                            text = it,
+                                            onClick = {
+                                                tagSelected = it
+                                                showMenu = true
+                                            },
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -728,11 +725,20 @@ private fun TagsChip(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
-    CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 0.dp) {
-        SuggestionChip(
-            modifier = modifier.then(DefaultTagChipModifier),
-            onClick = onClick,
-            label = { Text(text = text, style = MaterialTheme.typography.bodySmall) },
+    Box(
+        modifier = modifier
+            .background(
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                shape = RoundedCornerShape(8.dp),
+            )
+            .clickableNoIndication(onClick = onClick)
+            .padding(horizontal = 8.dp, vertical = 4.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = text,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.bodySmall,
         )
     }
 }
