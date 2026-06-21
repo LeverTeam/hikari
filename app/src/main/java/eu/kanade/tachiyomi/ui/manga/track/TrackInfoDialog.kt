@@ -5,20 +5,15 @@ import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.input.rememberTextFieldState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.collectAsState
@@ -76,8 +71,8 @@ import tachiyomi.domain.track.interactor.DeleteTrack
 import tachiyomi.domain.track.interactor.GetTracks
 import tachiyomi.domain.track.model.Track
 import tachiyomi.i18n.MR
+import eu.kanade.presentation.components.AdaptiveSheet
 import tachiyomi.presentation.core.components.LabeledCheckbox
-import tachiyomi.presentation.core.components.material.AlertDialogContent
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 import uy.kohesive.injekt.Injekt
@@ -552,21 +547,27 @@ private data class TrackDateRemoverScreen(
                 start = start,
             )
         }
-        AlertDialogContent(
-            modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars),
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.Delete,
-                    contentDescription = null,
-                )
-            },
-            title = {
+        AdaptiveSheet(
+            onDismissRequest = navigator::pop,
+            header = {
                 Text(
                     text = stringResource(MR.strings.track_remove_date_conf_title),
-                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = MaterialTheme.padding.medium,
+                            top = MaterialTheme.padding.small,
+                            end = MaterialTheme.padding.medium,
+                            bottom = MaterialTheme.padding.small,
+                        ),
                 )
             },
-            text = {
+        ) {
+            Column(
+                modifier = Modifier.padding(MaterialTheme.padding.medium),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+            ) {
                 val serviceName = screenModel.getServiceName()
                 Text(
                     text = if (start) {
@@ -574,17 +575,21 @@ private data class TrackDateRemoverScreen(
                     } else {
                         stringResource(MR.strings.track_remove_finish_date_conf_text, serviceName)
                     },
+                    style = MaterialTheme.typography.bodyMedium,
                 )
-            },
-            buttons = {
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small, Alignment.End),
+                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
                 ) {
-                    TextButton(onClick = navigator::pop) {
+                    OutlinedButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = navigator::pop,
+                    ) {
                         Text(text = stringResource(MR.strings.action_cancel))
                     }
                     FilledTonalButton(
+                        modifier = Modifier.weight(1f),
                         onClick = {
                             screenModel.removeDate()
                             navigator.popUntil { it is TrackInfoDialogHomeScreen }
@@ -597,8 +602,8 @@ private data class TrackDateRemoverScreen(
                         Text(text = stringResource(MR.strings.action_remove))
                     }
                 }
-            },
-        )
+            }
+        }
     }
 
     private class Model(
@@ -732,49 +737,52 @@ private data class TrackerRemoveScreen(
         }
         val serviceName = screenModel.getName()
         var removeRemoteTrack by remember { mutableStateOf(false) }
-        AlertDialogContent(
-            modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars),
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.Delete,
-                    contentDescription = null,
-                )
-            },
-            title = {
+        AdaptiveSheet(
+            onDismissRequest = navigator::pop,
+            header = {
                 Text(
                     text = stringResource(MR.strings.track_delete_title, serviceName),
-                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = MaterialTheme.padding.medium,
+                            top = MaterialTheme.padding.small,
+                            end = MaterialTheme.padding.medium,
+                            bottom = MaterialTheme.padding.small,
+                        ),
                 )
             },
-            text = {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
-                ) {
-                    Text(
-                        text = stringResource(MR.strings.track_delete_text, serviceName),
-                    )
+        ) {
+            Column(
+                modifier = Modifier.padding(MaterialTheme.padding.medium),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+            ) {
+                Text(
+                    text = stringResource(MR.strings.track_delete_text, serviceName),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
 
-                    if (screenModel.isDeletable()) {
-                        LabeledCheckbox(
-                            label = stringResource(MR.strings.track_delete_remote_text, serviceName),
-                            checked = removeRemoteTrack,
-                            onCheckedChange = { removeRemoteTrack = it },
-                        )
-                    }
+                if (screenModel.isDeletable()) {
+                    LabeledCheckbox(
+                        label = stringResource(MR.strings.track_delete_remote_text, serviceName),
+                        checked = removeRemoteTrack,
+                        onCheckedChange = { removeRemoteTrack = it },
+                    )
                 }
-            },
-            buttons = {
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(
-                        MaterialTheme.padding.small,
-                        Alignment.End,
-                    ),
+                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
                 ) {
-                    TextButton(onClick = navigator::pop) {
+                    OutlinedButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = navigator::pop,
+                    ) {
                         Text(text = stringResource(MR.strings.action_cancel))
                     }
                     FilledTonalButton(
+                        modifier = Modifier.weight(1f),
                         onClick = {
                             screenModel.unregisterTracking(serviceId)
                             if (removeRemoteTrack) screenModel.deleteMangaFromService()
@@ -788,8 +796,8 @@ private data class TrackerRemoveScreen(
                         Text(text = stringResource(MR.strings.action_ok))
                     }
                 }
-            },
-        )
+            }
+        }
     }
 
     private class Model(

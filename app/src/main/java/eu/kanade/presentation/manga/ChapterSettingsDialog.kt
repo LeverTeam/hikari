@@ -11,14 +11,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.PeopleAlt
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import eu.kanade.presentation.components.AdaptiveSheet
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,6 +47,7 @@ import tachiyomi.presentation.core.components.RadioItem
 import tachiyomi.presentation.core.components.SortItem
 import tachiyomi.presentation.core.components.TriStateItem
 import tachiyomi.presentation.core.i18n.stringResource
+import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.theme.active
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -309,10 +311,27 @@ private fun SetAsDefaultDialog(
 ) {
     var optionalChecked by rememberSaveable { mutableStateOf(false) }
 
-    AlertDialog(
+    AdaptiveSheet(
         onDismissRequest = onDismissRequest,
-        title = { Text(text = stringResource(MR.strings.chapter_settings)) },
-        text = {
+        header = {
+            Text(
+                text = stringResource(MR.strings.chapter_settings),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.padding.medium,
+                        top = MaterialTheme.padding.small,
+                        end = MaterialTheme.padding.medium,
+                        bottom = MaterialTheme.padding.small,
+                    ),
+            )
+        },
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
@@ -324,21 +343,27 @@ private fun SetAsDefaultDialog(
                     onCheckedChange = { optionalChecked = it },
                 )
             }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(text = stringResource(MR.strings.action_cancel))
-            }
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    onConfirmed(optionalChecked)
-                    onDismissRequest()
-                },
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
             ) {
-                Text(text = stringResource(MR.strings.action_ok))
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = onDismissRequest,
+                ) {
+                    Text(text = stringResource(MR.strings.action_cancel))
+                }
+                FilledTonalButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = {
+                        onConfirmed(optionalChecked)
+                        onDismissRequest()
+                    },
+                ) {
+                    Text(text = stringResource(MR.strings.action_ok))
+                }
             }
-        },
-    )
+        }
+    }
 }

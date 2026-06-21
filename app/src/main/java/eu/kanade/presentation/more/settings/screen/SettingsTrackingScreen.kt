@@ -5,15 +5,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.icons.outlined.Close
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,6 +22,13 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import eu.kanade.presentation.components.AdaptiveSheet
+import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.seconds
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -210,94 +217,118 @@ object SettingsTrackingScreen : SearchableSettings {
         var processing by remember { mutableStateOf(false) }
         var inputError by remember { mutableStateOf(false) }
 
-        AlertDialog(
-            onDismissRequest = onDismissRequest,
-            title = {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = stringResource(MR.strings.login_title, tracker.name),
-                        modifier = Modifier.weight(1f),
-                    )
-                    IconButton(onClick = onDismissRequest) {
-                        Icon(
-                            imageVector = Icons.Outlined.Close,
-                            contentDescription = stringResource(MR.strings.action_close),
-                        )
-                    }
-                }
-            },
-            text = {
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .semantics { contentType = ContentType.Username + ContentType.EmailAddress },
-                        value = username,
-                        onValueChange = { username = it },
-                        label = { Text(text = stringResource(uNameStringRes)) },
-                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                        singleLine = true,
-                        isError = inputError && !processing,
-                    )
+        val focusRequester = remember { FocusRequester() }
+        val keyboardController = LocalSoftwareKeyboardController.current
 
-                    var hidePassword by remember { mutableStateOf(true) }
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .semantics { contentType = ContentType.Password },
-                        value = password,
-                        onValueChange = { password = it },
-                        label = { Text(text = stringResource(MR.strings.password)) },
-                        trailingIcon = {
-                            IconButton(onClick = { hidePassword = !hidePassword }) {
-                                Icon(
-                                    imageVector = if (hidePassword) {
-                                        Icons.Filled.Visibility
-                                    } else {
-                                        Icons.Filled.VisibilityOff
-                                    },
-                                    contentDescription = null,
-                                )
-                            }
-                        },
-                        visualTransformation = if (hidePassword) {
-                            PasswordVisualTransformation()
-                        } else {
-                            VisualTransformation.None
-                        },
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Password,
-                            imeAction = ImeAction.Done,
+        AdaptiveSheet(
+            onDismissRequest = onDismissRequest,
+            modifier = Modifier.imePadding(),
+            header = {
+                Text(
+                    text = stringResource(MR.strings.login_title, tracker.name),
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = MaterialTheme.padding.medium,
+                            top = MaterialTheme.padding.small,
+                            end = MaterialTheme.padding.medium,
+                            bottom = MaterialTheme.padding.small,
                         ),
-                        singleLine = true,
-                        isError = inputError && !processing,
-                    )
-                }
+                )
             },
-            confirmButton = {
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
-                    enabled = !processing && username.text.isNotBlank() && password.text.isNotBlank(),
-                    onClick = {
-                        scope.launchIO {
-                            processing = true
-                            val result = checkLogin(
-                                context = context,
-                                tracker = tracker,
-                                username = username.text,
-                                password = password.text,
+        ) {
+            Column(
+                modifier = Modifier.padding(MaterialTheme.padding.medium),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+            ) {
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .focusRequester(focusRequester)
+                        .semantics { contentType = ContentType.Username + ContentType.EmailAddress },
+                    value = username,
+                    onValueChange = { username = it },
+                    label = { Text(text = stringResource(uNameStringRes)) },
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+                    singleLine = true,
+                    isError = inputError && !processing,
+                )
+
+                var hidePassword by remember { mutableStateOf(true) }
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .semantics { contentType = ContentType.Password },
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text(text = stringResource(MR.strings.password)) },
+                    trailingIcon = {
+                        IconButton(onClick = { hidePassword = !hidePassword }) {
+                            Icon(
+                                imageVector = if (hidePassword) {
+                                    Icons.Filled.Visibility
+                                } else {
+                                    Icons.Filled.VisibilityOff
+                                },
+                                contentDescription = null,
                             )
-                            inputError = !result
-                            if (result) onDismissRequest()
-                            processing = false
                         }
                     },
+                    visualTransformation = if (hidePassword) {
+                        PasswordVisualTransformation()
+                    } else {
+                        VisualTransformation.None
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done,
+                    ),
+                    singleLine = true,
+                    isError = inputError && !processing,
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
                 ) {
-                    val id = if (processing) MR.strings.logging_in else MR.strings.login
-                    Text(text = stringResource(id))
+                    OutlinedButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = onDismissRequest,
+                    ) {
+                        Text(text = stringResource(MR.strings.action_cancel))
+                    }
+                    FilledTonalButton(
+                        modifier = Modifier.weight(1f),
+                        enabled = !processing && username.text.isNotBlank() && password.text.isNotBlank(),
+                        onClick = {
+                            scope.launchIO {
+                                processing = true
+                                val result = checkLogin(
+                                    context = context,
+                                    tracker = tracker,
+                                    username = username.text,
+                                    password = password.text,
+                                )
+                                inputError = !result
+                                if (result) onDismissRequest()
+                                processing = false
+                            }
+                        },
+                    ) {
+                        val id = if (processing) MR.strings.logging_in else MR.strings.login
+                        Text(text = stringResource(id))
+                    }
                 }
-            },
-        )
+            }
+        }
+
+        LaunchedEffect(focusRequester) {
+            // TODO: https://issuetracker.google.com/issues/204502668
+            delay(0.3.seconds)
+            focusRequester.requestFocus()
+            keyboardController?.show()
+        }
     }
 
     private suspend fun checkLogin(
@@ -323,31 +354,45 @@ object SettingsTrackingScreen : SearchableSettings {
         onDismissRequest: () -> Unit,
     ) {
         val context = LocalContext.current
-        AlertDialog(
+        AdaptiveSheet(
             onDismissRequest = onDismissRequest,
-            title = {
+            header = {
                 Text(
                     text = stringResource(MR.strings.logout_title, tracker.name),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = MaterialTheme.padding.medium,
+                            top = MaterialTheme.padding.small,
+                            end = MaterialTheme.padding.medium,
+                            bottom = MaterialTheme.padding.small,
+                        ),
                 )
             },
-            confirmButton = {
-                Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall)) {
+        ) {
+            Column(
+                modifier = Modifier.padding(MaterialTheme.padding.medium),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+                ) {
                     OutlinedButton(
                         modifier = Modifier.weight(1f),
                         onClick = onDismissRequest,
                     ) {
                         Text(text = stringResource(MR.strings.action_cancel))
                     }
-                    Button(
+                    FilledTonalButton(
                         modifier = Modifier.weight(1f),
                         onClick = {
                             tracker.logout()
                             onDismissRequest()
                             context.toast(MR.strings.logout_success)
                         },
-                        colors = ButtonDefaults.buttonColors(
+                        colors = ButtonDefaults.filledTonalButtonColors(
                             containerColor = MaterialTheme.colorScheme.error,
                             contentColor = MaterialTheme.colorScheme.onError,
                         ),
@@ -355,8 +400,8 @@ object SettingsTrackingScreen : SearchableSettings {
                         Text(text = stringResource(MR.strings.logout))
                     }
                 }
-            },
-        )
+            }
+        }
     }
 }
 

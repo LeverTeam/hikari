@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -29,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import eu.kanade.core.preference.asToggleableState
 import eu.kanade.presentation.category.visualName
 import kotlinx.collections.immutable.ImmutableList
@@ -50,10 +52,12 @@ fun CategoryCreateDialog(
     var name by remember { mutableStateOf("") }
 
     val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
     val nameAlreadyExists = remember(name) { categories.contains(name) }
 
     AdaptiveSheet(
         onDismissRequest = onDismissRequest,
+        modifier = Modifier.imePadding(),
         header = {
             Text(
                 text = stringResource(MR.strings.action_add_category),
@@ -120,8 +124,9 @@ fun CategoryCreateDialog(
 
     LaunchedEffect(focusRequester) {
         // TODO: https://issuetracker.google.com/issues/204502668
-        delay(0.1.seconds)
+        delay(0.3.seconds)
         focusRequester.requestFocus()
+        keyboardController?.show()
     }
 }
 
@@ -136,10 +141,12 @@ fun CategoryRenameDialog(
     var valueHasChanged by remember { mutableStateOf(false) }
 
     val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
     val nameAlreadyExists = remember(name) { categories.contains(name) }
 
     AdaptiveSheet(
         onDismissRequest = onDismissRequest,
+        modifier = Modifier.imePadding(),
         header = {
             Text(
                 text = stringResource(MR.strings.action_rename_category),
@@ -207,8 +214,9 @@ fun CategoryRenameDialog(
 
     LaunchedEffect(focusRequester) {
         // TODO: https://issuetracker.google.com/issues/204502668
-        delay(0.1.seconds)
+        delay(0.3.seconds)
         focusRequester.requestFocus()
+        keyboardController?.show()
     }
 }
 

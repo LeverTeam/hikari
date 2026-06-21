@@ -1,12 +1,19 @@
 package eu.kanade.presentation.more.settings.screen.browse.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import eu.kanade.presentation.components.AdaptiveSheet
+import tachiyomi.presentation.core.components.material.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -16,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.KeyboardType
 import hikari.domain.extensionrepo.model.ExtensionRepo
 import kotlinx.collections.immutable.ImmutableSet
@@ -33,62 +41,84 @@ fun ExtensionRepoCreateDialog(
     var name by remember { mutableStateOf("") }
 
     val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
     val nameAlreadyExists = remember(name) { repoUrls.contains(name) }
 
-    AlertDialog(
+    AdaptiveSheet(
         onDismissRequest = onDismissRequest,
-        confirmButton = {
-            TextButton(
-                enabled = name.isNotEmpty() && !nameAlreadyExists,
-                onClick = {
-                    onCreate(name)
-                    onDismissRequest()
-                },
-            ) {
-                Text(text = stringResource(MR.strings.action_add))
-            }
+        modifier = Modifier.imePadding(),
+        header = {
+            Text(
+                text = stringResource(MR.strings.action_add_repo),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.padding.medium,
+                        top = MaterialTheme.padding.small,
+                        end = MaterialTheme.padding.medium,
+                        bottom = MaterialTheme.padding.small,
+                    ),
+            )
         },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(text = stringResource(MR.strings.action_cancel))
-            }
-        },
-        title = {
-            Text(text = stringResource(MR.strings.action_add_repo))
-        },
-        text = {
-            Column {
-                Text(text = stringResource(MR.strings.action_add_repo_message, stringResource(MR.strings.app_name)))
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
+            Text(text = stringResource(MR.strings.action_add_repo_message, stringResource(MR.strings.app_name)))
 
-                OutlinedTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .focusRequester(focusRequester),
-                    value = name,
-                    onValueChange = { name = it },
-                    label = {
-                        Text(text = stringResource(MR.strings.label_add_repo_input))
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .focusRequester(focusRequester),
+                value = name,
+                onValueChange = { name = it },
+                label = {
+                    Text(text = stringResource(MR.strings.label_add_repo_input))
+                },
+                supportingText = {
+                    val msgRes = if (name.isNotEmpty() && nameAlreadyExists) {
+                        MR.strings.error_repo_exists
+                    } else {
+                        MR.strings.information_required_plain
+                    }
+                    Text(text = stringResource(msgRes))
+                },
+                isError = name.isNotEmpty() && nameAlreadyExists,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri),
+                singleLine = true,
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            ) {
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = onDismissRequest,
+                ) {
+                    Text(text = stringResource(MR.strings.action_cancel))
+                }
+                FilledTonalButton(
+                    modifier = Modifier.weight(1f),
+                    enabled = name.isNotEmpty() && !nameAlreadyExists,
+                    onClick = {
+                        onCreate(name)
+                        onDismissRequest()
                     },
-                    supportingText = {
-                        val msgRes = if (name.isNotEmpty() && nameAlreadyExists) {
-                            MR.strings.error_repo_exists
-                        } else {
-                            MR.strings.information_required_plain
-                        }
-                        Text(text = stringResource(msgRes))
-                    },
-                    isError = name.isNotEmpty() && nameAlreadyExists,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri),
-                    singleLine = true,
-                )
+                ) {
+                    Text(text = stringResource(MR.strings.action_add))
+                }
             }
-        },
-    )
+        }
+    }
 
     LaunchedEffect(focusRequester) {
         // TODO: https://issuetracker.google.com/issues/204502668
-        delay(0.1.seconds)
+        delay(0.3.seconds)
         focusRequester.requestFocus()
+        keyboardController?.show()
     }
 }
 
@@ -98,28 +128,51 @@ fun ExtensionRepoDeleteDialog(
     onDelete: () -> Unit,
     repo: String,
 ) {
-    AlertDialog(
+    AdaptiveSheet(
         onDismissRequest = onDismissRequest,
-        confirmButton = {
-            TextButton(onClick = {
-                onDelete()
-                onDismissRequest()
-            }) {
-                Text(text = stringResource(MR.strings.action_ok))
-            }
+        header = {
+            Text(
+                text = stringResource(MR.strings.action_delete_repo),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.padding.medium,
+                        top = MaterialTheme.padding.small,
+                        end = MaterialTheme.padding.medium,
+                        bottom = MaterialTheme.padding.small,
+                    ),
+            )
         },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(text = stringResource(MR.strings.action_cancel))
-            }
-        },
-        title = {
-            Text(text = stringResource(MR.strings.action_delete_repo))
-        },
-        text = {
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
             Text(text = stringResource(MR.strings.delete_repo_confirmation, repo))
-        },
-    )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            ) {
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = onDismissRequest,
+                ) {
+                    Text(text = stringResource(MR.strings.action_cancel))
+                }
+                FilledTonalButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = {
+                        onDelete()
+                        onDismissRequest()
+                    },
+                ) {
+                    Text(text = stringResource(MR.strings.action_ok))
+                }
+            }
+        }
+    }
 }
 
 @Composable
@@ -129,30 +182,51 @@ fun ExtensionRepoConflictDialog(
     onDismissRequest: () -> Unit,
     onMigrate: () -> Unit,
 ) {
-    AlertDialog(
+    AdaptiveSheet(
         onDismissRequest = onDismissRequest,
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    onMigrate()
-                    onDismissRequest()
-                },
-            ) {
-                Text(text = stringResource(MR.strings.action_replace_repo))
-            }
+        header = {
+            Text(
+                text = stringResource(MR.strings.action_replace_repo_title),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.padding.medium,
+                        top = MaterialTheme.padding.small,
+                        end = MaterialTheme.padding.medium,
+                        bottom = MaterialTheme.padding.small,
+                    ),
+            )
         },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(text = stringResource(MR.strings.action_cancel))
-            }
-        },
-        title = {
-            Text(text = stringResource(MR.strings.action_replace_repo_title))
-        },
-        text = {
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
             Text(text = stringResource(MR.strings.action_replace_repo_message, newRepo.name, oldRepo.name))
-        },
-    )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            ) {
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = onDismissRequest,
+                ) {
+                    Text(text = stringResource(MR.strings.action_cancel))
+                }
+                FilledTonalButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = {
+                        onMigrate()
+                        onDismissRequest()
+                    },
+                ) {
+                    Text(text = stringResource(MR.strings.action_replace_repo))
+                }
+            }
+        }
+    }
 }
 
 @Composable
@@ -161,28 +235,49 @@ fun ExtensionRepoConfirmDialog(
     onCreate: () -> Unit,
     repo: String,
 ) {
-    AlertDialog(
+    AdaptiveSheet(
         onDismissRequest = onDismissRequest,
-        title = {
-            Text(text = stringResource(MR.strings.action_add_repo))
+        header = {
+            Text(
+                text = stringResource(MR.strings.action_add_repo),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.padding.medium,
+                        top = MaterialTheme.padding.small,
+                        end = MaterialTheme.padding.medium,
+                        bottom = MaterialTheme.padding.small,
+                    ),
+            )
         },
-        text = {
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
             Text(text = stringResource(MR.strings.add_repo_confirmation, repo))
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    onCreate()
-                    onDismissRequest()
-                },
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
             ) {
-                Text(text = stringResource(MR.strings.action_add))
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = onDismissRequest,
+                ) {
+                    Text(text = stringResource(MR.strings.action_cancel))
+                }
+                FilledTonalButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = {
+                        onCreate()
+                        onDismissRequest()
+                    },
+                ) {
+                    Text(text = stringResource(MR.strings.action_add))
+                }
             }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(text = stringResource(MR.strings.action_cancel))
-            }
-        },
-    )
+        }
+    }
 }

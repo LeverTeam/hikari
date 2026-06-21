@@ -7,22 +7,20 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DatePicker
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
@@ -32,6 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import dev.icerock.moko.resources.StringResource
+import eu.kanade.presentation.components.AdaptiveSheet
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentMapOf
@@ -40,7 +39,6 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.components.WheelNumberPicker
 import tachiyomi.presentation.core.components.WheelTextPicker
-import tachiyomi.presentation.core.components.material.AlertDialogContent
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
 
@@ -151,40 +149,61 @@ fun TrackDateSelector(
         initialSelectedDateMillis = initialSelectedDateMillis,
         selectableDates = selectableDates,
     )
-    AlertDialogContent(
-        modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars),
-        title = { Text(text = title) },
-        content = {
-            Column {
-                DatePicker(
-                    state = pickerState,
-                    title = null,
-                    headline = null,
-                    showModeToggle = false,
-                )
+    AdaptiveSheet(
+        onDismissRequest = onDismissRequest,
+        header = {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.padding.medium,
+                        top = MaterialTheme.padding.small,
+                        end = MaterialTheme.padding.medium,
+                        bottom = MaterialTheme.padding.small,
+                    ),
+            )
+        },
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
+            DatePicker(
+                state = pickerState,
+                title = null,
+                headline = null,
+                showModeToggle = false,
+            )
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 12.dp, top = 8.dp, end = 12.dp, bottom = 24.dp),
-                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small, Alignment.End),
-                ) {
-                    if (onRemove != null) {
-                        TextButton(onClick = onRemove) {
-                            Text(text = stringResource(MR.strings.action_remove))
-                        }
-                        Spacer(modifier = Modifier.weight(1f))
-                    }
-                    TextButton(onClick = onDismissRequest) {
-                        Text(text = stringResource(MR.strings.action_cancel))
-                    }
-                    TextButton(onClick = { onConfirm(pickerState.selectedDateMillis!!) }) {
-                        Text(text = stringResource(MR.strings.action_ok))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            ) {
+                if (onRemove != null) {
+                    OutlinedButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = onRemove,
+                    ) {
+                        Text(text = stringResource(MR.strings.action_remove))
                     }
                 }
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = onDismissRequest,
+                ) {
+                    Text(text = stringResource(MR.strings.action_cancel))
+                }
+                FilledTonalButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = { onConfirm(pickerState.selectedDateMillis!!) },
+                ) {
+                    Text(text = stringResource(MR.strings.action_ok))
+                }
             }
-        },
-    )
+        }
+    }
 }
 
 @Composable
@@ -195,33 +214,66 @@ private fun BaseSelector(
     onDismissRequest: () -> Unit,
     thirdButton: @Composable (RowScope.() -> Unit)? = null,
 ) {
-    AlertDialogContent(
-        modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars),
-        title = { Text(text = title) },
-        text = {
+    AdaptiveSheet(
+        onDismissRequest = onDismissRequest,
+        header = {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.padding.medium,
+                        top = MaterialTheme.padding.small,
+                        end = MaterialTheme.padding.medium,
+                        bottom = MaterialTheme.padding.small,
+                    ),
+            )
+        },
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
             Box(
                 modifier = Modifier.fillMaxWidth(),
                 content = content,
             )
-        },
-        buttons = {
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small, Alignment.End),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
             ) {
                 if (thirdButton != null) {
                     thirdButton()
                     Spacer(modifier = Modifier.weight(1f))
-                }
-                TextButton(onClick = onDismissRequest) {
-                    Text(text = stringResource(MR.strings.action_cancel))
-                }
-                TextButton(onClick = onConfirm) {
-                    Text(text = stringResource(MR.strings.action_ok))
+                    OutlinedButton(
+                        onClick = onDismissRequest,
+                    ) {
+                        Text(text = stringResource(MR.strings.action_cancel))
+                    }
+                    FilledTonalButton(
+                        onClick = onConfirm,
+                    ) {
+                        Text(text = stringResource(MR.strings.action_ok))
+                    }
+                } else {
+                    OutlinedButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = onDismissRequest,
+                    ) {
+                        Text(text = stringResource(MR.strings.action_cancel))
+                    }
+                    FilledTonalButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = onConfirm,
+                    ) {
+                        Text(text = stringResource(MR.strings.action_ok))
+                    }
                 }
             }
-        },
-    )
+        }
+    }
 }
 
 @PreviewLightDark
