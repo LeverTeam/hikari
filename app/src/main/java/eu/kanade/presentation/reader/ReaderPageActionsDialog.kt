@@ -10,10 +10,10 @@ import androidx.compose.material.icons.outlined.ContentCopy
 import androidx.compose.material.icons.outlined.Photo
 import androidx.compose.material.icons.outlined.Save
 import androidx.compose.material.icons.outlined.Share
-import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -118,20 +118,35 @@ private fun SetCoverDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    AlertDialog(
-        text = {
-            Text(stringResource(MR.strings.confirm_set_image_as_cover))
-        },
-        confirmButton = {
-            TextButton(onClick = onConfirm) {
-                Text(stringResource(MR.strings.action_ok))
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text(stringResource(MR.strings.action_cancel))
-            }
-        },
+    AdaptiveSheet(
         onDismissRequest = onDismiss,
-    )
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
+            Text(
+                text = stringResource(MR.strings.confirm_set_image_as_cover),
+                style = MaterialTheme.typography.bodyMedium,
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            ) {
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = onDismiss,
+                ) {
+                    Text(text = stringResource(MR.strings.action_cancel))
+                }
+                FilledTonalButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = onConfirm,
+                ) {
+                    Text(text = stringResource(MR.strings.action_ok))
+                }
+            }
+        }
+    }
 }

@@ -28,12 +28,14 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import eu.kanade.presentation.components.AdaptiveSheet
+import tachiyomi.presentation.core.components.material.padding
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -615,15 +617,24 @@ private fun LanguageRowItem(
 private fun NsfwWarningDialog(
     onClickConfirm: () -> Unit,
 ) {
-    AlertDialog(
-        text = {
-            Text(text = stringResource(MR.strings.ext_nsfw_warning))
-        },
-        confirmButton = {
-            TextButton(onClick = onClickConfirm) {
+    AdaptiveSheet(
+        onDismissRequest = onClickConfirm,
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
+            Text(
+                text = stringResource(MR.strings.ext_nsfw_warning),
+                style = MaterialTheme.typography.bodyMedium,
+            )
+
+            FilledTonalButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = onClickConfirm,
+            ) {
                 Text(text = stringResource(MR.strings.action_ok))
             }
-        },
-        onDismissRequest = onClickConfirm,
-    )
+        }
+    }
 }

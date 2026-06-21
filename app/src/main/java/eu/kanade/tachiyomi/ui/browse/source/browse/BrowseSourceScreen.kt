@@ -40,7 +40,6 @@ import eu.kanade.core.util.ifSourcesLoaded
 import eu.kanade.presentation.browse.BrowseSourceContent
 import eu.kanade.presentation.browse.MissingSourceScreen
 import eu.kanade.presentation.browse.components.BrowseSourceToolbar
-import eu.kanade.presentation.browse.components.RemoveMangaDialog
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
 import eu.kanade.presentation.manga.DuplicateMangaDialog
 import eu.kanade.presentation.util.AssistContentScreen
@@ -267,15 +266,6 @@ data class BrowseSourceScreen(
                     // Initiated from the context of [dialog.target] so we show [dialog.current].
                     onClickTitle = { navigator.push(MangaScreen(dialog.current.id)) },
                     onDismissRequest = onDismissRequest,
-                )
-            }
-            is BrowseSourceScreenModel.Dialog.RemoveManga -> {
-                RemoveMangaDialog(
-                    onDismissRequest = onDismissRequest,
-                    onConfirm = {
-                        screenModel.changeMangaFavorite(dialog.manga)
-                    },
-                    mangaToRemove = dialog.manga,
                 )
             }
             is BrowseSourceScreenModel.Dialog.ChangeMangaCategory -> {

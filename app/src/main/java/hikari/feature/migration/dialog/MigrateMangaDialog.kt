@@ -3,14 +3,17 @@ package hikari.feature.migration.dialog
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import eu.kanade.presentation.components.AdaptiveSheet
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -65,12 +68,27 @@ internal fun Screen.MigrateMangaDialog(
         return
     }
 
-    AlertDialog(
+    AdaptiveSheet(
         onDismissRequest = onDismissRequest,
-        title = {
-            Text(text = stringResource(MR.strings.migration_dialog_what_to_include))
+        header = {
+            Text(
+                text = stringResource(MR.strings.migration_dialog_what_to_include),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.padding.medium,
+                        top = MaterialTheme.padding.small,
+                        end = MaterialTheme.padding.medium,
+                        bottom = MaterialTheme.padding.small,
+                    ),
+            )
         },
-        text = {
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState()),
             ) {
@@ -82,23 +100,25 @@ internal fun Screen.MigrateMangaDialog(
                     )
                 }
             }
-        },
-        confirmButton = {
-            FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+
+            HorizontalDivider()
+
+            OutlinedButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    onDismissRequest()
+                    onClickTitle()
+                },
             ) {
-                TextButton(
-                    onClick = {
-                        onDismissRequest()
-                        onClickTitle()
-                    },
-                ) {
-                    Text(text = stringResource(MR.strings.action_show_manga))
-                }
+                Text(text = stringResource(MR.strings.action_show_manga))
+            }
 
-                Spacer(modifier = Modifier.weight(1f))
-
-                TextButton(
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            ) {
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
                     onClick = {
                         scope.launchIO {
                             screenModel.migrateManga(replace = false)
@@ -108,7 +128,8 @@ internal fun Screen.MigrateMangaDialog(
                 ) {
                     Text(text = stringResource(MR.strings.copy))
                 }
-                TextButton(
+                FilledTonalButton(
+                    modifier = Modifier.weight(1f),
                     onClick = {
                         scope.launchIO {
                             screenModel.migrateManga(replace = true)
@@ -119,8 +140,8 @@ internal fun Screen.MigrateMangaDialog(
                     Text(text = stringResource(MR.strings.migrate))
                 }
             }
-        },
-    )
+        }
+    }
 }
 
 internal class MigrateDialogScreenModel : StateScreenModel<MigrateDialogScreenModel.State>(State()) {

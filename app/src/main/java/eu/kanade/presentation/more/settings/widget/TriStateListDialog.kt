@@ -1,6 +1,7 @@
 package eu.kanade.presentation.more.settings.widget
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,13 +15,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CheckBox
 import androidx.compose.material.icons.rounded.CheckBoxOutlineBlank
 import androidx.compose.material.icons.rounded.DisabledByDefault
-import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import eu.kanade.presentation.components.AdaptiveSheet
+import tachiyomi.presentation.core.components.material.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.toMutableStateList
@@ -59,86 +62,108 @@ fun <T> TriStateListDialog(
             }
             .toMutableStateList()
     }
-    AlertDialog(
+    AdaptiveSheet(
         onDismissRequest = onDismissRequest,
-        title = { Text(text = title) },
-        text = {
-            Column {
-                if (message != null) {
-                    Text(
-                        text = message,
-                        modifier = Modifier.padding(bottom = 8.dp),
-                    )
-                }
+        header = {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.padding.medium,
+                        top = MaterialTheme.padding.small,
+                        end = MaterialTheme.padding.medium,
+                        bottom = MaterialTheme.padding.small,
+                    ),
+            )
+        },
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
+            if (message != null) {
+                Text(
+                    text = message,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
 
-                Box {
-                    val listState = rememberLazyListState()
-                    LazyColumn(state = listState) {
-                        itemsIndexed(items = items) { index, item ->
-                            val state = selected[index]
-                            Row(
-                                modifier = Modifier
-                                    .clip(MaterialTheme.shapes.small)
-                                    .clickable {
-                                        selected[index] = when (state) {
-                                            State.UNCHECKED -> State.CHECKED
-                                            State.CHECKED -> State.INVERSED
-                                            State.INVERSED -> State.UNCHECKED
-                                        }
+            Box(modifier = Modifier.weight(1f, fill = false)) {
+                val listState = rememberLazyListState()
+                LazyColumn(state = listState) {
+                    itemsIndexed(items = items) { index, item ->
+                        val state = selected[index]
+                        Row(
+                            modifier = Modifier
+                                .clip(MaterialTheme.shapes.small)
+                                .clickable {
+                                    selected[index] = when (state) {
+                                        State.UNCHECKED -> State.CHECKED
+                                        State.CHECKED -> State.INVERSED
+                                        State.INVERSED -> State.UNCHECKED
                                     }
-                                    .defaultMinSize(minHeight = 48.dp)
-                                    .fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                Icon(
-                                    modifier = Modifier.padding(end = 20.dp),
-                                    imageVector = when (state) {
-                                        State.UNCHECKED -> Icons.Rounded.CheckBoxOutlineBlank
-                                        State.CHECKED -> Icons.Rounded.CheckBox
-                                        State.INVERSED -> Icons.Rounded.DisabledByDefault
+                                }
+                                .defaultMinSize(minHeight = 48.dp)
+                                .fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Icon(
+                                modifier = Modifier.padding(end = 20.dp),
+                                imageVector = when (state) {
+                                    State.UNCHECKED -> Icons.Rounded.CheckBoxOutlineBlank
+                                    State.CHECKED -> Icons.Rounded.CheckBox
+                                    State.INVERSED -> Icons.Rounded.DisabledByDefault
+                                },
+                                tint = if (state == State.UNCHECKED) {
+                                    LocalContentColor.current
+                                } else {
+                                    MaterialTheme.colorScheme.primary
+                                },
+                                contentDescription = stringResource(
+                                    when (state) {
+                                        State.UNCHECKED -> MR.strings.not_selected
+                                        State.CHECKED -> MR.strings.selected
+                                        State.INVERSED -> MR.strings.disabled
                                     },
-                                    tint = if (state == State.UNCHECKED) {
-                                        LocalContentColor.current
-                                    } else {
-                                        MaterialTheme.colorScheme.primary
-                                    },
-                                    contentDescription = stringResource(
-                                        when (state) {
-                                            State.UNCHECKED -> MR.strings.not_selected
-                                            State.CHECKED -> MR.strings.selected
-                                            State.INVERSED -> MR.strings.disabled
-                                        },
-                                    ),
-                                )
-                                Text(text = itemLabel(item))
-                            }
+                                ),
+                            )
+                            Text(text = itemLabel(item))
                         }
                     }
+                }
 
-                    if (listState.canScrollBackward) HorizontalDivider(modifier = Modifier.align(Alignment.TopCenter))
-                    if (listState.canScrollForward) HorizontalDivider(modifier = Modifier.align(Alignment.BottomCenter))
+                if (listState.canScrollBackward) HorizontalDivider(modifier = Modifier.align(Alignment.TopCenter))
+                if (listState.canScrollForward) HorizontalDivider(modifier = Modifier.align(Alignment.BottomCenter))
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            ) {
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = onDismissRequest,
+                ) {
+                    Text(text = stringResource(MR.strings.action_cancel))
+                }
+                FilledTonalButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = {
+                        val included = items.mapIndexedNotNull { index, category ->
+                            if (selected[index] == State.CHECKED) category else null
+                        }
+                        val excluded = items.mapIndexedNotNull { index, category ->
+                            if (selected[index] == State.INVERSED) category else null
+                        }
+                        onValueChanged(included, excluded)
+                        onDismissRequest()
+                    },
+                ) {
+                    Text(text = stringResource(MR.strings.action_ok))
                 }
             }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(text = stringResource(MR.strings.action_cancel))
-            }
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    val included = items.mapIndexedNotNull { index, category ->
-                        if (selected[index] == State.CHECKED) category else null
-                    }
-                    val excluded = items.mapIndexedNotNull { index, category ->
-                        if (selected[index] == State.INVERSED) category else null
-                    }
-                    onValueChanged(included, excluded)
-                },
-            ) {
-                Text(text = stringResource(MR.strings.action_ok))
-            }
-        },
-    )
+        }
+    }
 }

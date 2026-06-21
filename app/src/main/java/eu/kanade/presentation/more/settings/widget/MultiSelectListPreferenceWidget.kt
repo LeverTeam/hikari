@@ -1,9 +1,18 @@
 package eu.kanade.presentation.more.settings.widget
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.ui.Modifier
+import eu.kanade.presentation.components.AdaptiveSheet
+import tachiyomi.presentation.core.components.material.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,11 +46,28 @@ fun MultiSelectListPreferenceWidget(
                 .filter { values.contains(it) }
                 .toMutableStateList()
         }
-        AlertDialog(
+        AdaptiveSheet(
             onDismissRequest = { isDialogShown = false },
-            title = { Text(text = preference.title) },
-            text = {
-                LazyColumn {
+            header = {
+                Text(
+                    text = preference.title,
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = MaterialTheme.padding.medium,
+                            top = MaterialTheme.padding.small,
+                            end = MaterialTheme.padding.medium,
+                            bottom = MaterialTheme.padding.small,
+                        ),
+                )
+            },
+        ) {
+            Column(
+                modifier = Modifier.padding(MaterialTheme.padding.medium),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+            ) {
+                LazyColumn(modifier = Modifier.weight(1f, fill = false)) {
                     preference.entries.forEach { current ->
                         item {
                             val isSelected = selected.contains(current.key)
@@ -59,25 +85,28 @@ fun MultiSelectListPreferenceWidget(
                         }
                     }
                 }
-            },
-            properties = DialogProperties(
-                usePlatformDefaultWidth = true,
-            ),
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        onValuesChange(selected.toMutableSet())
-                        isDialogShown = false
-                    },
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
                 ) {
-                    Text(text = stringResource(MR.strings.action_ok))
+                    OutlinedButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = { isDialogShown = false },
+                    ) {
+                        Text(text = stringResource(MR.strings.action_cancel))
+                    }
+                    FilledTonalButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = {
+                            onValuesChange(selected.toMutableSet())
+                            isDialogShown = false
+                        },
+                    ) {
+                        Text(text = stringResource(MR.strings.action_ok))
+                    }
                 }
-            },
-            dismissButton = {
-                TextButton(onClick = { isDialogShown = false }) {
-                    Text(text = stringResource(MR.strings.action_cancel))
-                }
-            },
-        )
+            }
+        }
     }
 }

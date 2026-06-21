@@ -8,13 +8,18 @@ import android.webkit.WebStorage
 import android.webkit.WebView
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import eu.kanade.presentation.components.AdaptiveSheet
+import tachiyomi.presentation.core.components.material.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
@@ -632,26 +637,54 @@ object SettingsAdvancedScreen : SearchableSettings {
 
         if (shizukuMissing) {
             val dismiss = { shizukuMissing = false }
-            AlertDialog(
+            AdaptiveSheet(
                 onDismissRequest = dismiss,
-                title = { Text(text = stringResource(MR.strings.ext_installer_shizuku)) },
-                text = { Text(text = stringResource(MR.strings.ext_installer_shizuku_unavailable_dialog)) },
-                dismissButton = {
-                    TextButton(onClick = dismiss) {
-                        Text(text = stringResource(MR.strings.action_cancel))
-                    }
+                header = {
+                    Text(
+                        text = stringResource(MR.strings.ext_installer_shizuku),
+                        style = MaterialTheme.typography.titleLarge,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                start = MaterialTheme.padding.medium,
+                                top = MaterialTheme.padding.small,
+                                end = MaterialTheme.padding.medium,
+                                bottom = MaterialTheme.padding.small,
+                            ),
+                    )
                 },
-                confirmButton = {
-                    TextButton(
-                        onClick = {
-                            dismiss()
-                            uriHandler.openUri("https://shizuku.rikka.app/download")
-                        },
+            ) {
+                Column(
+                    modifier = Modifier.padding(MaterialTheme.padding.medium),
+                    verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+                ) {
+                    Text(
+                        text = stringResource(MR.strings.ext_installer_shizuku_unavailable_dialog),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
                     ) {
-                        Text(text = stringResource(MR.strings.action_ok))
+                        OutlinedButton(
+                            modifier = Modifier.weight(1f),
+                            onClick = dismiss,
+                        ) {
+                            Text(text = stringResource(MR.strings.action_cancel))
+                        }
+                        FilledTonalButton(
+                            modifier = Modifier.weight(1f),
+                            onClick = {
+                                dismiss()
+                                uriHandler.openUri("https://shizuku.rikka.app/download")
+                            },
+                        ) {
+                            Text(text = stringResource(MR.strings.action_ok))
+                        }
                     }
-                },
-            )
+                }
+            }
         }
         return Preference.PreferenceGroup(
             title = stringResource(MR.strings.label_extensions),

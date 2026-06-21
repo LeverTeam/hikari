@@ -373,7 +373,6 @@ class BrowseSourceScreenModel(
 
     sealed interface Dialog {
         data object Filter : Dialog
-        data class RemoveManga(val manga: Manga) : Dialog
         data class AddDuplicateManga(val manga: Manga, val duplicates: List<MangaWithChapterCount>) : Dialog
         data class ChangeMangaCategory(
             val manga: Manga,

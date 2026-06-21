@@ -1,18 +1,21 @@
 package eu.kanade.presentation.more.settings.widget
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.minimumInteractiveComponentSize
+import eu.kanade.presentation.components.AdaptiveSheet
+import tachiyomi.presentation.core.components.material.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,11 +49,28 @@ fun <T> ListPreferenceWidget(
     )
 
     if (isDialogShown) {
-        AlertDialog(
+        AdaptiveSheet(
             onDismissRequest = { isDialogShown = false },
-            title = { Text(text = title) },
-            text = {
-                Box {
+            header = {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = MaterialTheme.padding.medium,
+                            top = MaterialTheme.padding.small,
+                            end = MaterialTheme.padding.medium,
+                            bottom = MaterialTheme.padding.small,
+                        ),
+                )
+            },
+        ) {
+            Column(
+                modifier = Modifier.padding(MaterialTheme.padding.medium),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+            ) {
+                Box(modifier = Modifier.weight(1f, fill = false)) {
                     val state = rememberLazyListState()
                     ScrollbarLazyColumn(state = state) {
                         entries.forEach { current ->
@@ -70,13 +90,15 @@ fun <T> ListPreferenceWidget(
                     if (state.canScrollBackward) HorizontalDivider(modifier = Modifier.align(Alignment.TopCenter))
                     if (state.canScrollForward) HorizontalDivider(modifier = Modifier.align(Alignment.BottomCenter))
                 }
-            },
-            confirmButton = {
-                TextButton(onClick = { isDialogShown = false }) {
+
+                OutlinedButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { isDialogShown = false },
+                ) {
                     Text(text = stringResource(MR.strings.action_cancel))
                 }
-            },
-        )
+            }
+        }
     }
 }
 

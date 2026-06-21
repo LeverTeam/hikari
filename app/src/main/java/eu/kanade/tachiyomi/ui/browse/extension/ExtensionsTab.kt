@@ -1,9 +1,18 @@
 package eu.kanade.tachiyomi.ui.browse.extension
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.material3.AlertDialog
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.ui.Modifier
+import eu.kanade.presentation.components.AdaptiveSheet
+import tachiyomi.presentation.core.components.material.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -112,28 +121,52 @@ private fun ExtensionUninstallConfirmation(
     onClickConfirm: () -> Unit,
     onDismissRequest: () -> Unit,
 ) {
-    AlertDialog(
-        title = {
-            Text(text = stringResource(MR.strings.ext_confirm_remove))
-        },
-        text = {
-            Text(text = stringResource(MR.strings.remove_private_extension_message, extensionName))
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    onClickConfirm()
-                    onDismissRequest()
-                },
-            ) {
-                Text(text = stringResource(MR.strings.ext_remove))
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(text = stringResource(MR.strings.action_cancel))
-            }
-        },
+    AdaptiveSheet(
         onDismissRequest = onDismissRequest,
-    )
+        header = {
+            Text(
+                text = stringResource(MR.strings.ext_confirm_remove),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.padding.medium,
+                        top = MaterialTheme.padding.small,
+                        end = MaterialTheme.padding.medium,
+                        bottom = MaterialTheme.padding.small,
+                    ),
+            )
+        },
+    ) {
+        Column(
+            modifier = Modifier.padding(MaterialTheme.padding.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+        ) {
+            Text(
+                text = stringResource(MR.strings.remove_private_extension_message, extensionName),
+                style = MaterialTheme.typography.bodyMedium,
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            ) {
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = onDismissRequest,
+                ) {
+                    Text(text = stringResource(MR.strings.action_cancel))
+                }
+                FilledTonalButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = {
+                        onClickConfirm()
+                        onDismissRequest()
+                    },
+                ) {
+                    Text(text = stringResource(MR.strings.ext_remove))
+                }
+            }
+        }
+    }
 }

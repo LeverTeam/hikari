@@ -11,11 +11,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FlipToBack
 import androidx.compose.material.icons.outlined.SelectAll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import eu.kanade.presentation.components.AdaptiveSheet
+import tachiyomi.presentation.core.components.material.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.collectAsState
@@ -77,11 +79,27 @@ class ClearDatabaseScreen : Screen() {
             is ClearDatabaseScreenModel.State.Ready -> {
                 if (s.showConfirmation) {
                     var keepReadManga by remember { mutableStateOf(true) }
-                    AlertDialog(
-                        title = {
-                            Text(text = stringResource(MR.strings.are_you_sure))
+                    AdaptiveSheet(
+                        onDismissRequest = model::hideConfirmation,
+                        header = {
+                            Text(
+                                text = stringResource(MR.strings.are_you_sure),
+                                style = MaterialTheme.typography.titleLarge,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(
+                                        start = MaterialTheme.padding.medium,
+                                        top = MaterialTheme.padding.small,
+                                        end = MaterialTheme.padding.medium,
+                                        bottom = MaterialTheme.padding.small,
+                                    ),
+                            )
                         },
-                        text = {
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(MaterialTheme.padding.medium),
+                            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+                        ) {
                             Column(
                                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
                             ) {
@@ -108,28 +126,33 @@ class ClearDatabaseScreen : Screen() {
                                     )
                                 }
                             }
-                        },
-                        onDismissRequest = model::hideConfirmation,
-                        confirmButton = {
-                            TextButton(
-                                onClick = {
-                                    scope.launchUI {
-                                        model.removeMangaBySourceId(keepReadManga)
-                                        model.clearSelection()
-                                        model.hideConfirmation()
-                                        context.toast(MR.strings.clear_database_completed)
-                                    }
-                                },
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
                             ) {
-                                Text(text = stringResource(MR.strings.action_ok))
+                                OutlinedButton(
+                                    modifier = Modifier.weight(1f),
+                                    onClick = model::hideConfirmation,
+                                ) {
+                                    Text(text = stringResource(MR.strings.action_cancel))
+                                }
+                                FilledTonalButton(
+                                    modifier = Modifier.weight(1f),
+                                    onClick = {
+                                        scope.launchUI {
+                                            model.removeMangaBySourceId(keepReadManga)
+                                            model.clearSelection()
+                                            model.hideConfirmation()
+                                            context.toast(MR.strings.clear_database_completed)
+                                        }
+                                    },
+                                ) {
+                                    Text(text = stringResource(MR.strings.action_ok))
+                                }
                             }
-                        },
-                        dismissButton = {
-                            TextButton(onClick = model::hideConfirmation) {
-                                Text(text = stringResource(MR.strings.action_cancel))
-                            }
-                        },
-                    )
+                        }
+                    }
                 }
 
                 Scaffold(

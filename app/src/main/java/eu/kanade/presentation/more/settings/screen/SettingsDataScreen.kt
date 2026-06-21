@@ -12,8 +12,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.OutlinedButton
+import eu.kanade.presentation.components.AdaptiveSheet
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -464,12 +466,27 @@ object SettingsDataScreen : SearchableSettings {
         var authorSelected by remember { mutableStateOf(options.includeAuthor) }
         var artistSelected by remember { mutableStateOf(options.includeArtist) }
 
-        AlertDialog(
+        AdaptiveSheet(
             onDismissRequest = onDismissRequest,
-            title = {
-                Text(text = stringResource(MR.strings.migration_dialog_what_to_include))
+            header = {
+                Text(
+                    text = stringResource(MR.strings.migration_dialog_what_to_include),
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = MaterialTheme.padding.medium,
+                            top = MaterialTheme.padding.small,
+                            end = MaterialTheme.padding.medium,
+                            bottom = MaterialTheme.padding.small,
+                        ),
+                )
             },
-            text = {
+        ) {
+            Column(
+                modifier = Modifier.padding(MaterialTheme.padding.medium),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
+            ) {
                 Column {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Checkbox(
@@ -503,28 +520,34 @@ object SettingsDataScreen : SearchableSettings {
                         Text(text = stringResource(MR.strings.artist))
                     }
                 }
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        onConfirm(
-                            ExportOptions(
-                                includeTitle = titleSelected,
-                                includeAuthor = authorSelected,
-                                includeArtist = artistSelected,
-                            ),
-                        )
-                        onDismissRequest()
-                    },
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
                 ) {
-                    Text(text = stringResource(MR.strings.action_save))
+                    OutlinedButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = onDismissRequest,
+                    ) {
+                        Text(text = stringResource(MR.strings.action_cancel))
+                    }
+                    FilledTonalButton(
+                        modifier = Modifier.weight(1f),
+                        onClick = {
+                            onConfirm(
+                                ExportOptions(
+                                    includeTitle = titleSelected,
+                                    includeAuthor = authorSelected,
+                                    includeArtist = artistSelected,
+                                ),
+                            )
+                            onDismissRequest()
+                        },
+                    ) {
+                        Text(text = stringResource(MR.strings.action_save))
+                    }
                 }
-            },
-            dismissButton = {
-                TextButton(onClick = onDismissRequest) {
-                    Text(text = stringResource(MR.strings.action_cancel))
-                }
-            },
-        )
+            }
+        }
     }
 }
