@@ -1,7 +1,6 @@
 # Changelog
 
-
-## [Unreleased]
+## [0.5.2] - 2026-06-23
 
 ### Added
 
@@ -33,7 +32,6 @@
 
 - Self-hosted tracker integrations: Kavita, Komga, and Suwayomi
 - Legacy Tachiyomi JSON metadata format support in local source (long-migrated to ComicInfo.xml)
-
 
 ## [0.5.0] - 2026-05-28
 
